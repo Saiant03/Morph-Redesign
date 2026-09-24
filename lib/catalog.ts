@@ -1,4 +1,4 @@
-// Shared data layer for all three directions. Everything here comes from the Store API snapshot
+// Shared data layer. Everything here comes from the Store API snapshot
 // (data/catalog.json) or sampled bottle colors (data/colors.json). Nothing is invented; missing values stay null.
 import catalog from '@/data/catalog.json';
 import colors from '@/data/colors.json';
@@ -130,21 +130,25 @@ export const BOUTIQUE = {
   hours: ['L–V 12:00–20:00', 'S–D 10:00–18:00'],
 };
 
-/** Readable text color on a given background (WCAG relative luminance). */
-export function onColor(hex: string) {
-  const [r, g, b] = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255).map(c => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4));
-  const L = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-  return L > 0.36 ? '#1b1c1d' : '#f4f4f1';
-}
-
 export const ALL_BY_COLLECTION: CollectionId[] = ['les-exclusifs', 'luxury', 'ice'];
 
-/** Linear sRGB mix of two hex colors (w = share of `a`). */
-export function mix(a: string, b: string, w: number) {
-  const h = (x: string) => [1, 3, 5].map(i => parseInt(x.slice(i, i + 2), 16));
-  const [A, B] = [h(a), h(b)];
-  return '#' + A.map((v, i) => Math.round(v * w + B[i] * (1 - w)).toString(16).padStart(2, '0')).join('');
+export const productHref = (p: Perfume) => `/${p.slug}`;
+export const collectionHref = (id?: CollectionId) => (id ? `/parfumuri/${id}` : '/parfumuri');
+
+/** Family description built from data: the notes that occur most often across the family's perfumes. */
+export function familyNotes(id: string, n = 3) {
+  const count = new Map<string, number>();
+  for (const p of perfumes.filter(x => familyGroup(x)?.id === id))
+    for (const note of [...p.notes.top, ...p.notes.heart, ...p.notes.base]) {
+      const k = note.toLowerCase();
+      count.set(k, (count.get(k) ?? 0) + 1);
+    }
+  return [...count.entries()].sort((a, b) => b[1] - a[1]).slice(0, n).map(([k]) => k);
 }
 
-/** Soft tint of a scent's juice color over direction C's mist. */
-export const veilTint = (p: Perfume, w = 0.26) => mix(tone(p).juice, '#e3e1e5', w);
+export const firstSentences = (t: string, n: number) => (t.match(/[^.!?]+[.!?]+/g) || [t]).slice(0, n).join(' ').trim();
+
+/** Discovery offers Morph sells (in stock or not), for the trial path. */
+export const discoverySets = () => travelSets.filter(t => /discovery/.test(t.slug));
+
+export const hours = (p: Perfume) => (p.longevity ? p.longevity.replace('-', '–') : null);

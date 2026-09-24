@@ -1,0 +1,61 @@
+.composer { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-6); align-items: start; }
+
+/* stage: two strata columns, multiplied where they overlap */
+.stage { grid-column: 1 / span 7; position: sticky; top: calc(var(--header-h) + 24px); height: clamp(340px, 38vw, 560px); background: var(--surface-raised); border-radius: var(--r); overflow: hidden; isolation: isolate; }
+.axis { position: absolute; left: var(--s-4); top: 22%; bottom: 12%; display: grid; grid-template-rows: repeat(3, 1fr); font-size: var(--t-micro); color: var(--muted); z-index: 2; }
+.axis li { display: flex; align-items: center; }
+/* three equal zones: A alone, A + B (overlap), B alone */
+.column { position: absolute; top: 22%; bottom: 12%; width: 36%; display: grid; grid-template-rows: repeat(3, 1fr); gap: 4px; mix-blend-mode: multiply; transition: left var(--d-story) var(--ease-inout); }
+.column span { border-radius: 1px; transition: background-color var(--d-slow) var(--ease-inout); }
+.colA { left: 23%; }
+.colB { left: 41%; }
+.stage[data-joined='false'] .colA { left: 14%; }
+.stage[data-joined='false'] .colB { left: 50%; }
+.bottle { position: absolute; top: 3%; height: 17%; width: 18%; transition: opacity var(--d-base); }
+.bottle img { object-fit: contain; mix-blend-mode: multiply; }
+.names { position: absolute; left: 0; right: 0; bottom: 4%; height: 20px; font-size: var(--t-micro); }
+.names span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.names span:nth-child(1) { left: 32%; }
+.names span:nth-child(2) { left: 50%; }
+.names span:nth-child(3) { left: 68%; }
+.sum { font-weight: 500; transition: opacity var(--d-base); }
+.stage[data-joined='false'] .sum, .stage[data-joined='false'] .bottle { opacity: 0; }
+
+/* panel */
+.panel { grid-column: 9 / -1; display: grid; gap: var(--s-5); }
+.slots { display: grid; gap: var(--s-2); }
+.slot { display: grid; grid-template-columns: 52px 1fr auto; gap: var(--s-4); align-items: center; text-align: left; padding: 8px 16px 8px 8px; border: 1px solid var(--border); border-radius: var(--r); background: transparent; }
+.slot[aria-expanded='true'] { border-color: var(--fg); }
+.slotVisual { width: 52px; height: 64px; }
+.slotText { display: grid; }
+.slotName { font-size: 20px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.2; }
+
+.picker:not([hidden]) { display: grid; gap: var(--s-4); padding: var(--s-4); background: var(--surface-raised); border-radius: var(--r); }
+.pickGroup { display: grid; gap: var(--s-2); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 12px; border: 1px solid var(--border); border-radius: var(--r); background: var(--bg); font-size: 14px; }
+.chip[aria-pressed='true'] { border-color: var(--fg); box-shadow: inset 0 0 0 1px var(--fg); }
+.chip:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.result { margin: 0; display: grid; border-top: 1px solid var(--border); }
+.resultRow { position: relative; display: grid; grid-template-columns: 96px 1fr; gap: var(--s-3); padding: 12px 0 12px 20px; border-bottom: 1px solid var(--border); font-size: 15px; }
+.resultRow::before { content: ''; position: absolute; left: 0; top: 12px; bottom: 12px; width: 6px; background: linear-gradient(var(--ta) 50%, var(--tb) 50%); }
+.resultRow dt { font-size: var(--t-micro); color: var(--muted); padding-top: 2px; }
+.resultRow dd { margin: 0; display: flex; flex-wrap: wrap; column-gap: 14px; row-gap: 2px; }
+.note { display: inline-flex; align-items: center; gap: 6px; }
+.note i { width: 8px; height: 8px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(27, 28, 29, 0.14); flex: none; }
+.buy { display: grid; gap: var(--s-3); justify-items: start; }
+
+@media (pointer: coarse) { .chip { min-height: 44px; } }
+@media (max-width: 899px) {
+  .composer { grid-template-columns: 1fr; }
+  .stage, .panel { grid-column: 1; }
+  .stage { position: relative; top: 0; }
+  .stage { height: 320px; }
+  .axis { display: none; }
+  .column { width: 40%; }
+  .colA { left: 20%; } .colB { left: 40%; }
+  .bottle { width: 20%; }
+  .names span:nth-child(1) { left: 30%; }
+  .names span:nth-child(3) { left: 70%; }
+}

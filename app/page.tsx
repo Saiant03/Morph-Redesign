@@ -1,37 +1,128 @@
 import Link from 'next/link';
-import { snapshotAt } from '@/lib/catalog';
+import Image from 'next/image';
+import { ScentAtlas } from '@/components/ScentAtlas';
+import { CollectionPreview } from '@/components/CollectionPreview';
+import { ProductCard } from '@/components/ProductCard';
+import { LayeringComposer } from '@/components/LayeringComposer';
+import {
+  perfumes, inCollection, COLLECTIONS, ALL_BY_COLLECTION, FAMILY_GROUPS, familyGroup, familyNotes, bestsellerMix,
+  travelFor, sampleSets, discoverySets, layeringSets, lei, FREE_SHIPPING, BOUTIQUE, collectionHref, productHref,
+} from '@/lib/catalog';
+import { collectionChord, scentTokens } from '@/lib/scent';
+import s from './home.module.css';
 
-const DIRS = [
-  { id: 'a', name: 'A — Cromatic', idea: 'Culoarea fiecărei sticle devine sistemul vizual. Galerie calmă, editorială.' },
-  { id: 'b', name: 'B — Forma', idea: 'Geometria sticlei răsucite devine structura interfeței. Monocrom, arhitectural.' },
-  { id: 'c', name: 'C — Strata', idea: 'Parfumul ca straturi care evoluează în timp. Atmosferic, translucid.' },
-];
+export default function Home() {
+  const withTravel = perfumes.filter(p => travelFor(p));
+  const samples = sampleSets.filter(x => x.inStock);
+  const discovery = discoverySets().find(x => x.inStock);
+  const picks = bestsellerMix(4, ['morph-zeta-parfum-100ml']);
+  const lux = inCollection('luxury')[0].price;
 
-export default function Index() {
   return (
-    <main style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif', padding: '48px 24px', maxWidth: 960, margin: '0 auto', color: '#161616', lineHeight: 1.5 }}>
-      <p style={{ fontSize: 13, color: '#666' }}>Uz intern · Faza 02 · prototipuri de direcție creativă</p>
-      <h1 style={{ fontSize: 32, margin: '8px 0 8px', fontWeight: 600 }}>Morph — trei direcții</h1>
-      <p style={{ color: '#444', maxWidth: 640 }}>
-        Aceleași produse reale Morph (Store API, snapshot {snapshotAt.slice(0, 10)}) în trei limbaje vizuale. Pentru fiecare: homepage, colecția Luxury și pagina de produs Zeta.
-        Concept privat; nu este un site Morph.
-      </p>
-      <div style={{ display: 'grid', gap: 16, marginTop: 32 }}>
-        {DIRS.map(d => (
-          <section key={d.id} style={{ border: '1px solid #ddd', borderRadius: 8, padding: 20 }}>
-            <h2 style={{ margin: 0, fontSize: 20 }}>{d.name}</h2>
-            <p style={{ margin: '4px 0 12px', color: '#555' }}>{d.idea}</p>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              {['home', 'collection', 'product'].map(s => (
-                <Link key={s} href={`/concept/${d.id}/${s}`} style={{ padding: '8px 14px', border: '1px solid #bbb', borderRadius: 999, textDecoration: 'none' }}>
-                  /concept/{d.id}/{s}
-                </Link>
+    <>
+      <ScentAtlas />
+
+      {/* What Morph sells: three collections, each read as the chord of its colors */}
+      <section className={`wrap ${s.collections}`} aria-labelledby="colectii">
+        <h2 id="colectii" className="sr-only">Colecțiile Morph</h2>
+        {ALL_BY_COLLECTION.map(c => {
+          const list = inCollection(c);
+          return (
+            <Link key={c} href={collectionHref(c)} className={s.coll}>
+              <span className={s.collChord} style={{ background: collectionChord(c) }} aria-hidden />
+              <span className="t-3">{COLLECTIONS[c].name}</span>
+              <span className="t-small">{COLLECTIONS[c].line}</span>
+              <span className="t-small muted">{COLLECTIONS[c].type}, {list.length} parfumuri, <span className="num">{lei(list[0].price)}</span></span>
+            </Link>
+          );
+        })}
+      </section>
+
+      {/* FIND */}
+      <section id="gaseste" className="wrap section" aria-labelledby="gaseste-titlu">
+        <div className={s.head}>
+          <h2 id="gaseste-titlu" className="t-2">Găsește-ți familia</h2>
+          <p className="muted">Cinci familii olfactive, fiecare cu gama ei de culori. Notele de sub nume sunt cele care apar cel mai des în familia respectivă.</p>
+        </div>
+        {FAMILY_GROUPS.map(g => {
+          const list = perfumes.filter(p => familyGroup(p)?.id === g.id);
+          return (
+            <CollectionPreview key={g.id} title={g.name} href={`/parfumuri?familie=${g.id}`} count={list.length} items={list}>
+              {familyNotes(g.id).join(', ')}
+            </CollectionPreview>
+          );
+        })}
+        <div className={s.finder}>
+          <p className="t-3">Nu știi de unde să pornești?</p>
+          <p className="muted">Șapte întrebări despre prezență, anotimp și ocazie. Primești două sau trei parfumuri potrivite.</p>
+          <a href="https://morphparfum.ro/quiz" className="btn btn-secondary">Începe Fragrance Finder</a>
+        </div>
+      </section>
+
+      {/* TRY */}
+      <section id="incearca" className="wrap section" aria-labelledby="incearca-titlu">
+        <div className={s.head}>
+          <h2 id="incearca-titlu" className="t-2">Încearcă înainte de sticlă</h2>
+          <p className="muted">Un parfum se alege pe piele, în câteva zile. Morph are deja formatele pentru asta.</p>
+        </div>
+        <div className={s.offers}>
+          <article className={s.offer}>
+            <div className={s.offerVisual}><Image src="/morph/set-travel-morph-zeta-0.avif" alt="Set travel Morph Zeta, 2×8 ml" fill sizes="(max-width: 899px) 100vw, 33vw" /></div>
+            <h3 className="t-3">Travel 2×8 ml</h3>
+            <p className="t-small muted">Același parfum, în două flacoane de 8 ml. Există pentru {withTravel.length} din cele {perfumes.length} de parfumuri.</p>
+            <ul className={s.travelList} aria-label="Parfumuri cu variantă travel">
+              {withTravel.map(p => (
+                <li key={p.slug}><Link href={productHref(p)} className={s.travelChip}><span className="swatch" style={{ '--scent': scentTokens(p).scent } as React.CSSProperties} />{p.shortName}</Link></li>
               ))}
-            </div>
-          </section>
-        ))}
-      </div>
-      <p style={{ fontSize: 13, color: '#777', marginTop: 32 }}>Cercetare: docs/research · Documentație fază: docs/design</p>
-    </main>
+            </ul>
+            <p className={`${s.price} num`}>{lei(travelFor(withTravel[0])!.price)}</p>
+          </article>
+          {samples.map(x => (
+            <article key={x.slug} className={s.offer}>
+              <div className={s.offerVisual}><Image src={x.image!} alt="" fill sizes="(max-width: 899px) 100vw, 33vw" /></div>
+              <h3 className="t-3">Setul de mostre {/luxury/.test(x.slug) ? 'Luxury' : 'Les Exclusifs & Ice'}</h3>
+              <p className="t-small muted">Mostre din întreaga colecție, ca să compari acasă înainte de 100 ml.</p>
+              <p className={s.offerFoot}><span className={`${s.price} num`}>{lei(x.price)}</span> <a className="link t-small" href={x.url}>Vezi setul</a></p>
+            </article>
+          ))}
+        </div>
+        <p className={`${s.threshold} t-small`}>
+          Livrarea e gratuită de la {lei(FREE_SHIPPING)}. O sticlă Luxury ({lei(lux)}) împreună cu un travel trece pragul.
+          {discovery && <> Pentru toată gama: <a className="link" href={discovery.url}>setul Discovery Travel</a>, {lei(discovery.price)}.</>}
+        </p>
+      </section>
+
+      {/* BUY */}
+      <section id="cumpara" className="wrap section" aria-labelledby="cumpara-titlu">
+        <div className={s.head}>
+          <h2 id="cumpara-titlu" className="t-2">Cele mai alese</h2>
+          <p className="muted">Bestsellerurile Morph, din toate cele trei colecții.</p>
+        </div>
+        <div className={s.cards}>{picks.map(p => <ProductCard key={p.slug} p={p} />)}</div>
+      </section>
+
+      {/* COMBINE */}
+      <section id="combina" className="wrap section" aria-labelledby="combina-titlu">
+        <LayeringComposer first="morph-zeta-parfum-100ml" second="morph-vapor-parfum-100ml" heading="Două parfumuri, a treia formă" headingId="combina-titlu" />
+        <div className={s.ynf}>
+          <p className="t-small muted">Your Next Form, seturile blind de layering Morph:</p>
+          <ul className="t-small">{layeringSets.map(x => <li key={x.slug}><a href={x.url} className="link">{x.state}</a></li>)}</ul>
+        </div>
+      </section>
+
+      {/* Casa Morph and trust */}
+      <section id="casa-morph" className="wrap section" aria-labelledby="casa-titlu">
+        <div className={s.head}>
+          <h2 id="casa-titlu" className="t-2">Casa Morph, București</h2>
+          <p className="muted">Parfumurile se pot încerca în boutique, cu echipa Morph alături.</p>
+        </div>
+        <div className={s.trust}>
+          <div><h3 className="t-3">{BOUTIQUE.address}</h3><p className="muted">{BOUTIQUE.hours.join(', ')}</p></div>
+          <div><h3 className="t-3">Original, verificabil</h3><p className="muted">Fiecare parfum are un cod Certilogo care confirmă online că vine din circuitul oficial Morph.</p></div>
+          <div><h3 className="t-3">Livrare și plată</h3><p className="muted">Livrare gratuită de la {lei(FREE_SHIPPING)}. Card, Apple Pay sau Google Pay.</p></div>
+          <div><h3 className="t-3">Morph Points</h3><p className="muted">Programul de fidelitate Morph, în contul tău de client.</p></div>
+        </div>
+      </section>
+    </>
   );
 }

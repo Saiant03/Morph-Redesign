@@ -1,12 +1,107 @@
+/* Morph concept — design tokens and shared primitives. Source of truth: docs/design/phase-03-design-system.md */
+
+@property --scent { syntax: '<color>'; inherits: true; initial-value: #ebbb23; }
+@property --scent-field { syntax: '<color>'; inherits: true; initial-value: #ecdca3; }
+
+:root {
+  /* color */
+  --bg: #edeeeb;
+  --fg: #1b1c1d;
+  --muted: #5d5f5e;              /* 5.5:1 on --bg */
+  --border: rgba(27, 28, 29, 0.14);
+  --border-strong: #7d7f7d;      /* 3.4:1 on --bg: control outlines */
+  --surface: #e4e5e1;
+  --surface-raised: #f6f6f3;
+  --accent: var(--fg);           /* the interface accent is ink; color belongs to the scents */
+  --focus: var(--fg);
+  --error: #a3261d;
+  --success: #2d6a3e;
+  /* per-scope, set from data (lib/scent.ts): --scent, --scent-field, --scent-ink; --chord for collections */
+
+  /* type */
+  --font: var(--font-sans), system-ui, sans-serif;
+  --t-display: clamp(48px, 7vw, 120px);
+  --t-1: clamp(44px, 5.4vw, 92px);
+  --t-2: clamp(28px, 3vw, 46px);
+  --t-3: clamp(20px, 1.6vw, 25px);
+  --t-lede: clamp(17px, 1.3vw, 20px);
+  --t-body: 16px;
+  --t-small: 14px;
+  --t-micro: 13px;
+
+  /* space: 4px base */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px;
+  --m: clamp(16px, 3.2vw, 48px);           /* page margin */
+  --gap: clamp(12px, 1.8vw, 28px);         /* grid gutter */
+  --section: clamp(80px, 10vw, 152px);     /* vertical rhythm between sections */
+  --header-h: 64px;
+
+  /* shape */
+  --r: 2px;                                 /* the only radius; circles only for scent swatches */
+
+  /* motion */
+  --d-fast: 160ms; --d-base: 320ms; --d-slow: 640ms; --d-story: 900ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+}
+@media (max-width: 899px) { :root { --header-h: 56px; } }
+
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-body { margin: 0; min-height: 100vh; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: calc(var(--header-h) + 16px); }
+body {
+  margin: 0; min-height: 100vh; background: var(--bg); color: var(--fg);
+  font-family: var(--font); font-size: var(--t-body); line-height: 1.5;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
 img { display: block; max-width: 100%; height: auto; }
 button, input, select { font: inherit; color: inherit; }
 button { cursor: pointer; }
-a { color: inherit; }
-:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, p { margin: 0; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.on-dark { --focus: var(--bg); }
+
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip { position: absolute; left: 8px; top: -60px; z-index: 100; background: var(--fg); color: var(--bg); padding: 10px 16px; }
+.skip:focus { top: 8px; }
+
+/* layout */
+.wrap { max-width: 1560px; margin: 0 auto; padding: 0 var(--m); }
+.section { padding-top: var(--section); }
+
+/* type */
+.t-display { font-size: var(--t-display); line-height: 0.92; letter-spacing: -0.04em; font-weight: 500; }
+.t-1 { font-size: var(--t-1); line-height: 0.94; letter-spacing: -0.035em; font-weight: 500; }
+.t-2 { font-size: var(--t-2); line-height: 1.04; letter-spacing: -0.025em; font-weight: 500; }
+.t-3 { font-size: var(--t-3); line-height: 1.15; letter-spacing: -0.012em; font-weight: 500; }
+.t-lede { font-size: var(--t-lede); line-height: 1.45; }
+.t-small { font-size: var(--t-small); line-height: 1.45; }
+.t-micro { font-size: var(--t-micro); line-height: 1.4; }
+.muted { color: var(--muted); }
+.num { font-variant-numeric: tabular-nums; }
+
+/* links */
+.link { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, currentColor 45%, transparent); transition: text-decoration-color var(--d-fast); }
+.link:hover { text-decoration-color: currentColor; }
+
+/* buttons: one shape, three weights */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 52px; padding: 0 24px; border-radius: var(--r); border: 1px solid var(--fg);
+  background: var(--fg); color: var(--bg); font-size: 15px; font-weight: 500; line-height: 1.2; text-align: center;
+  transition: background var(--d-fast), color var(--d-fast), border-color var(--d-fast);
+}
+.btn:hover { background: #33352f; border-color: #33352f; }
+.btn-secondary { background: transparent; color: var(--fg); }
+.btn-secondary:hover { background: var(--fg); color: var(--bg); }
+.btn-sm { min-height: 40px; padding: 0 16px; font-size: 14px; }
+.btn[disabled], .btn[aria-disabled='true'] { background: transparent; color: var(--muted); border-color: var(--border-strong); cursor: not-allowed; }
+@media (pointer: coarse) { .btn-sm { min-height: 44px; } }
+
+/* scent swatch: the only round shape. Edge ring keeps pale Ice colors visible on paper. */
+.swatch { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--scent); box-shadow: inset 0 0 0 1px rgba(27, 28, 29, 0.14); flex: none; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 }

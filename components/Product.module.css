@@ -1,0 +1,21 @@
+/* ProductVisual */
+.visual { position: relative; overflow: hidden; border-radius: var(--r); background: var(--scent-field); isolation: isolate; transition: --scent-field var(--d-story) var(--ease-inout); }
+.bottle { object-fit: contain; mix-blend-mode: multiply; padding: 7% 0; }
+
+/* ProductMeta */
+.meta { display: grid; gap: 6px; }
+.desc { font-size: 15px; line-height: 1.4; }
+.tags { display: flex; flex-wrap: wrap; column-gap: 14px; row-gap: 2px; font-size: var(--t-micro); color: var(--muted); }
+
+/* ProductCard */
+.card { display: flex; flex-direction: column; gap: var(--s-3); position: relative; }
+.cardLink { display: grid; gap: var(--s-4); }
+.cardVisual { aspect-ratio: 4 / 5; }
+.cardVisual .bottle { transition: transform var(--d-slow) var(--ease-out); }
+.cardLink:hover .cardVisual .bottle { transform: translateY(-1.5%); }
+.cardName { font-size: 24px; line-height: 1; letter-spacing: -0.02em; font-weight: 500; }
+.cardFoot { display: flex; justify-content: space-between; align-items: center; gap: var(--s-3); margin-top: auto; padding-top: var(--s-3); border-top: 1px solid var(--border); }
+.price { font-weight: 500; }
+.flag { position: absolute; top: 12px; left: 12px; font-size: var(--t-micro); padding: 3px 10px; background: var(--bg); border-radius: var(--r); }
+.soldout .cardVisual { filter: saturate(0.25); }
+@media (max-width: 899px) { .cardName { font-size: 20px; } }

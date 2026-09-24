@@ -1,0 +1,16 @@
+.gallery { position: relative; }
+.track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; border-radius: var(--r); }
+.track::-webkit-scrollbar { display: none; }
+.slide { flex: 0 0 100%; scroll-snap-align: start; height: calc(100vh - var(--header-h) - 120px); min-height: 520px; max-height: 860px; border-radius: 0; }
+.thumbs { display: flex; gap: 8px; margin-top: 10px; }
+.thumbs button { padding: 0; border: 1px solid transparent; border-radius: var(--r); background: none; }
+.thumbs button[aria-pressed='true'] { border-color: var(--fg); }
+.thumb { width: 60px; height: 75px; }
+@media (max-width: 899px) {
+  .slide { height: 40vh; min-height: 250px; max-height: 360px; }
+  .thumbs { position: absolute; left: 0; right: 0; bottom: 10px; justify-content: center; margin: 0; gap: 4px; }
+  .thumbs button { width: 28px; height: 28px; display: grid; place-items: center; border: 0; }
+  .thumbs button::after { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--fg); opacity: 0.25; }
+  .thumbs button[aria-pressed='true']::after { opacity: 1; }
+  .thumb { display: none; }
+}

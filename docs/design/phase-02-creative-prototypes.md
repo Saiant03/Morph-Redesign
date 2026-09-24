@@ -1,5 +1,7 @@
 # Phase 02 — Creative prototypes
 
+> Superseded in Phase 03: the `/concept/{a,b,c}` routes were removed from the app and replaced by the consolidated A + C concept (`phase-03-consolidation.md`). The code below is in git at `ae81766`; the captures stay in `captures/`.
+
 Nine focused screens: three creative directions × (homepage, collection, product page), built on the same real Morph data. Purpose: compare territories, not ship a site. No direction is chosen here. The comparison is in `phase-02-comparison.md`.
 
 ## How to run

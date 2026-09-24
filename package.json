@@ -1,8 +1,8 @@
 {
   "name": "morph-redesign-concept",
   "private": true,
-  "version": "0.2.0",
-  "description": "Morph Parfum redesign concept prototypes (Phase 02). Not a production site.",
+  "version": "0.3.0",
+  "description": "Morph Parfum redesign concept (Phase 03, A Cromatic + C Strata). Not a production site.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

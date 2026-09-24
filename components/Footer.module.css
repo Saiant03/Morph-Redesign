@@ -1,0 +1,8 @@
+.footer { margin-top: var(--section); border-top: 1px solid var(--border); padding: var(--s-7) 0 var(--s-8); }
+.grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: var(--gap); }
+.brand { display: grid; gap: var(--s-4); align-content: start; }
+.logo { width: 120px; }
+.h { font-weight: 500; margin-bottom: var(--s-3); }
+.grid ul { display: grid; gap: 6px; }
+.note { margin-top: var(--s-7); }
+@media (max-width: 899px) { .grid { grid-template-columns: 1fr 1fr; row-gap: var(--s-6); } .brand { grid-column: 1 / -1; } }
