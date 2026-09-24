@@ -1,7 +1,6 @@
 'use client';
 import { useId, useState } from 'react';
 import { type Perfume, FAMILY_GROUPS, familyGroup } from '@/lib/catalog';
-import { chord } from '@/lib/scent';
 import { type Filters, type Sort, DEFAULT_FILTERS, activeCount } from '@/lib/filters';
 import s from './FilterBar.module.css';
 
@@ -29,7 +28,7 @@ export function FilterBar({ items, f, set, shown }: Props) {
           <button type="button" className={s.chip} aria-pressed={!f.familie} onClick={() => set({ familie: null })}>Toate <span className="num">{items.length}</span></button>
           {families.map(g => (
             <button key={g.id} type="button" className={s.chip} aria-pressed={f.familie === g.id} onClick={() => set({ familie: f.familie === g.id ? null : g.id })}>
-              <i className={s.mini} style={{ background: chord(g.list) }} aria-hidden />{g.name} <span className="num">{g.list.length}</span>
+              {g.name} <span className="num">{g.list.length}</span>
             </button>
           ))}
         </div>

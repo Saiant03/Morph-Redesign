@@ -3,8 +3,7 @@ import Link from 'next/link';
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Flip } from 'gsap/Flip';
 import { gsap, reducedMotion, EASE } from '@/lib/motion';
-import { type Perfume, type Offer, bySlug, COLLECTIONS, concentration, hours, lei, productHref, travelFor } from '@/lib/catalog';
-import { scentTokens } from '@/lib/scent';
+import { type Perfume, type Offer, bySlug, COLLECTIONS, concentration, hours, lei, productHref, travelFor, fullItem, sampleName } from '@/lib/catalog';
 import { type Filters, apply, toQuery, activeCount } from '@/lib/filters';
 import { FilterBar } from './FilterBar';
 import { ProductIndexRow } from './ProductIndexRow';
@@ -16,7 +15,7 @@ import s from './ProductIndex.module.css';
 
 if (typeof window !== 'undefined') gsap.registerPlugin(Flip);
 
-/** Collection browsing: an editorial index with a live preview (B's pattern in A's color language), or a gallery. */
+/** Collection browsing: an editorial index with a live preview in a niche, or a gallery of objects. */
 export function ProductIndex({ items, initial, trial }: { items: Perfume[]; initial: Filters; trial: Offer[] }) {
   const [f, setF] = useState(initial);
   const shown = useMemo(() => apply(items, f), [items, f]);
@@ -82,10 +81,11 @@ function FragmentRow({ children, promo }: { children: React.ReactNode; promo: Of
       {children}
       {promo && promo.length > 0 && (
         <li className={s.promo} data-flip-id="promo">
-          <p className="t-3">Nu știi de unde să începi?</p>
+          <p className="t-2">Nu știi de unde să începi?</p>
           <p className="t-small muted">Încearcă mostrele acasă, apoi alege sticla de 100 ml.</p>
           <p className={s.promoLinks}>
-            {promo.map(o => <a key={o.slug} className="btn btn-sm btn-secondary" href={o.url}>Setul de mostre {/luxury/.test(o.slug) ? 'Luxury' : 'Les Exclusifs & Ice'}, {lei(o.price)}</a>)}
+            {promo.map(o => <a key={o.slug} className="btn btn-sm btn-secondary" href={o.url}>{sampleName(o.slug)}, {lei(o.price)}</a>)}
+              <Link className="btn btn-sm btn-secondary" href="/descopera/finder">Fragrance Finder</Link>
           </p>
         </li>
       )}
@@ -93,26 +93,25 @@ function FragmentRow({ children, promo }: { children: React.ReactNode; promo: Of
   );
 }
 
-/** Sticky preview: the field interpolates to the hovered scent's color; notes shown as strata. */
+/** Sticky preview: the hovered fragrance comes into the niche; its notes as a formula. */
 function Preview({ p }: { p: Perfume }) {
-  const t = scentTokens(p);
   const travel = travelFor(p);
   return (
     <aside className={s.preview} aria-label={`Previzualizare ${p.shortName}`}>
       <Link href={productHref(p)} tabIndex={-1} aria-hidden><ProductVisual p={p} sizes="34vw" alt="" className={s.previewVisual} /></Link>
       <div className={s.previewHead}>
-        <h2 className="t-2">{p.shortName}</h2>
-        <p className="t-small muted">{COLLECTIONS[p.collection].name}, {concentration(p)}</p>
+        <p className="label muted">{COLLECTIONS[p.collection].name} · {concentration(p)}</p>
+        <h2 className={s.previewName}>{p.shortName}</h2>
       </div>
       <NotePyramid p={p} />
       <dl className={s.facts}>
-        <div><dt>Intensitate</dt><dd>{p.intensity ?? '—'}</dd></div>
-        <div><dt>Longevitate</dt><dd className="num">{hours(p) ?? '—'}</dd></div>
-        <div><dt>100 ml</dt><dd className="num">{lei(p.price)}</dd></div>
+        <div><dt className="label muted">Intensitate</dt><dd>{p.intensity ?? '—'}</dd></div>
+        <div><dt className="label muted">Pe piele</dt><dd className="num">{hours(p) ?? '—'}</dd></div>
+        <div><dt className="label muted">100 ml</dt><dd className="num">{lei(p.price)}</dd></div>
       </dl>
       <div className={s.previewActions}>
         <Link href={productHref(p)} className="btn btn-secondary">Vezi parfumul</Link>
-        {p.inStock && <AddToCart items={[{ key: p.slug, name: p.shortName, format: '100 ml', price: p.price, color: t.scent }]}>Adaugă în coș</AddToCart>}
+        {p.inStock && <AddToCart items={[fullItem(p)]}>Adaugă în coș</AddToCart>}
       </div>
       {travel && <p className="t-small muted">Există și travel 2×8 ml, {lei(travel.price)}.</p>}
     </aside>

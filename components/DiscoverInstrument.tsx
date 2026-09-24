@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Flip } from 'gsap/Flip';
 import { gsap, reducedMotion, EASE } from '@/lib/motion';
-import { bySlug, COLLECTIONS, concentration, hours, lei, productHref, familyGroup } from '@/lib/catalog';
-import { scentTokens } from '@/lib/scent';
+import Image from 'next/image';
+import { bySlug, COLLECTIONS, concentration, hours, lei, productHref, familyGroup, fullItem, descriptor } from '@/lib/catalog';
 import { LENSES, groups, topNotes, hasNote, type LensId } from '@/lib/discover';
 import { ProductVisual } from './ProductVisual';
 import { NotePyramid } from './NotePyramid';
@@ -18,8 +18,9 @@ if (typeof window !== 'undefined') gsap.registerPlugin(Flip);
 const NOTES = topNotes();
 
 /**
- * Descoperă: one lens at a time regroups the 26 colors (Flip shows where each scent moves). Selecting a scent opens
- * its preview: beside the groups on desktop, directly under the chosen group on phones. State lives in the URL.
+ * Descoperă: one lens at a time regroups the 26 fragrances, shown as their bottles under a group title written in
+ * fragrance language (FILTER → REFLOW: Flip shows where each object moves). Selecting one opens its preview beside the
+ * groups on desktop, directly under the chosen group on phones. State lives in the URL.
  */
 export function DiscoverInstrument({ initial }: { initial: { lens: LensId; note: string; slug: string | null } }) {
   const [lens, setLens] = useState<LensId>(initial.lens);
@@ -82,8 +83,8 @@ export function DiscoverInstrument({ initial }: { initial: { lens: LensId; note:
         {list.map((g, gi) => (
           <section key={g.id} className={s.group} style={{ order: gi * 2 }} aria-labelledby={`g-${g.id}`}>
             <header className={s.groupHead}>
-              <h3 id={`g-${g.id}`} className="t-3">{g.title} <span className="num muted t-small">{g.items.length}</span></h3>
-              {g.line && <p className="t-small muted">{g.line}</p>}
+              <h3 id={`g-${g.id}`} className={s.groupTitle}>{g.title} <span className="label muted num">{g.items.length}</span></h3>
+              {g.line && <p className={s.groupLine}>{g.line}</p>}
             </header>
             {g.items.length === 0 ? <p className="t-small muted">Niciun parfum.</p> : (
               <ul className={s.keys}>
@@ -93,9 +94,8 @@ export function DiscoverInstrument({ initial }: { initial: { lens: LensId; note:
                   return (
                     <li key={p.slug} data-flip-id={id}>
                       <button type="button" className={s.key} aria-pressed={on} aria-controls="previzualizare" data-soldout={!p.inStock}
-                        style={{ '--scent': scentTokens(p).scent } as React.CSSProperties}
                         onClick={() => setSel(on ? null : { slug: p.slug, group: g.id })}>
-                        <i aria-hidden />
+                        <span className={`niche-sm ${s.keyImg}`} aria-hidden><Image src={p.images[0]} alt="" fill sizes="80px" /></span>
                         <span>{p.shortName}</span>
                       </button>
                     </li>
@@ -115,8 +115,8 @@ function Preview({ slug, order, mark, onClose }: { slug: string | null; order: n
   if (!slug) {
     return (
       <aside id="previzualizare" className={`${s.preview} ${s.previewEmpty}`} style={{ order }} aria-label="Previzualizare">
-        <p className="t-3">Alege o culoare.</p>
-        <p className="t-small muted">Fiecare culoare e un parfum Morph. Vezi notele, intensitatea, prețul și cum îl încerci.</p>
+        <p className="t-2">Alege un parfum.</p>
+        <p className="t-small muted">Vezi notele, intensitatea, prețul și cum îl încerci.</p>
       </aside>
     );
   }
@@ -126,19 +126,20 @@ function Preview({ slug, order, mark, onClose }: { slug: string | null; order: n
     <aside id="previzualizare" className={s.preview} style={{ order }} aria-label={`Previzualizare ${p.shortName}`}>
       <Link href={productHref(p)} tabIndex={-1} aria-hidden className={s.previewLink}><ProductVisual p={p} sizes="(max-width: 899px) 100vw, 34vw" alt="" className={s.previewVisual} /></Link>
       <div className={s.previewHead}>
-        <h2 className="t-2"><Link href={productHref(p)}>{p.shortName}</Link></h2>
-        <p className="t-small muted">{COLLECTIONS[p.collection].name}, {concentration(p)?.toLowerCase()}{fam ? `, ${fam.name.toLowerCase()}` : ''}{!p.inStock && ', stoc epuizat'}</p>
+        <p className="label muted">{COLLECTIONS[p.collection].name} · {concentration(p)}{fam ? ` · ${fam.name}` : ''}{!p.inStock && ' · stoc epuizat'}</p>
+        <h2 className={s.previewName}><Link href={productHref(p)}>{p.shortName}</Link></h2>
+        <p className={s.previewLine}>{descriptor(p)}</p>
         <button type="button" className={`text-btn link t-small ${s.close}`} onClick={onClose}>Închide</button>
       </div>
       <NotePyramid p={p} mark={mark} />
       <dl className={s.facts}>
-        <div><dt>Intensitate</dt><dd>{p.intensity ?? '—'}</dd></div>
-        <div><dt>Longevitate</dt><dd className="num">{hours(p) ?? '—'}</dd></div>
-        <div><dt>100 ml</dt><dd className="num">{lei(p.price)}</dd></div>
+        <div><dt className="label muted">Intensitate</dt><dd>{p.intensity ?? '—'}</dd></div>
+        <div><dt className="label muted">Pe piele</dt><dd className="num">{hours(p) ?? '—'}</dd></div>
+        <div><dt className="label muted">100 ml</dt><dd className="num">{lei(p.price)}</dd></div>
       </dl>
       <div className={s.actions}>
         {p.inStock
-          ? <AddToCart items={[{ key: p.slug, name: p.shortName, format: '100 ml', price: p.price, color: scentTokens(p).scent }]}>Adaugă 100 ml <span className="num">{lei(p.price)}</span></AddToCart>
+          ? <AddToCart items={[fullItem(p)]}>Adaugă 100 ml <span className="num">{lei(p.price)}</span></AddToCart>
           : <Link className="btn" href={productHref(p)}>Anunță-mă</Link>}
         <TryOffer p={p} />
       </div>

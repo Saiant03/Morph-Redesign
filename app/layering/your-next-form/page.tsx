@@ -11,7 +11,7 @@ export const metadata = { title: 'Your Next Form' };
 export default function Page() {
   const inStock = layeringSets.filter(x => x.inStock).length;
   return (
-    <div className="wrap">
+    <div className={s.page} data-tone="dark"><div className="wrap">
       <PageHead id="ynf-titlu" title="Your Next Form" crumbs={[{ href: '/layering', label: 'Layering' }, { label: 'Your Next Form' }]}
         lede={`${layeringSets.length} seturi de layering create de Morph, în ediție limitată. Două parfumuri de 8 ml, fără nume: afli care sunt abia când deschizi cutia.`}
         meta={<>2×8 ml, <span className="num">{lei(layeringSets[0].price)}</span> setul. {inStock} din {layeringSets.length} în stoc.</>}>
@@ -39,6 +39,6 @@ export default function Page() {
           <Link className="btn btn-secondary" href="/casa-morph">Vezi Casa Morph</Link>
         </div>
       </section>
-    </div>
+    </div></div>
   );
 }

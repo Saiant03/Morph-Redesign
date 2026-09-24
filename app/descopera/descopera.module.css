@@ -1,27 +1,33 @@
 .h { margin-bottom: var(--s-5); }
-.head { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-3); align-items: end; margin-bottom: var(--s-6); }
-.head > :first-child { grid-column: 1 / span 6; }
-.head > :last-child { grid-column: 8 / -1; max-width: 46ch; }
+.head { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-3); align-items: end; margin-bottom: var(--s-7); }
+.head > :first-child { grid-column: 1 / span 7; }
+.head > :last-child { grid-column: 9 / -1; max-width: 44ch; }
 
 .finder { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-3); align-items: center; padding: var(--s-5) 0; border-top: 1px solid var(--fg); border-bottom: 1px solid var(--border); margin-top: var(--s-4); }
-.finder > :nth-child(1) { grid-column: 1 / span 3; }
-.finder > :nth-child(2) { grid-column: 4 / span 5; }
+.finder > :nth-child(1) { grid-column: 1 / span 5; }
+.finder > :nth-child(2) { grid-column: 6 / span 4; }
 .finder > :nth-child(3) { grid-column: 10 / -1; justify-self: end; }
 
-.travel { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-4); padding: var(--s-4) 0 var(--s-5); border-top: 1px solid var(--fg); }
-.travel > div { grid-column: 1 / span 4; display: grid; gap: var(--s-2); align-content: start; }
+.travel { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-4); padding: var(--s-5) 0; border-top: 1px solid var(--fg); }
+.travelIntro { grid-column: 1 / span 4; display: grid; gap: var(--s-2); align-content: start; }
 .travelList { grid-column: 6 / -1; display: grid; grid-template-columns: repeat(3, 1fr); column-gap: var(--gap); }
-.travelList li { display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); }
-.travelList li > a { flex: 1; }
+.travelList li { display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); padding: 4px 0; }
+.travelImg { width: 32px; height: 40px; flex: none; }
+.travelName { flex: 1; font-family: var(--serif); font-size: 20px; }
+.travelName:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 .offers { border-top: 1px solid var(--border); }
-.offer { display: grid; grid-template-columns: 72px minmax(0, 3fr) minmax(0, 1fr) auto; gap: var(--s-4); align-items: center; padding: var(--s-3) 0; border-bottom: 1px solid var(--border); }
-.offerVisual { position: relative; width: 72px; height: 58px; background: var(--surface-raised); border-radius: var(--r); overflow: hidden; isolation: isolate; }
-.offerVisual img { object-fit: contain; mix-blend-mode: multiply; padding: 4px; }
-.offerName { font-size: 20px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 500; }
+.offer { display: grid; grid-template-columns: 96px minmax(0, 3fr) minmax(0, 1fr) auto; gap: var(--s-4); align-items: center; padding: var(--s-3) 0; border-bottom: 1px solid var(--border); }
+.offerVisual { width: 96px; height: 96px; }
+.offerName { font-family: var(--serif); font-size: 26px; line-height: 1.1; font-weight: 400; }
 .offer b { font-weight: 500; }
 .soldout .offerName { color: var(--muted); }
-.soldout .offerVisual { filter: saturate(0.25); }
+.soldout .offerVisual { filter: grayscale(0.7); }
+
+.person { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-3); align-items: center; margin-top: var(--s-6); padding: var(--s-6) var(--s-6); border-radius: var(--r); }
+.person > :nth-child(1) { grid-column: 1 / span 4; }
+.person > :nth-child(2) { grid-column: 5 / span 5; display: grid; gap: 4px; }
+.person > :nth-child(3) { grid-column: 10 / -1; justify-self: end; }
 .threshold { margin-top: var(--s-5); max-width: 90ch; }
 
 .next { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-3); align-items: center; padding-bottom: var(--section); }
@@ -31,13 +37,14 @@
 
 @media (max-width: 1100px) { .travelList { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 899px) {
-  .head, .finder, .travel, .next { grid-template-columns: 1fr; }
-  .head > *, .finder > *, .travel > *, .next > * { grid-column: 1 !important; justify-self: stretch !important; }
+  .head, .finder, .travel, .next, .person { grid-template-columns: 1fr; }
+  .head > *, .finder > *, .travel > *, .next > *, .person > * { grid-column: 1 !important; justify-self: stretch !important; }
   .travelList { grid-template-columns: 1fr; }
-  .offer { grid-template-columns: 56px minmax(0, 1fr) auto; grid-template-areas: 'v n n' 'v p a'; row-gap: var(--s-2); }
-  .offer > :nth-child(1) { grid-area: v; width: 56px; height: 56px; }
+  .offer { grid-template-columns: 72px minmax(0, 1fr) auto; grid-template-areas: 'v n n' 'v p a'; row-gap: var(--s-2); }
+  .offer > :nth-child(1) { grid-area: v; width: 72px; height: 72px; }
   .offer > :nth-child(2) { grid-area: n; }
   .offer > :nth-child(3) { grid-area: p; }
   .offer > :nth-child(4) { grid-area: a; }
-  .offerName { font-size: 18px; }
+  .offerName { font-size: 22px; }
+  .person { margin-inline: calc(var(--m) * -1); padding: var(--s-5) var(--m); border-radius: 0; }
 }

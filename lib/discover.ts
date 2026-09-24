@@ -4,7 +4,7 @@ import { perfumes, FAMILY_GROUPS, familyGroup, familyNotes, COLLECTIONS, ALL_BY_
 
 export type LensId = 'familie' | 'nota' | 'anotimp' | 'intensitate' | 'colectie';
 export const LENSES: { id: LensId; label: string; hint: string }[] = [
-  { id: 'familie', label: 'Familie', hint: 'Cele cinci familii olfactive propuse, fiecare cu gama ei de culori.' },
+  { id: 'familie', label: 'Familie', hint: 'Cinci familii olfactive, fiecare descrisă prin notele care apar cel mai des în parfumurile ei.' },
   { id: 'nota', label: 'Notă', hint: 'Unde apare o notă în evoluția fiecărui parfum: la deschidere, în inimă sau în bază.' },
   { id: 'anotimp', label: 'Anotimp', hint: 'Anotimpurile indicate de Morph. Un parfum poate apărea în mai multe.' },
   { id: 'intensitate', label: 'Intensitate și durată', hint: 'Intensitatea și longevitatea declarate de Morph, de la discret la persistent.' },
@@ -14,7 +14,7 @@ export const LENSES: { id: LensId; label: string; hint: string }[] = [
 export type Group = { id: string; title: string; line: string; items: Perfume[] };
 
 export const norm = (t: string) => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ţ/g, 't').trim();
-const SEASONS = [['Primavară', 'Primăvară'], ['Vară', 'Vară'], ['Toamnă', 'Toamnă'], ['Iarnă', 'Iarnă']] as const;
+const SEASONS = [['Primăvară', 'Primăvară'], ['Vară', 'Vară'], ['Toamnă', 'Toamnă'], ['Iarnă', 'Iarnă']] as const;
 const TIERS = [['top', 'La deschidere'], ['heart', 'În inimă'], ['base', 'În bază']] as const;
 
 /** Most frequent notes (merged by accent-free spelling), for the note lens chips. */

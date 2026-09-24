@@ -24,34 +24,38 @@
 .index { font-size: var(--t-micro); color: var(--muted); }
 .answer[aria-pressed='true'] .index { color: inherit; }
 .text { display: grid; gap: 2px; }
-.answerLabel { font-size: clamp(18px, 1.5vw, 22px); letter-spacing: -0.01em; line-height: 1.2; }
-.answerChord { display: inline-flex; align-items: center; gap: 8px; }
-.answerChord i { display: block; width: 72px; height: 8px; border-radius: 1px; box-shadow: inset 0 0 0 1px rgba(27, 28, 29, 0.12); }
+.answerLabel { font-family: var(--serif); font-size: clamp(22px, 1.9vw, 30px); letter-spacing: -0.01em; line-height: 1.1; }
+.answerObjects { display: inline-flex; align-items: center; gap: 10px; }
+.stack { display: inline-flex; }
+.stackImg { width: 24px; height: 30px; border-radius: 1px; box-shadow: 0 0 0 1.5px var(--bg); }
+.stackImg + .stackImg { margin-left: -8px; }
 .note { max-width: 60ch; }
 
-/* side: the palette re-weights with every answer */
+/* side: the shelf of tagged bottles; matches stay lit, the rest dim */
 .side { grid-column: 9 / -1; position: sticky; top: calc(var(--header-h) + 24px); display: grid; gap: var(--s-4); }
-.palette { display: flex; gap: 2px; height: clamp(160px, 22vw, 320px); }
-.palette span { flex-basis: 0; min-width: 3px; border-radius: 1px; box-shadow: inset 0 0 0 1px rgba(27, 28, 29, 0.1); transition: flex-grow var(--d-slow) var(--ease-inout), opacity var(--d-slow); }
-.palette span[data-zero='true'] { opacity: 0.25; }
+.shelf { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+.shelf li { transition: opacity var(--d-slow) var(--ease-inout), filter var(--d-slow) var(--ease-inout), transform var(--d-slow) var(--ease-out); }
+.shelfImg { display: block; aspect-ratio: 4 / 5; }
+.shelfImg img { padding: 6% 0; }
+.shelf li[data-lit='some'] { opacity: calc(0.35 + var(--w) * 0.5); filter: grayscale(calc(1 - var(--w))) brightness(calc(0.7 + var(--w) * 0.3)); }
+.shelf li[data-lit='off'] { opacity: 0.18; filter: grayscale(1) brightness(0.6); }
+.shelf li[data-lit='lead'] { transform: translateY(-4px); }
+.shelf li[data-lit='lead'] .shelfImg { box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--fg); }
 .lead { display: grid; gap: var(--s-2); }
-.lead ul { display: grid; gap: 4px; }
-.lead li { display: flex; align-items: center; gap: 8px; }
+.lead ol { display: grid; gap: 2px; font-family: var(--serif); font-size: 28px; line-height: 1.1; }
 
 @keyframes enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 
 @media (max-width: 899px) {
   .flow { grid-template-columns: 1fr; padding-top: var(--s-4); row-gap: var(--s-5); }
   .main, .side { grid-column: 1; }
-  /* on mobile the palette sits above the question as a thin band; the leaders line stays */
+  /* phones: no shelf; the three leaders stay named above the question */
   .side { order: -1; position: static; gap: var(--s-2); }
   .side > p { display: none; }
-  .palette { height: 28px; }
-  .lead { grid-auto-flow: column; justify-content: start; align-items: center; gap: var(--s-3); }
-  .lead ul { display: flex; gap: 12px; }
-  .lead li { font-size: var(--t-small); }
+  .shelf { display: none; }
+  .lead { grid-auto-flow: column; justify-content: start; align-items: baseline; gap: var(--s-3); }
+  .lead ol { display: flex; gap: 12px; font-size: 18px; }
   .question { gap: var(--s-4); }
   .answer { grid-template-columns: 28px 1fr auto; min-height: 60px; }
-  .answerChord i { width: 40px; }
-  .answerChord span { display: none; }
+  .answerObjects .label { display: none; }
 }

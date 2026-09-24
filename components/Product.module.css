@@ -1,21 +1,33 @@
-/* ProductVisual */
-.visual { position: relative; overflow: hidden; border-radius: var(--r); background: var(--scent-field); isolation: isolate; transition: --scent-field var(--d-story) var(--ease-inout); }
-.bottle { object-fit: contain; mix-blend-mode: multiply; padding: 7% 0; }
+/* ProductVisual: the niche. A lit recess, brightest behind the bottle, falling off toward its edges;
+   a glass shelf edge near the foot. White packshots are multiplied onto it, so the light becomes their background. */
+.visual {
+  position: relative; overflow: hidden; isolation: isolate; border-radius: var(--r);
+  background:
+    radial-gradient(90% 70% at 50% 40%, var(--glow) 0%, var(--niche-mid) 55%, var(--niche-edge) 100%);
+  box-shadow: inset 0 40px 60px -40px rgba(20, 14, 10, 0.28), inset 0 0 0 1px rgba(20, 14, 10, 0.06);
+  transition: --glow var(--d-story) var(--ease-inout);
+}
+.visual::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 13%; pointer-events: none; z-index: 1;
+  background: linear-gradient(to bottom, rgba(255, 252, 246, 0.55), rgba(255, 252, 246, 0) 2px), linear-gradient(to bottom, rgba(20, 14, 10, 0.06), rgba(20, 14, 10, 0.14));
+}
+.bottle { object-fit: contain; mix-blend-mode: multiply; padding: 7% 0 5%; }
+.visual[data-crop] .bottle { padding: 0; object-fit: cover; }
 
 /* ProductMeta */
 .meta { display: grid; gap: 6px; }
 .desc { font-size: 15px; line-height: 1.4; }
 .tags { display: flex; flex-wrap: wrap; column-gap: 14px; row-gap: 2px; font-size: var(--t-micro); color: var(--muted); }
 
-/* ProductCard */
+/* ProductCard: object first, name in the serif, price and one action */
 .card { display: flex; flex-direction: column; gap: var(--s-3); position: relative; }
 .cardLink { display: grid; gap: var(--s-4); }
 .cardVisual { aspect-ratio: 4 / 5; }
 .cardVisual .bottle { transition: transform var(--d-slow) var(--ease-out); }
-.cardLink:hover .cardVisual .bottle { transform: translateY(-1.5%); }
-.cardName { font-size: 24px; line-height: 1; letter-spacing: -0.02em; font-weight: 500; }
+.cardLink:hover .cardVisual .bottle { transform: translateY(-1.5%) scale(1.02); }
+.cardName { font-family: var(--serif); font-size: 30px; line-height: 1; letter-spacing: -0.015em; font-weight: 400; }
 .cardFoot { display: flex; justify-content: space-between; align-items: center; gap: var(--s-3); margin-top: auto; padding-top: var(--s-3); border-top: 1px solid var(--border); }
 .price { font-weight: 500; }
-.flag { position: absolute; top: 12px; left: 12px; font-size: var(--t-micro); padding: 3px 10px; background: var(--bg); border-radius: var(--r); }
-.soldout .cardVisual { filter: saturate(0.25); }
-@media (max-width: 899px) { .cardName { font-size: 20px; } }
+.flag { position: absolute; top: 12px; left: 12px; z-index: 2; padding: 4px 10px; background: var(--bg); border-radius: var(--r); }
+.soldout .cardVisual { filter: grayscale(0.6); }
+@media (max-width: 899px) { .cardName { font-size: 26px; } }

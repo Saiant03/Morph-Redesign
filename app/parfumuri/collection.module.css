@@ -1,14 +1,32 @@
-.head { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-5); align-items: end; padding: clamp(28px, 4vw, 64px) 0 var(--s-6); }
+.room { padding: 1px 0 var(--s-6); margin-bottom: var(--s-5); }
+.head.head { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-5); align-items: end; margin-top: clamp(28px, 4vw, 64px); margin-bottom: var(--s-7); }
 .head > :first-child { grid-column: 1 / span 7; }
-.intro { grid-column: 8 / -1; display: grid; gap: var(--s-3); }
+.intro { grid-column: 9 / -1; display: grid; gap: var(--s-4); }
 .crumb { display: flex; gap: 8px; margin-bottom: var(--s-4); }
 .crumb a:hover { text-decoration: underline; text-underline-offset: 3px; }
-.chord { display: block; height: 12px; border-radius: var(--r); margin-top: var(--s-2); }
+.facts { margin: 0; display: grid; border-top: 1px solid var(--border); }
+.facts > div { display: flex; justify-content: space-between; gap: var(--s-3); padding: 8px 0; border-bottom: 1px solid var(--border); }
+.facts dd { margin: 0; }
+
+/* the shelf: every bottle of the collection, one object each, on a glass edge */
+.shelfWrap { overflow-x: auto; scrollbar-width: none; }
+.shelfWrap::-webkit-scrollbar { display: none; }
+.shelf { display: flex; gap: clamp(6px, 0.8vw, 12px); padding-bottom: 4px; }
+.shelf li { flex: 1 1 0; min-width: 72px; max-width: 150px; }
+.shelfItem { display: grid; gap: 6px; }
+.shelfNiche { aspect-ratio: 3 / 4; }
+.shelfNiche img { transition: transform var(--d-slow) var(--ease-out); }
+.shelfItem:hover .shelfNiche img, .shelfItem:focus-visible .shelfNiche img { transform: translateY(-3%); }
+.shelfItem span { color: var(--muted); transition: color var(--d-fast); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.shelfItem:hover span { color: var(--fg); }
+.shelf[data-dense='true'] li { min-width: 40px; }
+.shelf[data-dense='true'] span { display: none; }
+
 @media (max-width: 899px) {
-  .head { grid-template-columns: 1fr; padding: var(--s-4) 0 var(--s-4); row-gap: var(--s-3); }
-  .head h1 { font-size: 52px; }
+  .head.head { grid-template-columns: 1fr; margin-top: var(--s-4); margin-bottom: var(--s-5); row-gap: var(--s-4); }
+  .head h1 { font-size: 60px; }
   .crumb { margin-bottom: var(--s-2); }
-  .chord { display: none; }
   .intro :global(.t-lede) { font-size: 16px; }
   .head > *, .intro { grid-column: 1 !important; }
+  .shelf li { flex: 0 0 76px; }
 }

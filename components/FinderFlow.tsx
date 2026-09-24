@@ -2,12 +2,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { QUESTIONS, TAGGED, score, taggedWith, answersQuery, type Answers } from '@/lib/finder';
-import { chord, scentTokens } from '@/lib/scent';
+import Image from 'next/image';
 import s from './FinderFlow.module.css';
 
 /**
- * Morph's seven questions, one at a time. Beside them, the palette of the tagged perfumes re-weights after every
- * answer (width = current score), so the visitor sees the selection narrowing. The last answer opens the result URL.
+ * Morph's seven questions, one at a time. Beside them, the shelf of the 23 perfumes Morph tagged: after every answer
+ * the bottles that match stay lit and the others dim (light = current score), so the selection visibly narrows.
+ * The last answer opens the result URL.
  */
 export function FinderFlow({ initial, step }: { initial: Answers; step: number | null }) {
   const router = useRouter();
@@ -40,6 +41,7 @@ export function FinderFlow({ initial, step }: { initial: Answers; step: number |
   const scored = TAGGED.map(x => ({ ...x, score: score(x.tags, answers) })).sort((a, b) => b.score - a.score);
   const answered = QUESTIONS.filter(x => answers[x.id]).length;
   const nextOpen = QUESTIONS.findIndex(x => !answers[x.id]);
+  const max = scored[0]?.score ?? 0;
 
   return (
     <div className={s.flow}>
@@ -70,9 +72,9 @@ export function FinderFlow({ initial, step }: { initial: Answers; step: number |
                     {a.description && <span className="t-small muted">{a.description}</span>}
                   </span>
                   {list.length > 0 && (
-                    <span className={s.answerChord} aria-hidden title={list.map(p => p.shortName).join(', ')}>
-                      <i style={{ background: chord(list) }} />
-                      <span className="t-micro muted num">{list.length}</span>
+                    <span className={s.answerObjects} aria-hidden title={list.map(p => p.shortName).join(', ')}>
+                      <span className={s.stack}>{list.slice(0, 3).map(p => <span key={p.slug} className={`niche-sm ${s.stackImg}`}><Image src={p.images[0]} alt="" fill sizes="28px" /></span>)}</span>
+                      <span className="label muted num">{list.length}</span>
                     </span>
                   )}
                 </button>
@@ -80,25 +82,26 @@ export function FinderFlow({ initial, step }: { initial: Answers; step: number |
             })}
           </div>
         </div>
-        <p className={`${s.note} t-micro muted`}>Culorile de lângă fiecare răspuns sunt parfumurile pe care Morph le-a etichetat astfel în finder.</p>
+        <p className={`${s.note} t-micro muted`}>Lângă fiecare răspuns: câte parfumuri a etichetat Morph astfel în finder.</p>
       </div>
 
       <aside className={s.side} aria-label="Selecția de până acum">
-        <p className="t-small">{answered === 0 ? 'Paleta Morph' : 'Paleta ta, după ' + answered + (answered === 1 ? ' răspuns' : ' răspunsuri')}</p>
-        <div className={s.palette} aria-hidden>
+        <p className="label muted">{answered === 0 ? `Cele ${TAGGED.length} parfumuri din finder` : `După ${answered} ${answered === 1 ? 'răspuns' : 'răspunsuri'}`}</p>
+        <ul className={s.shelf} aria-hidden>
           {TAGGED.map(x => {
             const sc = scored.find(y => y.p.slug === x.p.slug)!.score;
-            return <span key={x.p.slug} style={{ flexGrow: 1 + sc * sc, background: scentTokens(x.p).scent }} data-zero={answered > 0 && sc === 0} />;
+            const lead = answered > 0 && scored.slice(0, 3).some(y => y.p.slug === x.p.slug);
+            return (
+              <li key={x.p.slug} data-lit={answered === 0 ? 'all' : lead ? 'lead' : sc > 0 ? 'some' : 'off'} style={{ '--w': max ? sc / max : 1 } as React.CSSProperties}>
+                <span className={`niche-sm ${s.shelfImg}`}><Image src={x.p.images[0]} alt="" fill sizes="48px" /></span>
+              </li>
+            );
           })}
-        </div>
+        </ul>
         {answered > 0 && (
           <div className={s.lead} aria-live="polite">
-            <p className="t-micro muted">Cele mai apropiate acum</p>
-            <ul>
-              {scored.slice(0, 3).map(x => (
-                <li key={x.p.slug}><span className="swatch" style={{ '--scent': scentTokens(x.p).scent } as React.CSSProperties} />{x.p.shortName}</li>
-              ))}
-            </ul>
+            <p className="label muted">Cele mai apropiate acum</p>
+            <ol>{scored.slice(0, 3).map(x => <li key={x.p.slug}>{x.p.shortName}</li>)}</ol>
           </div>
         )}
       </aside>

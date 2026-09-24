@@ -2,7 +2,7 @@
 
 Source of truth for implementation. Tokens live in `app/globals.css`; scent colors are derived in `lib/scent.ts`; components in `components/`. When this document and the code disagree, fix one of them in the same change.
 
-> **Superseded in part (2026-09-24).** The brand direction in `CLAUDE.md` replaces color as the primary visual language: fragrance color is an atmospheric accent only; families, collections, the catalog and layering must not be expressed as color palettes or color mixing. Principles 1–3 and every color-led component below (atlas, chords, color keys, composer strata) are to be revised. Tokens for type, space, accessibility and the buy path still apply.
+> **Superseded in part (2026-09-24).** The brand direction in `CLAUDE.md` replaces color as the primary visual language: fragrance color is an atmospheric accent only; families, collections, the catalog and layering must not be expressed as color palettes or color mixing. Replaced by `phase-05-design-system.md` (color, type, product presentation, layering, discovery, motion). Space, grid, the buy path and the accessibility checklist still apply.
 
 ## Principles (five rules)
 

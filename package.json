@@ -1,15 +1,16 @@
 {
   "name": "morph-redesign-concept",
   "private": true,
-  "version": "0.4.0",
-  "description": "Morph Parfum redesign concept (Phase 04, A Cromatic + C Strata, journey expansion). Not a production site.",
+  "version": "0.5.0",
+  "description": "Morph Parfum redesign concept (Phase 05: art-direction reset — object, matter, light). Not a production site.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "snapshot": "node scripts/snapshot.mjs",
     "colors": "node scripts/colors.mjs",
-    "finder": "node scripts/finder.mjs"
+    "finder": "node scripts/finder.mjs",
+    "smoke": "node scripts/smoke.mjs"
   },
   "dependencies": {
     "gsap": "^3.15.0",

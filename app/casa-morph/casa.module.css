@@ -1,41 +1,59 @@
-.head { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-3); align-items: end; margin-bottom: var(--s-6); }
-.head > :first-child { grid-column: 1 / span 6; }
-.head > :last-child { grid-column: 8 / -1; max-width: 48ch; }
+.head { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-3); align-items: end; margin-bottom: var(--s-7); }
+.head > :first-child { grid-column: 1 / span 7; }
+.head > :last-child { grid-column: 9 / -1; max-width: 42ch; }
 
-/* visit: the house's colors as a wall, the practical facts beside it */
-.visit { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-6); align-items: stretch; padding-top: var(--s-5); border-top: 1px solid var(--fg); }
-.wall { grid-column: 1 / span 6; display: grid; grid-template-rows: repeat(3, 1fr); gap: 4px; min-height: clamp(260px, 30vw, 440px); }
-.wall li { position: relative; border-radius: var(--r); box-shadow: inset 0 0 0 1px rgba(27, 28, 29, 0.08); }
-.wall a { position: absolute; left: 8px; bottom: 8px; padding: 2px 8px; background: var(--bg); border-radius: var(--r); font-size: var(--t-small); }
-.wall a:hover { text-decoration: underline; text-underline-offset: 3px; }
-.visitInfo { grid-column: 8 / -1; display: grid; gap: var(--s-5); align-content: start; }
+/* the room */
+.room { padding: clamp(28px, 4vw, 64px) 0 var(--section); }
+.roomGrid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-7); align-items: end; }
+.roomText { grid-column: 1 / span 7; display: grid; gap: var(--s-5); }
+.roomText h1 { margin-top: var(--s-3); }
+.roomText :global(.t-lede) { max-width: 40ch; }
+/* the art wall: the boutique's burgundy panel, three niches set into it at different heights */
+.artWall {
+  grid-column: 1 / span 7; grid-row: 2; position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 2vw, 32px); align-items: end;
+  padding: clamp(28px, 4vw, 64px) clamp(20px, 3vw, 48px) clamp(20px, 2.4vw, 36px); border-radius: var(--r);
+  background: radial-gradient(120% 90% at 30% 10%, #6b2635 0%, var(--wine) 45%, #2a0e14 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), 0 40px 80px -40px rgba(0, 0, 0, 0.7);
+  color: var(--wine-fg);
+}
+.wallNiche { display: grid; gap: var(--s-2); margin-bottom: calc(var(--k) * clamp(16px, 3vw, 48px)); }
+.wallNiche:hover .label { text-decoration: underline; text-underline-offset: 3px; }
+.niche { aspect-ratio: 3 / 4; box-shadow: inset 0 50px 70px -40px rgba(0, 0, 0, 0.5), 0 24px 40px -24px rgba(0, 0, 0, 0.7); }
+.visit { grid-column: 9 / -1; grid-row: 1 / span 2; align-self: end; display: grid; gap: var(--s-5); }
 .hours { margin: 0; display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .hours > div { padding: 12px 0; }
 .hours > div + div { padding-left: 14px; border-left: 1px solid var(--border); }
-.hours dt { font-size: var(--t-micro); color: var(--muted); }
-.hours dd { margin: 2px 0 0; font-size: 20px; font-weight: 500; }
+.hours dd { margin: 4px 0 0; font-size: 22px; font-weight: 500; }
 .actions { display: flex; flex-wrap: wrap; gap: var(--s-2); }
 
-.reasons { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
-.reasons > div { display: grid; gap: var(--s-3); align-content: start; justify-items: start; padding-top: var(--s-4); border-top: 1px solid var(--border); }
-.colls { display: grid; gap: var(--s-2); }
-.colls li { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.colls li > span:first-child { width: 48px; height: 10px; border-radius: 1px; }
+.reasons { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
+.reasons li { display: grid; gap: var(--s-3); align-content: start; padding-top: var(--s-4); border-top: 1px solid var(--fg); }
+
+/* the selection */
+.listBand { background: var(--surface); }
+.listGrid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-6); align-items: start; }
+.listText { grid-column: 1 / span 4; display: grid; gap: var(--s-4); position: sticky; top: calc(var(--header-h) + 32px); }
+.listGrid > :last-child { grid-column: 6 / -1; }
 
 .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
 .steps li { display: grid; gap: var(--s-2); align-content: start; padding-top: var(--s-4); border-top: 1px solid var(--border); }
 
-.story { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-5); padding-bottom: var(--section); }
-.story > h2 { grid-column: 1 / span 4; }
-.story > p.t-lede, .story > :global(.t-lede) { grid-column: 6 / -1; max-width: 60ch; }
-.palette { grid-column: 1 / -1; height: 12px; border-radius: var(--r); }
-.story > p:last-child { grid-column: 6 / -1; }
+.story { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-5); }
+.story > h2 { grid-column: 1 / span 5; }
+.story > div { grid-column: 7 / -1; display: grid; gap: var(--s-4); max-width: 60ch; }
 
-@media (max-width: 1100px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 1100px) {
+  .reasons, .steps { grid-template-columns: repeat(2, 1fr); row-gap: var(--s-6); }
+  .roomText, .artWall { grid-column: 1 / span 7; }
+  .visit { grid-column: 8 / -1; }
+}
 @media (max-width: 899px) {
-  .head, .visit, .story { grid-template-columns: 1fr; }
-  .head > *, .visit > *, .story > * { grid-column: 1 !important; }
-  .wall { min-height: 0; height: 168px; order: 2; }
+  .head, .roomGrid, .listGrid, .story { grid-template-columns: 1fr; }
+  .head > *, .roomGrid > *, .listGrid > *, .story > * { grid-column: 1 !important; grid-row: auto !important; }
+  .roomText h1 { font-size: 60px; }
+  .artWall { margin-inline: calc(var(--m) * -1); border-radius: 0; gap: 10px; padding: 32px var(--m) 20px; }
+  .wallNiche { margin-bottom: calc(var(--k) * 14px); }
+  .listText { position: static; }
   .reasons, .steps { grid-template-columns: 1fr; gap: var(--s-5); }
   .actions > * { flex: 1 1 100%; }
 }

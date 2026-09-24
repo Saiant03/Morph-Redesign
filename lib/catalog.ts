@@ -33,7 +33,8 @@ export type Offer = { id: number; slug: string; name: string; price: number; inS
 export type Tone = { juice: string; accent: string | null; identity: string };
 
 const fixNote = (n: string) => n.replace(/\bavola\b/g, 'Avola');
-export const perfumes = (catalog.perfumes as Perfume[]).map(p => ({ ...p, notes: { top: p.notes.top.map(fixNote), heart: p.notes.heart.map(fixNote), base: p.notes.base.map(fixNote) } }));
+// "Primavară" is spelled so in the Store API; shown with its diacritic.
+export const perfumes = (catalog.perfumes as Perfume[]).map(p => ({ ...p, season: p.season.map(x => (x === 'Primavară' ? 'Primăvară' : x)), notes: { top: p.notes.top.map(fixNote), heart: p.notes.heart.map(fixNote), base: p.notes.base.map(fixNote) } }));
 export const travelSets = catalog.travel as Offer[];
 export const sampleSets = catalog.samples as Offer[];
 export const layeringSets = catalog.layering as Offer[];
@@ -159,3 +160,26 @@ export const firstSentences = (t: string, n: number) => (t.match(/[^.!?]+[.!?]+/
 export const discoverySets = () => travelSets.filter(t => /discovery/.test(t.slug));
 
 export const hours = (p: Perfume) => (p.longevity ? p.longevity.replace('-', '–') : null);
+
+/** Cart line builders (the cart finds its image by key through imageFor). */
+export const fullItem = (p: Perfume) => ({ key: p.slug, name: p.shortName, format: '100 ml', price: p.price });
+export const travelItem = (p: Perfume, t: Offer) => ({ key: t.slug, name: p.shortName, format: 'Travel 2×8 ml', price: t.price });
+export const offerItem = (o: Offer, name: string, format: string) => ({ key: o.slug, name, format, price: o.price });
+
+/** Image for a cart line: the bottle for a perfume, the box for a set. */
+export function imageFor(key: string) {
+  const p = perfumes.find(x => x.slug === key);
+  if (p) return p.images[0];
+  return [...travelSets, ...sampleSets, ...layeringSets].find(o => o.slug === key)?.image ?? null;
+}
+
+/** Display names for Morph's trial products, from their own product names and descriptions. */
+export const TRIAL: Record<string, { name: string; what: string }> = {
+  'morph-set-esantioane-les-exclusifs-ice-collections': { name: 'Mostre Les Exclusifs & Ice', what: 'Setul de mostre al celor două colecții.' },
+  'morph-set-esantioane-luxury-collection': { name: 'Mostre Luxury', what: 'Setul de mostre al colecției Luxury.' },
+  'morph-set-esantioane': { name: 'Eșantioane parfumuri', what: 'Setul de eșantioane anterior.' },
+  'set-mini-parfumuri-morph-discovery-travel-24-parfumuri-8ml': { name: 'Discovery Travel, 24 × 8 ml', what: 'Luxury, Les Exclusifs și Ice împreună, în flacoane de 8 ml.' },
+  'morph-discovery-travel-set-mini-parfumuri': { name: 'Discovery Travel, 22 × 8 ml', what: '22 de parfumuri în format travel de 8 ml.' },
+  'blind-set-6-samples-1-travel': { name: 'Blind set: 6 mostre + 1 travel', what: 'Mostre de 2,5 ml și un travel, fără să știi care sunt până deschizi cutia.' },
+};
+export const sampleName = (slug: string) => `Setul de mostre ${/luxury/.test(slug) ? 'Luxury' : 'Les Exclusifs & Ice'}`;

@@ -10,7 +10,7 @@
 .gift { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; min-height: 32px; }
 .gift input { width: 18px; height: 18px; accent-color: var(--fg); }
 .cta { width: 100%; min-height: 58px; font-size: 16px; justify-content: space-between; }
-.nudge { display: grid; gap: 4px; padding: 12px 14px; background: var(--surface-raised); border-radius: var(--r); }
+.nudge { display: grid; gap: 4px; padding: 12px 0 12px 14px; border-left: 1px solid var(--fg); }
 .nudge button { background: none; border: 0; padding: 0; justify-self: start; }
 .notify { display: grid; gap: var(--s-3); }
 .notifyRow { display: grid; grid-template-columns: 1fr auto; gap: 6px; }
@@ -23,11 +23,12 @@
 .bar {
   position: fixed; z-index: 40; right: var(--m); bottom: var(--s-4); width: min(440px, calc(100vw - 2 * var(--m)));
   display: flex; align-items: center; gap: var(--s-3); padding: 8px 8px 8px 16px; background: var(--bg); border: 1px solid var(--border-strong); border-radius: var(--r);
-  box-shadow: 0 8px 28px rgba(27, 28, 29, 0.12); transform: translateY(calc(100% + 32px)); transition: transform var(--d-slow) var(--ease-out);
+  box-shadow: 0 12px 32px rgba(25, 22, 19, 0.16); transform: translateY(calc(100% + 32px)); transition: transform var(--d-slow) var(--ease-out);
 }
 .bar[data-show='true'] { transform: none; }
+.barThumb { width: 32px; height: 40px; flex: none; }
 .barText { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 15px; }
-.barText b { font-weight: 500; }
+.barText b { font-family: var(--serif); font-weight: 400; font-size: 20px; }
 @media (max-width: 899px) {
   .format { flex-direction: row; justify-content: space-between; align-items: center; min-height: 48px; padding: 0 12px; font-size: 14px; }
   .single { display: flex; justify-content: space-between; font-size: 18px; font-weight: 500; padding-bottom: var(--s-2); border-bottom: 1px solid var(--border); }

@@ -1,79 +1,78 @@
-# Photography direction (A Cromatic + C Strata)
+# Photography direction (Phase 05: object, matter, light)
 
-Status: proposal for a future production shoot. The concept keeps using Morph's current catalog packshots (768×960, on white, soft and low-resolution; Phase 02 finding). Nothing here has been shot.
+Status: proposal for a future production shoot. Nothing here has been shot. The concept uses Morph's catalog packshots (768×960 on white, soft, low resolution) staged in a digital lit niche. Revised in Phase 05: the Phase 03 direction (bottles on seamless paper matched to each juice color) is withdrawn, because color is no longer the system's language. See `phase-05-art-direction-reset.md`.
 
 ## What the system needs from photography
 
-The interface does three things with images: it puts a bottle **on its own color** (collection, home, PDP), it shows a scent **in stages** (time on skin, layering), and it shows **objects Morph sells for trying** (travel box, sample sets, Your Next Form boxes). The shoot should serve those three jobs and nothing decorative. No mist, smoke, petals, liquid splashes, butterflies or skin-glow clichés.
+The interface shows fragrances as **objects in light** inside rooms of **stone, night and walnut**. Photography should carry the same four ideas: CRAFT (the Bormioli twist, the label, the cap), OBJECT (the bottle as a collectible piece), SCENT (what is inside, told through liquid and material, not illustration) and MATERIAL (glass, wood, stone, metal, a burgundy wall). Not a color palette. No mist, smoke, petals, splashes, butterflies, melting glass or skin-glow clichés.
 
-## 1. Product isolation (the master asset)
+## 1. The master packshot (replaces the niche's white packshot)
 
-- Every bottle shot **front-on, straight, no tilt**, on a seamless paper background, with a clean alpha cut delivered alongside (PNG/TIFF with path). The site currently fakes isolation with `multiply` over white; a real cut-out removes the grey halo and lets the field color be exact.
-- Deliver two versions per SKU: on **neutral paper** (≈ `#edeeeb`, the site background) and **cut-out**. The colored field is produced in the interface from data, not in the photograph, so a color change never needs a reshoot.
-- The Bormioli twist must read: light from a large soft source 45° camera-left plus a narrow strip light camera-right to draw the twisted edges. The glass edge is the "2px glass edge" of the design system; photograph it as such.
-- Juice color must be **measured, not graded**: shoot with a color target in the first frame of each bottle, keep white balance locked for the whole session, deliver a sampled juice hex and label-band hex per bottle. These replace the current canvas-sampled values in `data/colors.json` (method `sampled` → `measured`).
+- Every bottle front-on, straight, same camera height and focal length, bottle at 78–82% of frame height, cap whole, baseline on the same pixel row across all SKUs.
+- **Lit from behind and above** like the niche: a soft source behind the bottle (the juice glows), a narrow strip light camera-right to draw the twisted edges, a dark card camera-left so the glass edge reads. The light itself is neutral; the juice colors it.
+- Background: warm stone paper (≈ `#e7e0d5`) with a real light fall-off, plus a clean alpha cut-out. With a cut-out the site stops relying on `multiply` and the niche can go darker.
+- Measured color, not graded: a color target in the first frame, white balance locked for the session, juice and label-band hexes delivered per bottle (they feed `--glow`, `data/colors.json`, method `measured`).
+- Les Exclusifs smoked glass: an extra backlit pass so the amber reads through the smoke.
 
-## 2. Bottle scale and framing
+## 2. The sculpture series (for the hero, "Obiectul", PDP gallery)
 
-- Same focal length, camera height and distance for all 26 bottles, so bottles line up at identical scale in the index, the atlas and the composer. Bottle occupies 78–82% of frame height with the cap fully visible; baseline at the same pixel row across SKUs.
-- Travel 2×8 ml boxes, sample sets and Your Next Form boxes: one fixed 3/4 top angle (the one Morph already uses for the yellow Zeta travel box), same scale rule per product type.
+Per bottle, on dark walnut or black stone, one warm key light, deep shadow:
+1. **Raking light along the twist** (the "echilibru și mișcare continuă" image): 3/4 view, light grazing the faceted edge.
+2. **Shoulder and cap**: brushed metal against glass, macro, shallow depth.
+3. **The label through the juice**: the band and the engraved M seen through the liquid.
+4. **The foot on glass**: the heavy base on a glass shelf with its reflection (the shelf edge the niche imitates).
 
-## 3. Ratios and crops
+These replace the packshot in the large niches (hero, "Obiectul", PDP first slide on desktop). They must also work at 56svh on a phone: the object whole, not cropped at the cap.
 
-| Use | Ratio | Minimum delivered size | Notes |
-|---|---|---|---|
-| Product card, index thumbnail | 4:5 | 1600×2000 | bottle centered, 7% top/bottom air |
-| PDP main, home hero field | 4:5 source, cropped to 1:1 and 5:4 by the layout | 2400×3000 | keep 10% safe area on all sides for mobile crops |
-| PDP mobile | 5:4 or 1:1 crop of the same master | — | bottle must remain whole: never crop the cap |
-| Collection preview panel | 5:4 | 2000×1600 | |
-| Offer objects (travel, sets, boxes) | 5:4 | 2000×1600 | |
-| Close-ups | 1:1 and 4:5 | 2400×2400 | |
-| Layering pair | 16:9 and 4:5 | 3200×1800 / 2000×2500 | |
+## 3. Material close-ups (time on skin)
 
-Delivery: lossless masters; the site generates AVIF/WebP through `next/image`.
+Three frames per perfume, same framing across SKUs, used in the Time on Skin niche per phase: opening (atomizer and the first centimetre of juice, bright), heart (label band through the juice, mid light), base (glass foot and the lowest juice, low warm light). They match the interface behaviour, where the niche's light warms and lowers with the phase. Liquid texture (a slow drop, a meniscus) is acceptable here; decorative splashes are not.
 
-## 4. Lighting and background (A: color as material)
+## 4. Collections (the vitrines)
 
-- Background is **paper, not a gradient**. For the few art-directed shots that carry color in-camera (hero campaign, collection openers), use colored seamless paper matched to the measured identity color at ≈36% strength — the same mix the interface uses for `--scent-field`, so photography and UI fields meet without a seam.
-- Daylight-balanced, soft, low contrast; shadows short and neutral. No colored gels on the product: the juice is the only saturated color in the frame.
-- Les Exclusifs smoked glass needs a backlight pass so the amber reads through the smoke (Phase 02 had to null out "accents" that were the smoked glass).
+One campaign image per collection, shot in the same wood room: Les Exclusifs (smoked glass, lowest key), Luxury (clear glass, label bands), Ice (frosted glass, pale light). Same camera, same shelf, different light, so the three read as rooms of one house. Replaces the single bestseller packshot in each vitrine.
 
-## 5. Material close-ups (C: strata)
+## 5. Layering
 
-Per perfume, three close-ups that map to the three tiers used by Time on Skin — not illustrations of notes, but the bottle's own materials:
+Two bottles on one glass shelf, the second slightly behind the first on the same axis, so the glass and juices overlap in depth. Shot generically (any two bottles): the site never presents a visitor's pair as recommended. Your Next Form: the closed box, the lid half open, the two 8 ml vials revealed, on dark stone. The existing black campaign of hands and box stays editorial.
 
-1. **Opening** — the atomizer and the first centimetre of juice under the cap, bright, shallow depth.
-2. **Heart** — the label band / engraved M through the juice, mid-depth.
-3. **Base** — the heavy glass foot and the lower juice, darker, the twist visible in refraction.
+## 6. Casa Morph
 
-Same framing across all SKUs so the three images can be swapped per phase in the PDP without layout change. These replace the current tier color blocks only when they exist; the color strata remain the fallback.
+Documentary, not staged lifestyle: the walnut displays and their lit niches, the glass, the burgundy art wall with the M, the counter, the team at work (with consent), evening light. These replace the digital art wall on `/casa-morph` and the home boutique chapter. Credit and permission required before any use.
 
-## 6. Layering imagery
+## 7. Trial objects
 
-- Two bottles **side by side then overlapping in depth** (one behind the other on the same axis), shot on neutral paper, so the overlap area shows both juices through each other. This is the photographic twin of the composer's multiply overlap.
-- Your Next Form: the blind box closed, lid half-open, and open with the two 8 ml vials visible — the reveal sequence. Keep the existing black-background hand campaign for editorial use only; product listings use the paper background.
-- Do not shoot "recommended pairs" unless Morph confirms the pairs; shoot combinations generically (any two bottles), since the interface does not present visitor pairs as recommendations.
+Travel 2×8 ml boxes, sample sets and the Discovery Travel set at the existing 3/4 top angle, on the same stone paper, same scale per product type. Open and closed.
 
-## 7. Hero imagery
+## 8. Ratios and delivery
 
-The hero is a product field, not a lifestyle photo. Deliver, per scent, the cut-out plus a measured color; the atlas does the rest. Optional campaign frame for seasonal use: a single bottle, straight, on its colored paper, generous negative space on the left for the headline (desktop) and at the top (mobile).
+| Use | Ratio | Minimum size |
+|---|---|---|
+| Master packshot, cards, index, shelf | 4:5 | 2000×2500 |
+| Hero, "Obiectul", stage niches | 4:5 source, cropped to 3:4 / 5:6 | 2800×3500 |
+| Sculpture series, close-ups | 4:5 and 1:1 | 2800×3500 / 2800×2800 |
+| Collection vitrines | 3:4 | 2400×3200 |
+| Layering pair | 16:9 and 4:5 | 3600×2025 / 2400×3000 |
+| Casa Morph | 3:2 and 4:5 | 3600×2400 |
+| Trial objects | 1:1 and 5:4 | 2000×2000 |
 
-## 8. Mobile crops
+Lossless masters with alpha where listed; the site produces AVIF/WebP through `next/image`. Test every master at 250px height (phone thumbnails and the buy bar).
 
-- Mobile PDP media is 250–360px tall: the bottle must be recognisable at 250px height — test every master at that size.
-- Never rely on hover-to-reveal secondary images on touch; the gallery swipes, so the second and third images must stand alone (packaging, then a material close-up).
-
-## 9. Casa Morph
-
-Daylight documentary photos of the boutique at Piața Alexandru Lahovari 5 and the team at work (with consent). No staged "luxury lifestyle". Used on the Casa Morph section and future booking page.
-
-## 10. Shot list per perfume (summary)
+## 9. Shot list per perfume
 
 | # | Shot | Ratio |
 |---|---|---|
-| 1 | Front bottle, neutral paper + cut-out, color target frame | 4:5 |
-| 2 | Bottle with its box | 4:5 |
-| 3–5 | Opening / heart / base material close-ups | 1:1 |
-| 6 | Travel 2×8 ml box (if sold) | 5:4 |
+| 1 | Master packshot on stone + cut-out + color target frame | 4:5 |
+| 2–5 | Sculpture series: twist, shoulder, label through juice, foot on glass | 4:5 / 1:1 |
+| 6–8 | Opening / heart / base close-ups | 1:1 |
+| 9 | With its box | 4:5 |
+| 10 | Travel 2×8 ml (if sold) | 1:1 |
 
-26 perfumes × 5–6 frames, plus sets and layering sequences. One studio setup, repeatable for new launches: a new scent brings its own measured color and slots into the system with no design work.
+26 perfumes × 9–10 frames, plus collections, layering, Your Next Form, trial objects and Casa Morph. One lighting setup per series, repeatable for new launches.
+
+## Where production photography would change the result most
+
+1. The hero and "Obiectul" chapter (the packshot is soft at that scale).
+2. Casa Morph (no real space is shown today).
+3. The collection vitrines (one campaign image each instead of a bestseller packshot).
+4. Time on skin (material close-ups instead of one bottle under changing light).

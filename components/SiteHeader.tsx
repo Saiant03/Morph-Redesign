@@ -1,19 +1,26 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Logo } from './Logo';
 import { cart, useCart } from '@/lib/cart';
+import { search } from '@/lib/search';
 import { NAV } from '@/lib/nav';
 import s from './SiteHeader.module.css';
 
 const isCurrent = (n: (typeof NAV)[number], path: string) =>
   n.href.startsWith('/') && (n.match ? n.match.test(path) : path === n.href || path.startsWith(n.href + '/'));
 
+/**
+ * The header takes the tone of the chapter under it (SECTION → TRANSITION): dark over the night and wood rooms,
+ * stone over the lit ones. It reads the element just below its bottom edge on scroll.
+ */
 export function SiteHeader() {
   const path = usePathname() || '/';
   const { count } = useCart();
   const [open, setOpen] = useState(false);
+  const [tone, setTone] = useState<string | undefined>(undefined);
+  const ref = useRef<HTMLElement>(null);
 
   useEffect(() => setOpen(false), [path]);
   useEffect(() => {
@@ -23,8 +30,25 @@ export function SiteHeader() {
     return () => window.removeEventListener('keydown', esc);
   }, [open]);
 
+  useEffect(() => {
+    let raf = 0;
+    const read = () => {
+      raf = 0;
+      const h = ref.current?.offsetHeight ?? 64;
+      const el = document.elementFromPoint(window.innerWidth / 2, h + 2);
+      const t = el?.closest('[data-tone]')?.getAttribute('data-tone');
+      setTone(t === 'wood' ? 'dark' : t ?? undefined);
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(read); };
+    read();
+    const late = setTimeout(read, 400);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => { clearTimeout(late); window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); if (raf) cancelAnimationFrame(raf); };
+  }, [path]);
+
   return (
-    <header className={s.header} data-open={open}>
+    <header ref={ref} className={s.header} data-open={open} data-tone={open ? undefined : tone}>
       <div className={`wrap ${s.inner}`}>
         <Link href="/" className={s.logo} aria-label="Morph, pagina principală"><Logo /></Link>
         <nav className={s.nav} aria-label="Principal">
@@ -33,9 +57,9 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className={s.utils}>
-          <Link href="/parfumuri#cauta" className={s.util}>Caută</Link>
+          <button type="button" className={s.util} onClick={search.open} aria-haspopup="dialog">Caută</button>
           <button type="button" className={s.util} onClick={cart.open} aria-label={`Coș, ${count} ${count === 1 ? 'produs' : 'produse'}`}>
-            Coș <span className={`${s.count} num`}>{count}</span>
+            Coș <span className={`${s.count} num`} data-empty={count === 0}>{count}</span>
           </button>
           <button type="button" className={`${s.util} ${s.menuBtn}`} aria-expanded={open} aria-controls="meniu" onClick={() => setOpen(!open)}>
             {open ? 'Închide' : 'Meniu'}

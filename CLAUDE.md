@@ -57,4 +57,5 @@ Fapte-cheie (verificate 2026-09-24):
   - Principiu digital: PRODUS + FORMĂ + MATERIE + LUMINĂ + PARFUM + TRANSFORMARE.
   - Culoarea derivată din parfum e doar accent atmosferic, nu taxonomie și nu limbaj vizual principal.
   - Niciodată familii olfactive reprezentate în principal ca palete de culori. Niciodată catalogul ca sistem de culori. Niciodată layering-ul ca amestec de vopsea.
+- 2026-09-24: Faza 05 încheiată: reset de direcție artistică. Sistem: nișa luminată (produsul în lumină), tonuri piatră / noapte / nuc, un perete burgund doar pe Casa Morph, Newsreader pentru nume și capitole. Culoarea parfumului = doar `--glow` (14% în lumina nișei). Paginile noi: `/cadouri`, căutare overlay. Documente: `docs/design/phase-05-design-system.md`, `phase-05-art-direction-reset.md`, `phase-05-creative-review.md`. Test: `npm run smoke` (server pornit).
 - Skill-urile externe se importă doar după inspecție și se înregistrează în `docs/research/skill-registry.md`.

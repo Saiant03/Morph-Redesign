@@ -1,54 +1,98 @@
 .head { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-3); align-items: end; margin-bottom: var(--s-7); }
-.head > :first-child { grid-column: 1 / span 6; }
-.head > :last-child { grid-column: 8 / -1; max-width: 46ch; }
+.head > :first-child { grid-column: 1 / span 7; }
+.head > :last-child { grid-column: 9 / -1; max-width: 42ch; }
 
-/* collections strip, right under the hero */
-.collections { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); padding-top: var(--s-8); }
-.coll { display: grid; gap: var(--s-2); align-content: start; }
-.collChord { display: block; height: 10px; border-radius: var(--r); margin-bottom: var(--s-3); transition: height var(--d-base) var(--ease-out); }
-.coll:hover .collChord { height: 16px; }
-.coll:hover .t-3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+/* object: two niches of different scale and an editorial column */
+.objectGrid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-6); align-items: end; }
+.objectMain { grid-column: 1 / span 5; }
+.objectSecond { grid-column: 6 / span 2; align-self: end; }
+.objectNiche { width: 100%; aspect-ratio: 4 / 5; }
+.objectMain .objectNiche { aspect-ratio: auto; height: min(84vh, 780px); }
+.objectText { grid-column: 9 / -1; display: grid; gap: var(--s-5); align-self: center; }
+.facts { margin: 0; display: grid; border-top: 1px solid var(--border); }
+.facts > div { display: grid; grid-template-columns: 110px 1fr; gap: var(--s-3); padding: 12px 0; border-bottom: 1px solid var(--border); align-items: baseline; }
+.facts dd { margin: 0; }
 
-/* find */
-.finder { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-3); align-items: center; padding: var(--s-6) 0 0; border-top: 1px solid var(--fg); }
-.finder > :nth-child(1) { grid-column: 1 / span 3; }
-.finder > :nth-child(2) { grid-column: 4 / span 5; }
+/* collection vitrines */
+.vitrines { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+.vitrine { display: grid; gap: var(--s-3); }
+.vitrineNiche { aspect-ratio: 3 / 4; box-shadow: inset 0 60px 80px -50px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 0, 0, 0.4), 0 30px 60px -30px rgba(0, 0, 0, 0.6); }
+.vitrineNiche img { transition: transform var(--d-story) var(--ease-out); }
+.vitrine:hover .vitrineNiche img { transform: translateY(-1.5%) scale(1.02); }
+.vitrineName { font-family: var(--serif); font-weight: 300; font-size: clamp(34px, 3vw, 48px); line-height: 1; margin-top: var(--s-3); }
+.vitrine:hover .vitrineName { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
+
+/* families: a typographic index with the real objects beside each name */
+.familiesBand { background: var(--surface); }
+.families { border-top: 1px solid var(--fg); }
+.family {
+  display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-2); align-items: center;
+  padding: var(--s-5) 0; border-bottom: 1px solid var(--border);
+}
+.familyName { grid-column: 1 / span 4; grid-row: 1 / span 2; font-family: var(--serif); font-weight: 300; font-size: clamp(44px, 5vw, 84px); line-height: 0.95; letter-spacing: -0.02em; }
+.familyName a:hover { font-style: italic; }
+.familyNotes { grid-column: 5 / span 4; font-size: var(--t-3); line-height: 1.3; }
+.familyMeta { grid-column: 5 / span 4; }
+.familyObjects { grid-column: 9 / span 3; grid-row: 1 / span 2; display: flex; gap: 8px; }
+.familyObjects a { display: grid; gap: 4px; justify-items: center; }
+.familyObjects a:hover span { text-decoration: underline; text-underline-offset: 3px; }
+.mini { width: 72px; height: 90px; }
+.familyLink { grid-column: 12; grid-row: 1 / span 2; justify-self: end; min-height: 44px; display: inline-flex; align-items: center; }
+.finder { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-3); align-items: center; margin-top: var(--s-8); }
+.finder > :nth-child(1) { grid-column: 1 / span 5; }
+.finder > :nth-child(2) { grid-column: 6 / span 4; }
 .finder > :nth-child(3) { grid-column: 10 / -1; justify-self: end; }
 
-/* try */
-.offers { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
-.offer { display: flex; flex-direction: column; gap: var(--s-3); }
-.offerVisual { position: relative; aspect-ratio: 5 / 4; background: var(--surface-raised); border-radius: var(--r); overflow: hidden; isolation: isolate; margin-bottom: var(--s-2); }
-.offerVisual img { object-fit: contain; mix-blend-mode: multiply; padding: 6%; }
-.travelList { display: flex; flex-wrap: wrap; gap: 4px 12px; }
-.travelChip { display: inline-flex; align-items: center; gap: 6px; font-size: var(--t-small); min-height: 28px; }
-.travelChip:hover { text-decoration: underline; text-underline-offset: 3px; }
-.price { font-weight: 500; font-size: 18px; }
-.offerFoot { display: flex; justify-content: space-between; align-items: baseline; margin-top: auto; }
-.offer > .price { margin-top: auto; }
-.threshold { margin-top: var(--s-6); padding-top: var(--s-4); border-top: 1px solid var(--border); max-width: 90ch; }
+/* try at home / in person */
+.tryGrid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-5); align-items: stretch; }
+.tryHome { grid-column: 1 / span 7; display: grid; grid-template-columns: repeat(7, 1fr); column-gap: var(--gap); }
+.tryNiche { grid-column: 1 / span 3; aspect-ratio: 4 / 5; }
+.tryText { grid-column: 4 / -1; display: grid; gap: var(--s-3); align-content: start; justify-items: start; }
+.tryList { width: 100%; border-top: 1px solid var(--border); }
+.tryList li { display: flex; justify-content: space-between; gap: var(--s-3); padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 15px; }
+.tryShop { grid-column: 9 / -1; display: grid; gap: var(--s-3); align-content: start; justify-items: start; padding: var(--s-6); border-radius: var(--r); }
+.threshold { margin-top: var(--s-6); padding-top: var(--s-4); border-top: 1px solid var(--border); }
 
-/* buy */
-.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
+.ynf { margin-top: var(--s-6); padding-top: var(--s-4); border-top: 1px solid var(--border); }
 
-/* combine */
-.ynf { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-4); align-items: baseline; margin-top: var(--s-6); padding-top: var(--s-4); border-top: 1px solid var(--border); }
-.ynf ul { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+/* boutique chapter */
+.house { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-7); align-items: center; }
+.houseText { grid-column: 1 / span 5; display: grid; gap: var(--s-5); justify-items: start; }
+.trust { width: 100%; border-top: 1px solid var(--border); }
+.trust li { display: grid; grid-template-columns: 110px 1fr; gap: var(--s-3); padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 15px; align-items: baseline; }
+.wall { grid-column: 7 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-3); padding: var(--s-4); background: rgba(0, 0, 0, 0.28); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05); }
+.wall a { display: block; }
+.wallNiche { aspect-ratio: 3 / 4; }
 
-/* trust */
-.trust { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
-.trust > div { display: grid; gap: var(--s-2); align-content: start; border-top: 1px solid var(--border); padding-top: var(--s-4); }
-
-@media (max-width: 1100px) { .cards { grid-template-columns: repeat(2, 1fr); } .trust { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 1100px) {
+  .objectMain { grid-column: 1 / span 6; }
+  .objectSecond { display: none; }
+  .objectText { grid-column: 8 / -1; }
+  .familyName { grid-column: 1 / span 5; }
+  .familyNotes, .familyMeta { grid-column: 6 / span 4; }
+  .familyObjects { grid-column: 10 / -1; }
+  .mini { width: 56px; height: 70px; }
+  .familyLink { grid-column: 6 / span 4; grid-row: 3; justify-self: start; }
+  .tryHome { grid-column: 1 / -1; }
+  .tryShop { grid-column: 1 / -1; }
+}
 @media (max-width: 899px) {
-  .head { grid-template-columns: 1fr; margin-bottom: var(--s-6); }
-  .head > * { grid-column: 1 !important; }
-  .collections { grid-template-columns: 1fr; gap: var(--s-5); padding-top: var(--s-7); }
-  .finder { grid-template-columns: 1fr; }
-  .finder > * { grid-column: 1 !important; justify-self: stretch !important; }
-  .offers { grid-auto-flow: column; grid-auto-columns: 80%; grid-template-columns: none; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(var(--m) * -1); padding-inline: var(--m); scroll-padding-inline: var(--m); }
-  .offer { scroll-snap-align: start; }
-  .cards { grid-auto-flow: column; grid-auto-columns: 74%; grid-template-columns: none; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(var(--m) * -1); padding-inline: var(--m); scroll-padding-inline: var(--m); }
-  .cards > * { scroll-snap-align: start; }
-  .trust { grid-template-columns: 1fr; }
+  .head, .objectGrid, .finder, .tryGrid, .tryHome, .house { grid-template-columns: 1fr; }
+  .head > *, .objectGrid > *, .finder > *, .tryGrid > *, .tryHome > *, .house > * { grid-column: 1 !important; justify-self: stretch !important; }
+  .head { margin-bottom: var(--s-6); }
+  .objectMain { margin-inline: calc(var(--m) * -1); }
+  .objectMain .objectNiche { height: 70svh; max-height: 560px; border-radius: 0; }
+  .vitrines { grid-auto-flow: column; grid-auto-columns: 78%; grid-template-columns: none; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(var(--m) * -1); padding-inline: var(--m); scroll-padding-inline: var(--m); }
+  .vitrines > li { scroll-snap-align: start; }
+  .family { grid-template-columns: 1fr auto; }
+  .familyName { grid-column: 1 / -1; grid-row: auto; font-size: 52px; }
+  .familyNotes, .familyMeta { grid-column: 1 / -1; }
+  .familyObjects { grid-column: 1; grid-row: auto; }
+  .familyLink { grid-column: 2; grid-row: auto; align-self: end; }
+  .tryNiche { aspect-ratio: 16 / 11; }
+  .tryShop { padding: var(--s-5); margin-inline: calc(var(--m) * -1); border-radius: 0; }
+  .wall { gap: 6px; padding: 6px; }
+  /* shorter phone page: the classification line and the set list stay on desktop */
+  .familyMeta, .ynf { display: none; }
+  .wall li:nth-child(n + 4) { display: none; }
 }

@@ -1,8 +1,8 @@
 'use client';
 import { useEffect, useId, useRef, useState } from 'react';
-import { type Perfume, type Offer, lei, FREE_SHIPPING } from '@/lib/catalog';
+import { type Perfume, type Offer, lei, FREE_SHIPPING, fullItem, travelItem, imageFor } from '@/lib/catalog';
 import { cart } from '@/lib/cart';
-import { scentTokens } from '@/lib/scent';
+import Image from 'next/image';
 import s from './PurchaseBlock.module.css';
 
 type Fmt = 'full' | 'travel';
@@ -18,7 +18,6 @@ export function PurchaseBlock({ p, travel, samples }: { p: Perfume; travel: Offe
   const [bar, setBar] = useState(false);
   const cta = useRef<HTMLDivElement>(null);
   const name = useId();
-  const color = scentTokens(p).scent;
   const price = fmt === 'full' ? p.price : travel!.price;
   const label = fmt === 'full' ? '100 ml' : 'Travel 2×8 ml';
   const total = price + (gift ? GIFT_BOX : 0);
@@ -31,7 +30,7 @@ export function PurchaseBlock({ p, travel, samples }: { p: Perfume; travel: Offe
   }, []);
 
   const add = () => cart.add([
-    { key: p.slug + fmt, name: p.shortName, format: label, price, color },
+    fmt === 'full' ? fullItem(p) : travelItem(p, travel!),
     ...(gift ? [{ key: 'cutie', name: 'Cutie cadou', format: p.shortName, price: GIFT_BOX }] : []),
   ]);
   const helper = travel ?? samples;
@@ -45,7 +44,7 @@ export function PurchaseBlock({ p, travel, samples }: { p: Perfume; travel: Offe
           <span id={name} className="sr-only">Format</span>
           {([['full', '100 ml', p.price], ['travel', 'Travel 2×8 ml', travel.price]] as const).map(([k, l, v]) => (
             <button key={k} type="button" role="radio" aria-checked={fmt === k} className={s.format} onClick={() => setFmt(k)}>
-              <span>{l}</span><span className="num">{lei(v)}</span>
+              <span className="label">{l}</span><span className="num">{lei(v)}</span>
             </button>
           ))}
         </div>
@@ -70,14 +69,14 @@ export function PurchaseBlock({ p, travel, samples }: { p: Perfume; travel: Offe
         <div className={s.nudge}>
           <p className="t-small">Mai ai {lei(gap)} până la livrarea gratuită. {travel ? 'Travel-ul' : 'Setul de mostre'} acoperă diferența.</p>
           {travel
-            ? <button type="button" className="link t-small" onClick={() => cart.add([{ key: travel.slug, name: p.shortName, format: 'Travel 2×8 ml', price: travel.price, color }])}>Adaugă travel, {lei(travel.price)}</button>
+            ? <button type="button" className="link t-small" onClick={() => cart.add([travelItem(p, travel)])}>Adaugă travel, {lei(travel.price)}</button>
             : <a className="link t-small" href={helper.url}>Vezi setul, {lei(helper.price)}</a>}
         </div>
       )}
       {travel && samples && <p className="t-small muted">Vrei să compari mai multe? <a className="link" href={samples.url}>Setul de mostre al colecției</a>, {lei(samples.price)}.</p>}
 
       <div className={s.bar} data-show={bar && p.inStock} aria-hidden={!bar} inert={!bar}>
-        <span className="swatch" style={{ '--scent': color } as React.CSSProperties} />
+        <span className={`niche-sm ${s.barThumb}`} aria-hidden><Image src={imageFor(p.slug)!} alt="" fill sizes="40px" /></span>
         <span className={s.barText}><b>{p.shortName}</b> <span className="muted">{label}</span></span>
         <button type="button" className="btn btn-sm" onClick={add}>Adaugă <span className="num">{lei(total)}</span></button>
       </div>

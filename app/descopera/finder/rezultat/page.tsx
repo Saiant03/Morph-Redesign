@@ -6,10 +6,9 @@ import { TryOffer } from '@/components/TryOffer';
 import { TryToggle } from '@/components/TryToggle';
 import { LayeringComposer } from '@/components/LayeringComposer';
 import {
-  type Perfume, COLLECTIONS, concentration, descriptor, familyGroup, hours, lei, productHref, BOUTIQUE,
+  type Perfume, COLLECTIONS, concentration, descriptor, familyGroup, hours, lei, productHref, BOUTIQUE, fullItem, travelFor,
 } from '@/lib/catalog';
 import { QUESTIONS, WEIGHTS, UNTAGGED, parseAnswers, complete, results, reasons, answersQuery, finderSnapshotAt } from '@/lib/finder';
-import { scentTokens, scentVars } from '@/lib/scent';
 import s from './result.module.css';
 
 export const metadata = { title: 'Rezultatul Fragrance Finder' };
@@ -49,9 +48,11 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
       )}
 
       {alts.length > 0 && (
-        <section className={`wrap ${s.section}`} aria-labelledby="impreuna">
-          <LayeringComposer first={main.p.slug} second={alts[0].p.slug} heading={`${main.p.shortName} și ${alts[0].p.shortName}, împreună`} headingId="impreuna"
-            intro="Primele două rezultate, purtate unul peste altul. Vezi cum se suprapun notele, de la deschidere la bază." />
+        <section className={`band ${s.combine}`} data-tone="dark" aria-labelledby="impreuna">
+          <div className="wrap">
+            <LayeringComposer first={main.p.slug} second={alts[0].p.slug} heading={`${main.p.shortName} și ${alts[0].p.shortName}, împreună`} headingId="impreuna"
+              intro="Primele două rezultate, purtate unul peste altul. Vezi cum se așază notele lor, de la deschidere la bază." />
+          </div>
         </section>
       )}
 
@@ -87,12 +88,12 @@ function Reasons({ m, answers }: { m: Match; answers: ReturnType<typeof parseAns
   const hit = r.filter(x => x.matched);
   return (
     <div className={s.reasons}>
-      <p className="t-small"><b>De ce {m.p.shortName}:</b> Morph l-a etichetat cu <span className="num">{hit.length}</span> din cele <span className="num">{r.length}</span> răspunsuri ale tale.</p>
+      <p className="t-small"><b>De ce {m.p.shortName}</b>: Morph l-a etichetat cu <span className="num">{hit.length}</span> din cele <span className="num">{r.length}</span> răspunsuri ale tale.</p>
       <ul>
         {r.map(x => (
           <li key={x.category} data-hit={x.matched}>
-            <span className={s.mark} aria-hidden />
-            <span className="t-micro muted">{x.category}</span>
+            <span className={s.mark} aria-hidden>{x.matched ? '✓' : '–'}</span>
+            <span className="label muted">{x.category}</span>
             <span>{x.answer}<span className="sr-only">{x.matched ? ': se potrivește' : ': nu se potrivește'}</span></span>
           </li>
         ))}
@@ -105,7 +106,7 @@ function Buy({ p }: { p: Perfume }) {
   return (
     <div className={s.buy}>
       {p.inStock
-        ? <AddToCart items={[{ key: p.slug, name: p.shortName, format: '100 ml', price: p.price, color: scentTokens(p).scent }]}>Adaugă 100 ml în coș <span className="num">{lei(p.price)}</span></AddToCart>
+        ? <AddToCart items={[fullItem(p)]}>Adaugă 100 ml în coș <span className="num">{lei(p.price)}</span></AddToCart>
         : <Link className="btn btn-secondary" href={productHref(p)}>Stoc epuizat. Anunță-mă</Link>}
       <TryOffer p={p} />
     </div>
@@ -116,23 +117,24 @@ function MainMatch({ m, answers, single }: { m: Match; answers: ReturnType<typeo
   const p = m.p;
   const fam = familyGroup(p);
   return (
-    <section className={`wrap ${s.main}`} style={scentVars(p)} aria-labelledby="potrivire">
+    <section className={`wrap ${s.main}`} aria-labelledby="potrivire">
       <div className={s.mainVisual}><ProductVisual p={p} sizes="(max-width: 899px) 100vw, 50vw" priority alt={p.name} className={s.visual} /></div>
       <div className={s.mainInfo}>
         <nav className="t-small muted" aria-label="Breadcrumb"><Link href="/descopera/finder">Fragrance Finder</Link> / Rezultat</nav>
         <h1 id="potrivire" className={s.title}>
-          <span className="t-small">{single ? 'Potrivirea ta' : 'Potrivirea principală'}</span>
-          <span className="t-1">{p.shortName}</span>
+          <span className="label muted">{single ? 'Morph-ul tău' : 'Morph-ul tău · potrivirea principală'}</span>
+          <span className="t-display">{p.shortName}</span>
         </h1>
-        <p className="muted">{COLLECTIONS[p.collection].name}, {concentration(p)?.toLowerCase()}, 100 ml{!p.inStock && ', momentan epuizat'}</p>
+        <p className="label muted">{COLLECTIONS[p.collection].name} · {concentration(p)} · 100 ml{!p.inStock && ' · momentan epuizat'}</p>
         <p className={s.notesLine}>{descriptor(p)}</p>
         <Buy p={p} />
         <p className={s.more}><Link className="link t-small" href={productHref(p)}>Pagina parfumului</Link><TryToggle id={p.slug} name={p.shortName} /></p>
         <Reasons m={m} answers={answers} />
         <dl className={s.facts}>
-          <div><dt>Familie</dt><dd>{fam?.name ?? '—'}</dd></div>
-          <div><dt>Intensitate</dt><dd>{p.intensity ?? 'Nespecificată'}</dd></div>
-          <div><dt>Longevitate</dt><dd className="num">{hours(p) ?? '—'}</dd></div>
+          <div><dt className="label muted">Familie</dt><dd>{fam?.name ?? '—'}{fam && p.family !== fam.name ? <span className="muted t-small"> ({p.family?.toLowerCase()})</span> : null}</dd></div>
+          <div><dt className="label muted">Intensitate</dt><dd>{p.intensity ?? 'Nespecificată'}</dd></div>
+          <div><dt className="label muted">Pe piele</dt><dd className="num">{hours(p) ?? '—'}</dd></div>
+          <div><dt className="label muted">Disponibil</dt><dd>{p.inStock ? '100 ml în stoc' : '100 ml epuizat'}{travelFor(p) ? ', travel 2×8 ml' : ''}</dd></div>
         </dl>
         <NotePyramid p={p} />
       </div>
@@ -143,11 +145,11 @@ function MainMatch({ m, answers, single }: { m: Match; answers: ReturnType<typeo
 function AltMatch({ m, answers }: { m: Match; answers: ReturnType<typeof parseAnswers> }) {
   const p = m.p;
   return (
-    <article className={s.alt} style={scentVars(p)}>
+    <article className={s.alt}>
       <Link href={productHref(p)} tabIndex={-1} aria-hidden><ProductVisual p={p} sizes="(max-width: 899px) 40vw, 20vw" alt="" className={s.altVisual} /></Link>
       <div className={s.altInfo}>
-        <p className="t-micro muted">{COLLECTIONS[p.collection].name}</p>
-        <h3 className="t-2"><Link href={productHref(p)}>{p.shortName}</Link></h3>
+        <p className="label muted">{COLLECTIONS[p.collection].name}</p>
+        <h3 className={s.altName}><Link href={productHref(p)}>{p.shortName}</Link></h3>
         <p className={s.notesLine}>{descriptor(p)}</p>
         <p className="t-small muted">{familyGroup(p)?.name ?? 'Familie nespecificată'}, <span className="num">{hours(p) ?? '—'}</span>, intensitate {p.intensity?.toLowerCase() ?? 'nespecificată'}</p>
         <Reasons m={m} answers={answers} />
