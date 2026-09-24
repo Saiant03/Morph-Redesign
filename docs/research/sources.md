@@ -67,3 +67,9 @@ Secondary (S), to be re-verified before client-facing numbers:
 - https://github.com/anthropics/claude-code @ d78be9481b889e11186ec4578b4f5e9301396e25
 - https://github.com/greensock/gsap-skills @ aed9cfd3277740755f6bfc1155c7aa645403b760
 - https://github.com/vercel-labs/agent-skills @ 063bee94c3f4df8453406c830b0a7df0f2860278
+
+## Phase 05.5 (2026-09-24)
+
+Morph (F, fetched): https://morphparfum.ro/despre-noi, /blog, /contact, /abonare-newsletter, /colectie, /spring-selection-2026, /cum-testezi-un-parfum-inainte-sa-il-cumperi; WordPress REST `wp-json/wp/v2/posts` (45 RO posts) and `wp-json/wp/v2/media` (1,017 items; searched by keyword); Store API `wc/store/v1/products` (105 products; Body & Bath, sets, gift card, gift box). Detail in `docs/design/phase-05-5-content-opportunity-map.md`.
+
+Awwwards (F, fetched): https://www.awwwards.com/websites/fragrance/, /websites/beauty/, /websites/fashion/, /websites/e-commerce/, /sites/abel-fragrance, /sites/annatwelve-fragrances, /sites/the-tuscan-journey-begins, /sites/omr-beauty, /sites/essentiality-of-beauty, /sites/lacoste-ace-breaker, /inspiration/perfume-product-page, /inspiration/fragrance-finder-kayali. Detail in `docs/design/phase-05-5-awwwards-reference-map.md`.
