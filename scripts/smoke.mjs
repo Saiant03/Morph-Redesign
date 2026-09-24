@@ -38,18 +38,17 @@ await check('skip link is first in tab order', async () => {
   assert(await pg.evaluate(() => document.activeElement?.classList.contains('skip')), 'skip link not focused');
 });
 
-await check('home: featured focus swaps the object', async () => {
-  const names = pg.getByRole('list', { name: 'Cele mai alese' }).getByRole('button');
-  await names.nth(1).click();
-  await pg.waitForTimeout(900);
-  assert(await names.nth(1).getAttribute('aria-pressed') === 'true', 'second name not pressed');
-  const label = (await names.nth(1).innerText()).split('\n')[1];
-  const title = await pg.getByRole('region', { name: 'Parfumul din vitrină' }).locator('h3').innerText();
-  assert(title.trim() === label.trim(), `${title} ≠ ${label}`);
+await check('home: lookbook moves to the next spread (button, count, active spread)', async () => {
+  const book = pg.getByRole('region', { name: /Cele mai alese/ });
+  await pg.getByRole('button', { name: 'Parfumul următor' }).click();
+  await pg.waitForTimeout(1200);
+  assert(/2 \/ 5/.test(await pg.locator('[aria-live="polite"]', { hasText: '/ 5' }).innerText()), 'count not 2 / 5');
+  assert(await book.locator('[data-i="1"]').getAttribute('data-active') === 'true', 'second spread not active');
+  assert(await pg.locator('[aria-labelledby="alese-titlu"] a[href^="/morph"]').count() > 0, 'no product links');
 });
 
 await check('cart: add opens drawer, quantity, remove, empty state, Escape', async () => {
-  await pg.getByRole('region', { name: 'Parfumul din vitrină' }).getByRole('button', { name: /Adaugă 100 ml/ }).click();
+  await pg.getByRole('region', { name: /Cele mai alese/ }).locator('[data-active="true"]').getByRole('button', { name: /100 ml în coș/ }).click();
   const dialog = pg.getByRole('dialog', { name: 'Coșul tău' });
   await dialog.waitFor({ state: 'visible' });
   await dialog.getByRole('button', { name: /Crește cantitatea/ }).click();
@@ -89,7 +88,7 @@ await check('header takes the tone of the chapter under it', async () => {
   await pg.evaluate(() => window.scrollTo(0, 0));
   await pg.waitForTimeout(400);
   assert(await pg.locator('header').getAttribute('data-tone') === 'dark', 'not dark over hero');
-  await pg.evaluate(() => document.querySelector('#alese-titlu')?.scrollIntoView());
+  await pg.evaluate(() => document.querySelector('#forma-titlu')?.scrollIntoView());
   await pg.waitForTimeout(400);
   assert(await pg.locator('header').getAttribute('data-tone') === null, 'not stone over light chapter');
 });
@@ -162,7 +161,7 @@ await check('reduced motion: hero and reveals fully visible', async () => {
 });
 
 await check('no horizontal overflow at 390 / 768 / 1024 / 1440', async () => {
-  const routes = ['/', '/parfumuri/luxury', '/morph-zeta-parfum-100ml', '/descopera', '/descopera/finder', '/layering', '/layering/your-next-form', '/magazin', '/cadouri'];
+  const routes = ['/', '/parfumuri/luxury', '/parfumuri/corp', '/morph-zeta-parfum-100ml', '/descopera', '/descopera/finder', '/layering', '/layering/your-next-form', '/magazin', '/cadouri'];
   for (const w of [390, 768, 1024, 1440]) {
     const p = await page(w === 390 ? { ...devices['iPhone 13'] } : { viewport: { width: w, height: 900 } });
     for (const r of routes) {
@@ -198,11 +197,14 @@ await check('hero: "Metamorfoză prin parfum." never clipped, 320–1920 px ever
   for (let w = 320; w <= 1920; w += 10) {
     await h.setViewportSize({ width: w, height: 900 });
     await h.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
-    const r = await h.evaluate(() => [...document.querySelectorAll('h1 [data-line]')].map(s => {
+    const measure = () => h.evaluate(() => [...document.querySelectorAll('h1 [data-line]')].map(s => {
       const range = document.createRange(); range.selectNodeContents(s);
       const t = range.getBoundingClientRect(), m = s.parentElement.getBoundingClientRect();
       return t.left >= m.left - 0.5 && t.right <= m.right + 0.5 && t.right <= window.innerWidth;
     }));
+    let r = await measure();
+    // a large resize can leave container-query layout one frame behind: measure again once before failing
+    if (r.length !== 2 || r.includes(false)) { await h.waitForTimeout(150); r = await measure(); }
     if (r.length !== 2 || r.includes(false)) bad.push(w);
   }
   assert(bad.length === 0, `clipped at ${bad.join(', ')}`);
@@ -235,6 +237,46 @@ await check('page transition under reduced motion: no animation, content visible
   assert(slow === 0, `${slow} running animations`);
   const op = await r.locator('.page-enter').evaluate(e => getComputedStyle(e).opacity);
   assert(op === '1', `page opacity ${op}`);
+});
+
+await check('collection room: Luxury → Ice changes the room in place (photograph, title, shelf)', async () => {
+  const t = await page();
+  await t.goto(BASE + '/parfumuri/luxury', { waitUntil: 'networkidle' });
+  await t.evaluate(() => {
+    const vt = document.startViewTransition?.bind(document); window.__vt = [];
+    if (vt) document.startViewTransition = (...a) => { const tr = vt(...a); tr.ready.then(() => window.__vt.push([...document.getAnimations()].map(x => x.effect?.pseudoElement).filter(Boolean).join(' '))); return tr; };
+  });
+  await t.getByRole('navigation', { name: 'Colecții' }).getByRole('link', { name: 'Ice' }).click();
+  await t.waitForURL(/parfumuri\/ice/);
+  await t.waitForTimeout(1200);
+  const log = (await t.evaluate(() => window.__vt)).join(' ');
+  for (const n of ['room-image', 'room-title']) assert(log.includes(n), `no ${n}: ${log.slice(0, 160)}`);
+  assert(await t.locator('h1').innerText() === 'Ice', 'title');
+  assert(await t.getByRole('list', { name: 'Vitrina Ice' }).getByRole('link').count() === 5, 'ice shelf');
+});
+
+await check('Baie & Corp: rituals by scent, real prices, add a gel; PDP ritual', async () => {
+  await pg.goto(BASE + '/parfumuri/corp', { waitUntil: 'networkidle' });
+  assert(await pg.locator('ol > li h2').count() === 12, 'ritual rows');
+  await pg.getByRole('button', { name: 'Adaugă gel de duș Zeta în coș' }).click();
+  const dialog = pg.getByRole('dialog', { name: 'Coșul tău' });
+  await dialog.waitFor({ state: 'visible' });
+  assert(/240 lei/.test(await dialog.innerText()), 'gel price');
+  await pg.keyboard.press('Escape');
+  await pg.goto(BASE + '/morph-zeta-parfum-100ml', { waitUntil: 'networkidle' });
+  assert(await pg.getByRole('heading', { name: 'Ritualul Zeta' }).count() === 1, 'PDP ritual');
+});
+
+await check('cart: threshold suggestion is a real product that covers the gap; gift box line', async () => {
+  const c = await page();
+  await c.goto(BASE + '/morph-zeta-parfum-100ml', { waitUntil: 'networkidle' });
+  await c.getByRole('button', { name: /Adaugă în coș/ }).click();
+  const dialog = c.getByRole('dialog', { name: 'Coșul tău' });
+  await dialog.waitFor({ state: 'visible' });
+  const text = await dialog.innerText();
+  assert(/Mai ai 60 lei/.test(text) && /Îl acoperă:.*(Travel 2×8 ml|Gel de duș) Zeta/.test(text.replace(/\n/g, ' ')), text.slice(0, 200));
+  await dialog.getByRole('checkbox', { name: /Cutie cadou/ }).check();
+  assert(/Cutie cadou/.test(await dialog.locator('ul').first().innerText()), 'gift box line');
 });
 
 await check('no console errors', async () => { assert(errors.length === 0, errors.slice(0, 3).join(' | ')); });

@@ -1,0 +1,24 @@
+.head { background: var(--surface) var(--mat-grain) 0 0 / 160px; padding: clamp(28px, 4vw, 64px) 0 var(--s-7); margin-bottom: var(--s-7); }
+.headGrid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-5); align-items: end; }
+.plate { grid-column: 1 / span 7; display: grid; gap: var(--s-3); }
+.crumb { display: flex; gap: 8px; margin-bottom: var(--s-3); }
+.quote { grid-column: 9 / -1; margin: 0; display: grid; gap: var(--s-2); padding-left: var(--s-4); border-left: 1px solid var(--metal); }
+.quote p { font-family: var(--serif); font-style: italic; font-size: var(--t-3); line-height: 1.35; }
+.headGrid > nav { grid-column: 1 / -1; }
+
+/* one scent per row: its name, then its textures standing side by side, then the sets that combine them */
+.rituals { display: grid; }
+.ritual { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-4); padding: var(--s-6) 0; border-top: 1px solid var(--border); }
+.name { grid-column: 1 / span 3; display: grid; gap: var(--s-2); align-content: start; }
+.name h2 a:hover { font-style: italic; }
+.set { grid-column: 4 / -1; }
+
+@media (max-width: 1100px) {
+  .name { grid-column: 1 / span 4; }
+  .set { grid-column: 5 / -1; }
+}
+@media (max-width: 899px) {
+  .headGrid, .ritual { grid-template-columns: 1fr; }
+  .plate, .quote, .headGrid > nav, .name, .set { grid-column: 1; }
+  .plate h1 { font-size: 56px; }
+}

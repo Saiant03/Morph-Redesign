@@ -3,7 +3,7 @@
 .scrim { position: absolute; inset: 0; background: rgba(21, 18, 16, 0.5); opacity: 0; transition: opacity var(--d-base) var(--ease-out); }
 .root[data-open='true'] .scrim { opacity: 1; }
 .panel {
-  position: absolute; top: 0; right: 0; bottom: 0; width: min(480px, 100%); background: var(--bg);
+  position: absolute; top: 0; right: 0; bottom: 0; width: min(480px, 100%); background: var(--bg) var(--mat-grain) 0 0 / 160px;
   display: flex; flex-direction: column; gap: var(--s-5); padding: var(--s-5) var(--s-6) calc(var(--s-5) + env(safe-area-inset-bottom));
   transform: translateX(100%); transition: transform var(--d-slow) var(--ease-out); overflow-y: auto;
   border-left: 1px solid var(--border);
@@ -16,7 +16,9 @@
 .emptyLinks { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); margin-top: var(--s-2); }
 .emptyLinks a { min-height: 44px; display: inline-flex; align-items: center; }
 .items { display: grid; }
-.item { display: grid; grid-template-columns: 72px 1fr auto; grid-template-areas: 'thumb info price' 'thumb qty remove'; column-gap: var(--s-4); row-gap: var(--s-2); padding: var(--s-4) 0; border-bottom: 1px solid var(--border); }
+.item { display: grid; grid-template-columns: 72px 1fr auto; grid-template-areas: 'thumb info price' 'thumb qty remove'; column-gap: var(--s-4); row-gap: var(--s-2); padding: var(--s-4) 0 var(--s-4); position: relative; }
+/* each line stands on a glass edge */
+.item::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 8px; background: linear-gradient(to bottom, rgb(255 246 232 / 0.28) 0 1px, rgb(255 246 232 / 0.06) 1px, transparent); }
 .thumb { grid-area: thumb;  width: 72px; height: 90px; }
 .thumb img { padding: 6px 0; }
 .info { grid-area: info; display: grid; gap: 4px; align-content: start; }
@@ -29,7 +31,13 @@
 .foot { margin-top: auto; display: grid; gap: var(--s-4); }
 .ship { display: grid; gap: var(--s-2); }
 .bar { height: 2px; background: var(--border); display: block; }
-.bar span { display: block; height: 100%; background: var(--fg); transition: width var(--d-slow) var(--ease-out); }
+.bar span { display: block; height: 100%; background: linear-gradient(to right, var(--metal), #c9c0b3); transition: width var(--d-slow) var(--ease-out); }
+.next { display: flex; flex-wrap: wrap; align-items: center; gap: 4px var(--s-2); }
+.next button { min-height: 32px; }
+.gift { display: flex; align-items: center; gap: var(--s-2); min-height: 44px; }
+.gift input { width: 20px; height: 20px; accent-color: var(--fg); }
+/* the empty cart: a niche with no light in it */
+.unlit { display: block; width: 96px; aspect-ratio: 3 / 4; margin-bottom: var(--s-3); background: radial-gradient(90% 70% at 50% 40%, #2a231d, #17130f); box-shadow: inset 0 30px 40px -30px rgb(0 0 0 / 0.8), inset 0 0 0 1px rgb(255 255 255 / 0.05); }
 .total { display: flex; justify-content: space-between; font-weight: 500; font-size: 18px; border-top: 1px solid var(--border); padding-top: var(--s-4); }
 @media (pointer: coarse) { .qty button { width: 44px; height: 44px; } }
 @media (max-width: 899px) { .panel { padding-inline: var(--m); } }

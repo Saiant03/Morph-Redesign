@@ -47,7 +47,9 @@ const sized = (im, min) => {
 
 const COLL = { 'Parfumuri colecția Luxury': 'luxury', 'Parfumuri colecția Les Exclusifs': 'les-exclusifs', 'Parfumuri colecția Ice': 'ice' };
 const cats = p => p.categories.map(c => decode(c.name));
-const perfumes = [], travel = [], samples = [], layering = [];
+const perfumes = [], travel = [], samples = [], layering = [], body = [], gift = [];
+// Body & Bath and the perfume+body sets: linked to their perfume by the name Morph gives them (matched after the loop).
+const BODY = [['Set parfum și gel de duș', 'set-gel'], ['Set parfum și cremă', 'set-cream'], ['Geluri de duș', 'gel'], ['Creme de corp parfumate', 'cream']];
 
 for (const p of items) {
   const c = cats(p);
@@ -71,6 +73,13 @@ for (const p of items) {
       sections: sections(p.description),
       images,
     });
+  } else if (BODY.some(([k]) => c.includes(k))) {
+    const image = p.images[0] ? await img(sized(p.images[0], 600), `${p.slug}-0`) : null;
+    body.push({ ...base, kind: BODY.find(([k]) => c.includes(k))[1], image, summary: strip(p.short_description) });
+  } else if (/^(gift box|morph gift card)$/i.test(decode(p.name).trim())) {
+    const image = p.images[0] ? await img(sized(p.images[0], 600), `${p.slug}-0`) : null;
+    const range = p.prices.price_range ? [+p.prices.price_range.min_amount, +p.prices.price_range.max_amount].map(v => v / 10 ** p.prices.currency_minor_unit) : null;
+    gift.push({ ...base, image, range, summary: strip(p.short_description) });
   } else if (c.includes('Set travel') || c.includes('Eșantioane parfumuri') || c.includes('Layering')) {
     const image = p.images[0] ? await img(sized(p.images[0], 600), `${p.slug}-0`) : null;
     const rec = { ...base, image, summary: strip(p.short_description) };
@@ -80,7 +89,13 @@ for (const p of items) {
   }
 }
 
+// the perfume a body product belongs to: the one whose short name appears in the product name
+for (const b of body) {
+  const up = b.name.toUpperCase();
+  b.scent = perfumes.filter(p => up.includes(p.shortName.toUpperCase())).sort((a, z) => z.shortName.length - a.shortName.length)[0]?.slug ?? null;
+}
+
 fs.writeFileSync(path.join(root, 'data/catalog.json'), JSON.stringify({
-  source: API, snapshotAt: new Date().toISOString(), perfumes, travel, samples, layering,
+  source: API, snapshotAt: new Date().toISOString(), perfumes, travel, samples, layering, body, gift,
 }, null, 1));
-console.log({ perfumes: perfumes.length, travel: travel.length, samples: samples.length, layering: layering.length });
+console.log({ perfumes: perfumes.length, travel: travel.length, samples: samples.length, layering: layering.length, body: body.length, gift: gift.length, unmatched: body.filter(b => !b.scent).map(b => b.name) });

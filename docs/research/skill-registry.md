@@ -38,6 +38,20 @@ Inspection procedure applied to every candidate:
 | Known limitations | The descriptions tell the agent to "recommend GSAP" by default (a vendor bias; the choice stays ours per 08). The ScrollTrigger containerAnimation example has a typo (`Max.max` should be `Math.max`). React-specific cleanup lives in `gsap-react`, which is not imported yet |
 | Date added | 2026-09-24 |
 
+### ui-ux-pro-max
+| Field | Value |
+|---|---|
+| Source repository | nextlevelbuilder/ui-ux-pro-max-skill (third party, requested by the owner in Phase B) |
+| Source URL | https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/tree/main/.claude/skills/ui-ux-pro-max |
+| Commit | `dcc40ff5133ef78276117db0cc34e7b83cc8aeba` (2026-09-21), skill version 2.13.0 |
+| License | MIT (`LICENSE` copied into the skill folder) |
+| Relevance | Searchable UX guidelines (119), accessibility and interaction rules, stack notes for Next.js/React; used for targeted `--domain ux` queries in Phase B |
+| Inspected | Full SKILL.md and both references; all 5 Python scripts read for network, subprocess, environment and file access: they read local CSVs only, with no network or subprocess calls; files are written only with `--persist` (to `design-system/`, never used here). URLs in the scripts only build Google Fonts links. Hidden Unicode scan over every file: none. No prompt-injection patterns. The repo also contains a CLI (`cli/`), other skills (banner, brand, design-system, slides, ui-styling) with their own scripts, galleries and screenshots; none were copied or run |
+| Copied | `SKILL.md`, `references/`, `data/` (3.1 MB of CSV/JSON), `scripts/*.py` (not `scripts/tests/`), `LICENSE`; diff against the source: identical |
+| Scripts present / executed | Yes / `scripts/search.py` only, for read-only queries (`--domain ux`, one `--design-system` run without `--persist`) |
+| Known limitations | The `--design-system` output is generic and conflicts with the Morph direction (gold accent, Cormorant/Montserrat, feature-card grids, "liquid glass" blur, `back.out` stagger); it was rejected. Treat only the UX/accessibility rules as input, and never persist its output. Some queries return no match (e.g. cart drawer) |
+| Date added | 2026-09-24 |
+
 ## Local (authored for this project)
 
 | Skill | Purpose | Scripts | Date |

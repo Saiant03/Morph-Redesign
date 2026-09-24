@@ -1,0 +1,31 @@
+/* Stage: the object stands in the room. --shelf is the shelf line, --oh the image box height (both of the stage
+   height); --foot is where the bottle ends inside its packshot, so top = shelf − foot × oh puts it on the glass. */
+.stage {
+  --shelf: 86%; --oh: 100%;
+  position: relative; overflow: hidden; isolation: isolate;
+  background:
+    var(--mat-grain) 0 0 / 160px,
+    radial-gradient(50% 54% at 50% 47%, var(--glow) 0%, var(--niche-mid) 36%, color-mix(in srgb, var(--niche-mid) 62%, var(--bg)) 58%, color-mix(in srgb, var(--niche-mid) 28%, var(--bg)) 78%, color-mix(in srgb, var(--niche-mid) 8%, var(--bg)) 92%, var(--bg) 100%);
+  transition: --glow var(--d-story) var(--ease-inout);
+}
+.obj, .refl { position: absolute; left: 50%; height: var(--oh); aspect-ratio: var(--ar); translate: -50% 0; mix-blend-mode: multiply; }
+.obj { top: calc(var(--shelf) - var(--foot) * var(--oh)); z-index: 2; }
+.img { object-fit: contain; }
+/* the reflection: the same image mirrored about the foot, fading within a fifth of the object's height */
+.refl {
+  top: calc(var(--shelf) - (1 - var(--foot)) * var(--oh)); z-index: 1; scale: 1 -1; opacity: 0.9;
+  mask-image: linear-gradient(to top, transparent calc((1 - var(--foot)) * 100%), rgb(0 0 0 / 0.3) calc((1 - var(--foot)) * 100% + 0.5%), transparent calc((1 - var(--foot)) * 100% + 20%));
+}
+/* where the glass meets the shelf: a soft contact shadow the width of the bottle */
+.contact {
+  position: absolute; left: calc(var(--ol) * 100%); width: calc(var(--ow) * 100%); top: calc(var(--foot) * 100% - 1.2%); height: 2.4%;
+  background: radial-gradient(50% 50% at 50% 50%, rgb(20 14 10 / 0.32), transparent 70%);
+}
+/* the glass shelf: a lit front edge, a translucent body, then the floor falling off into shadow */
+.shelf {
+  position: absolute; left: 0; right: 0; top: var(--shelf); bottom: 0;
+  background:
+    linear-gradient(to bottom, rgb(255 252 246 / 0.7) 0 1px, rgb(255 252 246 / 0.16) 1px, rgb(255 252 246 / 0) 14px),
+    linear-gradient(to bottom, rgb(20 14 10 / 0.03), rgb(20 14 10 / 0.18));
+  mask-image: linear-gradient(to right, transparent, #000 22%, #000 78%, transparent);
+}

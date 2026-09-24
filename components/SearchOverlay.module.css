@@ -1,10 +1,14 @@
-.root { position: fixed; inset: 0; z-index: 90; pointer-events: none; visibility: hidden; transition: visibility 0s linear var(--d-base); }
+.root { position: fixed; inset: 0; z-index: 90; pointer-events: none; visibility: hidden; transition: visibility 0s linear 460ms; }
 .root[data-open='true'] { pointer-events: auto; visibility: visible; transition: none; }
+/* the lights lower first… */
+.dim { position: absolute; inset: 0; background: rgb(10 7 5 / 0.55); opacity: 0; transition: opacity 220ms ease 200ms; }
+.root[data-open='true'] .dim { opacity: 1; transition: opacity 180ms ease; }
+/* …then the panel unfolds from the top; closing, it lifts away faster */
 .panel {
-  position: absolute; inset: 0; background: var(--bg); overflow-y: auto; overscroll-behavior: contain;
-  opacity: 0; transition: opacity var(--d-base) var(--ease-out);
+  position: absolute; inset: 0; background: var(--bg) var(--mat-grain) 0 0 / 160px; overflow-y: auto; overscroll-behavior: contain;
+  clip-path: inset(0 0 100% 0); transition: clip-path 260ms var(--ease-inout);
 }
-.root[data-open='true'] .panel { opacity: 1; }
+.root[data-open='true'] .panel { clip-path: inset(0); transition: clip-path 440ms var(--ease-inout) 120ms; }
 .panel .bar { position: sticky; top: 0; z-index: 1; background: var(--bg); padding-top: clamp(20px, 4vw, 56px); display: grid; gap: var(--s-2); }
 .field { display: flex; align-items: flex-end; gap: var(--s-5); border-bottom: 1px solid var(--fg); transform: translateY(-10px); transition: transform var(--d-slow) var(--ease-out); }
 .root[data-open='true'] .field { transform: none; }
@@ -37,6 +41,10 @@
 .plain a { display: grid; gap: 2px; padding: 12px 0; border-bottom: 1px solid var(--border); min-height: 44px; }
 .plain a:hover > :first-child { text-decoration: underline; text-underline-offset: 4px; }
 .plain .serif { font-size: 26px; line-height: 1.1; }
+.plain a.coll { grid-template-columns: 64px 1fr; gap: var(--s-4); align-items: center; }
+.collImg { position: relative; width: 64px; height: 80px; overflow: hidden; }
+.collImg img { object-fit: cover; }
+.collText { display: grid; gap: 2px; }
 .notes { display: flex; flex-wrap: wrap; gap: 6px; }
 .notes button { min-height: 40px; padding: 0 14px; border: 1px solid var(--border); border-radius: var(--r); background: transparent; font-size: 15px; }
 .notes button:hover { border-color: var(--fg); }

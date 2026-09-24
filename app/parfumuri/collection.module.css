@@ -1,12 +1,17 @@
-.room { padding: 1px 0 var(--s-6); margin-bottom: var(--s-5); }
-.head.head { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-5); align-items: end; margin-top: clamp(28px, 4vw, 64px); margin-bottom: var(--s-7); }
-.head > :first-child { grid-column: 1 / span 7; }
-.intro { grid-column: 9 / -1; display: grid; gap: var(--s-4); }
-.crumb { display: flex; gap: 8px; margin-bottom: var(--s-4); }
+/* the room: the campaign is its window, the name sits on a plate crossing the window's lower edge */
+.room { margin-bottom: var(--s-5); }
+.window { position: relative; height: clamp(420px, 64vh, 720px); overflow: hidden; background: var(--surface); }
+.env { display: block; height: 100%; }
+.plateRow { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-4); align-items: end; margin-top: clamp(-180px, -14vh, -96px); position: relative; margin-bottom: var(--s-6); }
+.plate {
+  grid-column: 1 / span 7; display: grid; gap: var(--s-3); padding: var(--s-6) var(--s-6) var(--s-5);
+  background: var(--bg) var(--mat-grain) 0 0 / 160px; box-shadow: 0 30px 80px -40px rgb(20 14 10 / 0.4);
+}
+.plateRow > nav { grid-column: 9 / -1; justify-self: end; }
+.title { overflow-wrap: anywhere; }
+.crumb { display: flex; gap: 8px; }
 .crumb a:hover { text-decoration: underline; text-underline-offset: 3px; }
-.facts { margin: 0; display: grid; border-top: 1px solid var(--border); }
-.facts > div { display: flex; justify-content: space-between; gap: var(--s-3); padding: 8px 0; border-bottom: 1px solid var(--border); }
-.facts dd { margin: 0; }
+.shelfBand { padding: var(--s-6) 0 var(--s-5); }
 
 /* the shelf: every bottle of the collection, one object each, on a glass edge */
 .shelfWrap { overflow-x: auto; scrollbar-width: none; }
@@ -23,10 +28,10 @@
 .shelf[data-dense='true'] span { display: none; }
 
 @media (max-width: 899px) {
-  .head.head { grid-template-columns: 1fr; margin-top: var(--s-4); margin-bottom: var(--s-5); row-gap: var(--s-4); }
-  .head h1 { font-size: 60px; }
-  .crumb { margin-bottom: var(--s-2); }
-  .intro :global(.t-lede) { font-size: 16px; }
-  .head > *, .intro { grid-column: 1 !important; }
+  .window { height: min(134vw, 72svh); }
+  .plateRow { grid-template-columns: 1fr; margin-top: calc(var(--s-8) * -1); }
+  .plate { grid-column: 1; padding: var(--s-5); }
+  .plate h1 { font-size: 56px; }
+  .plateRow > nav { grid-column: 1; justify-self: start; }
   .shelf li { flex: 0 0 76px; }
 }

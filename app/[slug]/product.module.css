@@ -27,6 +27,19 @@
 .relHead { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-4); margin-bottom: var(--s-6); flex-wrap: wrap; }
 .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
 
+/* Ritualul: the scent in its textures */
+.ritual.ritual { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-6); margin-block: var(--section); align-items: end; }
+.ritualHead { grid-column: 1 / span 4; display: grid; gap: var(--s-3); justify-items: start; }
+.ritual > :last-child { grid-column: 6 / -1; }
+/* layering entry: two bottles overlapping in depth, the composer one click away */
+.compose { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-6); align-items: center; }
+.pair { grid-column: 1 / span 5; position: relative; height: clamp(300px, 42vw, 520px); }
+.pairA, .pairB { position: absolute; width: 58%; aspect-ratio: 3 / 4; }
+.pairA { left: 0; bottom: 0; z-index: 2; box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.7); }
+.pairB { right: 0; top: 0; filter: brightness(0.82); }
+.composeText { grid-column: 7 / -1; display: grid; gap: var(--s-4); justify-items: start; }
+.composeLinks { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-4); }
+
 @media (max-width: 1100px) { .cards { grid-template-columns: repeat(2, 1fr); } .info { grid-column: 8 / -1; } }
 @media (max-width: 899px) {
   .top { grid-template-columns: 1fr; padding-top: 0; }
@@ -38,6 +51,9 @@
   .notesLine { font-size: 20px; order: 3; margin-top: 0 !important; }
   .facts { order: 4; } .summary { order: 5; } .assure { order: 6; } .alts { order: 7; }
   .story.story { grid-template-columns: 1fr; }
+  .ritual.ritual, .compose { grid-template-columns: 1fr; }
+  .ritualHead, .ritual > :last-child, .pair, .composeText { grid-column: 1; }
+  .pair { height: 320px; }
   .quote, .context { grid-column: 1; }
   .cards { grid-auto-flow: column; grid-auto-columns: 74%; grid-template-columns: none; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(var(--m) * -1); padding-inline: var(--m); scroll-padding-inline: var(--m); }
   .cards > * { scroll-snap-align: start; }

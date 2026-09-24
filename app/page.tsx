@@ -1,43 +1,55 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { HeroCampaign } from '@/components/HeroCampaign';
-import { FeaturedFocus } from '@/components/FeaturedFocus';
-import { LayeringComposer } from '@/components/LayeringComposer';
-import { ProductVisual, Niche } from '@/components/ProductVisual';
+import { CollectionWorlds } from '@/components/CollectionWorlds';
+import { Lookbook } from '@/components/Lookbook';
+import { ProductVisual } from '@/components/ProductVisual';
 import { Reveal } from '@/components/Reveal';
 import { OpenNow } from '@/components/OpenNow';
 import {
-  perfumes, inCollection, COLLECTIONS, ALL_BY_COLLECTION, FAMILY_GROUPS, familyGroup, familyNotes, bestsellerMix, bySlug,
-  travelFor, sampleSets, discoverySets, layeringSets, lei, FREE_SHIPPING, BOUTIQUE, collectionHref, productHref, sampleName,
+  perfumes, FAMILY_GROUPS, familyGroup, familyNotes, bestsellerMix, bySlug, bodyFor, BODY_KIND, travelFor, sampleSets, discoverySets,
+  layeringSets, lei, FREE_SHIPPING, BOUTIQUE, HERO_SLUG, productHref, sampleName,
 } from '@/lib/catalog';
 import s from './home.module.css';
 
-// One object per collection for the collection vitrines (bestsellers from the snapshot).
-const COLLECTION_FACE = { 'les-exclusifs': 'morph-n8-parfum-100ml', luxury: 'morph-vision-parfum-100ml', ice: 'morph-tonkatonic-100ml' } as const;
-// The boutique wall: a few of the objects waiting in Bucharest (from all three collections).
-const WALL = ['morph-too-parfum-100ml', 'morph-pure-soul-parfum-100ml', 'morph-oud-mafia-100ml', 'morph-kolonaki-parfum-100ml', 'morph-miyazawa-parfum-100ml', 'morph-gate-17-100ml'];
+// The ritual example: a perfume Morph sells as perfume, shower gel and body cream.
+const RITUAL = 'morph-zeta-parfum-100ml';
 
+/**
+ * Home as a campaign in six movements (docs/design/phase-05-5-creative-upgrade-plan.md §8):
+ * entrance · three worlds · most chosen · form · rituals · the shop. Each has its own anatomy.
+ */
 export default function Home() {
   const withTravel = perfumes.filter(p => travelFor(p));
   const samples = sampleSets.filter(x => x.inStock);
   const discovery = discoverySets().find(x => x.inStock);
-  const picks = bestsellerMix(5);
-  const lux = inCollection('luxury')[0].price;
-  const antigua = bySlug('morph-antigua-bay-parfum-100ml');
-  const n8 = bySlug('morph-n8-parfum-100ml');
+  const picks = bestsellerMix(5, [HERO_SLUG]);
+  const ritual = bySlug(RITUAL);
+  const ritualBody = bodyFor(ritual).filter(b => b.kind === 'gel' || b.kind === 'cream');
 
   return (
     <>
-      {/* IMAGE: the campaign */}
+      {/* 1 ENTRANCE: the motto and one bottle standing in the dark room */}
       <HeroCampaign />
 
-      {/* OBJECT: the bottle as a sculpted piece */}
-      <section className={`band ${s.object}`} aria-labelledby="obiect-titlu">
-        <div className={`wrap ${s.objectGrid}`}>
-          <Reveal className={s.objectMain}><ProductVisual p={antigua} image={2} sizes="(max-width: 899px) 100vw, 44vw" alt="Sticla Morph Antigua Bay, înclinată, cu forma răsucită vizibilă" className={s.objectNiche} /></Reveal>
-          <Reveal className={s.objectSecond}><ProductVisual p={n8} image={0} sizes="(max-width: 899px) 60vw, 20vw" alt="Sticla Morph N8, din colecția Les Exclusifs" className={s.objectNiche} /></Reveal>
-          <div className={s.objectText}>
+      {/* 2 THREE WORLDS: Morph's campaigns as the environment of each collection */}
+      <CollectionWorlds />
+
+      {/* 3 MOST CHOSEN: a lookbook, one bottle per spread */}
+      <section className={`band ${s.lookBand}`} data-tone="dark" aria-labelledby="alese-titlu">
+        <h2 id="alese-titlu" className={`wrap t-1 ${s.lookTitle}`}>Cele mai alese</h2>
+        <Lookbook items={picks} />
+      </section>
+
+      {/* 4 FORM: the Bormioli bottle, one image cropped to the glass */}
+      <section className={`band ${s.form}`} aria-labelledby="forma-titlu">
+        <div className={`wrap ${s.formGrid}`}>
+          <Reveal crop className={s.formImage}>
+            <Image src="/morph/campaign/luxury-flatlay.avif" alt="Sticle Morph Luxury, una peste alta: sticla răsucită de la Bormioli Luigi" fill sizes="(max-width: 899px) 100vw, 60vw" />
+          </Reveal>
+          <div className={s.formText}>
             <p className="label muted">Obiectul</p>
-            <h2 id="obiect-titlu" className="t-1">Echilibru și mișcare continuă.</h2>
+            <h2 id="forma-titlu" className="t-1">Echilibru și mișcare continuă.</h2>
             <p className="t-lede">Sticla Morph vine de la Bormioli Luigi. E răsucită, spune Morph, ca să exprime „ideea de echilibru și mișcare continuă”.</p>
             <dl className={s.facts}>
               <div><dt className="label muted">Casa</dt><dd>Napoli, fondată în 2002 de Andrea Angelino</dd></div>
@@ -48,142 +60,85 @@ export default function Home() {
         </div>
       </section>
 
-      {/* COLLECTION: three vitrines in a wood wall */}
-      <section className="band" data-tone="wood" aria-labelledby="colectii-titlu">
+      {/* 5 RITUALS: discover by notes, compose two, wear one scent in three textures */}
+      <section className={`band ${s.rituals}`} aria-labelledby="ritualuri-titlu">
         <div className="wrap">
-          <div className={s.head}>
-            <h2 id="colectii-titlu" className="t-1">Trei colecții</h2>
-            <p className="muted">Diferă prin concentrație și prin caracter. Fiecare vitrină deschide colecția ei.</p>
-          </div>
-          <ul className={s.vitrines}>
-            {ALL_BY_COLLECTION.map(c => {
-              const list = inCollection(c);
-              const face = bySlug(COLLECTION_FACE[c]);
-              const prices = [...new Set(list.map(p => p.price))];
-              return (
-                <li key={c}>
-                  <Link href={collectionHref(c)} className={s.vitrine}>
-                    <ProductVisual p={face} sizes="(max-width: 899px) 80vw, 30vw" alt="" className={s.vitrineNiche} />
-                    <span className={s.vitrineName}>{COLLECTIONS[c].name}</span>
-                    <span className="t-small">{COLLECTIONS[c].line}</span>
-                    <span className="label muted">{COLLECTIONS[c].type} · {list.length} parfumuri · <span className="num">{prices.map(lei).join(' / ')}</span></span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </section>
+          <h2 id="ritualuri-titlu" className={`t-display ${s.ritualsTitle}`}>Trei ritualuri</h2>
+          <div className={s.ritualGrid}>
+            <article className={s.ritual} aria-labelledby="r-descopera">
+              <p className="label muted">Descoperă</p>
+              <h3 id="r-descopera" className="t-2">Cinci familii, scrise în note.</h3>
+              <ul className={s.familyList}>
+                {FAMILY_GROUPS.map(g => (
+                  <li key={g.id}>
+                    <Link href={`/parfumuri?familie=${g.id}`}>
+                      <span className={s.familyName}>{g.name}</span>
+                      <span className="t-small muted">{familyNotes(g.id, 3).join(', ')}</span>
+                      <span className="t-micro muted num">{perfumes.filter(p => familyGroup(p)?.id === g.id).length}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <Link href="/descopera/finder" className="btn btn-secondary">Fragrance Finder, 7 întrebări</Link>
+            </article>
 
-      {/* FRAGRANCE: the most chosen, one at a time */}
-      <section className="band" aria-labelledby="alese-titlu">
-        <div className="wrap">
-          <div className={s.head}>
-            <h2 id="alese-titlu" className="t-1">Cele mai alese</h2>
-            <p className="muted">Bestsellerurile Morph, din toate cele trei colecții. Alege un nume ca să-l aduci în vitrină.</p>
-          </div>
-          <FeaturedFocus items={picks} />
-        </div>
-      </section>
-
-      {/* FRAGRANCE language: families by their notes, not by a swatch */}
-      <section className={`band ${s.familiesBand}`} aria-labelledby="familii-titlu">
-        <div className="wrap">
-          <div className={s.head}>
-            <h2 id="familii-titlu" className="t-1">Găsește-ți familia</h2>
-            <p className="muted">Cinci familii olfactive. Sub fiecare nume, notele care apar cel mai des în parfumurile ei și încadrările Morph pe care le reunește.</p>
-          </div>
-          <ol className={s.families}>
-            {FAMILY_GROUPS.map(g => {
-              const list = perfumes.filter(p => familyGroup(p)?.id === g.id);
-              const members = [...new Set(list.map(p => p.family!))];
-              return (
-                <li key={g.id} className={s.family}>
-                  <h3 className={s.familyName}><Link href={`/parfumuri?familie=${g.id}`}>{g.name}</Link></h3>
-                  <p className={s.familyNotes}>{familyNotes(g.id, 4).join(', ')}</p>
-                  <p className={`${s.familyMeta} t-small muted`}>Încadrări Morph: {members.join(', ')}. <span className="num">{list.length}</span> parfumuri.</p>
-                  <ul className={s.familyObjects} aria-label={`Câteva parfumuri ${g.name}`}>
-                    {list.slice(0, 3).map(p => (
-                      <li key={p.slug}><Link href={productHref(p)} aria-label={p.shortName}><ProductVisual p={p} sizes="80px" alt="" className={s.mini} /><span className="t-micro">{p.shortName}</span></Link></li>
-                    ))}
-                  </ul>
-                  <Link href={`/parfumuri?familie=${g.id}`} className={`${s.familyLink} link t-small`}>Toate cele {list.length}</Link>
-                </li>
-              );
-            })}
-          </ol>
-          <div className={s.finder}>
-            <p className="t-2">Nu știi de unde să pornești?</p>
-            <p className="muted">Fragrance Finder: șapte întrebări despre prezență, anotimp și ocazie, cu logica Morph. La final vezi de ce ți se potrivește parfumul, cât costă și cum îl încerci.</p>
-            <Link href="/descopera/finder" className="btn">Începe Fragrance Finder</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* DISCOVERY: try at home, try in person */}
-      <section id="incearca" className="band" aria-labelledby="incearca-titlu">
-        <div className="wrap">
-          <div className={s.head}>
-            <h2 id="incearca-titlu" className="t-1">Încearcă înainte de sticlă</h2>
-            <p className="muted">Un parfum se alege pe piele, în câteva zile. Morph are formatele pentru acasă și un magazin în București.</p>
-          </div>
-          <div className={s.tryGrid}>
-            <article className={s.tryHome}>
-              <Niche src="/morph/set-travel-morph-zeta-0.avif" alt="Set travel Morph Zeta, două flacoane de 8 ml" sizes="(max-width: 899px) 100vw, 30vw" className={s.tryNiche} />
-              <div className={s.tryText}>
-                <p className="label muted">Acasă</p>
-                <h3 className="t-2">Travel 2×8 ml</h3>
-                <p className="muted">Același parfum în două flacoane de 8 ml, <span className="num">{lei(travelFor(withTravel[0])!.price)}</span>. Există pentru {withTravel.length} din cele {perfumes.length} de parfumuri.</p>
-                <ul className={s.tryList}>
-                  {samples.map(x => <li key={x.slug}><span>{sampleName(x.slug)}</span><span className="num">{lei(x.price)}</span></li>)}
-                  {discovery && <li><span>Discovery Travel, toate colecțiile</span><span className="num">{lei(discovery.price)}</span></li>}
-                </ul>
-                <Link className="link t-small" href="/descopera#incearca">Toate formatele de încercare</Link>
+            <article className={s.ritual} aria-labelledby="r-layering">
+              <p className="label muted">Layering</p>
+              <div className={s.ritualImage}>
+                <Image src="/morph/campaign/ynf-box-in-hand.avif" alt="Cutia Your Next Form deschisă, cu două flacoane de 8 ml, ținută în mână" fill sizes="(max-width: 899px) 100vw, 32vw" />
               </div>
+              <h3 id="r-layering" className="t-2">Două parfumuri, a treia formă.</h3>
+              <p className="muted">Your Next Form: {layeringSets.length} seturi blind de 2×8 ml, {lei(layeringSets[0].price)}. „Identitatea parfumurilor este dezvăluită doar la deschiderea cutiei.”</p>
+              <p className={s.links}><Link className="link" href="/layering">Compune o pereche</Link><Link className="link" href="/layering/your-next-form">Your Next Form</Link></p>
             </article>
-            <article className={s.tryShop} data-tone="wood">
-              <p className="label muted">În persoană</p>
-              <h3 className="t-2">{BOUTIQUE.name}</h3>
-              <p>{BOUTIQUE.address}</p>
-              <OpenNow />
-              <p className="t-small muted num">{BOUTIQUE.hours.join(' · ')}</p>
-              <p className="muted t-small">Parfumurile se încearcă pe piele, cu echipa Morph alături. Ce marchezi online „De încercat în magazin” îți rămâne pe listă.</p>
-              <Link className="btn btn-secondary" href={BOUTIQUE.href}>Vezi magazinul</Link>
+
+            <article className={s.ritual} aria-labelledby="r-corp">
+              <p className="label muted">Baie & Corp</p>
+              <ul className={s.textures} aria-label={`${ritual.shortName} în trei texturi`}>
+                <li><ProductVisual p={ritual} sizes="120px" alt="" className={s.texture} /><span className="t-micro">Parfum</span></li>
+                {ritualBody.map(b => (
+                  <li key={b.slug}><span className={`niche-sm ${s.texture}`}>{b.image && <Image src={b.image} alt="" fill sizes="120px" />}</span><span className="t-micro">{BODY_KIND[b.kind].name}</span></li>
+                ))}
+              </ul>
+              <h3 id="r-corp" className="t-2">Același parfum, în trei texturi.</h3>
+              <p className="muted">Cremele de corp Morph sunt, spune Morph, „perfecte pentru a fi utilizate împreună cu parfumul preferat”. {ritual.shortName}: gel de duș {lei(ritualBody.find(b => b.kind === 'gel')?.price ?? 0)}, cremă {lei(ritualBody.find(b => b.kind === 'cream')?.price ?? 0)}.</p>
+              <p className={s.links}><Link className="link" href="/parfumuri/corp">Baie & Corp</Link><Link className="link" href={productHref(ritual)}>{ritual.shortName}</Link></p>
             </article>
           </div>
-          <p className={`${s.threshold} t-small muted`}>Livrarea e gratuită de la {lei(FREE_SHIPPING)}. O sticlă Luxury ({lei(lux)}) împreună cu un travel trece pragul.</p>
         </div>
       </section>
 
-      {/* LAYERING: the composition studio */}
-      <section className="band" data-tone="dark" aria-labelledby="combina-titlu">
-        <div className="wrap">
-          <LayeringComposer first="morph-animal-parfum-100ml" second="morph-tonkatonic-100ml" heading="Două parfumuri, a treia formă." headingId="combina-titlu"
-            intro="Identity, layer by layer. Alege două parfumuri Morph și vezi cum se așază notele lor una peste alta: deschiderea peste deschidere, baza peste bază." />
-          <p className={`${s.ynf} t-small muted`}>Your Next Form: {layeringSets.map(x => x.state).join(', ')}.</p>
-        </div>
-      </section>
-
-      {/* BOUTIQUE */}
-      <section className="band" data-tone="wood" aria-labelledby="casa-titlu">
-        <div className={`wrap ${s.house}`}>
-          <div className={s.houseText}>
+      {/* 6 THE SHOP: a walnut room; the two ways to try before the bottle */}
+      <section className={`band ${s.shop}`} data-tone="wood" aria-labelledby="magazin-titlu">
+        <div className={`wrap ${s.shopGrid}`}>
+          <div className={s.shopText}>
             <p className="label muted">București</p>
-            <h2 id="casa-titlu" className="t-1">Magazinul Morph</h2>
-            <p className="t-lede">Magazinul Morph din Piața Alexandru Lahovari. Aici parfumurile găsite pe ecran se încearcă pe piele.</p>
-            <ul className={s.trust}>
-              <li><span className="label muted">Original</span><span>Cod Certilogo pe fiecare cutie, verificabil online.</span></li>
-              <li><span className="label muted">Livrare</span><span>Gratuită de la {lei(FREE_SHIPPING)}. Card, Apple Pay sau Google Pay.</span></li>
-              <li><span className="label muted">Fidelitate</span><span>Morph Points, în contul de client.</span></li>
-            </ul>
+            <h2 id="magazin-titlu" className="t-display">Magazinul Morph</h2>
+            <p className="t-lede">{BOUTIQUE.address}</p>
+            <OpenNow />
+            <p className="t-small muted num">{BOUTIQUE.hours.join(' · ')}</p>
             <Link className="btn" href={BOUTIQUE.href}>Vizitează magazinul</Link>
           </div>
-          <ul className={s.wall} aria-label="Câteva dintre parfumurile Morph">
-            {WALL.map(slug => {
-              const p = bySlug(slug);
-              return <li key={slug}><Link href={productHref(p)} aria-label={p.shortName}><ProductVisual p={p} sizes="(max-width: 899px) 30vw, 14vw" alt="" className={s.wallNiche} /></Link></li>;
-            })}
-          </ul>
+          <div className={s.tryPair}>
+            <h3 className={`label ${s.tryHead}`}>Încearcă înainte de sticlă</h3>
+            <div className={s.try}>
+              <p className={s.tryName}>Acasă</p>
+              <ul className={`${s.tryList} t-small`}>
+                <li><span>Travel 2×8 ml, același parfum</span><span className="num">{lei(travelFor(withTravel[0])!.price)}</span></li>
+                {samples.map(x => <li key={x.slug}><span>{sampleName(x.slug)}</span><span className="num">{lei(x.price)}</span></li>)}
+                {discovery && <li><span>Discovery Travel, toate colecțiile</span><span className="num">{lei(discovery.price)}</span></li>}
+              </ul>
+              <Link className="link t-small" href="/descopera#incearca">Toate formatele de încercare</Link>
+            </div>
+            <div className={s.try}>
+              <p className={s.tryName}>În magazin</p>
+              <p className="t-small">Pe piele, cu echipa Morph alături. Ce marchezi online „De încercat în magazin” rămâne pe o listă pe care o arăți pe telefon.</p>
+            </div>
+            <ul className={`${s.trust} t-small`}>
+              <li><span className="label muted">Original</span><span>Cod Certilogo pe fiecare cutie, verificabil online.</span></li>
+              <li><span className="label muted">Livrare</span><span>Gratuită de la {lei(FREE_SHIPPING)}. Card, Apple Pay sau Google Pay.</span></li>
+            </ul>
+          </div>
         </div>
       </section>
     </>

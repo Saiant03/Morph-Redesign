@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { useMotion, gsap, EASE } from '@/lib/motion';
 import { bySlug, COLLECTIONS, HERO_SLUG, lei, concentration, productHref, perfumes } from '@/lib/catalog';
 import { TIERS } from './NotePyramid';
-import { ProductVisual } from './ProductVisual';
+import { Stage } from './Stage';
 import s from './HeroCampaign.module.css';
 
 /**
@@ -45,7 +45,7 @@ export function HeroCampaign() {
         </div>
 
         <div ref={stage} className={s.stage} data-stage>
-          <ProductVisual p={p} sizes="(max-width: 899px) 100vw, 58vw" priority vt className={s.niche} alt={`${p.name}, sticla`} />
+          <Stage p={p} sizes="(max-width: 899px) 100vw, 58vw" priority vt className={s.niche} alt={`${p.name}, sticla`} />
           <span className={s.dim} data-dim aria-hidden />
         </div>
 

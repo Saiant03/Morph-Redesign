@@ -1,0 +1,858 @@
+{
+ "/morph/morph-primitivo-eau-de-parfum-unisex-0.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.101,
+  "bottom": 0.875,
+  "left": 0.273,
+  "right": 0.724
+ },
+ "/morph/morph-primitivo-eau-de-parfum-unisex-1.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.097,
+  "bottom": 0.874,
+  "left": 0.086,
+  "right": 0.913
+ },
+ "/morph/morph-primitivo-eau-de-parfum-unisex-2.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.147,
+  "bottom": 0.831,
+  "left": 0.073,
+  "right": 0.939
+ },
+ "/morph/morph-gate-17-100ml-0.avif": {
+  "w": 768,
+  "h": 957,
+  "top": 0.134,
+  "bottom": 0.883,
+  "left": 0.279,
+  "right": 0.702
+ },
+ "/morph/morph-gate-17-100ml-1.avif": {
+  "w": 768,
+  "h": 768,
+  "top": 0.133,
+  "bottom": 0.876,
+  "left": 0.186,
+  "right": 0.815
+ },
+ "/morph/morph-gate-17-100ml-2.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.204,
+  "bottom": 0.936,
+  "left": 0.229,
+  "right": 0.813
+ },
+ "/morph/morph-tonkatonic-100ml-0.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.131,
+  "bottom": 0.877,
+  "left": 0.279,
+  "right": 0.707
+ },
+ "/morph/morph-tonkatonic-100ml-1.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.128,
+  "bottom": 0.876,
+  "left": 0.104,
+  "right": 0.891
+ },
+ "/morph/morph-tonkatonic-100ml-2.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.215,
+  "bottom": 0.953,
+  "left": 0.257,
+  "right": 0.835
+ },
+ "/morph/morph-oud-mafia-100ml-0.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.132,
+  "bottom": 0.876,
+  "left": 0.306,
+  "right": 0.702
+ },
+ "/morph/morph-oud-mafia-100ml-1.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.124,
+  "bottom": 0.876,
+  "left": 0.109,
+  "right": 0.893
+ },
+ "/morph/morph-oud-mafia-100ml-2.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.16,
+  "bottom": 0.944,
+  "left": 0.173,
+  "right": 0.836
+ },
+ "/morph/morph-antigua-bay-parfum-100ml-0.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.096,
+  "bottom": 0.879,
+  "left": 0.263,
+  "right": 0.721
+ },
+ "/morph/morph-antigua-bay-parfum-100ml-1.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.089,
+  "bottom": 0.877,
+  "left": 0.072,
+  "right": 0.924
+ },
+ "/morph/morph-antigua-bay-parfum-100ml-2.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.214,
+  "bottom": 0.88,
+  "left": 0.198,
+  "right": 0.87
+ },
+ "/morph/morph_disumano_parfum_100ml-0.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.132,
+  "bottom": 0.892,
+  "left": 0.298,
+  "right": 0.703
+ },
+ "/morph/morph_disumano_parfum_100ml-1.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.085,
+  "bottom": 0.88,
+  "left": 0.074,
+  "right": 0.927
+ },
+ "/morph/morph_disumano_parfum_100ml-2.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.107,
+  "bottom": 0.902,
+  "left": 0.079,
+  "right": 0.943
+ },
+ "/morph/morph-cruda-parfum-100ml-0.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.097,
+  "bottom": 0.878,
+  "left": 0.26,
+  "right": 0.716
+ },
+ "/morph/morph-cruda-parfum-100ml-1.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.083,
+  "bottom": 0.878,
+  "left": 0.069,
+  "right": 0.923
+ },
+ "/morph/morph-axum-parfum-100ml-0.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.099,
+  "bottom": 0.878,
+  "left": 0.26,
+  "right": 0.716
+ },
+ "/morph/morph-axum-parfum-100ml-1.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.081,
+  "bottom": 0.878,
+  "left": 0.07,
+  "right": 0.926
+ },
+ "/morph/morph-malaga-parfum-100ml-0.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.098,
+  "bottom": 0.876,
+  "left": 0.26,
+  "right": 0.715
+ },
+ "/morph/morph-malaga-parfum-100ml-1.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.084,
+  "bottom": 0.876,
+  "left": 0.073,
+  "right": 0.924
+ },
+ "/morph/morph-vision-parfum-100ml-0.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.096,
+  "bottom": 0.878,
+  "left": 0.257,
+  "right": 0.717
+ },
+ "/morph/morph-vision-parfum-100ml-1.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.085,
+  "bottom": 0.878,
+  "left": 0.074,
+  "right": 0.924
+ },
+ "/morph/morph-miyazawa-parfum-100ml-0.avif": {
+  "w": 768,
+  "h": 768,
+  "top": 0.092,
+  "bottom": 0.918,
+  "left": 0.32,
+  "right": 0.681
+ },
+ "/morph/morph-miyazawa-parfum-100ml-1.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.086,
+  "bottom": 0.877,
+  "left": 0.072,
+  "right": 0.923
+ },
+ "/morph/morph-miyazawa-parfum-100ml-2.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.186,
+  "bottom": 0.903,
+  "left": 0.216,
+  "right": 0.823
+ },
+ "/morph/morph-umhh-parfum-100ml-0.avif": {
+  "w": 768,
+  "h": 768,
+  "top": 0.094,
+  "bottom": 0.857,
+  "left": 0.318,
+  "right": 0.68
+ },
+ "/morph/morph-umhh-parfum-100ml-1.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.083,
+  "bottom": 0.878,
+  "left": 0.069,
+  "right": 0.924
+ },
+ "/morph/morph-umhh-parfum-100ml-2.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.209,
+  "bottom": 0.865,
+  "left": 0.197,
+  "right": 0.819
+ },
+ "/morph/morph-arles-parfum-100ml-0.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.126,
+  "bottom": 0.877,
+  "left": 0.251,
+  "right": 0.693
+ },
+ "/morph/morph-arles-parfum-100ml-1.avif": {
+  "w": 768,
+  "h": 998,
+  "top": 0.15,
+  "bottom": 0.997,
+  "left": 0.052,
+  "right": 0.944
+ },
+ "/morph/morph-arles-parfum-100ml-2.avif": {
+  "w": 768,
+  "h": 768,
+  "top": 0.098,
+  "bottom": 0.9,
+  "left": 0.164,
+  "right": 0.836
+ },
+ "/morph/morph-too-parfum-100ml-0.avif": {
+  "w": 768,
+  "h": 768,
+  "top": 0.086,
+  "bottom": 0.923,
+  "left": 0.319,
+  "right": 0.682
+ },
+ "/morph/morph-too-parfum-100ml-1.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.082,
+  "bottom": 0.875,
+  "left": 0.072,
+  "right": 0.927
+ },
+ "/morph/morph-too-parfum-100ml-2.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.193,
+  "bottom": 0.889,
+  "left": 0.281,
+  "right": 0.797
+ },
+ "/morph/morph-kolonaki-parfum-100ml-0.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.098,
+  "bottom": 0.878,
+  "left": 0.26,
+  "right": 0.716
+ },
+ "/morph/morph-kolonaki-parfum-100ml-1.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.078,
+  "bottom": 0.877,
+  "left": 0.074,
+  "right": 0.923
+ },
+ "/morph/morph-iconic-parfum-100ml-0.avif": {
+  "w": 768,
+  "h": 768,
+  "top": 0.083,
+  "bottom": 0.923,
+  "left": 0.316,
+  "right": 0.682
+ },
+ "/morph/morph-iconic-parfum-100ml-1.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.081,
+  "bottom": 0.875,
+  "left": 0.072,
+  "right": 0.927
+ },
+ "/morph/morph-iconic-parfum-100ml-2.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.261,
+  "bottom": 0.893,
+  "left": 0.189,
+  "right": 0.848
+ },
+ "/morph/morph-montmartre-parfum-100ml-0.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.096,
+  "bottom": 0.879,
+  "left": 0.259,
+  "right": 0.716
+ },
+ "/morph/morph-montmartre-parfum-100ml-1.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.084,
+  "bottom": 0.877,
+  "left": 0.074,
+  "right": 0.926
+ },
+ "/morph/morph-nudo-parfum-100ml-0.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.098,
+  "bottom": 0.88,
+  "left": 0.259,
+  "right": 0.715
+ },
+ "/morph/morph-nudo-parfum-100ml-1.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.084,
+  "bottom": 0.878,
+  "left": 0.073,
+  "right": 0.923
+ },
+ "/morph/morph-n8-parfum-100ml-0.avif": {
+  "w": 768,
+  "h": 768,
+  "top": 0.095,
+  "bottom": 0.857,
+  "left": 0.32,
+  "right": 0.68
+ },
+ "/morph/morph-n8-parfum-100ml-1.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.08,
+  "bottom": 0.877,
+  "left": 0.069,
+  "right": 0.926
+ },
+ "/morph/morph-n8-parfum-100ml-2.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.226,
+  "bottom": 0.894,
+  "left": 0.241,
+  "right": 0.876
+ },
+ "/morph/morph-indomable-parfum-100ml-0.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.11,
+  "bottom": 0.866,
+  "left": 0.271,
+  "right": 0.706
+ },
+ "/morph/morph-indomable-parfum-100ml-1.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.083,
+  "bottom": 0.876,
+  "left": 0.072,
+  "right": 0.924
+ },
+ "/morph/morph-a21-parfum-100ml-0.avif": {
+  "w": 768,
+  "h": 768,
+  "top": 0.086,
+  "bottom": 0.922,
+  "left": 0.316,
+  "right": 0.682
+ },
+ "/morph/morph-a21-parfum-100ml-1.avif": {
+  "w": 615,
+  "h": 658,
+  "top": 0.055,
+  "bottom": 0.947,
+  "left": 0.086,
+  "right": 0.907
+ },
+ "/morph/morph-rose-j-parfum-100ml-0.avif": {
+  "w": 768,
+  "h": 768,
+  "top": 0.095,
+  "bottom": 0.857,
+  "left": 0.327,
+  "right": 0.678
+ },
+ "/morph/morph-rose-j-parfum-100ml-1.avif": {
+  "w": 615,
+  "h": 658,
+  "top": 0.056,
+  "bottom": 0.944,
+  "left": 0.085,
+  "right": 0.906
+ },
+ "/morph/morph-animal-parfum-100ml-0.avif": {
+  "w": 768,
+  "h": 768,
+  "top": 0.091,
+  "bottom": 0.918,
+  "left": 0.319,
+  "right": 0.681
+ },
+ "/morph/morph-animal-parfum-100ml-1.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.082,
+  "bottom": 0.878,
+  "left": 0.072,
+  "right": 0.927
+ },
+ "/morph/morph-animal-parfum-100ml-2.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.223,
+  "bottom": 0.848,
+  "left": 0.215,
+  "right": 0.844
+ },
+ "/morph/morph-vapor-parfum-100ml-0.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.096,
+  "bottom": 0.877,
+  "left": 0.258,
+  "right": 0.715
+ },
+ "/morph/morph-vapor-parfum-100ml-1.avif": {
+  "w": 768,
+  "h": 768,
+  "top": 0.082,
+  "bottom": 0.905,
+  "left": 0.159,
+  "right": 0.841
+ },
+ "/morph/morph-zeta-parfum-100ml-0.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.096,
+  "bottom": 0.879,
+  "left": 0.26,
+  "right": 0.719
+ },
+ "/morph/morph-zeta-parfum-100ml-1.avif": {
+  "w": 768,
+  "h": 768,
+  "top": 0.095,
+  "bottom": 0.895,
+  "left": 0.161,
+  "right": 0.837
+ },
+ "/morph/morph-zeta-parfum-100ml-2.avif": {
+  "w": 768,
+  "h": 998,
+  "top": 0.144,
+  "bottom": 0.843,
+  "left": 0.06,
+  "right": 0.952
+ },
+ "/morph/morph-pure-soul-parfum-100ml-0.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.097,
+  "bottom": 0.878,
+  "left": 0.259,
+  "right": 0.715
+ },
+ "/morph/morph-pure-soul-parfum-100ml-1.avif": {
+  "w": 768,
+  "h": 960,
+  "top": 0.082,
+  "bottom": 0.878,
+  "left": 0.072,
+  "right": 0.926
+ },
+ "/morph/morph-gate-17-set-parfum-si-gel-de-dus-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.141,
+  "bottom": 0.856,
+  "left": 0.145,
+  "right": 0.813
+ },
+ "/morph/morph-cruda-set-parfum-si-gel-de-dus-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.141,
+  "bottom": 0.861,
+  "left": 0.16,
+  "right": 0.835
+ },
+ "/morph/morph-n8-set-parfum-si-gel-de-dus-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.145,
+  "bottom": 0.857,
+  "left": 0.158,
+  "right": 0.818
+ },
+ "/morph/morph-cruda-gel-de-dus-200-ml-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.148,
+  "bottom": 0.857,
+  "left": 0.258,
+  "right": 0.708
+ },
+ "/morph/morph-n8-gel-de-dus-200-ml-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.167,
+  "bottom": 0.867,
+  "left": 0.258,
+  "right": 0.7
+ },
+ "/morph/morph-gate-17-gel-de-dus-200-ml-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.167,
+  "bottom": 0.868,
+  "left": 0.287,
+  "right": 0.723
+ },
+ "/morph/morph-tonkatonic-set-parfum-si-gel-de-dus-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.145,
+  "bottom": 0.857,
+  "left": 0.163,
+  "right": 0.83
+ },
+ "/morph/morph-disumano-set-parfum-si-gel-de-dus-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.145,
+  "bottom": 0.856,
+  "left": 0.143,
+  "right": 0.813
+ },
+ "/morph/morph-zeta-set-parfum-si-gel-de-dus-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.143,
+  "bottom": 0.86,
+  "left": 0.147,
+  "right": 0.822
+ },
+ "/morph/morph-vapor-set-parfum-si-gel-de-dus-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.141,
+  "bottom": 0.857,
+  "left": 0.16,
+  "right": 0.832
+ },
+ "/morph/morph-indomable-set-parfum-si-gel-de-dus-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.141,
+  "bottom": 0.856,
+  "left": 0.158,
+  "right": 0.833
+ },
+ "/morph/morph-gate-17-set-parfum-si-crema-de-corp-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.143,
+  "bottom": 0.857,
+  "left": 0.132,
+  "right": 0.873
+ },
+ "/morph/morph-disumano-gel-de-dus-200-ml-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.135,
+  "bottom": 0.845,
+  "left": 0.252,
+  "right": 0.702
+ },
+ "/morph/crema-de-corp-morph-gate-17-200ml-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.46,
+  "bottom": 0.784,
+  "left": 0.158,
+  "right": 0.838
+ },
+ "/morph/morph-tonkatonic-gel-de-dus-200-ml-0.avif": {
+  "w": 600,
+  "h": 749,
+  "top": 0.135,
+  "bottom": 0.845,
+  "left": 0.255,
+  "right": 0.703
+ },
+ "/morph/morph-zeta-gel-de-dus-200-ml-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.203,
+  "bottom": 0.793,
+  "left": 0.318,
+  "right": 0.69
+ },
+ "/morph/morph-vapor-gel-de-dus-200-ml-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.203,
+  "bottom": 0.795,
+  "left": 0.322,
+  "right": 0.688
+ },
+ "/morph/morph-indomable-gel-de-dus-200-ml-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.203,
+  "bottom": 0.795,
+  "left": 0.318,
+  "right": 0.69
+ },
+ "/morph/morph-crema-de-corp-tonkatonic-0.avif": {
+  "w": 600,
+  "h": 823,
+  "top": 0.536,
+  "bottom": 0.847,
+  "left": 0.185,
+  "right": 0.82
+ },
+ "/morph/morph-set-tonkatonic-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.092,
+  "bottom": 0.881,
+  "left": 0.09,
+  "right": 0.92
+ },
+ "/morph/morph-crema-de-corp-animal-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.575,
+  "bottom": 0.915,
+  "left": 0.182,
+  "right": 0.813
+ },
+ "/morph/morph-crema-de-corp-disumano-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.576,
+  "bottom": 0.916,
+  "left": 0.182,
+  "right": 0.813
+ },
+ "/morph/morph-crema-de-corp-n8-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.573,
+  "bottom": 0.916,
+  "left": 0.182,
+  "right": 0.813
+ },
+ "/morph/morph_set_disumano-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.095,
+  "bottom": 0.876,
+  "left": 0.085,
+  "right": 0.917
+ },
+ "/morph/morph_set_montmartre-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.095,
+  "bottom": 0.876,
+  "left": 0.075,
+  "right": 0.922
+ },
+ "/morph/morph_set_vapor-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.103,
+  "bottom": 0.876,
+  "left": 0.073,
+  "right": 0.918
+ },
+ "/morph/morph-set-nudo-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.087,
+  "bottom": 0.879,
+  "left": 0.075,
+  "right": 0.925
+ },
+ "/morph/morph-crema-de-corp-montmartre-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.572,
+  "bottom": 0.893,
+  "left": 0.185,
+  "right": 0.817
+ },
+ "/morph/morph-crema-de-corp-zeta-200ml-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.571,
+  "bottom": 0.889,
+  "left": 0.187,
+  "right": 0.815
+ },
+ "/morph/morph-crema-de-corp-nudo-200ml-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.572,
+  "bottom": 0.892,
+  "left": 0.183,
+  "right": 0.818
+ },
+ "/morph/morph-crema-de-corp-vision-200ml-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.571,
+  "bottom": 0.884,
+  "left": 0.185,
+  "right": 0.817
+ },
+ "/morph/morph-crema-de-corp-indomable-200-ml-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.576,
+  "bottom": 0.897,
+  "left": 0.187,
+  "right": 0.815
+ },
+ "/morph/morph-crema-de-corp-cruda-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.575,
+  "bottom": 0.897,
+  "left": 0.183,
+  "right": 0.815
+ },
+ "/morph/morph-set-animal-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.185,
+  "bottom": 0.88,
+  "left": 0.068,
+  "right": 0.927
+ },
+ "/morph/morph-set-n8-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.096,
+  "bottom": 0.876,
+  "left": 0.072,
+  "right": 0.917
+ },
+ "/morph/morph-set-zeta-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.101,
+  "bottom": 0.879,
+  "left": 0.078,
+  "right": 0.92
+ },
+ "/morph/morph-set-indomable-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.095,
+  "bottom": 0.877,
+  "left": 0.075,
+  "right": 0.917
+ },
+ "/morph/morph-crema-de-corp-vapor-200-ml-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.572,
+  "bottom": 0.892,
+  "left": 0.183,
+  "right": 0.818
+ },
+ "/morph/morph-set-vision-0.avif": {
+  "w": 600,
+  "h": 600,
+  "top": 0.085,
+  "bottom": 0.878,
+  "left": 0.157,
+  "right": 0.842
+ },
+ "/morph/gift-box-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.244,
+  "bottom": 0.7,
+  "left": 0.128,
+  "right": 0.873
+ },
+ "/morph/gift-card-morph-parfum-0.avif": {
+  "w": 600,
+  "h": 345,
+  "top": 0.206,
+  "bottom": 0.974,
+  "left": 0.097,
+  "right": 0.903
+ }
+}

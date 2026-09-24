@@ -2,6 +2,7 @@
 // (data/catalog.json) or sampled bottle colors (data/colors.json). Nothing is invented; missing values stay null.
 import catalog from '@/data/catalog.json';
 import colors from '@/data/colors.json';
+import objects from '@/data/objects.json';
 
 export type CollectionId = 'les-exclusifs' | 'luxury' | 'ice';
 
@@ -32,6 +33,10 @@ export type Offer = { id: number; slug: string; name: string; price: number; inS
 
 export type Tone = { juice: string; accent: string | null; identity: string };
 
+/** Body & Bath and the perfume + body sets, linked to their perfume (`scent`) by Morph's product name. */
+export type BodyKind = 'gel' | 'cream' | 'set-gel' | 'set-cream';
+export type BodyItem = Offer & { kind: BodyKind; scent: string | null };
+
 const fixNote = (n: string) => n.replace(/\bavola\b/g, 'Avola');
 // "Primavară" is spelled so in the Store API; shown with its diacritic.
 export const perfumes = (catalog.perfumes as Perfume[]).map(p => ({ ...p, season: p.season.map(x => (x === 'Primavară' ? 'Primăvară' : x)), notes: { top: p.notes.top.map(fixNote), heart: p.notes.heart.map(fixNote), base: p.notes.base.map(fixNote) } }));
@@ -39,6 +44,27 @@ export const travelSets = catalog.travel as Offer[];
 export const sampleSets = catalog.samples as Offer[];
 export const layeringSets = catalog.layering as Offer[];
 export const snapshotAt = catalog.snapshotAt;
+export const bodyItems = catalog.body as BodyItem[];
+export const giftBox = (catalog.gift as (Offer & { range: number[] | null })[]).find(g => g.slug === 'gift-box') ?? null;
+export const giftCard = (catalog.gift as (Offer & { range: number[] | null })[]).find(g => /gift-card/.test(g.slug)) ?? null;
+
+export const BODY_KIND: Record<BodyKind, { name: string; format: string }> = {
+  gel: { name: 'Gel de duș', format: 'Gel de duș, 200 ml' },
+  cream: { name: 'Cremă de corp', format: 'Cremă de corp, 200 ml' },
+  'set-gel': { name: 'Set parfum și gel de duș', format: 'Set 100 ml + gel 200 ml' },
+  'set-cream': { name: 'Set parfum și cremă de corp', format: 'Set 100 ml + cremă 200 ml' },
+};
+/** The body products Morph sells for a perfume, in ritual order: gel, cream, then the sets. */
+export function bodyFor(p: Perfume) {
+  const order: BodyKind[] = ['gel', 'cream', 'set-gel', 'set-cream'];
+  return bodyItems.filter(b => b.scent === p.slug).sort((a, z) => order.indexOf(a.kind) - order.indexOf(z.kind));
+}
+/** Perfumes that have at least one body product, in catalog order. */
+export const ritualPerfumes = () => perfumes.filter(p => bodyItems.some(b => b.scent === p.slug));
+
+/** Where the object sits inside a packshot (fractions), measured by scripts/objects.mjs. */
+export type ObjectBox = { w: number; h: number; top: number; bottom: number; left: number; right: number };
+export const objectBox = (src: string) => (objects as Record<string, ObjectBox>)[src] ?? null;
 
 export const COLLECTIONS: Record<CollectionId, { name: string; type: string; line: string }> = {
   // `line` paraphrases Morph's own collection copy (homepage "Colecțiile Morph")
@@ -169,12 +195,14 @@ export const hours = (p: Perfume) => (p.longevity ? p.longevity.replace('-', '�
 export const fullItem = (p: Perfume) => ({ key: p.slug, name: p.shortName, format: '100 ml', price: p.price });
 export const travelItem = (p: Perfume, t: Offer) => ({ key: t.slug, name: p.shortName, format: 'Travel 2×8 ml', price: t.price });
 export const offerItem = (o: Offer, name: string, format: string) => ({ key: o.slug, name, format, price: o.price });
+export const bodyItem = (b: BodyItem, p: Perfume) => ({ key: b.slug, name: p.shortName, format: BODY_KIND[b.kind].format, price: b.price });
 
 /** Image for a cart line: the bottle for a perfume, the box for a set. */
 export function imageFor(key: string) {
+  if (key === 'cutie') return giftBox?.image ?? null;
   const p = perfumes.find(x => x.slug === key);
   if (p) return p.images[0];
-  return [...travelSets, ...sampleSets, ...layeringSets].find(o => o.slug === key)?.image ?? null;
+  return [...travelSets, ...sampleSets, ...layeringSets, ...bodyItems, ...(catalog.gift as Offer[])].find(o => o.slug === key)?.image ?? null;
 }
 
 /** Display names for Morph's trial products, from their own product names and descriptions. */

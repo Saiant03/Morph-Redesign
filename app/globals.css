@@ -155,6 +155,10 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 /* motion: IMAGE → REVEAL (only where marked; set up by components/Reveal) */
 [data-reveal] { clip-path: inset(0 0 0 0); transition: clip-path 1.2s var(--ease-inout); }
 [data-reveal='hidden'] { clip-path: inset(100% 0 0 0); }
+/* IMAGE → CROP: an editorial crop settles from a slight scale, once */
+[data-crop] { position: relative; height: 100%; overflow: hidden; }
+[data-crop] img { transition: scale 1.4s var(--ease-out); }
+[data-crop='hidden'] img { scale: 1.07; }
 
 /* PAGE → STATE (phase-a-creative-system.md): the same room changing state.
    T0: the header has its own transition name and no animation, so it stays while the page changes.
@@ -168,7 +172,25 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 ::view-transition-old(site-header) { display: none; }
 ::view-transition-group(.morph) { animation-duration: 520ms; animation-timing-function: var(--ease-inout); z-index: 2; }
 ::view-transition-old(.morph), ::view-transition-new(.morph) { animation-duration: 520ms; height: 100%; object-fit: contain; }
-html[data-nav] .page-enter { animation: 380ms var(--ease-out) backwards vt-light; }
+@media (prefers-reduced-motion: no-preference) { html[data-nav] .page-enter { animation: 380ms var(--ease-out) backwards vt-light; } }
+/* room change (collections): the photograph changes in place under a passing band of light; the title drops,
+   the next one rises; bottles shared by both shelves move, the others leave and arrive */
+::view-transition-group(.room) { animation-duration: 0s; }
+::view-transition-old(.room) { animation: 700ms var(--ease-inout) both vt-fade; }
+::view-transition-new(.room) { animation: 900ms var(--ease-inout) both room-light; mask-image: linear-gradient(100deg, #000 40%, rgb(0 0 0 / 0.6) 48%, transparent 56%); mask-size: 320% 100%; }
+@keyframes room-light { from { mask-position: 100% 0; filter: brightness(1.25); } to { mask-position: 0 0; filter: brightness(1); } }
+@keyframes vt-fade { to { opacity: 0; } }
+::view-transition-group(.room-title) { animation-duration: 0s; }
+::view-transition-old(.room-title), ::view-transition-new(.room-title) { height: 100%; width: auto; object-fit: none; object-position: left bottom; }
+::view-transition-old(.room-title) { animation: 260ms var(--ease-inout) both title-drop; }
+::view-transition-new(.room-title) { animation: 520ms var(--ease-out) 180ms both title-rise; }
+@keyframes title-drop { to { opacity: 0; transform: translateY(24%); } }
+@keyframes title-rise { from { opacity: 0; transform: translateY(24%); } }
+::view-transition-group(.shelf) { animation-duration: 600ms; animation-timing-function: var(--ease-inout); }
+::view-transition-old(.shelf-out) { animation: 240ms var(--ease-inout) both shelf-out; }
+::view-transition-new(.shelf-in) { animation: 560ms var(--ease-out) 160ms both shelf-in; }
+@keyframes shelf-out { to { opacity: 0; transform: translateY(10%); filter: brightness(0.6); } }
+@keyframes shelf-in { from { opacity: 0; transform: translateY(10%); filter: brightness(0.6); } }
 @keyframes vt-light { from { opacity: 0; transform: translateY(8px); filter: brightness(0.75); } }
 
 @media (prefers-reduced-motion: reduce) {

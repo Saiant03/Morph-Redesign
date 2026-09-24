@@ -1,52 +1,67 @@
 import Link from 'next/link';
+import { ViewTransition } from 'react';
 import { ProductIndex } from '@/components/ProductIndex';
 import { SectionNav } from '@/components/SectionNav';
 import { ProductVisual } from '@/components/ProductVisual';
+import { RoomImage } from '@/components/RoomImage';
+import { CAMPAIGN } from '@/lib/campaign';
 import { perfumes, inCollection, COLLECTIONS, ALL_BY_COLLECTION, sampleSets, collectionHref, productHref, lei, type CollectionId } from '@/lib/catalog';
 import { parseFilters } from '@/lib/filters';
 import s from './collection.module.css';
 
 type SP = Record<string, string | string[] | undefined>;
 
-/** Shared by /parfumuri (all) and /parfumuri/[colectie]. The head is the collection's vitrine: every bottle on one shelf. */
+export const ROOM_TABS = [{ href: '/parfumuri', label: 'Toate' }, ...ALL_BY_COLLECTION.map(c => ({ href: collectionHref(c), label: COLLECTIONS[c].name })), { href: '/parfumuri/corp', label: 'Baie & Corp' }];
+const ALL = { src: '/morph/campaign/bottle-row.avif', alt: 'Sticle Morph așezate în rând, cu reflexiile lor', pos: '50% 60%' };
+
+/**
+ * Shared by /parfumuri (all) and /parfumuri/[colectie]: one room in four states. Morph's campaign is the window,
+ * the name sits on a plate crossing its edge, every bottle of the collection stands on the walnut shelf below.
+ * Changing collection is a change of state (docs/design/phase-b-core-commerce.md): the photograph changes under
+ * light, the title drops and the next one rises, shared bottles move along the shelf.
+ */
 export function CollectionPage({ id, searchParams }: { id: CollectionId | null; searchParams: SP }) {
   const items = id ? inCollection(id) : perfumes;
   const prices = [...new Set(items.map(p => p.price))].sort((a, b) => a - b);
   const trial = sampleSets.filter(x => x.inStock && (!id || (id === 'luxury' ? /luxury/.test(x.slug) : /exclusifs|ice/.test(x.slug))));
+  const env = id ? CAMPAIGN[id] : ALL;
   return (
     <>
-      <section className={s.room} data-tone="wood" aria-labelledby="colectie-titlu">
-        <div className={`wrap ${s.head}`}>
-          <div>
+      <section className={s.room} aria-labelledby="colectie-titlu">
+        <div className={s.window}>
+          <RoomImage src={env.src} mobile={id ? CAMPAIGN[id].mobile : undefined} alt={env.alt} pos={env.pos} className={s.env} />
+        </div>
+        <div className={`wrap ${s.plateRow}`}>
+          <div className={s.plate}>
             <nav className={`${s.crumb} t-small muted`} aria-label="Breadcrumb">
               <Link href="/">Morph</Link><span aria-hidden>/</span>{id ? <><Link href="/parfumuri">Parfumuri</Link><span aria-hidden>/</span><span aria-current="page">{COLLECTIONS[id].name}</span></> : <span aria-current="page">Parfumuri</span>}
             </nav>
-            <h1 id="colectie-titlu" className="t-display">{id ? COLLECTIONS[id].name : 'Parfumuri'}</h1>
-          </div>
-          <div className={s.intro}>
+            <ViewTransition name="room-title" share="room-title" default="none">
+              <h1 id="colectie-titlu" className={`t-display ${s.title}`}>{id ? COLLECTIONS[id].name : 'Parfumuri'}</h1>
+            </ViewTransition>
             <p className="t-lede">{id ? COLLECTIONS[id].line : 'Toate parfumurile Morph, unisex, în trei colecții: Les Exclusifs, Luxury și Ice.'}</p>
-            <dl className={s.facts}>
-              {id && <div><dt className="label muted">Concentrație</dt><dd>{COLLECTIONS[id].type}</dd></div>}
-              <div><dt className="label muted">Parfumuri</dt><dd className="num">{items.length}, toate unisex</dd></div>
-              <div><dt className="label muted">100 ml</dt><dd className="num">{prices.map(lei).join(' sau ')}</dd></div>
-            </dl>
+            <p className="label muted num">{id ? `${COLLECTIONS[id].type} · ` : ''}{items.length} parfumuri · 100 ml · {prices.map(lei).join(' / ')}</p>
           </div>
+          <SectionNav label="Colecții" current={collectionHref(id ?? undefined)} items={ROOM_TABS} />
         </div>
-        <div className={s.shelfWrap}>
-          <ul className={`${s.shelf} wrap`} data-dense={items.length > 14} aria-label={`Vitrina ${id ? COLLECTIONS[id].name : 'Morph'}`}>
-            {items.map(p => (
-              <li key={p.slug}>
-                <Link href={productHref(p)} className={s.shelfItem} aria-label={p.shortName}>
-                  <ProductVisual p={p} sizes="120px" alt="" className={s.shelfNiche} />
-                  <span className="t-micro" aria-hidden>{p.shortName}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <div className={s.shelfBand} data-tone="wood">
+          <div className={s.shelfWrap}>
+            <ul className={`${s.shelf} wrap`} data-dense={items.length > 14} aria-label={`Vitrina ${id ? COLLECTIONS[id].name : 'Morph'}`}>
+              {items.map(p => (
+                <li key={p.slug}>
+                  <ViewTransition name={`shelf-${p.slug}`} share="shelf" enter="shelf-in" exit="shelf-out" default="none">
+                    <Link href={productHref(p)} className={s.shelfItem} aria-label={p.shortName}>
+                      <ProductVisual p={p} sizes="120px" alt="" className={s.shelfNiche} />
+                      <span className="t-micro" aria-hidden>{p.shortName}</span>
+                    </Link>
+                  </ViewTransition>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
       <div className="wrap">
-        <SectionNav label="Colecții" current={collectionHref(id ?? undefined)} items={[{ href: '/parfumuri', label: 'Toate' }, ...ALL_BY_COLLECTION.map(c => ({ href: collectionHref(c), label: COLLECTIONS[c].name }))]} />
         <ProductIndex items={items} initial={parseFilters(searchParams)} trial={trial} />
       </div>
     </>

@@ -4,7 +4,7 @@
 /* The motto must never be cut: "Metamorfoză" is one unbreakable word, so the size is bound to the width of
    the column that holds it (cqi), and the reveal mask clips only vertically. The word is 5.65 × the font size
    in Newsreader 300, so 17cqi keeps it at ≈96% of the column; see docs/design/phase-a-creative-system.md. */
-.title { --fit: 17; margin-top: var(--s-5); font-size: min(112px, calc(var(--fit) * 1cqi)); }
+.title.title { --fit: 17; margin-top: var(--s-5); font-size: min(112px, calc(var(--fit) * 1cqi)); }
 .mask { display: block; padding-bottom: 0.08em; margin-bottom: -0.08em; clip-path: inset(-0.3em -1em 0 -1em); }
 .mask > span { display: block; }
 .attr { margin-top: var(--s-3); }
@@ -13,7 +13,6 @@
 
 .stage { grid-column: 6 / span 5; grid-row: 1 / span 2; position: relative; }
 .niche { height: 100%; min-height: 520px; }
-.niche img { padding: 9% 0 7% !important; }
 .dim { position: absolute; inset: 0; background: #0d0b09; opacity: 0; pointer-events: none; z-index: 2; border-radius: var(--r); }
 
 /* the caption stands beside the niche like a museum label */
@@ -36,12 +35,12 @@
   .grid { grid-template-columns: 1fr; grid-template-rows: none; min-height: 0; }
   .text { display: contents; }
   .text > :first-child { order: 1; }
-  .title { order: 2; margin-top: var(--s-3); font-size: min(72px, calc(var(--fit) * 1cqi)); }
+  .title.title { order: 2; margin-top: var(--s-3); font-size: min(72px, calc(var(--fit) * 1cqi)); }
   .attr { order: 3; }
   .stage { order: 4; grid-column: 1; grid-row: auto; margin: var(--s-5) calc(var(--m) * -1) 0; }
   .niche { height: 58svh; min-height: 340px; max-height: 520px; border-radius: 0; }
   .caption { order: 5; grid-column: 1; grid-row: auto; margin-top: var(--s-4); }
-  .formula { grid-template-columns: 1fr; }
+  .formula { display: none; }
   .lede { order: 6; margin-top: var(--s-5); padding-top: 0; }
   .ctas { order: 7; }
   .ctas > * { flex: 1 1 auto; }

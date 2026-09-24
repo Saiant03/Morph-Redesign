@@ -3,11 +3,12 @@ import { notFound } from 'next/navigation';
 import { ProductGallery } from '@/components/ProductGallery';
 import { PurchaseBlock } from '@/components/PurchaseBlock';
 import { TimeOnSkin } from '@/components/TimeOnSkin';
-import { LayeringComposer } from '@/components/LayeringComposer';
+import { Ritual } from '@/components/Ritual';
+import { ProductVisual } from '@/components/ProductVisual';
 import { ProductCard } from '@/components/ProductCard';
 import {
   perfumes, COLLECTIONS, concentration, familyGroup, travelFor, samplesFor, related, section, hours, descriptor,
-  firstSentences, collectionHref, lei, FREE_SHIPPING, BOUTIQUE,
+  firstSentences, collectionHref, lei, FREE_SHIPPING, BOUTIQUE, bodyFor, layeringSets,
 } from '@/lib/catalog';
 import s from './product.module.css';
 
@@ -90,10 +91,33 @@ export default async function Product({ params }: { params: Params }) {
 
       <TimeOnSkin p={p} />
 
+      {bodyFor(p).length > 0 && (
+        <section className={`wrap ${s.ritual}`} aria-labelledby="ritual-titlu">
+          <div className={s.ritualHead}>
+            <p className="label muted">Baie & Corp</p>
+            <h2 id="ritual-titlu" className="t-1">Ritualul {p.shortName}</h2>
+            <p className="muted">Același parfum în gel de duș și cremă de corp, de la Morph. Cremele sunt, spune Morph, „perfecte pentru a fi utilizate împreună cu parfumul preferat”.</p>
+            <Link className="link t-small" href="/parfumuri/corp">Toate ritualurile Baie & Corp</Link>
+          </div>
+          <Ritual p={p} />
+        </section>
+      )}
+
       <section className="band" data-tone="dark" aria-labelledby="layering-titlu">
-        <div className="wrap">
-          <LayeringComposer first={p.slug} second={partner.slug} heading={`${p.shortName}, cu încă un strat`} headingId="layering-titlu"
-            intro={`Un exemplu din aceeași familie, cu variantă travel. Schimbă al doilea strat ca să compui altă pereche.`} />
+        <div className={`wrap ${s.compose}`}>
+          <div className={s.pair} aria-hidden>
+            <ProductVisual p={p} sizes="200px" alt="" className={s.pairA} />
+            <ProductVisual p={partner} sizes="200px" alt="" className={s.pairB} />
+          </div>
+          <div className={s.composeText}>
+            <p className="label muted">Layering</p>
+            <h2 id="layering-titlu" className="t-1">{p.shortName}, cu încă un strat</h2>
+            <p className="muted">Compune-l cu un al doilea parfum și vezi cum se așază notele, de la deschidere la bază. Exemplul de mai jos e din aceeași familie ({partner.shortName}); nu e o recomandare Morph.</p>
+            <p className={s.composeLinks}>
+              <Link className="btn btn-secondary" href={`/layering?a=${p.slug}&b=${partner.slug}`}>Compune cu {partner.shortName}</Link>
+              <Link className="link t-small" href="/layering/your-next-form">Your Next Form: {layeringSets.length} seturi blind, {lei(layeringSets[0].price)}</Link>
+            </p>
+          </div>
         </div>
       </section>
 

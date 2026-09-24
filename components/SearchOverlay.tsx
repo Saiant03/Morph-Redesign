@@ -5,8 +5,9 @@ import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { search, useSearchOpen } from '@/lib/search';
 import {
   perfumes, FAMILY_GROUPS, familyGroup, familyNotes, COLLECTIONS, travelSets, sampleSets, layeringSets, TRIAL, bestsellerMix,
-  descriptor, lei, productHref, collectionHref, ALL_BY_COLLECTION, type Perfume,
+  descriptor, lei, productHref, collectionHref, ALL_BY_COLLECTION, bodyItems, BODY_KIND, bySlug, type Perfume,
 } from '@/lib/catalog';
+import { CAMPAIGN } from '@/lib/campaign';
 import { norm, topNotes } from '@/lib/discover';
 import { TIERS } from './NotePyramid';
 import s from './SearchOverlay.module.css';
@@ -17,12 +18,14 @@ const PAGES = [
   { href: '/layering/your-next-form', label: 'Your Next Form: seturile blind', words: 'your next form blind set layering surpriza' },
   { href: '/descopera#incearca', label: 'Încearcă înainte de sticlă', words: 'mostre esantioane travel incearca proba discovery' },
   { href: '/cadouri', label: 'Cadouri', words: 'cadou cadouri gift card cutie' },
+  { href: '/parfumuri/corp', label: 'Baie & Corp: geluri de duș și creme de corp', words: 'baie corp gel dus crema creme ritual body' },
   { href: '/magazin', label: 'Magazinul Morph din București', words: 'magazin boutique bucuresti adresa program lahovari' },
   { href: '/magazin#certilogo', label: 'Verificare Certilogo', words: 'certilogo original autentic verificare cod' },
 ];
 const OFFERS = [
   ...[...travelSets, ...sampleSets].filter(o => TRIAL[o.slug]).map(o => ({ o, name: TRIAL[o.slug].name, href: '/descopera#incearca' })),
   ...layeringSets.map(o => ({ o, name: `Your Next Form ${o.state}`, href: '/layering/your-next-form' })),
+  ...bodyItems.filter(b => b.scent).map(b => ({ o: b, name: `${BODY_KIND[b.kind].name} ${bySlug(b.scent!).shortName}`, href: '/parfumuri/corp' })),
 ];
 const TIER_WORD = { top: 'deschidere', heart: 'inimă', base: 'bază' } as const;
 const SUGGESTED = topNotes(8);
@@ -40,7 +43,11 @@ function find(q: string) {
   return { byName, byNote, fams, offers, pages, total: byName.length + byNote.length + fams.length + offers.length + pages.length };
 }
 
-/** SEARCH → OVERLAY: a full-screen, keyboard-first search over names, notes, families, formats and pages. */
+/**
+ * SEARCH → OVERLAY: a full-screen, keyboard-first search over names, notes, families, formats, body products and
+ * pages. The room dims first, then the panel unfolds from the top with the field already focused; it lifts away
+ * faster than it came.
+ */
 export function SearchOverlay() {
   const open = useSearchOpen();
   const [q, setQ] = useState('');
@@ -86,6 +93,7 @@ export function SearchOverlay() {
 
   return (
     <div className={s.root} data-open={open} aria-hidden={!open} inert={!open}>
+      <div className={s.dim} onClick={go} />
       <div ref={panel} className={s.panel} role="dialog" aria-modal="true" aria-label="Caută">
         <div className={`wrap ${s.bar}`}>
           <label htmlFor={id} className="label muted">Caută un parfum, o notă sau un format</label>
@@ -188,7 +196,7 @@ function Suggestions({ setQ, go }: { setQ: (v: string) => void; go: () => void }
         <h2 className="label muted">Colecții</h2>
         <ul className={s.plain}>
           {ALL_BY_COLLECTION.map(c => (
-            <li key={c}><Link href={collectionHref(c)} onClick={go}><span className="serif">{COLLECTIONS[c].name}</span><span className="t-small muted">{COLLECTIONS[c].type}, {perfumes.filter(p => p.collection === c).length} parfumuri</span></Link></li>
+            <li key={c}><Link href={collectionHref(c)} onClick={go} className={s.coll}><span className={s.collImg} aria-hidden><Image src={CAMPAIGN[c].mobile} alt="" fill sizes="64px" /></span><span className={s.collText}><span className="serif">{COLLECTIONS[c].name}</span><span className="t-small muted">{COLLECTIONS[c].type}, {perfumes.filter(p => p.collection === c).length} parfumuri</span></span></Link></li>
           ))}
         </ul>
       </section>

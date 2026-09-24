@@ -1,0 +1,37 @@
+/* the sticky environment: a full-bleed layer as tall as the screen under the header; the cards scroll over it */
+.worlds { position: relative; background: var(--bg); overflow: clip; }
+.stage { position: sticky; top: var(--header-h); height: calc(100svh - var(--header-h)); overflow: hidden; margin-bottom: calc((100svh - var(--header-h)) * -1); }
+.env { object-fit: cover; opacity: 0; transition: opacity 900ms var(--ease-inout); }
+.env[data-on='true'] { opacity: 1; }
+/* a band of warm light crossing the frame when the campaign changes */
+.sweep {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(100deg, transparent 35%, rgb(255 246 232 / 0.35) 50%, transparent 65%);
+  translate: -100% 0; animation: sweep 1100ms var(--ease-inout) forwards;
+}
+@keyframes sweep { to { translate: 100% 0; } }
+
+.panel { position: relative; min-height: calc(100svh - var(--header-h)); display: flex; align-items: center; padding: var(--s-9) var(--m); max-width: 1560px; margin: 0 auto; }
+.panel[data-side='right'] { justify-content: flex-end; }
+.mobileImg { display: none; }
+.card {
+  width: min(440px, 36vw); display: grid; gap: var(--s-4); justify-items: start; padding: var(--s-6);
+  background: var(--bg) var(--mat-grain) 0 0 / 160px; box-shadow: 0 30px 80px -40px rgb(20 14 10 / 0.45);
+}
+.name { font-family: var(--serif); font-weight: 300; font-size: clamp(48px, 4.6vw, 80px); line-height: 0.95; letter-spacing: -0.02em; }
+.still { display: flex; gap: 8px; width: 100%; padding-top: var(--s-2); }
+.still li { flex: 1; }
+.still a { display: grid; gap: 6px; }
+.obj { aspect-ratio: 3 / 4; }
+.still a:hover span { text-decoration: underline; text-underline-offset: 3px; }
+.credit { position: relative; max-width: 1560px; margin: 0 auto; padding: 0 var(--m) var(--s-4); color: var(--muted); text-align: right; }
+
+@media (max-width: 899px) {
+  .stage { display: none; }
+  .panel { display: block; min-height: 0; padding: 0 0 var(--s-7); }
+  .mobileImg { display: block; position: relative; aspect-ratio: 745 / 1000; max-height: 54svh; width: 100%; }
+  .mobileImg img { object-fit: cover; }
+  .card { width: auto; margin: calc(var(--s-8) * -1) var(--m) 0; position: relative; padding: var(--s-5); }
+  .credit { text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) { .sweep { display: none; } }
