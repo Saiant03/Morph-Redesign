@@ -124,10 +124,17 @@ export function noteStory(p: Perfume) {
 }
 
 export const HERO_SLUG = 'morph-zeta-parfum-100ml';
+// Boutique facts as published in the morphparfum.ro footer and contact page (checked 2026-09-24).
 export const BOUTIQUE = {
   name: 'Casa Morph',
   address: 'Piața Alexandru Lahovari nr. 5, București',
   hours: ['L–V 12:00–20:00', 'S–D 10:00–18:00'],
+  /** opening hours by weekday (0 = Sunday), for the "open now" line */
+  open: [[10, 18], [12, 20], [12, 20], [12, 20], [12, 20], [12, 20], [10, 18]] as [number, number][],
+  phone: '0733 400 949',
+  onlineOrders: { phone: '0799 400 949', hours: 'L–V 09:00–17:00' },
+  email: 'info@morphparfum.ro',
+  maps: 'https://www.google.com/maps/search/?api=1&query=Pia%C8%9Ba+Alexandru+Lahovari+5+Bucure%C8%99ti',
 };
 
 export const ALL_BY_COLLECTION: CollectionId[] = ['les-exclusifs', 'luxury', 'ice'];

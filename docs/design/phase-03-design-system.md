@@ -99,7 +99,7 @@ Adding a product: add its sampled color to `colors.json` (script `npm run colors
 
 | Component | Contract |
 |---|---|
-| `SiteHeader` + navigation | Logo left, 5 IA items centered (Parfumuri, Descoperă, Layering, Cadouri, Casa Morph), Caută + Coș right. Solid paper, no blur. Mobile: logo, Caută, Coș, Meniu → full-height sheet, Escape closes. `aria-current` on the active section |
+| `SiteHeader` + navigation | Logo left, 5 IA items centered (Parfumuri, Descoperă, Layering, Cadouri, Casa Morph), Caută + Coș right. Solid paper, no blur. Mobile: logo, Caută, Coș, Meniu → full-height sheet (second-level items indented), Escape closes. `aria-current` follows the path. Items in `lib/nav.ts` |
 | Links | Ink, underline 1px at 45% opacity, full on hover. Never blue |
 | Buttons | `.btn` ink fill (primary, one per zone) · `.btn-secondary` outline · text link for tertiary. Heights 52 / 40 (44 on coarse pointers). Label says the action; price inside the primary CTA when it adds to cart |
 | `ProductVisual` | Packshot on `--scent-field`, `object-fit: contain`, `multiply`, 7% vertical padding. `next/image` with `sizes`. The field color transitions (registered `@property`) when the scent changes in place |
@@ -114,7 +114,22 @@ Adding a product: add its sampled color to `colors.json` (script `npm run colors
 | `LayeringComposer` | Two slots (mini visual + name + "Schimbă" → chips grouped by collection). Stage: two strata columns multiplied where they overlap = A / A+B / B. Result list merges notes per tier with origin dots. States that the pair is a visualisation, not a Morph recommendation. Buy: both travel sizes if both exist, otherwise the relevant sample set; Your Next Form always offered as Morph's own curated alternative |
 | `ScentAtlas` | Home hero: 26 bars grouped by collection (labels link to collection pages); hover/focus/tap recolors the field and swaps the bottle |
 | `CartDrawer` | Mock. Items with scent dots, remove, subtotal, free-shipping progress to 750 lei; checkout disabled and labeled as out of concept scope. Focus moves in, Escape closes, focus returns |
-| `Footer` | IA footer columns listed (not linked), snapshot date, concept disclaimer |
+| `Footer` | IA footer columns; items with a concept route are linked (Casa Morph, Certilogo), the rest listed. Snapshot date, concept disclaimer |
+
+### Phase 04 additions
+
+| Component | Contract |
+|---|---|
+| `PageHead` | Section page opening on the collection-head grid: breadcrumb + display title (cols 1–7), lede + facts + optional chord (cols 8–12), children below (usually `SectionNav`) |
+| `SectionNav` | Second-level navigation inside a section (collections, Descoperă, Layering). Text links, 1px ink underline on the current one, horizontal scroll on phones, 44px targets on touch |
+| `TryOffer` | The TRY action for one perfume from what Morph sells: travel 2×8 ml (add), else the collection sample set (add), else "epuizat" + Morph's link. Always a secondary button next to the primary buy button |
+| `TryToggle` | "De încercat în Casa Morph" toggle (`aria-pressed`) for a perfume or a pair; list stored only in the browser (`lib/tryList.ts`), shown by `TryListPanel` on `/casa-morph` |
+| `BlindStrata` | The composer's two strata columns drawn without color (outline, 6% ink tint on the second layer) for Your Next Form: unknown scents carry no color |
+| `DiscoverInstrument` | Lens buttons (`aria-pressed`) regroup color keys (bar + visible name, button). Preview sticky on desktop; on phones it opens under the chosen group via CSS `order`. Flip on regroup. URL state |
+| `FinderFlow` | One question per screen, answers as full-width rows with index, label and a chord of the perfumes Morph tagged with that answer; seven progress strata; palette re-weighted by score |
+| `LayeringComposer` (extended) | `detail` mode: URL state, shared notes / families / intensity / seasons, formats table, both bottles, copy link. Phones: slots side by side, stage as three horizontal bands (A from left, B from right, overlap = result) |
+| `NotePyramid` (extended) | Optional `mark` highlights matching notes (underline 2px, weight 500) |
+| `.text-btn` | A `<button>` that reads as a text link (tertiary actions), 44px tall |
 
 Metadata language: product facts appear as label/value pairs (`dl`) or plain comma lists — never as "A · B · C" strings.
 
@@ -124,14 +139,15 @@ Metadata language: product facts appear as label/value pairs (`dl`) or plain com
 |---|---|---|
 | Entrance (home only) | GSAP timeline: headline lines rise, field unmasks, atlas bars grow | 0.9–1 s, `power3.out` / `inOut` |
 | Product selection (atlas) | GSAP crossfade of the bottle (0.18 s out, 0.5 s in) + CSS `@property` field color | `--d-story` 900ms |
-| Filtering / sorting / view change | GSAP Flip on rows/cards (collection route only) | 0.45 s `power3.inOut` |
+| Filtering / sorting / view change | GSAP Flip on rows/cards (collection route; Descoperă lens change since Phase 04) | 0.45–0.5 s `power3.inOut` |
+| Finder | CSS: question enters (translate 12px + fade), palette bars re-weight (flex-grow) | 640ms |
 | Preview | Field color interpolation, strip width | 900 / 320ms |
 | Layering | CSS: columns part and rejoin, strata recolor top→base with 120ms stagger | 900 / 640ms |
 | Time on skin | IntersectionObserver sets the phase; CSS flex-grow + opacity on strata | 900 / 640ms |
 | Hover | Underline, border, 1.5% bottle lift on cards | 160–640ms |
 | Drawer / buy bar | CSS transform | 320–640ms `--ease-out` |
 
-Rules: no pinning, no scrub, no smooth-scroll library, no parallax, no cursor tracking, no reveal-on-scroll for sections. GSAP is loaded only where it earns its place (home entrance and atlas, collection Flip); the PDP ships no GSAP code. `prefers-reduced-motion`: GSAP setups are skipped through `gsap.matchMedia`, CSS transitions collapse to 0.01ms, smooth scrolling becomes instant. The page is complete without motion (checked with reduced motion emulation).
+Rules: no pinning, no scrub, no smooth-scroll library, no parallax, no cursor tracking, no reveal-on-scroll for sections. GSAP is loaded only where it earns its place (home entrance and atlas, collection and Descoperă Flip); the PDP ships no GSAP code. `prefers-reduced-motion`: GSAP setups are skipped through `gsap.matchMedia`, CSS transitions collapse to 0.01ms, smooth scrolling becomes instant. The page is complete without motion (checked with reduced motion emulation).
 
 ## Accessibility checklist (built in)
 

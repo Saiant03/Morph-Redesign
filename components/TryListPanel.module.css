@@ -1,0 +1,8 @@
+.empty { padding: var(--s-5); background: var(--surface-raised); border-radius: var(--r); max-width: 72ch; }
+.list { border-top: 1px solid var(--border); }
+.row { display: grid; grid-template-columns: 48px minmax(0, 2fr) minmax(0, 1fr) auto; gap: var(--s-4); align-items: center; padding: var(--s-2) 0; border-bottom: 1px solid var(--border); }
+.dots { display: inline-flex; }
+.dots > span + span { margin-left: -4px; }
+.dots :global(.swatch) { width: 20px; height: 20px; }
+.name { font-size: var(--t-3); letter-spacing: -0.012em; font-weight: 500; }
+@media (max-width: 899px) { .row { grid-template-columns: 44px 1fr auto; } .row > :nth-child(3) { display: none; } .name { font-size: 18px; } }

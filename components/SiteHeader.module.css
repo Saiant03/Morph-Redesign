@@ -21,4 +21,6 @@
   .sheet:not([hidden]) { display: block; position: fixed; inset: var(--header-h) 0 0; background: var(--bg); border-top: 1px solid var(--border); overflow-y: auto; }
   .sheet ul { padding-top: var(--s-5); display: grid; }
   .sheet a { display: block; padding: 14px 0; font-size: 28px; letter-spacing: -0.02em; border-bottom: 1px solid var(--border); }
+  .sheet a[aria-current='page'] { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
+  .sheet .sub a { font-size: 17px; letter-spacing: 0; padding: 12px 0 12px var(--s-5); color: var(--muted); }
 }

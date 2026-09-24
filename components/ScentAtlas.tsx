@@ -48,7 +48,7 @@ export function ScentAtlas() {
         <p className={`t-lede ${s.lede}`}>{perfumes.length} de parfumuri unisex în trei colecții. Fiecare sticlă își are culoarea ei, iar culoarea te duce la parfum.</p>
         <div className={s.ctas}>
           <Link href="/parfumuri" className="btn">Vezi toate parfumurile</Link>
-          <a href="https://morphparfum.ro/quiz" className="btn btn-secondary">Găsește-ți parfumul</a>
+          <Link href="/descopera/finder" className="btn btn-secondary">Găsește-ți parfumul</Link>
         </div>
       </div>
 

@@ -9,14 +9,15 @@ export const TIERS = [
 ] as const;
 
 /** Notes as three strata, lightest (opening) to fullest (base) in the scent's own color. */
-export function NotePyramid({ p, className = '' }: { p: Perfume; className?: string }) {
+/** `mark` highlights notes containing that text (used by the note lens in Descoperă). */
+export function NotePyramid({ p, className = '', mark }: { p: Perfume; className?: string; mark?: (note: string) => boolean }) {
   const { tiers } = scentTokens(p);
   return (
     <dl className={`${s.pyramid} ${className}`}>
       {TIERS.map((t, i) => (
         <div key={t.key} className={s.row} style={{ '--tier': tiers[i] } as React.CSSProperties}>
           <dt>{t.label}</dt>
-          <dd>{p.notes[t.key].join(', ') || '—'}</dd>
+          <dd>{p.notes[t.key].length ? p.notes[t.key].map((n, k) => <span key={n}>{k ? ', ' : ''}{mark?.(n) ? <mark className={s.mark}>{n}</mark> : n}</span>) : '—'}</dd>
         </div>
       ))}
     </dl>

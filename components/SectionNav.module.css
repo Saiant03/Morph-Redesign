@@ -1,0 +1,6 @@
+.nav { display: flex; gap: var(--s-5); font-size: 15px; padding-bottom: var(--s-3); }
+.nav a { padding: 8px 0; border-bottom: 1px solid transparent; }
+.nav a:hover { border-bottom-color: var(--border-strong); }
+.nav a[aria-current='page'] { border-bottom-color: var(--fg); }
+@media (max-width: 899px) { .nav { overflow-x: auto; scrollbar-width: none; } .nav a { flex: none; } }
+@media (pointer: coarse) { .nav a { min-height: 44px; display: inline-flex; align-items: center; } }

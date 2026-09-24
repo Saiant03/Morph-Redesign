@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ProductIndex } from '@/components/ProductIndex';
+import { SectionNav } from '@/components/SectionNav';
 import { perfumes, inCollection, COLLECTIONS, ALL_BY_COLLECTION, sampleSets, collectionHref, type CollectionId } from '@/lib/catalog';
 import { chord } from '@/lib/scent';
 import { parseFilters } from '@/lib/filters';
@@ -27,10 +28,7 @@ export function CollectionPage({ id, searchParams }: { id: CollectionId | null; 
           <span className={s.chord} style={{ background: chord(items) }} aria-hidden />
         </div>
       </section>
-      <nav className={s.collections} aria-label="Colecții">
-        <Link href="/parfumuri" aria-current={!id ? 'page' : undefined}>Toate</Link>
-        {ALL_BY_COLLECTION.map(c => <Link key={c} href={collectionHref(c)} aria-current={id === c ? 'page' : undefined}>{COLLECTIONS[c].name}</Link>)}
-      </nav>
+      <SectionNav label="Colecții" current={collectionHref(id ?? undefined)} items={[{ href: '/parfumuri', label: 'Toate' }, ...ALL_BY_COLLECTION.map(c => ({ href: collectionHref(c), label: COLLECTIONS[c].name }))]} />
       <ProductIndex items={items} initial={parseFilters(searchParams)} trial={trial} />
     </div>
   );

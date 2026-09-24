@@ -4,23 +4,16 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Logo } from './Logo';
 import { cart, useCart } from '@/lib/cart';
+import { NAV } from '@/lib/nav';
 import s from './SiteHeader.module.css';
 
-// Primary navigation from docs/research/06. Only Parfumuri has its own route in the concept;
-// the others point to the homepage section that carries them, or to Morph's live page.
-export const NAV = [
-  { href: '/parfumuri', label: 'Parfumuri' },
-  { href: '/#incearca', label: 'Descoperă' },
-  { href: '/#combina', label: 'Layering' },
-  { href: 'https://morphparfum.ro/gift-card-morph-parfum', label: 'Cadouri' },
-  { href: '/#casa-morph', label: 'Casa Morph' },
-];
+const isCurrent = (n: (typeof NAV)[number], path: string) =>
+  n.href.startsWith('/') && (n.match ? n.match.test(path) : path === n.href || path.startsWith(n.href + '/'));
 
 export function SiteHeader() {
   const path = usePathname() || '/';
   const { count } = useCart();
   const [open, setOpen] = useState(false);
-  const inShop = path !== '/';
 
   useEffect(() => setOpen(false), [path]);
   useEffect(() => {
@@ -36,7 +29,7 @@ export function SiteHeader() {
         <Link href="/" className={s.logo} aria-label="Morph, pagina principală"><Logo /></Link>
         <nav className={s.nav} aria-label="Principal">
           {NAV.map(n => (
-            <Link key={n.label} href={n.href} aria-current={n.label === 'Parfumuri' && inShop ? 'page' : undefined}>{n.label}</Link>
+            <Link key={n.label} href={n.href} aria-current={isCurrent(n, path) ? 'page' : undefined}>{n.label}</Link>
           ))}
         </nav>
         <div className={s.utils}>
@@ -51,7 +44,16 @@ export function SiteHeader() {
       </div>
       <nav id="meniu" className={s.sheet} aria-label="Meniu" hidden={!open}>
         <ul className="wrap">
-          {NAV.map(n => <li key={n.label}><Link href={n.href} onClick={() => setOpen(false)}>{n.label}</Link></li>)}
+          {NAV.map(n => (
+            <li key={n.label}>
+              <Link href={n.href} onClick={() => setOpen(false)} aria-current={isCurrent(n, path) ? 'page' : undefined}>{n.label}</Link>
+              {n.children && (
+                <ul className={s.sub}>
+                  {n.children.slice(1).map(c => <li key={c.href}><Link href={c.href} onClick={() => setOpen(false)}>{c.label}</Link></li>)}
+                </ul>
+              )}
+            </li>
+          ))}
         </ul>
       </nav>
     </header>

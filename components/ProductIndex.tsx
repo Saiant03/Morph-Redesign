@@ -55,7 +55,7 @@ export function ProductIndex({ items, initial, trial }: { items: Perfume[]; init
         {shown.length === 0 ? (
           <div className={s.empty}>
             <p className="t-3">Niciun parfum nu corespunde acestor filtre.</p>
-            <p className="muted">Scoate un filtru sau încearcă o notă mai generală, de exemplu „vanilie” sau „lemn”. Poți porni și de la <a className="link" href="https://morphparfum.ro/quiz">Fragrance Finder</a>.</p>
+            <p className="muted">Scoate un filtru sau încearcă o notă mai generală, de exemplu „vanilie” sau „lemn”. Poți porni și de la <Link className="link" href="/descopera/finder">Fragrance Finder</Link>.</p>
           </div>
         ) : f.view === 'index' ? (
           <div className={s.split}>

@@ -1,0 +1,41 @@
+.head { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-3); align-items: end; margin-bottom: var(--s-6); }
+.head > :first-child { grid-column: 1 / span 6; }
+.head > :last-child { grid-column: 8 / -1; max-width: 48ch; }
+
+/* visit: the house's colors as a wall, the practical facts beside it */
+.visit { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-6); align-items: stretch; padding-top: var(--s-5); border-top: 1px solid var(--fg); }
+.wall { grid-column: 1 / span 6; display: grid; grid-template-rows: repeat(3, 1fr); gap: 4px; min-height: clamp(260px, 30vw, 440px); }
+.wall li { position: relative; border-radius: var(--r); box-shadow: inset 0 0 0 1px rgba(27, 28, 29, 0.08); }
+.wall a { position: absolute; left: 8px; bottom: 8px; padding: 2px 8px; background: var(--bg); border-radius: var(--r); font-size: var(--t-small); }
+.wall a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.visitInfo { grid-column: 8 / -1; display: grid; gap: var(--s-5); align-content: start; }
+.hours { margin: 0; display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.hours > div { padding: 12px 0; }
+.hours > div + div { padding-left: 14px; border-left: 1px solid var(--border); }
+.hours dt { font-size: var(--t-micro); color: var(--muted); }
+.hours dd { margin: 2px 0 0; font-size: 20px; font-weight: 500; }
+.actions { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+
+.reasons { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+.reasons > div { display: grid; gap: var(--s-3); align-content: start; justify-items: start; padding-top: var(--s-4); border-top: 1px solid var(--border); }
+.colls { display: grid; gap: var(--s-2); }
+.colls li { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.colls li > span:first-child { width: 48px; height: 10px; border-radius: 1px; }
+
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
+.steps li { display: grid; gap: var(--s-2); align-content: start; padding-top: var(--s-4); border-top: 1px solid var(--border); }
+
+.story { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-5); padding-bottom: var(--section); }
+.story > h2 { grid-column: 1 / span 4; }
+.story > p.t-lede, .story > :global(.t-lede) { grid-column: 6 / -1; max-width: 60ch; }
+.palette { grid-column: 1 / -1; height: 12px; border-radius: var(--r); }
+.story > p:last-child { grid-column: 6 / -1; }
+
+@media (max-width: 1100px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 899px) {
+  .head, .visit, .story { grid-template-columns: 1fr; }
+  .head > *, .visit > *, .story > * { grid-column: 1 !important; }
+  .wall { min-height: 0; height: 168px; order: 2; }
+  .reasons, .steps { grid-template-columns: 1fr; gap: var(--s-5); }
+  .actions > * { flex: 1 1 100%; }
+}

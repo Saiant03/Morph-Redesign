@@ -2,3 +2,4 @@
 .row { display: grid; grid-template-columns: 96px 1fr; gap: var(--s-3); align-items: baseline; padding: 8px 0 8px 14px; border-left: 6px solid var(--tier); font-size: 15px; line-height: 1.35; }
 .row dt { font-size: var(--t-micro); color: var(--muted); }
 .row dd { margin: 0; }
+.mark { background: none; color: inherit; font-weight: 500; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; text-decoration-color: var(--fg); }

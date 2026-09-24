@@ -4,10 +4,6 @@
 .crumb { display: flex; gap: 8px; margin-bottom: var(--s-4); }
 .crumb a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .chord { display: block; height: 12px; border-radius: var(--r); margin-top: var(--s-2); }
-.collections { display: flex; gap: var(--s-5); font-size: 15px; padding-bottom: var(--s-3); }
-.collections a { padding: 8px 0; border-bottom: 1px solid transparent; }
-.collections a:hover { border-bottom-color: var(--border-strong); }
-.collections a[aria-current='page'] { border-bottom-color: var(--fg); }
 @media (max-width: 899px) {
   .head { grid-template-columns: 1fr; padding: var(--s-4) 0 var(--s-4); row-gap: var(--s-3); }
   .head h1 { font-size: 52px; }
@@ -15,6 +11,4 @@
   .chord { display: none; }
   .intro :global(.t-lede) { font-size: 16px; }
   .head > *, .intro { grid-column: 1 !important; }
-  .collections { overflow-x: auto; scrollbar-width: none; }
-  .collections a { flex: none; }
 }

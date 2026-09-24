@@ -1,0 +1,871 @@
+{
+ "source": "https://morphparfum.ro/wp-content/plugins/morph-quiz/assets/quiz.js?ver=1782981430",
+ "snapshotAt": "2026-09-24T03:37:08.240Z",
+ "weights": {
+  "mood": 5,
+  "personality": 5,
+  "olfactive": 4,
+  "occasion": 4,
+  "projection": 3,
+  "season": 2,
+  "collection": 4
+ },
+ "productIds": {
+  "indomable": 807,
+  "kolonaki": 827,
+  "antigua-bay": 35608,
+  "axum": 862,
+  "montmartre": 819,
+  "nudo": 815,
+  "vapor": 783,
+  "vision": 851,
+  "zeta": 35605,
+  "cruda": 866,
+  "pure-soul": 35606,
+  "disumano": 35607,
+  "primitivo": 38315,
+  "tonkatonic": 13016,
+  "gate17": 35612,
+  "oudmaefia": 11705,
+  "a21": 804,
+  "iconic": 823,
+  "miyazawa": 847,
+  "rose-j": 797,
+  "too": 831,
+  "umhh": 839,
+  "n8": 811,
+  "animal": 789
+ },
+ "questions": [
+  {
+   "id": "q1",
+   "label": "Ce prezență vrei să ai?",
+   "category": "mood",
+   "answers": [
+    {
+     "label": "Elegantă și rafinată",
+     "tag": "elegant"
+    },
+    {
+     "label": "Seducătoare și magnetică",
+     "tag": "seductive"
+    },
+    {
+     "label": "Puternică și impunătoare",
+     "tag": "powerful"
+    },
+    {
+     "label": "Misterioasă și greu de uitat",
+     "tag": "mysterious"
+    }
+   ]
+  },
+  {
+   "id": "q2",
+   "label": "Ce te reprezintă cel mai bine?",
+   "category": "personality",
+   "answers": [
+    {
+     "label": "Sofisticat",
+     "tag": "sophisticated"
+    },
+    {
+     "label": "Aventurier",
+     "tag": "adventurous"
+    },
+    {
+     "label": "Rebel",
+     "tag": "rebel"
+    },
+    {
+     "label": "Ambițios",
+     "tag": "ambitious"
+    },
+    {
+     "label": "Calm și echilibrat",
+     "tag": "calm"
+    }
+   ]
+  },
+  {
+   "id": "q3",
+   "label": "Ce univers olfactiv te atrage?",
+   "category": "olfactive",
+   "answers": [
+    {
+     "label": "Lemn, piele și eleganță",
+     "tag": "woody"
+    },
+    {
+     "label": "Condimente și orient",
+     "tag": "oriental"
+    },
+    {
+     "label": "Flori și rafinament",
+     "tag": "floral"
+    },
+    {
+     "label": "Aer curat și prospețime",
+     "tag": "fresh"
+    },
+    {
+     "label": "Dulce, cald și irezistibil",
+     "tag": "gourmand"
+    }
+   ]
+  },
+  {
+   "id": "q4",
+   "label": "Unde îl vei purta cel mai des?",
+   "category": "occasion",
+   "answers": [
+    {
+     "label": "La birou",
+     "tag": "office"
+    },
+    {
+     "label": "La evenimente",
+     "tag": "events"
+    },
+    {
+     "label": "La întâlniri romantice",
+     "tag": "intimate"
+    },
+    {
+     "label": "În vacanțe",
+     "tag": "vacation"
+    },
+    {
+     "label": "La ieșiri seara",
+     "tag": "nightlife"
+    }
+   ]
+  },
+  {
+   "id": "q5",
+   "label": "Cât de prezent vrei să fie parfumul?",
+   "category": "projection",
+   "answers": [
+    {
+     "label": "Discret",
+     "tag": "skin"
+    },
+    {
+     "label": "Elegant și echilibrat",
+     "tag": "moderate"
+    },
+    {
+     "label": "Vizibil",
+     "tag": "strong"
+    },
+    {
+     "label": "Să lase amintiri",
+     "tag": "beast"
+    }
+   ]
+  },
+  {
+   "id": "q6",
+   "label": "Care este sezonul tău?",
+   "category": "season",
+   "answers": [
+    {
+     "label": "Primăvara",
+     "tag": "spring"
+    },
+    {
+     "label": "Vara",
+     "tag": "summer"
+    },
+    {
+     "label": "Toamna",
+     "tag": "autumn"
+    },
+    {
+     "label": "Iarna",
+     "tag": "winter"
+    }
+   ]
+  },
+  {
+   "id": "q7",
+   "label": "Ce experiență cauți?",
+   "category": "collection",
+   "answers": [
+    {
+     "label": "Luxury Collection",
+     "description": "Parfumuri versatile, elegante și ușor de purtat zilnic.",
+     "tag": "luxury"
+    },
+    {
+     "label": "Ice Collection",
+     "description": "Compoziții creative, memorabile și neconvenționale.",
+     "tag": "ice"
+    },
+    {
+     "label": "Les Exclusifs",
+     "description": "Creații rare, complexe și dedicate celor care caută ceva cu adevărat special.",
+     "tag": "exclusive"
+    },
+    {
+     "label": "Oricare colecție",
+     "tag": "any"
+    }
+   ]
+  }
+ ],
+ "perfumes": [
+  {
+   "slug": "indomable",
+   "name": "Indomable",
+   "collection": "luxury",
+   "mood": [
+    "powerful",
+    "seductive"
+   ],
+   "personality": [
+    "sophisticated",
+    "rebel"
+   ],
+   "olfactive": [
+    "oriental",
+    "woody"
+   ],
+   "occasion": [
+    "events",
+    "nightlife"
+   ],
+   "projection": [
+    "beast"
+   ],
+   "season": [
+    "autumn",
+    "winter"
+   ]
+  },
+  {
+   "slug": "kolonaki",
+   "name": "Kolonaki",
+   "collection": "luxury",
+   "mood": [
+    "elegant",
+    "seductive"
+   ],
+   "personality": [
+    "sophisticated",
+    "charismatic"
+   ],
+   "olfactive": [
+    "oriental",
+    "woody"
+   ],
+   "occasion": [
+    "office",
+    "events"
+   ],
+   "projection": [
+    "beast"
+   ],
+   "season": [
+    "autumn",
+    "winter"
+   ]
+  },
+  {
+   "slug": "antigua-bay",
+   "name": "Antigua Bay",
+   "collection": "luxury",
+   "mood": [
+    "relaxed",
+    "natural"
+   ],
+   "personality": [
+    "adventurous",
+    "balanced"
+   ],
+   "olfactive": [
+    "fresh",
+    "floral"
+   ],
+   "occasion": [
+    "vacation",
+    "daily"
+   ],
+   "projection": [
+    "strong"
+   ],
+   "season": [
+    "spring",
+    "summer"
+   ]
+  },
+  {
+   "slug": "axum",
+   "name": "Axum",
+   "collection": "luxury",
+   "mood": [
+    "elegant",
+    "mysterious"
+   ],
+   "personality": [
+    "sophisticated",
+    "calm"
+   ],
+   "olfactive": [
+    "oriental",
+    "woody"
+   ],
+   "occasion": [
+    "office",
+    "events"
+   ],
+   "projection": [
+    "strong"
+   ],
+   "season": [
+    "spring",
+    "autumn",
+    "winter"
+   ]
+  },
+  {
+   "slug": "montmartre",
+   "name": "Montmartre",
+   "collection": "luxury",
+   "mood": [
+    "romantic",
+    "elegant"
+   ],
+   "personality": [
+    "romantic",
+    "sophisticated"
+   ],
+   "olfactive": [
+    "woody",
+    "oriental"
+   ],
+   "occasion": [
+    "intimate",
+    "events"
+   ],
+   "projection": [
+    "strong"
+   ],
+   "season": [
+    "autumn",
+    "winter"
+   ]
+  },
+  {
+   "slug": "nudo",
+   "name": "Nudo",
+   "collection": "luxury",
+   "mood": [
+    "relaxed",
+    "elegant"
+   ],
+   "personality": [
+    "calm",
+    "sophisticated"
+   ],
+   "olfactive": [
+    "woody",
+    "oriental"
+   ],
+   "occasion": [
+    "office",
+    "daily"
+   ],
+   "projection": [
+    "strong"
+   ],
+   "season": [
+    "autumn",
+    "winter"
+   ]
+  },
+  {
+   "slug": "vapor",
+   "name": "Vapor",
+   "collection": "luxury",
+   "mood": [
+    "energetic",
+    "seductive"
+   ],
+   "personality": [
+    "adventurous",
+    "rebel"
+   ],
+   "olfactive": [
+    "fresh",
+    "floral"
+   ],
+   "occasion": [
+    "vacation",
+    "nightlife"
+   ],
+   "projection": [
+    "strong"
+   ],
+   "season": [
+    "spring",
+    "summer"
+   ]
+  },
+  {
+   "slug": "vision",
+   "name": "Vision",
+   "collection": "luxury",
+   "mood": [
+    "elegant",
+    "relaxed"
+   ],
+   "personality": [
+    "balanced",
+    "sophisticated"
+   ],
+   "olfactive": [
+    "fresh",
+    "floral"
+   ],
+   "occasion": [
+    "office",
+    "daily"
+   ],
+   "projection": [
+    "strong"
+   ],
+   "season": [
+    "spring",
+    "summer",
+    "autumn"
+   ]
+  },
+  {
+   "slug": "zeta",
+   "name": "Zeta",
+   "collection": "luxury",
+   "mood": [
+    "seductive",
+    "mysterious"
+   ],
+   "personality": [
+    "sophisticated",
+    "rebel"
+   ],
+   "olfactive": [
+    "oriental",
+    "gourmand"
+   ],
+   "occasion": [
+    "intimate",
+    "events"
+   ],
+   "projection": [
+    "moderate"
+   ],
+   "season": [
+    "autumn",
+    "winter"
+   ]
+  },
+  {
+   "slug": "cruda",
+   "name": "Cruda",
+   "collection": "luxury",
+   "mood": [
+    "seductive",
+    "elegant"
+   ],
+   "personality": [
+    "romantic",
+    "sophisticated"
+   ],
+   "olfactive": [
+    "floral",
+    "oriental"
+   ],
+   "occasion": [
+    "intimate",
+    "events"
+   ],
+   "projection": [
+    "strong"
+   ],
+   "season": [
+    "autumn",
+    "winter"
+   ]
+  },
+  {
+   "slug": "disumano",
+   "name": "Disumano",
+   "collection": "ice",
+   "mood": [
+    "energetic",
+    "relaxed"
+   ],
+   "personality": [
+    "adventurous",
+    "sophisticated"
+   ],
+   "olfactive": [
+    "fresh",
+    "gourmand"
+   ],
+   "occasion": [
+    "vacation",
+    "daily"
+   ],
+   "projection": [
+    "strong"
+   ],
+   "season": [
+    "spring",
+    "summer"
+   ]
+  },
+  {
+   "slug": "primitivo",
+   "name": "Primitivo",
+   "collection": "ice",
+   "mood": [
+    "powerful",
+    "seductive"
+   ],
+   "personality": [
+    "adventurous",
+    "charismatic"
+   ],
+   "olfactive": [
+    "oriental",
+    "woody"
+   ],
+   "occasion": [
+    "nightlife",
+    "events"
+   ],
+   "projection": [
+    "strong"
+   ],
+   "season": [
+    "autumn",
+    "winter"
+   ]
+  },
+  {
+   "slug": "tonkatonic",
+   "name": "Tonkatonic",
+   "collection": "ice",
+   "mood": [
+    "relaxed",
+    "romantic"
+   ],
+   "personality": [
+    "romantic",
+    "sophisticated"
+   ],
+   "olfactive": [
+    "gourmand",
+    "woody"
+   ],
+   "occasion": [
+    "vacation",
+    "intimate"
+   ],
+   "projection": [
+    "strong"
+   ],
+   "season": [
+    "spring",
+    "summer"
+   ]
+  },
+  {
+   "slug": "gate17",
+   "name": "Gate17",
+   "collection": "ice",
+   "mood": [
+    "elegant",
+    "natural"
+   ],
+   "personality": [
+    "balanced",
+    "sophisticated"
+   ],
+   "olfactive": [
+    "marine",
+    "woody"
+   ],
+   "occasion": [
+    "office",
+    "events"
+   ],
+   "projection": [
+    "strong"
+   ],
+   "season": [
+    "spring",
+    "autumn"
+   ]
+  },
+  {
+   "slug": "oudmaefia",
+   "name": "Oudmaèfia",
+   "collection": "ice",
+   "mood": [
+    "powerful",
+    "elegant"
+   ],
+   "personality": [
+    "ambitious",
+    "charismatic"
+   ],
+   "olfactive": [
+    "oriental",
+    "woody"
+   ],
+   "occasion": [
+    "office",
+    "events"
+   ],
+   "projection": [
+    "beast"
+   ],
+   "season": [
+    "autumn",
+    "winter"
+   ]
+  },
+  {
+   "slug": "a21",
+   "name": "A21",
+   "collection": "exclusive",
+   "mood": [
+    "seductive",
+    "mysterious"
+   ],
+   "personality": [
+    "nonconformist",
+    "romantic"
+   ],
+   "olfactive": [
+    "oriental",
+    "floral"
+   ],
+   "occasion": [
+    "intimate",
+    "events"
+   ],
+   "projection": [
+    "beast"
+   ],
+   "season": [
+    "autumn",
+    "winter"
+   ]
+  },
+  {
+   "slug": "iconic",
+   "name": "Iconic",
+   "collection": "exclusive",
+   "mood": [
+    "elegant",
+    "calm"
+   ],
+   "personality": [
+    "balanced",
+    "sophisticated"
+   ],
+   "olfactive": [
+    "floral",
+    "powdery"
+   ],
+   "occasion": [
+    "office",
+    "events"
+   ],
+   "projection": [
+    "strong"
+   ],
+   "season": [
+    "spring",
+    "summer",
+    "winter"
+   ]
+  },
+  {
+   "slug": "miyazawa",
+   "name": "Miyazawa",
+   "collection": "exclusive",
+   "mood": [
+    "romantic",
+    "artistic"
+   ],
+   "personality": [
+    "calm",
+    "sophisticated"
+   ],
+   "olfactive": [
+    "floral",
+    "woody"
+   ],
+   "occasion": [
+    "daily",
+    "events"
+   ],
+   "projection": [
+    "strong"
+   ],
+   "season": [
+    "spring",
+    "summer",
+    "autumn"
+   ]
+  },
+  {
+   "slug": "rose-j",
+   "name": "Rose J",
+   "collection": "exclusive",
+   "mood": [
+    "mysterious",
+    "elegant"
+   ],
+   "personality": [
+    "calm",
+    "sophisticated"
+   ],
+   "olfactive": [
+    "floral",
+    "oriental"
+   ],
+   "occasion": [
+    "intimate",
+    "events"
+   ],
+   "projection": [
+    "strong"
+   ],
+   "season": [
+    "spring",
+    "autumn",
+    "winter"
+   ]
+  },
+  {
+   "slug": "too",
+   "name": "Too",
+   "collection": "exclusive",
+   "mood": [
+    "elegant",
+    "balanced"
+   ],
+   "personality": [
+    "mature",
+    "calm"
+   ],
+   "olfactive": [
+    "aromatic",
+    "woody"
+   ],
+   "occasion": [
+    "office",
+    "events"
+   ],
+   "projection": [
+    "strong"
+   ],
+   "season": [
+    "spring",
+    "autumn",
+    "winter"
+   ]
+  },
+  {
+   "slug": "umhh",
+   "name": "Umhh",
+   "collection": "exclusive",
+   "mood": [
+    "calm",
+    "elegant"
+   ],
+   "personality": [
+    "balanced",
+    "sophisticated"
+   ],
+   "olfactive": [
+    "amber",
+    "woody"
+   ],
+   "occasion": [
+    "office",
+    "events"
+   ],
+   "projection": [
+    "strong"
+   ],
+   "season": [
+    "spring",
+    "autumn",
+    "winter"
+   ]
+  },
+  {
+   "slug": "n8",
+   "name": "N8",
+   "collection": "exclusive",
+   "mood": [
+    "artistic",
+    "calm"
+   ],
+   "personality": [
+    "balanced",
+    "sophisticated"
+   ],
+   "olfactive": [
+    "floral",
+    "powdery"
+   ],
+   "occasion": [
+    "office",
+    "daily"
+   ],
+   "projection": [
+    "strong"
+   ],
+   "season": [
+    "spring",
+    "summer",
+    "autumn"
+   ]
+  },
+  {
+   "slug": "animal",
+   "name": "Animal",
+   "collection": "exclusive",
+   "mood": [
+    "powerful",
+    "mysterious"
+   ],
+   "personality": [
+    "authentic",
+    "calm"
+   ],
+   "olfactive": [
+    "musky",
+    "woody"
+   ],
+   "occasion": [
+    "nightlife",
+    "events"
+   ],
+   "projection": [
+    "strong"
+   ],
+   "season": [
+    "autumn",
+    "winter"
+   ]
+  }
+ ]
+}

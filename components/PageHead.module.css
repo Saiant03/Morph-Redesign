@@ -1,0 +1,15 @@
+.head { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-5); align-items: end; padding: clamp(28px, 4vw, 64px) 0 var(--s-6); }
+.head > :first-child { grid-column: 1 / span 7; }
+.intro { grid-column: 8 / -1; display: grid; gap: var(--s-3); }
+.crumb { display: flex; gap: 8px; margin-bottom: var(--s-4); flex-wrap: wrap; }
+.crumbItem { display: inline-flex; gap: 8px; }
+.crumb a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.chord { display: block; height: 12px; border-radius: var(--r); margin-top: var(--s-2); }
+@media (max-width: 899px) {
+  .head { grid-template-columns: 1fr; padding: var(--s-4) 0 var(--s-4); row-gap: var(--s-3); }
+  .head h1 { font-size: 52px; }
+  .crumb { margin-bottom: var(--s-2); }
+  .chord { height: 8px; }
+  .intro :global(.t-lede) { font-size: 16px; }
+  .head > *, .intro { grid-column: 1 !important; }
+}

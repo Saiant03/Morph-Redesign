@@ -1,0 +1,39 @@
+.split { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); align-items: start; }
+.list { grid-column: 1 / span 7; border-top: 1px solid var(--border); }
+.row {
+  position: relative; display: grid; align-items: center; column-gap: var(--s-4); row-gap: 2px;
+  grid-template-columns: 40px minmax(0, 1.4fr) minmax(0, 2.4fr) minmax(0, 0.9fr) auto;
+  grid-template-areas: 'strip name accord price act'; padding: var(--s-4) 0; border-bottom: 1px solid var(--border);
+}
+.strip { grid-area: strip; height: 44px; width: 28px; transition: width var(--d-base) var(--ease-out); }
+.row[data-active='true'] .strip { width: 40px; }
+.thumb { display: none; grid-area: thumb; position: relative; width: 64px; height: 64px; background: var(--surface-raised); border-radius: var(--r); }
+.thumb img { object-fit: contain; mix-blend-mode: multiply; }
+.name { grid-area: name; font-size: clamp(22px, 1.9vw, 30px); line-height: 1.02; letter-spacing: -0.02em; font-weight: 500; }
+.name a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+.accord { grid-area: accord; font-size: 15px; line-height: 1.35; }
+.price { grid-area: price; line-height: 1.35; }
+.price b { font-weight: 500; }
+.act { grid-area: act; }
+
+.preview { grid-column: 9 / -1; position: sticky; top: calc(var(--header-h) + 24px); display: grid; gap: var(--s-4); }
+.previewVisual { position: relative; aspect-ratio: 5 / 4; max-height: 42vh; background: var(--surface-raised); border-radius: var(--r); overflow: hidden; isolation: isolate; }
+.previewVisual img { object-fit: contain; mix-blend-mode: multiply; padding: 6%; }
+.previewActions { display: flex; flex-wrap: wrap; gap: var(--s-3) var(--s-5); align-items: center; }
+
+@media (max-width: 1199px) {
+  .list { grid-column: 1 / -1; }
+  .preview { display: none; }
+}
+@media (max-width: 899px) {
+  .row {
+    grid-template-columns: 64px minmax(0, 1fr) auto;
+    grid-template-areas: 'thumb name name' 'thumb accord accord' 'thumb price act';
+    column-gap: var(--s-3); row-gap: var(--s-2); align-items: start;
+  }
+  .strip { display: none; }
+  .thumb { display: block; }
+  .name { font-size: 24px; }
+  .accord { font-size: 14px; }
+  .act { align-self: end; }
+}

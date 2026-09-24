@@ -45,17 +45,52 @@
 .note { display: inline-flex; align-items: center; gap: 6px; }
 .note i { width: 8px; height: 8px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(27, 28, 29, 0.14); flex: none; }
 .buy { display: grid; gap: var(--s-3); justify-items: start; }
+.links { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--s-5); }
+.links > a { min-height: 44px; display: inline-flex; align-items: center; }
+
+/* detail mode (/layering): what the pair shares, and both formats */
+.compare { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--gap); border-top: 1px solid var(--border); }
+.compare > div { padding: 10px 0; border-bottom: 1px solid var(--border); }
+.compare > div:first-child { grid-column: 1 / -1; }
+.compare dt { font-size: var(--t-micro); color: var(--muted); }
+.compare dd { margin: 2px 0 0; font-size: 15px; }
+.formats { width: 100%; border-collapse: collapse; font-size: 15px; }
+.formats th, .formats td { text-align: left; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--border); font-weight: 400; }
+.formats thead th { font-size: var(--t-micro); color: var(--muted); padding-top: 0; }
+.formats tbody th { display: flex; align-items: center; gap: 8px; font-weight: 500; }
+
+/* phone stage: three horizontal bands (hidden on desktop) */
+.bands { display: none; }
 
 @media (pointer: coarse) { .chip { min-height: 44px; } }
 @media (max-width: 899px) {
-  .composer { grid-template-columns: 1fr; }
-  .stage, .panel { grid-column: 1; }
+  /* phone order: heading, the two slots and the picker first, then the stage, then the result */
+  .composer { grid-template-columns: 1fr; row-gap: var(--s-4); }
+  .panel { display: contents; }
+  .panel > * { grid-column: 1; min-width: 0; }
+  .panel > h2, .panel > h2 + p, .slots, .picker { order: -1; }
+  .stage { grid-column: 1; }
   .stage { position: relative; top: 0; }
-  .stage { height: 320px; }
-  .axis { display: none; }
-  .column { width: 40%; }
-  .colA { left: 20%; } .colB { left: 40%; }
-  .bottle { width: 20%; }
-  .names span:nth-child(1) { left: 30%; }
-  .names span:nth-child(3) { left: 70%; }
+  .stage { height: auto; padding: var(--s-4); }
+  .axis, .column, .bottle, .names { display: none; }
+  .bands { display: grid; gap: 6px; }
+  .bandNames { display: grid; grid-template-columns: 72px 1fr 1fr 1fr; font-size: var(--t-micro); margin-bottom: 2px; }
+  .bandNames span:nth-child(1) { grid-column: 2; }
+  .bandNames span:nth-child(2) { text-align: center; }
+  .bandNames span:nth-child(3) { text-align: right; }
+  .band { display: grid; grid-template-columns: 72px 1fr; align-items: center; }
+  .bandLabel { font-size: var(--t-micro); color: var(--muted); }
+  .track { position: relative; height: 44px; isolation: isolate; }
+  .track i { position: absolute; top: 0; bottom: 0; border-radius: 1px; mix-blend-mode: multiply; transition: left var(--d-story) var(--ease-inout), right var(--d-story) var(--ease-inout), background-color var(--d-slow) var(--ease-inout); }
+  /* three equal zones, as on desktop: A alone, A + B, B alone */
+  .bandA { left: 0; right: 33.4%; }
+  .bandB { left: 33.4%; right: 0; }
+  .stage[data-joined='false'] .bandA { right: 50%; }
+  .stage[data-joined='false'] .bandB { left: 50%; }
+  .slots { grid-template-columns: 1fr 1fr; }
+  .slot { grid-template-columns: 40px 1fr; grid-template-rows: auto auto; gap: 2px var(--s-3); padding: 8px; }
+  .slotVisual { width: 40px; height: 52px; grid-row: 1 / span 2; }
+  .slotName { font-size: 17px; }
+  .slotAction { grid-column: 2; }
+  .compare { grid-template-columns: 1fr; }
 }

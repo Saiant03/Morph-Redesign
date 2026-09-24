@@ -55,7 +55,7 @@ export default function Home() {
         <div className={s.finder}>
           <p className="t-3">Nu știi de unde să pornești?</p>
           <p className="muted">Șapte întrebări despre prezență, anotimp și ocazie. Primești două sau trei parfumuri potrivite.</p>
-          <a href="https://morphparfum.ro/quiz" className="btn btn-secondary">Începe Fragrance Finder</a>
+          <Link href="/descopera/finder" className="btn btn-secondary">Începe Fragrance Finder</Link>
         </div>
       </section>
 
@@ -105,8 +105,8 @@ export default function Home() {
       <section id="combina" className="wrap section" aria-labelledby="combina-titlu">
         <LayeringComposer first="morph-zeta-parfum-100ml" second="morph-vapor-parfum-100ml" heading="Două parfumuri, a treia formă" headingId="combina-titlu" />
         <div className={s.ynf}>
-          <p className="t-small muted">Your Next Form, seturile blind de layering Morph:</p>
-          <ul className="t-small">{layeringSets.map(x => <li key={x.slug}><a href={x.url} className="link">{x.state}</a></li>)}</ul>
+          <p className="t-small muted"><Link className="link" href="/layering/your-next-form">Your Next Form</Link>, seturile blind de layering Morph:</p>
+          <ul className="t-small muted">{layeringSets.map(x => <li key={x.slug}>{x.state}</li>)}</ul>
         </div>
       </section>
 
@@ -114,7 +114,7 @@ export default function Home() {
       <section id="casa-morph" className="wrap section" aria-labelledby="casa-titlu">
         <div className={s.head}>
           <h2 id="casa-titlu" className="t-2">Casa Morph, București</h2>
-          <p className="muted">Parfumurile se pot încerca în boutique, cu echipa Morph alături.</p>
+          <p className="muted">Parfumurile se pot încerca în boutique, cu echipa Morph alături. <Link className="link" href="/casa-morph">Vezi Casa Morph</Link></p>
         </div>
         <div className={s.trust}>
           <div><h3 className="t-3">{BOUTIQUE.address}</h3><p className="muted">{BOUTIQUE.hours.join(', ')}</p></div>
