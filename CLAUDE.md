@@ -69,4 +69,5 @@ Fapte-cheie (verificate 2026-09-24):
   - 3D: nu se face din imaginile publice (există o singură vedere frontală). Zeta are dovada 2.5D (`npm run lightmask`, `ObjectLight`).
   - Tranziții: fotografia intră din home în camera colecției, sticla din raft devine scena de pe PDP, iar camerele colecțiilor sunt statice.
   - Test: `npm run smoke`, 28 de verificări.
+- 2026-09-24: Faza C1 (indexul de parfumuri) încheiată: vitrina de nuc devine vederea implicită a `/parfumuri` și a camerelor colecțiilor (un raft luminat pe colecție, câte o lumină pe sticlă, etichetă cu nume, note, preț; rânduri echilibrate în CSS). Vederea „Index” rămâne (`?vedere=index`); galeria de carduri a fost scoasă. Măștile 2.5D există acum pentru toate cele 26 de parfumuri. Skill importat: `impeccable` (oficial, fără hook-uri; binarul e în `.gitignore`). Document: `docs/design/phase-c1-product-index.md`. Test: `npm run smoke`, 31 de verificări. C2–C4 doar la cerere.
 - Skill-urile externe se importă doar după inspecție și se înregistrează în `docs/research/skill-registry.md`.

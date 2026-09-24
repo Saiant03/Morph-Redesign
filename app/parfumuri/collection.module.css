@@ -11,22 +11,6 @@
 .title { overflow-wrap: anywhere; }
 .crumb { display: flex; gap: 8px; }
 .crumb a:hover { text-decoration: underline; text-underline-offset: 3px; }
-.shelfBand { padding: var(--s-6) 0 var(--s-5); }
-
-/* the shelf: every bottle of the collection, one object each, on a glass edge */
-.shelfWrap { overflow-x: auto; scrollbar-width: none; }
-.shelfWrap::-webkit-scrollbar { display: none; }
-.shelf { display: flex; gap: clamp(6px, 0.8vw, 12px); padding-bottom: 4px; }
-.shelf li { flex: 1 1 0; min-width: 72px; max-width: 150px; }
-.shelfItem { display: grid; gap: 6px; }
-.shelfNiche { aspect-ratio: 3 / 4; }
-.shelfNiche img { transition: transform var(--d-slow) var(--ease-out); }
-.shelfItem:hover .shelfNiche img, .shelfItem:focus-visible .shelfNiche img { transform: translateY(-3%); }
-.shelfItem span { color: var(--muted); transition: color var(--d-fast); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.shelfItem:hover span { color: var(--fg); }
-.shelf[data-dense='true'] li { min-width: 40px; }
-.shelf[data-dense='true'] span { display: none; }
-
 @media (max-width: 1199px) { .plateRow > nav { grid-column: 1 / -1; justify-self: start; } }
 @media (max-width: 899px) {
   .window { height: auto; aspect-ratio: 16 / 10; }
@@ -34,7 +18,6 @@
   .plate { grid-column: 1; padding: var(--s-5); }
   .plate h1 { font-size: 56px; }
   .plateRow > nav { grid-column: 1; justify-self: start; }
-  .shelf li { flex: 0 0 76px; }
 }
 @media (max-width: 599px) {
   .window { aspect-ratio: auto; height: min(134vw, 72svh); }

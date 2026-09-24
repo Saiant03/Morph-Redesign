@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { ViewTransition } from 'react';
 import { ProductIndex } from '@/components/ProductIndex';
 import { SectionNav } from '@/components/SectionNav';
-import { ShelfItem } from '@/components/ShelfItem';
 import { RoomImage } from '@/components/RoomImage';
 import { CAMPAIGN, ALL_ROOM } from '@/lib/campaign';
 import { perfumes, inCollection, COLLECTIONS, ALL_BY_COLLECTION, sampleSets, collectionHref, lei, type CollectionId } from '@/lib/catalog';
@@ -12,7 +11,8 @@ export const ROOM_TABS = [{ href: '/parfumuri', label: 'Toate' }, ...ALL_BY_COLL
 
 /**
  * Shared by /parfumuri (all) and /parfumuri/[colectie]: one room in four states. Morph's campaign is the window,
- * the name sits on a plate crossing its edge, every bottle of the collection stands on the walnut shelf below.
+ * the name sits on a plate crossing its edge, every bottle of the collection stands in the walnut cabinet below
+ * (components/Vitrine).
  * Changing collection is a change of state (docs/design/phase-b-core-commerce.md): the photograph changes under
  * light, the title drops and the next one rises, shared bottles move along the shelf.
  */
@@ -40,19 +40,8 @@ export function CollectionPage({ id }: { id: CollectionId | null }) {
           </div>
           <SectionNav label="Colecții" current={collectionHref(id ?? undefined)} items={ROOM_TABS} types={['room']} />
         </div>
-        <div className={s.shelfBand} data-tone="wood">
-          <div className={s.shelfWrap}>
-            <ul className={`${s.shelf} wrap`} data-dense={items.length > 14} aria-label={`Vitrina ${id ? COLLECTIONS[id].name : 'Morph'}`}>
-              {items.map(p => (
-                <li key={p.slug}><ShelfItem p={p} className={s.shelfItem} nicheClassName={s.shelfNiche} /></li>
-              ))}
-            </ul>
-          </div>
-        </div>
       </section>
-      <div className="wrap">
-        <ProductIndex items={items} trial={trial} />
-      </div>
+      <ProductIndex id={id} items={items} trial={trial} />
     </>
   );
 }

@@ -42,7 +42,6 @@
 .facts dd { margin: 0; font-weight: 500; }
 .previewActions { display: flex; flex-wrap: wrap; gap: var(--s-2); }
 
-.gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-7) var(--gap); padding-top: var(--s-5); }
 .empty { padding: var(--s-8) 0; display: grid; gap: var(--s-3); max-width: 60ch; }
 
 /* no preview below 1200: rows carry an inline details toggle */
@@ -63,5 +62,4 @@
   .notes { font-size: 14px; }
   .act { align-self: end; }
   .promo { grid-template-columns: 1fr; padding: var(--s-5) 0; }
-  .gallery { grid-template-columns: repeat(2, 1fr); gap: var(--s-6) var(--s-3); }
 }

@@ -1,0 +1,68 @@
+/* the cabinet: a walnut wall with one lit shelf per collection (docs/design/phase-c1-product-index.md) */
+.band { padding: var(--s-8) 0 var(--s-9); }
+.group + .group { margin-top: var(--s-9); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--s-2) var(--s-5); margin-bottom: var(--s-5); }
+.title { font-family: var(--serif); font-weight: 300; font-size: var(--t-1); line-height: 0.98; letter-spacing: -0.02em; }
+.meta { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); }
+
+/* rows balanced from the count: 13 bottles at five a shelf stand 5 · 5 · 3, not 5 · 5 · 2 · 1 */
+.shelf {
+  --max: 2; --niche-h: 62vw;
+  --rows: round(up, calc(var(--n) / var(--max)), 1);
+  --cols: round(up, calc(var(--n) / var(--rows)), 1);
+  display: flex; flex-wrap: wrap; justify-content: center; row-gap: var(--s-7);
+}
+@supports not (width: calc(round(up, 1.5, 1) * 1px)) { .shelf { --cols: var(--max); } }
+/* a short last shelf widens its pools, up to two niches; a lone bottle stands centered on its own length of glass */
+.shelf > li { flex: 1 0 calc(100% / var(--cols) - 1px); max-width: calc(200% / var(--max)); min-width: 0; }
+
+.item { display: grid; align-content: start; gap: var(--s-4); height: 100%; outline-offset: -2px; }
+/* each bottle in its own pool of light; the recesses touch, so the glass edge and the shadow under the shelf above run on */
+.item .niche {
+  height: var(--niche-h); border-radius: 0;
+  background: radial-gradient(62% 72% at 50% 42%, var(--glow) 0%, var(--niche-mid) 46%, var(--niche-edge) 100%);
+  box-shadow: inset 0 48px 56px -44px rgb(10 7 5 / 0.55);
+  transition: --glow var(--d-story) var(--ease-inout), --lx 500ms var(--ease-out), --ly 500ms var(--ease-out), filter var(--d-slow) var(--ease-out);
+}
+.niche img, .niche > span { transform-origin: 50% 90%; transition: transform var(--d-slow) var(--ease-out); }
+.soldout .niche { filter: grayscale(0.6); }
+
+/* the museum label under the object, on the wood */
+.label { display: grid; gap: 4px; padding: 0 var(--s-3); }
+.name { font-family: var(--serif); font-weight: 400; font-size: clamp(22px, 1.9vw, 30px); line-height: 1; letter-spacing: -0.015em; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; text-decoration-color: transparent; transition: text-decoration-color var(--d-fast); }
+.notes { color: var(--muted); font-size: var(--t-small); line-height: 1.35; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
+.price { font-size: var(--t-small); line-height: 1.35; font-weight: 500; }
+.price span { font-weight: 400; }
+.soldout .name { color: var(--muted); }
+
+/* hover and focus: the light over the bottle comes up, the bottle lifts off the glass a little */
+@media (hover: hover) {
+  .item:hover .niche { filter: brightness(1.08); }
+  .soldout .item:hover .niche { filter: grayscale(0.6) brightness(1.08); }
+  .item:hover :is(.niche img, .niche > span) { transform: translateY(-2.5%) scale(1.035); }
+  .item:hover .name { text-decoration-color: currentColor; }
+}
+.item:focus-visible .niche { filter: brightness(1.08); }
+.item:focus-visible :is(.niche img, .niche > span) { transform: translateY(-2.5%) scale(1.035); }
+.item:focus-visible .name { text-decoration-color: currentColor; }
+@media (prefers-reduced-motion: reduce) {
+  .item .niche img, .item .niche > span { transform: none !important; }
+}
+
+.promo { display: grid; gap: var(--s-2) var(--gap); grid-template-columns: auto 1fr; align-items: baseline; margin-top: var(--s-9); padding-top: var(--s-6); border-top: 1px solid var(--border); }
+.promoLinks { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-3); }
+
+@media (min-width: 600px) { .shelf { --max: 3; --niche-h: clamp(280px, 38vw, 340px); } }
+@media (min-width: 900px) { .shelf { --max: 4; --niche-h: clamp(290px, 29vw, 340px); } }
+@media (min-width: 1200px) { .shelf { --max: 5; --niche-h: clamp(310px, 23vw, 380px); } }
+@media (min-width: 1600px) { .shelf { --max: 6; --niche-h: 380px; } }
+@media (max-width: 599px) {
+  .band { padding: var(--s-6) 0 var(--s-8); }
+  .group + .group { margin-top: var(--s-8); }
+  .title { font-size: 44px; }
+  .shelf { row-gap: var(--s-6); }
+  .label { padding: 0 var(--s-2); }
+  .name { font-size: 22px; }
+  .notes { font-size: var(--t-micro); }
+  .promo { grid-template-columns: 1fr; }
+}

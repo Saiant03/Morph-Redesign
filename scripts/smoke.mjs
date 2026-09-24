@@ -161,7 +161,7 @@ await check('reduced motion: hero and reveals fully visible', async () => {
 });
 
 await check('no horizontal overflow at 390 / 768 / 1024 / 1440', async () => {
-  const routes = ['/', '/parfumuri/luxury', '/parfumuri/corp', '/morph-zeta-parfum-100ml', '/descopera', '/descopera/finder', '/layering', '/layering/your-next-form', '/magazin', '/cadouri'];
+  const routes = ['/', '/parfumuri', '/parfumuri/luxury', '/parfumuri/corp', '/morph-zeta-parfum-100ml', '/descopera', '/descopera/finder', '/layering', '/layering/your-next-form', '/magazin', '/cadouri'];
   for (const w of [390, 768, 1024, 1440]) {
     const p = await page(w === 390 ? { ...devices['iPhone 13'] } : { viewport: { width: w, height: 900 } });
     for (const r of routes) {
@@ -277,9 +277,9 @@ await check('2.5D Zeta: the glint follows the pointer on the product stage', asy
   assert(parseFloat(lx) > 70, `--lx ${lx}`);
 });
 
-await check('page transition: collection row → product runs a view transition with the shared bottle', async () => {
+await check('page transition: collection row (index view) → product runs a view transition with the shared bottle', async () => {
   const t = await page();
-  await t.goto(BASE + '/parfumuri/luxury', { waitUntil: 'networkidle' });
+  await t.goto(BASE + '/parfumuri/luxury?vedere=index', { waitUntil: 'networkidle' });
   await t.evaluate(() => {
     const vt = document.startViewTransition?.bind(document);
     window.__vt = [];
@@ -296,7 +296,7 @@ await check('page transition: collection row → product runs a view transition 
 
 await check('page transition under reduced motion: no animation, content visible at once', async () => {
   const r = await page({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
-  await r.goto(BASE + '/parfumuri/luxury', { waitUntil: 'networkidle' });
+  await r.goto(BASE + '/parfumuri/luxury?vedere=index', { waitUntil: 'networkidle' });
   await r.getByRole('heading', { name: 'Zeta' }).getByRole('link').click();
   await r.waitForURL(/morph-zeta-parfum-100ml/);
   await r.waitForTimeout(60);
@@ -320,6 +320,66 @@ await check('collection room: Luxury → Ice changes the room in place (photogra
   for (const n of ['room-image', 'room-title']) assert(log.includes(n), `no ${n}: ${log.slice(0, 160)}`);
   assert(await t.locator('h1').innerText() === 'Ice', 'title');
   assert(await t.getByRole('list', { name: 'Vitrina Ice' }).getByRole('link').count() === 5, 'ice shelf');
+});
+
+await check('/parfumuri vitrine: one shelf per collection (8 · 13 · 5), every bottle lit, labels with notes and price', async () => {
+  const t = await page();
+  await t.goto(BASE + '/parfumuri', { waitUntil: 'networkidle' });
+  for (const [c, n] of [['Les Exclusifs', 8], ['Luxury', 13], ['Ice', 5]]) {
+    assert(await t.getByRole('heading', { level: 2, name: c }).count() === 1, `no ${c} heading`);
+    assert(await t.getByRole('list', { name: `Vitrina ${c}` }).getByRole('link').count() === n, `${c} count`);
+  }
+  assert(await t.locator('ul[aria-label^="Vitrina"] [data-lit]').count() === 26, 'not every bottle lit');
+  const label = await t.getByRole('list', { name: 'Vitrina Luxury' }).getByRole('link', { name: /Zeta/ }).innerText();
+  assert(/Cacao din Venezuela/.test(label) && /690 lei/.test(label), label);
+  // balanced shelves: Luxury at 1440 stands 5 · 5 · 3
+  const ys = await t.getByRole('list', { name: 'Vitrina Luxury' }).locator(':scope > li').evaluateAll(els => els.map(e => Math.round(e.getBoundingClientRect().top)));
+  const rows = Object.values(ys.reduce((m, y) => ((m[y] = (m[y] ?? 0) + 1), m), {}));
+  assert(rows.join() === '5,5,3', `rows ${rows}`);
+  await t.getByRole('button', { name: 'Index', exact: true }).click();
+  await t.waitForTimeout(500);
+  assert(/vedere=index/.test(t.url()) && await t.locator('ul[aria-label^="Vitrina"]').count() === 0, 'index view');
+  assert(await t.evaluate(() => document.activeElement?.textContent) === 'Index', 'view switch lost focus');
+  await t.evaluate(() => scrollTo(0, 2400));
+  await t.waitForTimeout(200);
+  assert(Math.abs((await t.locator('#filtre').boundingBox()).y - 64) < 2, 'filter bar not sticky over the index');
+});
+
+await check('vitrine: hover lifts the bottle and moves its light; keyboard focus shows the same state; reduced motion keeps it still', async () => {
+  const t = await page();
+  await t.goto(BASE + '/parfumuri/ice', { waitUntil: 'networkidle' });
+  const item = t.getByRole('list', { name: 'Vitrina Ice' }).getByRole('link').first();
+  await item.scrollIntoViewIfNeeded();
+  const lit = item.locator('[data-lit]');
+  const b = await lit.boundingBox();
+  await t.mouse.move(b.x + b.width * 0.8, b.y + b.height * 0.3, { steps: 4 });
+  await t.waitForTimeout(800);
+  assert(await lit.locator('img').evaluate(e => getComputedStyle(e).transform) !== 'none', 'no lift on hover');
+  assert(parseFloat(await lit.evaluate(e => e.style.getPropertyValue('--lx'))) > 60, 'light does not follow');
+  await t.mouse.move(5, 5);
+  await item.focus();
+  await t.keyboard.press('Shift+Tab'); await t.keyboard.press('Tab');
+  await t.waitForTimeout(800);
+  assert(await item.evaluate(e => e.matches(':focus-visible') && getComputedStyle(e).outlineStyle === 'solid'), 'no focus ring');
+  assert(await lit.locator('img').evaluate(e => getComputedStyle(e).transform) !== 'none', 'no lift on focus');
+  const r = await page({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+  await r.goto(BASE + '/parfumuri/ice', { waitUntil: 'networkidle' });
+  const ri = r.getByRole('list', { name: 'Vitrina Ice' }).getByRole('link').first();
+  await ri.scrollIntoViewIfNeeded();
+  await ri.hover();
+  await r.waitForTimeout(300);
+  assert(await ri.locator('[data-lit] img').evaluate(e => getComputedStyle(e).transform) === 'none', 'moves under reduced motion');
+});
+
+await check('vitrine bottle → product morphs into the stage (desktop, /parfumuri)', async () => {
+  const t = await page();
+  await t.goto(BASE + '/parfumuri', { waitUntil: 'networkidle' });
+  await hookVT(t);
+  await t.getByRole('list', { name: 'Vitrina Les Exclusifs' }).getByRole('link', { name: /Animal/ }).click();
+  await t.waitForURL(/morph-animal-parfum-100ml/);
+  await t.waitForTimeout(900);
+  const log = await t.evaluate(() => window.__vt);
+  assert(/obj-morph-animal-parfum-100ml/.test(log[1] ?? ''), JSON.stringify(log).slice(0, 200));
 });
 
 await check('Baie & Corp: rituals by scent, real prices, add a gel; PDP ritual', async () => {

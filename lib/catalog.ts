@@ -66,7 +66,7 @@ export const ritualPerfumes = () => perfumes.filter(p => bodyItems.some(b => b.s
 /** Where the object sits inside a packshot (fractions), measured by scripts/objects.mjs. */
 export type ObjectBox = { w: number; h: number; top: number; bottom: number; left: number; right: number };
 export const objectBox = (src: string) => (objects as Record<string, ObjectBox>)[src] ?? null;
-// 2.5D proof: the packshots cut out by scripts/lightmask.mjs (only Zeta for now) take light on the glass
+// 2.5D object: the packshots cut out by scripts/lightmask.mjs (all 26 perfumes since Phase C1) take light on the glass
 export const lightMask = (src: string) => (lightmasks as string[]).includes(src) ? `/morph/objects/${src.split('/').pop()!.replace(/\.\w+$/, '')}-mask.png` : null;
 
 export const COLLECTIONS: Record<CollectionId, { name: string; type: string; line: string }> = {

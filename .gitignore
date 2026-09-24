@@ -66,3 +66,8 @@ temp/
 .next/
 next-env.d.ts
 *.tsbuildinfo
+
+# Impeccable: the engine binary (16 MB) is fetched by the launcher from the official GitHub release, checksum-verified
+.claude/skills/impeccable/scripts/bin/
+.claude/skills/impeccable/scripts/update-check.json
+.impeccable/

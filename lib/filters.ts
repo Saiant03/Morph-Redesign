@@ -1,10 +1,10 @@
 import { type Perfume, familyGroup, travelFor } from './catalog';
 
 export type Sort = 'recomandate' | 'longevitate' | 'pret' | 'az';
-export type View = 'index' | 'galerie';
+export type View = 'vitrina' | 'index';
 export type Filters = { q: string; familie: string | null; intensitate: string | null; longevitate: string | null; travel: boolean; stoc: boolean; sort: Sort; view: View };
 
-export const DEFAULT_FILTERS: Filters = { q: '', familie: null, intensitate: null, longevitate: null, travel: false, stoc: false, sort: 'recomandate', view: 'index' };
+export const DEFAULT_FILTERS: Filters = { q: '', familie: null, intensitate: null, longevitate: null, travel: false, stoc: false, sort: 'recomandate', view: 'vitrina' };
 
 const norm = (t: string) => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
@@ -20,7 +20,7 @@ export function parseFilters(sp: Record<string, string | string[] | undefined>):
     travel: one('travel') === '1',
     stoc: one('stoc') === '1',
     sort: (['longevitate', 'pret', 'az'] as const).find(x => x === sort) ?? 'recomandate',
-    view: one('vedere') === 'galerie' ? 'galerie' : 'index',
+    view: one('vedere') === 'index' ? 'index' : 'vitrina',
   };
 }
 
@@ -33,7 +33,7 @@ export function toQuery(f: Filters) {
   if (f.travel) q.set('travel', '1');
   if (f.stoc) q.set('stoc', '1');
   if (f.sort !== 'recomandate') q.set('sort', f.sort);
-  if (f.view !== 'index') q.set('vedere', f.view);
+  if (f.view !== 'vitrina') q.set('vedere', f.view);
   return q.toString();
 }
 

@@ -46,8 +46,8 @@ export function FilterBar({ items, f, set, shown }: Props) {
             </select>
           </label>
           <div className={s.view} role="group" aria-label="Vedere">
+            <button type="button" aria-pressed={f.view === 'vitrina'} onClick={() => set({ view: 'vitrina' })}>Vitrină</button>
             <button type="button" aria-pressed={f.view === 'index'} onClick={() => set({ view: 'index' })}>Index</button>
-            <button type="button" aria-pressed={f.view === 'galerie'} onClick={() => set({ view: 'galerie' })}>Galerie</button>
           </div>
         </div>
       </div>

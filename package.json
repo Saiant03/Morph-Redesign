@@ -1,8 +1,8 @@
 {
   "name": "morph-redesign-concept",
   "private": true,
-  "version": "0.7.5",
-  "description": "Morph Parfum redesign concept (Phase B.5: asset and transition refinement). Not a production site.",
+  "version": "0.8.0",
+  "description": "Morph Parfum redesign concept (Phase C1: perfume index as a cabinet of objects). Not a production site.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

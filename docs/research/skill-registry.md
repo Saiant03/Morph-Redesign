@@ -52,6 +52,20 @@ Inspection procedure applied to every candidate:
 | Known limitations | The `--design-system` output is generic and conflicts with the Morph direction (gold accent, Cormorant/Montserrat, feature-card grids, "liquid glass" blur, `back.out` stagger); it was rejected. Treat only the UX/accessibility rules as input, and never persist its output. Some queries return no match (e.g. cart drawer) |
 | Date added | 2026-09-24 |
 
+### impeccable
+| Field | Value |
+|---|---|
+| Source repository | pbakaus/impeccable (official; npm package `impeccable` points to the same repository) |
+| Source URL | https://github.com/pbakaus/impeccable |
+| Commit | `edb9c7fbcba158fb6236bd043d6cba18d9cde8d3` (2026-09-24); installer `impeccable@4.1.0`, skill version 4.3.1, engine 0.1.5 |
+| License | Apache 2.0 (`LICENSE` copied into the skill folder; `NOTICE.md` credits ehmo/platform-design-skills, MIT, for the iOS/Android references) |
+| Relevance | Phase C1: critique before and after the `/parfumuri` redesign, the craft-floor checklist, and the deterministic detector (`scripts/impeccable detect`) |
+| Installed | With the documented installer (`npx impeccable install --providers=claude --scope=project`), run first in a scratch directory. Only `.claude/skills/impeccable/` was copied into the repo. **Not** copied: the Claude Code hooks it writes to `.claude/settings.local.json` (a detector after every Edit/Write and on Stop) and its four subagents in `.claude/agents/` |
+| Inspected | SKILL.md and the critique, polish and craft-floor references in full; URL scan of every markdown file (localhost, pinned github.com fixtures, impeccable.style docs, one design.md spec on raw.githubusercontent.com); hidden Unicode scan: none; no prompt-injection patterns. The launcher (`scripts/impeccable`, sh) was read: it runs a native engine binary, downloading it once from the project's GitHub releases (`engine-v<version>`) with a checksum check |
+| Scripts present / executed | Yes / the launcher: `context`, `detect --json` (read-only). The 16 MB engine binary is gitignored (`scripts/bin/`) and fetched by the launcher on first run |
+| Known limitations | Its generative defaults (bold "out-of-distribution" direction, PRODUCT.md/DESIGN.md setup, interactive questions, two subagents per critique) are not used; Morph's art direction in `docs/design/` wins. Used for critique, craft floor and detector only. The detector returned no findings on the C1 files, so it adds little beyond the manual review for this codebase |
+| Date added | 2026-09-24 |
+
 ## Local (authored for this project)
 
 | Skill | Purpose | Scripts | Date |
@@ -70,4 +84,4 @@ Inspection procedure applied to every candidate:
 | web-artifacts-builder, theme-factory, canvas-design, brand-guidelines | anthropics/skills | Aimed at claude.ai artifacts or Anthropic branding; not relevant | — |
 | claude-code plugins (feature-dev, code-review, security-guidance …) | anthropics/claude-code @ d78be94 | General dev workflow, largely covered by built-in skills in this environment | If a specific gap appears |
 
-No third-party (non-vendor) skill repositories were imported. The official vendor sources covered the needs, and unvetted community skill aggregators add risk without a clear gain.
+Apart from ui-ux-pro-max and impeccable (both requested by the owner), no third-party (non-vendor) skill repositories were imported. The official vendor sources covered the needs, and unvetted community skill aggregators add risk without a clear gain.
