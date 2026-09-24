@@ -26,7 +26,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
   return (
     <div className="wrap">
       <PageHead id="descopera-titlu" title="Descoperă" crumbs={[{ href: '/', label: 'Morph' }, { label: 'Descoperă' }]}
-        lede="Găsește-ți parfumul după familie, notă, anotimp sau intensitate, apoi încearcă-l acasă sau în boutique, înainte de sticla de 100 ml."
+        lede="Găsește-ți parfumul după familie, notă, anotimp sau intensitate, apoi încearcă-l acasă sau în magazin, înainte de sticla de 100 ml."
         meta={`${perfumes.length} de parfumuri. Atributele sunt cele publicate de Morph pentru fiecare parfum.`}>
         <SectionNav label="Descoperă" items={DESCOPERA_NAV} current="/descopera" />
       </PageHead>
@@ -45,7 +45,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
       <section id="incearca" className="section" aria-labelledby="incearca-titlu">
         <div className={s.head}>
           <h2 id="incearca-titlu" className="t-1">Încearcă înainte de sticlă</h2>
-          <p className="muted">Un parfum se alege pe piele, în câteva zile. Acasă, cu formatele mici Morph; în persoană, în {BOUTIQUE.name}. Stocul e cel de la data instantaneului.</p>
+          <p className="muted">Un parfum se alege pe piele, în câteva zile. Acasă, cu formatele mici Morph; în persoană, în {BOUTIQUE.short} din București. Stocul e cel de la data instantaneului.</p>
         </div>
 
         <div className={s.travel}>
@@ -80,7 +80,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
             <OpenNow />
             <p className="t-small muted num">{BOUTIQUE.hours.join(' · ')}</p>
           </div>
-          <Link className="btn btn-secondary" href="/casa-morph">Vezi Casa Morph</Link>
+          <Link className="btn btn-secondary" href={BOUTIQUE.href}>Vezi magazinul</Link>
         </div>
         <p className={`${s.threshold} t-small muted`}>Livrarea e gratuită de la {lei(FREE_SHIPPING)}. O sticlă de {lei(Math.min(...perfumes.map(p => p.price)))} plus un travel trece pragul.</p>
       </section>

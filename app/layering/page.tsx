@@ -44,8 +44,8 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
 
         <section className={`section ${s.try}`} aria-labelledby="pe-piele">
           <h2 id="pe-piele" className="t-2">Pe piele, nu pe ecran</h2>
-          <p className="muted">Compunerea arată cum se așază notele publicate, nu cum miroase perechea. O verifici în travel acasă sau direct în {BOUTIQUE.name}, {BOUTIQUE.address}.</p>
-          <p className={s.tryLinks}><Link className="link" href="/descopera#incearca">Toate formatele de încercare</Link><Link className="link" href="/casa-morph">Casa Morph</Link></p>
+          <p className="muted">Compunerea arată cum se așază notele publicate, nu cum miroase perechea. O verifici în travel acasă sau direct în {BOUTIQUE.short}, {BOUTIQUE.address}.</p>
+          <p className={s.tryLinks}><Link className="link" href="/descopera#incearca">Toate formatele de încercare</Link><Link className="link" href={BOUTIQUE.href}>Magazinul din București</Link></p>
         </section>
       </div>
     </div>

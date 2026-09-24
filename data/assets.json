@@ -1,0 +1,25 @@
+{
+  "note": "Morph images used in the private concept. Source: morphparfum.ro (public pages and media library), checked 2026-09-24. Downloaded by `npm run assets`; never hot-linked. status: 'concept' = used in the private concept like the packshots; 'pending' = not downloaded until the owner clears it. See docs/design/phase-05-5-content-opportunity-map.md.",
+  "base": "https://morphparfum.ro/wp-content/uploads/",
+  "assets": [
+    { "file": "les-exclusifs-campaign.avif", "src": "2026/03/les-exclusifs-slide.avif", "size": "1920x1000", "where": "home slider", "subject": "Les Exclusifs campaign: black-and-white panther", "status": "concept" },
+    { "file": "les-exclusifs-campaign-m.avif", "src": "2026/03/les-exclusifs-slide-m.avif", "where": "home slider, mobile", "subject": "Les Exclusifs campaign, mobile crop", "status": "concept" },
+    { "file": "luxury-campaign.avif", "src": "2026/03/colectia-luxury-slide.avif", "size": "1920x1000", "where": "home slider", "subject": "Luxury campaign: bottles bound in red rope", "status": "concept" },
+    { "file": "luxury-campaign-m.avif", "src": "2026/03/colectia-luxury-slide-m.avif", "where": "home slider, mobile", "subject": "Luxury campaign, mobile crop", "status": "concept" },
+    { "file": "ice-campaign.avif", "src": "2026/03/colectia-ice-slide.avif", "size": "1920x1000", "where": "home slider", "subject": "Ice campaign: gloved lab hands, sand, vial", "status": "concept" },
+    { "file": "ice-campaign-m.avif", "src": "2026/03/colectia-ice-slide-m.avif", "where": "home slider, mobile", "subject": "Ice campaign, mobile crop", "status": "concept" },
+    { "file": "ynf-box-in-hand.avif", "src": "2026/07/layering-parfum-slide.avif", "size": "1920x1353", "where": "blog lead (same shot as home slider layering-slide-1.png)", "subject": "Your Next Form: open box with two vials, in hand, on black", "status": "concept" },
+    { "file": "ynf-boxes.avif", "src": "2026/07/layering-slide-2.avif", "size": "1920x1000", "where": "home slider", "subject": "Your Next Form: boxes with state names", "status": "concept" },
+    { "file": "ynf-silhouette.avif", "src": "2026/07/layering-slide-3.avif", "size": "1920x1000", "where": "home slider", "subject": "Silhouette holding two vials against white", "status": "concept" },
+    { "file": "workshop-1.avif", "src": "2026/07/workshop-morph-1.avif", "size": "1000x705", "where": "blog: layering workshop", "subject": "Workshop table setting, outdoors", "status": "pending", "why": "event; check people in frame" },
+    { "file": "workshop-3.avif", "src": "2026/07/workshop-morph-3.avif", "size": "750x1000", "where": "blog: layering workshop", "subject": "Notes cards, vials, blotters on a table (hands only)", "status": "concept" },
+    { "file": "workshop-4.avif", "src": "2026/07/workshop-morph-4.avif", "size": "1000x705", "where": "blog: layering workshop", "subject": "Your Next Form box in hand (hands only)", "status": "concept" },
+    { "file": "luxury-flatlay.avif", "src": "2025/03/Parfumul-in-functie-de-zodie-pentru-femei-scaled-1.avif", "size": "2560x1707", "where": "blog lead image", "subject": "Luxury bottles overlapping at an angle", "status": "concept" },
+    { "file": "extract-still-life.avif", "src": "2024/12/Ce-inseamna-extract-de-parfum-ghidul-complet-pentru-iubitorii-de-parfumuri-de-lux.avif", "size": "1200x800", "where": "blog lead image", "subject": "Les Exclusifs bottle beside ribbed glass", "status": "concept" },
+    { "file": "black-bottle.avif", "src": "2024/11/Concentratie-de-parfum-scaled-1.avif", "size": "2560x1707", "where": "blog lead image", "subject": "Black bottle tilted on white, box behind", "status": "concept" },
+    { "file": "bottle-row.avif", "src": "2024/11/NOTE-DE-PARFUMURI-scaled-1.avif", "size": "2560x1440", "where": "blog lead image", "subject": "A row of bottles on white with reflections", "status": "concept" },
+    { "file": "n8-editorial.avif", "src": "2024/11/istoria-parfumului-scaled-1.avif", "size": "2560x1440", "where": "blog lead image, About", "subject": "N8 held between painted jackets", "status": "concept" },
+    { "file": "animal-editorial.avif", "src": "2024/11/Ingredientele-din-parfumuri-scaled-1.avif", "size": "2560x1440", "where": "blog lead image, About", "subject": "Two models, leopard print, Animal bottle", "status": "pending", "why": "models; usage rights" },
+    { "file": "gate17-launch", "src": "2025/03/1-2.avif … 15.avif", "size": "1080x1620 ×15", "where": "About gallery", "subject": "Gate 17 launch 2024, guests", "status": "pending", "why": "identifiable guests; consent" }
+  ]
+}

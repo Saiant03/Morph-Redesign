@@ -17,8 +17,8 @@ const PAGES = [
   { href: '/layering/your-next-form', label: 'Your Next Form: seturile blind', words: 'your next form blind set layering surpriza' },
   { href: '/descopera#incearca', label: 'Încearcă înainte de sticlă', words: 'mostre esantioane travel incearca proba discovery' },
   { href: '/cadouri', label: 'Cadouri', words: 'cadou cadouri gift card cutie' },
-  { href: '/casa-morph', label: 'Casa Morph, boutique-ul din București', words: 'boutique magazin bucuresti adresa program casa morph lahovari' },
-  { href: '/casa-morph#certilogo', label: 'Verificare Certilogo', words: 'certilogo original autentic verificare cod' },
+  { href: '/magazin', label: 'Magazinul Morph din București', words: 'magazin boutique bucuresti adresa program lahovari' },
+  { href: '/magazin#certilogo', label: 'Verificare Certilogo', words: 'certilogo original autentic verificare cod' },
 ];
 const OFFERS = [
   ...[...travelSets, ...sampleSets].filter(o => TRIAL[o.slug]).map(o => ({ o, name: TRIAL[o.slug].name, href: '/descopera#incearca' })),

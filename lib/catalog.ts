@@ -125,9 +125,13 @@ export function noteStory(p: Perfume) {
 }
 
 export const HERO_SLUG = 'morph-zeta-parfum-100ml';
-// Boutique facts as published in the morphparfum.ro footer and contact page (checked 2026-09-24).
+// Shop facts as published in the morphparfum.ro footer and contact page (checked 2026-09-24).
+// Naming: the live site calls it "magazinul din București"; "Casa Morph" is not used customer-facing (owner decision).
 export const BOUTIQUE = {
-  name: 'Casa Morph',
+  name: 'Magazinul Morph din București',
+  /** in a sentence: "în magazinul Morph, Piața …" */
+  short: 'magazinul Morph',
+  href: '/magazin',
   address: 'Piața Alexandru Lahovari nr. 5, București',
   hours: ['L–V 12:00–20:00', 'S–D 10:00–18:00'],
   /** opening hours by weekday (0 = Sunday), for the "open now" line */

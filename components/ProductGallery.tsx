@@ -13,7 +13,7 @@ export function ProductGallery({ p }: { p: Perfume }) {
     <div className={s.gallery}>
       <div ref={track} className={s.track} onScroll={e => setI(Math.round(e.currentTarget.scrollLeft / e.currentTarget.clientWidth))} tabIndex={0} aria-label={`Imagini ${p.shortName}`}>
         {p.images.map((_, k) => (
-          <ProductVisual key={k} p={p} image={k} priority={k === 0} sizes="(max-width: 899px) 100vw, 56vw" className={s.slide}
+          <ProductVisual key={k} p={p} image={k} priority={k === 0} vt={k === 0} sizes="(max-width: 899px) 100vw, 56vw" className={s.slide}
             alt={k === 0 ? p.name : `${p.shortName}, ambalaj, imaginea ${k + 1}`} />
         ))}
       </div>

@@ -2,6 +2,10 @@
 
 /* the light inside a niche; interpolates when the fragrance in it changes */
 @property --glow { syntax: '<color>'; inherits: true; initial-value: #f4efe7; }
+/* the key light of a room: one source, behind-above; rooms change by light, never by hue (phase-a-creative-system.md) */
+@property --key-x { syntax: '<percentage>'; inherits: true; initial-value: 30%; }
+@property --key-y { syntax: '<percentage>'; inherits: true; initial-value: 0%; }
+@property --key { syntax: '<number>'; inherits: true; initial-value: 1; }
 
 :root {
   /* stone: the lit gallery wall (default tone) */
@@ -48,6 +52,11 @@
   --d-fast: 160ms; --d-base: 320ms; --d-slow: 640ms; --d-story: 900ms; --d-light: 1400ms;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* materials: baked once by scripts/materials.mjs, never animated */
+  --mat-grain: url('/materials/grain.webp');
+  --mat-walnut: url('/materials/walnut.webp');
+  --mat-paper: url('/materials/paper.webp');
 }
 @media (max-width: 899px) { :root { --header-h: 56px; } }
 
@@ -66,18 +75,25 @@
   background-color: var(--bg);
   color: var(--fg);
 }
-/* wood: dark walnut with a faint grain, for the boutique and the collection vitrines */
+/* night: a faint grain so the dark does not band */
+[data-tone='dark'] { background-image: var(--mat-grain); background-size: 160px; }
+/* wood: a panelled walnut wall (vertical panels, shadow gaps, satin), lit by the room's key light and
+   falling off toward the floor. Built, not photographed: see scripts/materials.mjs. */
 [data-tone='wood'] {
   --bg: #221a14;
-  --muted: #a89c8e;              /* 6.1:1 */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='800' preserveAspectRatio='none'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.0018 0.045' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.6 0 0 0 0 0.44 0 0 0 0 0.3 0 0 0 0.22 -0.06'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
-  background-size: 100% 100%;
+  --muted: #a89c8e;              /* ≥ 4.5:1 on 99.9% of the lit walnut (measured), 7.4:1 on its darkest */
+  background-image:
+    radial-gradient(120% 90% at var(--key-x) var(--key-y), rgb(255 214 170 / calc(0.06 * var(--key))), transparent 60%),
+    linear-gradient(to bottom, transparent 55%, rgb(10 7 5 / 0.45)),
+    var(--mat-walnut);
+  background-size: 100% 100%, 100% 100%, cover;
+  background-position: center, center, 50% 0;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: calc(var(--header-h) + 16px); }
 body {
-  margin: 0; min-height: 100vh; background: var(--bg); color: var(--fg);
+  margin: 0; min-height: 100vh; background: var(--bg) var(--mat-grain) 0 0 / 160px; color: var(--fg);
   font-family: var(--font); font-size: var(--t-body); line-height: 1.5;
   -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
 }
@@ -140,7 +156,23 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 [data-reveal] { clip-path: inset(0 0 0 0); transition: clip-path 1.2s var(--ease-inout); }
 [data-reveal='hidden'] { clip-path: inset(100% 0 0 0); }
 
+/* PAGE → STATE (phase-a-creative-system.md): the same room changing state.
+   T0: the header has its own transition name and no animation, so it stays while the page changes.
+   T1 relight: the new page rises 8px as its light comes up (the page itself stays live; React does not snapshot it).
+   T2 morph: a named object (obj-<slug>) keeps its identity between a list and its product page. */
+.vt-marker { position: absolute; width: 1px; height: 1px; overflow: hidden; pointer-events: none; }
+::view-transition-old(.page), ::view-transition-new(.page),
+::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+::view-transition-group(site-header) { z-index: 3; }
+::view-transition-old(site-header), ::view-transition-new(site-header) { animation: none; }
+::view-transition-old(site-header) { display: none; }
+::view-transition-group(.morph) { animation-duration: 520ms; animation-timing-function: var(--ease-inout); z-index: 2; }
+::view-transition-old(.morph), ::view-transition-new(.morph) { animation-duration: 520ms; height: 100%; object-fit: contain; }
+html[data-nav] .page-enter { animation: 380ms var(--ease-out) backwards vt-light; }
+@keyframes vt-light { from { opacity: 0; transform: translateY(8px); filter: brightness(0.75); } }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
   [data-reveal='hidden'] { clip-path: none; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
 }

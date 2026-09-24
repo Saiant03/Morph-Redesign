@@ -15,7 +15,7 @@ export function ProductIndexRow({ p, active, onActivate, eager, showCollection }
   return (
     <li className={`${s.row} ${p.inStock ? '' : s.soldout}`} data-flip-id={p.slug} data-active={active} onMouseEnter={onActivate} onFocus={onActivate}>
       <Link href={productHref(p)} className={s.thumb} tabIndex={-1} aria-hidden>
-        <ProductVisual p={p} sizes="72px" alt="" priority={eager} className={s.thumbVisual} />
+        <ProductVisual p={p} sizes="72px" alt="" priority={eager} className={s.thumbVisual} vt />
       </Link>
       <div className={s.nameCell}>
         <h2 className={s.name}><Link href={productHref(p)}>{p.shortName}</Link></h2>

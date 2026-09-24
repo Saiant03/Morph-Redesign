@@ -5,11 +5,12 @@ import { ProductMeta } from './ProductMeta';
 import { AddToCart } from './AddToCart';
 import s from './Product.module.css';
 
-export function ProductCard({ p, sizes = '(max-width: 899px) 72vw, 25vw' }: { p: Perfume; sizes?: string }) {
+// `vt`: the card's bottle morphs into its product page. Only in lists where the product page holds no other card of it.
+export function ProductCard({ p, sizes = '(max-width: 899px) 72vw, 25vw', vt }: { p: Perfume; sizes?: string; vt?: boolean }) {
   return (
     <article className={`${s.card} ${p.inStock ? '' : s.soldout}`}>
       <Link href={productHref(p)} className={s.cardLink}>
-        <ProductVisual p={p} sizes={sizes} alt="" className={s.cardVisual} />
+        <ProductVisual p={p} sizes={sizes} alt="" className={s.cardVisual} vt={vt} />
         {!p.inStock && <span className={`${s.flag} label`}>Stoc epuizat</span>}
         <h3 className={s.cardName}>{p.shortName}</h3>
       </Link>

@@ -1,7 +1,7 @@
 'use client';
 import { useSyncExternalStore } from 'react';
 
-// "De încercat în Casa Morph": the visitor's own shortlist, kept only in this browser (localStorage).
+// "De încercat în magazin": the visitor's own shortlist, kept only in this browser (localStorage).
 // An entry is a perfume slug, or two slugs joined by "+" for a layering pair. Nothing is sent anywhere.
 const KEY = 'morph-concept-try';
 let items: string[] = [];

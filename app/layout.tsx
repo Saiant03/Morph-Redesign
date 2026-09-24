@@ -4,6 +4,7 @@ import { SiteHeader } from '@/components/SiteHeader';
 import { CartDrawer } from '@/components/CartDrawer';
 import { SearchOverlay } from '@/components/SearchOverlay';
 import { Footer } from '@/components/Footer';
+import { NavState } from '@/components/NavState';
 import './globals.css';
 
 const sans = Schibsted_Grotesk({ subsets: ['latin', 'latin-ext'], variable: '--font-sans', display: 'swap' });
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <CartDrawer />
         <SearchOverlay />
+        <NavState />
       </body>
     </html>
   );

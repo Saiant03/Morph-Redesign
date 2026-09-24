@@ -5,7 +5,7 @@ export const NAV: { href: string; label: string; match?: RegExp; children?: { hr
   { href: '/descopera', label: 'Descoperă', children: [{ href: '/descopera', label: 'Explorează' }, { href: '/descopera/finder', label: 'Fragrance Finder' }] },
   { href: '/layering', label: 'Layering', children: [{ href: '/layering', label: 'Compune' }, { href: '/layering/your-next-form', label: 'Your Next Form' }] },
   { href: '/cadouri', label: 'Cadouri' },
-  { href: '/casa-morph', label: 'Casa Morph' },
+  { href: '/magazin', label: 'Magazinul' },
 ];
 export const DESCOPERA_NAV = NAV[1].children!;
 export const LAYERING_NAV = NAV[2].children!;

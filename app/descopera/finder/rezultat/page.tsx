@@ -70,9 +70,9 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
           <Link className="link t-small" href="/descopera/finder">Refă de la început</Link>
         </div>
         <div className={s.boutique}>
-          <h2 className="t-3">Pe piele, în {BOUTIQUE.name}</h2>
-          <p className="muted">Parfumurile de mai sus se pot încerca în boutique, cu echipa Morph alături. {BOUTIQUE.address}. {BOUTIQUE.hours.join(', ')}.</p>
-          <Link className="btn btn-secondary" href="/casa-morph">Vezi Casa Morph</Link>
+          <h2 className="t-3">Pe piele, în {BOUTIQUE.short}</h2>
+          <p className="muted">Parfumurile de mai sus se pot încerca în magazin, cu echipa Morph alături. {BOUTIQUE.address}. {BOUTIQUE.hours.join(', ')}.</p>
+          <Link className="btn btn-secondary" href={BOUTIQUE.href}>Vezi magazinul</Link>
         </div>
         <p className={`${s.source} t-micro muted`}>
           Rezultatul folosește întrebările, etichetele și ponderile din Fragrance Finder-ul Morph (morphparfum.ro/quiz, preluate pe {finderSnapshotAt.slice(0, 10)}), cu aceeași regulă de selecție.

@@ -68,7 +68,7 @@ export function ProductIndex({ items, initial, trial }: { items: Perfume[]; init
             <Preview p={shown.some(x => x.slug === active) ? a : shown[0]} />
           </div>
         ) : (
-          <div className={s.gallery}>{shown.map(p => <div key={p.slug} data-flip-id={p.slug}><ProductCard p={p} sizes="(max-width: 899px) 50vw, 30vw" /></div>)}</div>
+          <div className={s.gallery}>{shown.map(p => <div key={p.slug} data-flip-id={p.slug}><ProductCard p={p} sizes="(max-width: 899px) 50vw, 30vw" vt /></div>)}</div>
         )}
       </div>
     </>

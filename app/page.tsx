@@ -125,7 +125,7 @@ export default function Home() {
         <div className="wrap">
           <div className={s.head}>
             <h2 id="incearca-titlu" className="t-1">Încearcă înainte de sticlă</h2>
-            <p className="muted">Un parfum se alege pe piele, în câteva zile. Morph are formatele pentru acasă și un boutique în București.</p>
+            <p className="muted">Un parfum se alege pe piele, în câteva zile. Morph are formatele pentru acasă și un magazin în București.</p>
           </div>
           <div className={s.tryGrid}>
             <article className={s.tryHome}>
@@ -147,8 +147,8 @@ export default function Home() {
               <p>{BOUTIQUE.address}</p>
               <OpenNow />
               <p className="t-small muted num">{BOUTIQUE.hours.join(' · ')}</p>
-              <p className="muted t-small">Parfumurile se încearcă pe piele, cu echipa Morph alături. Ce marchezi online „De încercat în Casa Morph” îți rămâne pe listă.</p>
-              <Link className="btn btn-secondary" href="/casa-morph">Vezi Casa Morph</Link>
+              <p className="muted t-small">Parfumurile se încearcă pe piele, cu echipa Morph alături. Ce marchezi online „De încercat în magazin” îți rămâne pe listă.</p>
+              <Link className="btn btn-secondary" href={BOUTIQUE.href}>Vezi magazinul</Link>
             </article>
           </div>
           <p className={`${s.threshold} t-small muted`}>Livrarea e gratuită de la {lei(FREE_SHIPPING)}. O sticlă Luxury ({lei(lux)}) împreună cu un travel trece pragul.</p>
@@ -169,14 +169,14 @@ export default function Home() {
         <div className={`wrap ${s.house}`}>
           <div className={s.houseText}>
             <p className="label muted">București</p>
-            <h2 id="casa-titlu" className="t-1">Casa Morph</h2>
-            <p className="t-lede">Boutique-ul Morph din Piața Alexandru Lahovari. Aici parfumurile găsite pe ecran se încearcă pe piele.</p>
+            <h2 id="casa-titlu" className="t-1">Magazinul Morph</h2>
+            <p className="t-lede">Magazinul Morph din Piața Alexandru Lahovari. Aici parfumurile găsite pe ecran se încearcă pe piele.</p>
             <ul className={s.trust}>
               <li><span className="label muted">Original</span><span>Cod Certilogo pe fiecare cutie, verificabil online.</span></li>
               <li><span className="label muted">Livrare</span><span>Gratuită de la {lei(FREE_SHIPPING)}. Card, Apple Pay sau Google Pay.</span></li>
               <li><span className="label muted">Fidelitate</span><span>Morph Points, în contul de client.</span></li>
             </ul>
-            <Link className="btn" href="/casa-morph">Vizitează Casa Morph</Link>
+            <Link className="btn" href={BOUTIQUE.href}>Vizitează magazinul</Link>
           </div>
           <ul className={s.wall} aria-label="Câteva dintre parfumurile Morph">
             {WALL.map(slug => {

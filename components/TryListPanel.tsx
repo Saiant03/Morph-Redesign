@@ -7,22 +7,22 @@ import s from './TryListPanel.module.css';
 
 const find = (slug: string) => perfumes.find(p => p.slug === slug);
 
-/** The visitor's "De încercat în Casa Morph" selection, read from this browser only. Laid out as a card to show in store. */
+/** The visitor's "De încercat în magazin" selection, read from this browser only. Laid out as a card to show in store. */
 export function TryListPanel() {
   const list = useTryList();
   const rows = list.map(k => ({ k, ps: k.split('+').map(find).filter(Boolean) as Perfume[] })).filter(r => r.ps.length);
   if (!rows.length) {
     return (
       <div className={s.card}>
-        <p className={s.cardHead}><span className="label muted">De încercat în Casa Morph</span></p>
+        <p className={s.cardHead}><span className="label muted">De încercat în magazin</span></p>
         <p className="t-lede">Selecția e goală.</p>
-        <p className="muted">Pornește de la <Link className="link" href="/descopera/finder">Fragrance Finder</Link>, <Link className="link" href="/descopera">Descoperă</Link> sau <Link className="link" href="/layering">Layering</Link> și marchează ce vrei să încerci. Aici apare lista, de arătat în boutique.</p>
+        <p className="muted">Pornește de la <Link className="link" href="/descopera/finder">Fragrance Finder</Link>, <Link className="link" href="/descopera">Descoperă</Link> sau <Link className="link" href="/layering">Layering</Link> și marchează ce vrei să încerci. Aici apare lista, de arătat în magazin.</p>
       </div>
     );
   }
   return (
     <div className={s.card}>
-      <p className={s.cardHead}><span className="label muted">De încercat în Casa Morph</span><span className="label muted num">{rows.length}</span></p>
+      <p className={s.cardHead}><span className="label muted">De încercat în magazin</span><span className="label muted num">{rows.length}</span></p>
       <ol className={s.list}>
         {rows.map(({ k, ps }, i) => (
           <li key={k} className={s.row}>
@@ -42,7 +42,7 @@ export function TryListPanel() {
           </li>
         ))}
       </ol>
-      <p className="t-micro muted">Nu e o rezervare. E lista ta, de arătat echipei în boutique.</p>
+      <p className="t-micro muted">Nu e o rezervare. E lista ta, de arătat echipei în magazin.</p>
     </div>
   );
 }

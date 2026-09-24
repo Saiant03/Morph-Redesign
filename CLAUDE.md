@@ -38,7 +38,7 @@ Concept de redesign pentru https://morphparfum.ro (propunere profesională cătr
 Sursa de adevăr pentru cercetare: `docs/research/`. Începe cu `00-executive-summary.md`; nu redescoperi fapte deja documentate acolo. `raw/` conține notițele brute ale subagenților, iar fișierele 01–08 au prioritate față de ele.
 
 Fapte-cheie (verificate 2026-09-24):
-- Morph e un brand italian de nișă (Napoli, 2002, Andrea Angelino). morphparfum.ro e magazinul oficial din România, cu boutique-ul Casa Morph din București.
+- Morph e un brand italian de nișă (Napoli, 2002, Andrea Angelino). morphparfum.ro e magazinul oficial din România, cu un magazin fizic în București (Piața Alexandru Lahovari 5; pe site-ul live: „magazinul din București”).
 - Stack actual: WordPress + WooCommerce + Breakdance. Store API public: `https://morphparfum.ro/wp-json/wc/store/v1/products`. Doar citire, fără credențiale.
 - Captură de pagini: skill-ul `site-capture`.
 
@@ -57,7 +57,8 @@ Fapte-cheie (verificate 2026-09-24):
   - Principiu digital: PRODUS + FORMĂ + MATERIE + LUMINĂ + PARFUM + TRANSFORMARE.
   - Culoarea derivată din parfum e doar accent atmosferic, nu taxonomie și nu limbaj vizual principal.
   - Niciodată familii olfactive reprezentate în principal ca palete de culori. Niciodată catalogul ca sistem de culori. Niciodată layering-ul ca amestec de vopsea.
-- 2026-09-24: Faza 05 încheiată: reset de direcție artistică. Sistem: nișa luminată (produsul în lumină), tonuri piatră / noapte / nuc, un perete burgund doar pe Casa Morph, Newsreader pentru nume și capitole. Culoarea parfumului = doar `--glow` (14% în lumina nișei). Paginile noi: `/cadouri`, căutare overlay. Documente: `docs/design/phase-05-design-system.md`, `phase-05-art-direction-reset.md`, `phase-05-creative-review.md`. Test: `npm run smoke` (server pornit).
+- 2026-09-24: Faza 05 încheiată: reset de direcție artistică. Sistem: nișa luminată (produsul în lumină), tonuri piatră / noapte / nuc, un perete burgund doar pe pagina magazinului, Newsreader pentru nume și capitole. Culoarea parfumului = doar `--glow` (14% în lumina nișei). Paginile noi: `/cadouri`, căutare overlay. Documente: `docs/design/phase-05-design-system.md`, `phase-05-art-direction-reset.md`, `phase-05-creative-review.md`. Test: `npm run smoke` (server pornit).
 - 2026-09-24: Faza 05.5 (doar strategie, fără cod): planul de upgrade creativ în `docs/design/phase-05-5-creative-upgrade-plan.md`, cu `phase-05-5-awwwards-reference-map.md` și `phase-05-5-content-opportunity-map.md`. Ideea: o singură cameră luminată care își schimbă starea (tranziții, obiect persistent, campaniile Morph ca medii). Roadmap A–E; urmează Faza A doar la cererea proprietarului.
 - Denumire: „Casa Morph” nu se folosește în experiența pentru clienți (decizia proprietarului). Propunere: „Magazinul Morph din București”, de confirmat.
+- 2026-09-24: Faza A (sistemul creativ) încheiată: magazinul redenumit („Magazinul Morph din București”, nav „Magazinul”, `/magazin`, redirect din `/casa-morph`), nuc pe panouri și granulație generate cu `npm run materials`, tokeni de lumină (`--key-*`), tranziții de pagină cu `<ViewTransition>` (header fix, intrare „relight”, sticla partajată listă → produs), titlul hero legat de coloană (testat 320–1920 px), imaginile de campanie Morph în `public/morph/campaign` (`npm run assets`, proveniență în `data/assets.json`). Document: `docs/design/phase-a-creative-system.md`. Urmează Faza B doar la cerere.
 - Skill-urile externe se importă doar după inspecție și se înregistrează în `docs/research/skill-registry.md`.

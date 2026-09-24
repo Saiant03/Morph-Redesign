@@ -138,10 +138,10 @@ await check('layering: URL pair, change slot updates URL, disclaimer', async () 
   assert(await pg.locator('h1').count() === 1, 'invalid slugs broke the page');
 });
 
-await check('try list: Descoperă → Casa Morph selection', async () => {
+await check('try list: Descoperă → shop selection', async () => {
   await pg.goto(BASE + '/descopera', { waitUntil: 'networkidle' });
   await pg.getByRole('button', { name: /Adaugă Zeta pe lista/ }).click();
-  await pg.goto(BASE + '/casa-morph', { waitUntil: 'networkidle' });
+  await pg.goto(BASE + '/magazin', { waitUntil: 'networkidle' });
   await pg.getByRole('link', { name: 'Zeta' }).first().waitFor();
 });
 
@@ -162,7 +162,7 @@ await check('reduced motion: hero and reveals fully visible', async () => {
 });
 
 await check('no horizontal overflow at 390 / 768 / 1024 / 1440', async () => {
-  const routes = ['/', '/parfumuri/luxury', '/morph-zeta-parfum-100ml', '/descopera', '/descopera/finder', '/layering', '/layering/your-next-form', '/casa-morph', '/cadouri'];
+  const routes = ['/', '/parfumuri/luxury', '/morph-zeta-parfum-100ml', '/descopera', '/descopera/finder', '/layering', '/layering/your-next-form', '/magazin', '/cadouri'];
   for (const w of [390, 768, 1024, 1440]) {
     const p = await page(w === 390 ? { ...devices['iPhone 13'] } : { viewport: { width: w, height: 900 } });
     for (const r of routes) {
@@ -178,6 +178,63 @@ await check('mobile PDP: price and CTA in the first viewport', async () => {
   await m.goto(BASE + '/morph-zeta-parfum-100ml', { waitUntil: 'networkidle' });
   const box = await m.getByRole('button', { name: /Adaugă în coș/ }).boundingBox();
   assert(box && box.y + box.height <= 664, `CTA bottom at ${box && box.y + box.height}`);
+});
+
+await check('naming: /casa-morph redirects; "Casa Morph" appears nowhere', async () => {
+  const r = await pg.goto(BASE + '/casa-morph', { waitUntil: 'networkidle' });
+  assert(new URL(pg.url()).pathname === '/magazin' && r.ok(), pg.url());
+  for (const route of ['/', '/magazin', '/descopera', '/descopera/finder/rezultat?r=1', '/layering', '/layering/your-next-form', '/morph-zeta-parfum-100ml', '/cadouri']) {
+    await pg.goto(BASE + route, { waitUntil: 'networkidle' });
+    const html = await pg.content();
+    assert(!/Casa Morph/i.test(html), `"Casa Morph" on ${route}`);
+  }
+});
+
+await check('hero: "Metamorfoză prin parfum." never clipped, 320–1920 px every 10 px', async () => {
+  const h = await page({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+  await h.goto(BASE + '/', { waitUntil: 'networkidle' });
+  await h.evaluate(() => document.fonts.ready);
+  const bad = [];
+  for (let w = 320; w <= 1920; w += 10) {
+    await h.setViewportSize({ width: w, height: 900 });
+    await h.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
+    const r = await h.evaluate(() => [...document.querySelectorAll('h1 [data-line]')].map(s => {
+      const range = document.createRange(); range.selectNodeContents(s);
+      const t = range.getBoundingClientRect(), m = s.parentElement.getBoundingClientRect();
+      return t.left >= m.left - 0.5 && t.right <= m.right + 0.5 && t.right <= window.innerWidth;
+    }));
+    if (r.length !== 2 || r.includes(false)) bad.push(w);
+  }
+  assert(bad.length === 0, `clipped at ${bad.join(', ')}`);
+});
+
+await check('page transition: collection row → product runs a view transition with the shared bottle', async () => {
+  const t = await page();
+  await t.goto(BASE + '/parfumuri/luxury', { waitUntil: 'networkidle' });
+  await t.evaluate(() => {
+    const vt = document.startViewTransition?.bind(document);
+    window.__vt = [];
+    if (vt) document.startViewTransition = (...a) => { const tr = vt(...a); window.__vt.push('start'); tr.ready.then(() => window.__vt.push([...document.getAnimations()].map(x => x.effect?.pseudoElement).filter(Boolean).join(' '))).catch(e => window.__vt.push('err ' + e)); return tr; };
+  });
+  await t.getByRole('heading', { name: 'Zeta' }).getByRole('link').click();
+  await t.waitForURL(/morph-zeta-parfum-100ml/);
+  await t.waitForTimeout(900);
+  const log = await t.evaluate(() => window.__vt);
+  assert(log[0] === 'start', `no view transition: ${JSON.stringify(log)}`);
+  assert(/obj-morph-zeta-parfum-100ml/.test(log[1] ?? ''), `no shared bottle: ${JSON.stringify(log).slice(0, 200)}`);
+  assert(await t.locator('h1').innerText() === 'Zeta', 'wrong page');
+});
+
+await check('page transition under reduced motion: no animation, content visible at once', async () => {
+  const r = await page({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+  await r.goto(BASE + '/parfumuri/luxury', { waitUntil: 'networkidle' });
+  await r.getByRole('heading', { name: 'Zeta' }).getByRole('link').click();
+  await r.waitForURL(/morph-zeta-parfum-100ml/);
+  await r.waitForTimeout(60);
+  const slow = await r.evaluate(() => document.getAnimations().filter(a => (a.effect?.getTiming().duration ?? 0) > 1 && a.playState === 'running').length);
+  assert(slow === 0, `${slow} running animations`);
+  const op = await r.locator('.page-enter').evaluate(e => getComputedStyle(e).opacity);
+  assert(op === '1', `page opacity ${op}`);
 });
 
 await check('no console errors', async () => { assert(errors.length === 0, errors.slice(0, 3).join(' | ')); });

@@ -48,7 +48,7 @@ export function SiteHeader() {
   }, [path]);
 
   return (
-    <header ref={ref} className={s.header} data-open={open} data-tone={open ? undefined : tone}>
+    <header ref={ref} className={s.header} data-open={open} data-tone={open ? undefined : tone} style={{ viewTransitionName: 'site-header' }}>
       <div className={`wrap ${s.inner}`}>
         <Link href="/" className={s.logo} aria-label="Morph, pagina principală"><Logo /></Link>
         <nav className={s.nav} aria-label="Principal">

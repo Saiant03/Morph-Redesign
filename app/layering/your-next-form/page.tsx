@@ -34,9 +34,9 @@ export default function Page() {
           <Link className="btn btn-secondary" href="/layering">Deschide compozitorul</Link>
         </div>
         <div>
-          <h3 className="t-3">Vrei să încerci în boutique?</h3>
-          <p className="muted">{BOUTIQUE.name}, {BOUTIQUE.address}. {BOUTIQUE.hours.join(', ')}.</p>
-          <Link className="btn btn-secondary" href="/casa-morph">Vezi Casa Morph</Link>
+          <h3 className="t-3">Vrei să încerci în magazin?</h3>
+          <p className="muted">Magazinul Morph, {BOUTIQUE.address}. {BOUTIQUE.hours.join(', ')}.</p>
+          <Link className="btn btn-secondary" href={BOUTIQUE.href}>Vezi magazinul</Link>
         </div>
       </section>
     </div></div>

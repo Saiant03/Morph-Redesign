@@ -45,7 +45,7 @@ export function HeroCampaign() {
         </div>
 
         <div ref={stage} className={s.stage} data-stage>
-          <ProductVisual p={p} sizes="(max-width: 899px) 100vw, 58vw" priority className={s.niche} alt={`${p.name}, sticla`} />
+          <ProductVisual p={p} sizes="(max-width: 899px) 100vw, 58vw" priority vt className={s.niche} alt={`${p.name}, sticla`} />
           <span className={s.dim} data-dim aria-hidden />
         </div>
 

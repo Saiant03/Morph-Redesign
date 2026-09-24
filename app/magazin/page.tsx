@@ -3,9 +3,9 @@ import { OpenNow } from '@/components/OpenNow';
 import { TryListPanel } from '@/components/TryListPanel';
 import { ProductVisual } from '@/components/ProductVisual';
 import { inCollection, COLLECTIONS, ALL_BY_COLLECTION, BOUTIQUE, FREE_SHIPPING, lei, bySlug, collectionHref, perfumes } from '@/lib/catalog';
-import s from './casa.module.css';
+import s from './magazin.module.css';
 
-export const metadata = { title: 'Casa Morph' };
+export const metadata = { title: BOUTIQUE.name };
 
 const tel = (n: string) => `tel:+40${n.replace(/\s/g, '').slice(1)}`;
 // One object per collection, set into the wall like the boutique's display niches.
@@ -18,9 +18,9 @@ export default function Page() {
       <section className={s.room} data-tone="wood" aria-labelledby="casa-titlu">
         <div className={`wrap ${s.roomGrid}`}>
           <div className={s.roomText}>
-            <nav className="t-small muted" aria-label="Breadcrumb"><Link href="/">Morph</Link> / <span aria-current="page">Casa Morph</span></nav>
-            <h1 id="casa-titlu" className="t-display">Casa Morph</h1>
-            <p className="t-lede">Boutique-ul Morph din București. Aici parfumurile găsite și compuse pe ecran se încearcă pe piele, cu echipa Morph alături.</p>
+            <nav className="t-small muted" aria-label="Breadcrumb"><Link href="/">Morph</Link> / <span aria-current="page">Magazinul</span></nav>
+            <h1 id="casa-titlu" className="t-display">Magazinul Morph</h1>
+            <p className="t-lede">Magazinul oficial Morph din București. Aici parfumurile găsite și compuse pe ecran se încearcă pe piele, cu echipa Morph alături.</p>
           </div>
           <div className={s.artWall} aria-label="Câte un parfum din fiecare colecție">
             {WALL.map((slug, i) => {
@@ -42,7 +42,7 @@ export default function Page() {
             </dl>
             <div className={s.actions}>
               <a className="btn" href={BOUTIQUE.maps} target="_blank" rel="noopener">Deschide în hărți</a>
-              <a className="btn btn-secondary" href={tel(BOUTIQUE.phone)}>Sună la boutique <span className="num">{BOUTIQUE.phone}</span></a>
+              <a className="btn btn-secondary" href={tel(BOUTIQUE.phone)}>Sună la magazin <span className="num">{BOUTIQUE.phone}</span></a>
             </div>
             <p className="t-small muted">Comenzi online: <a className="link num" href={tel(BOUTIQUE.onlineOrders.phone)}>{BOUTIQUE.onlineOrders.phone}</a>, {BOUTIQUE.onlineOrders.hours}. E-mail: <a className="link" href={`mailto:${BOUTIQUE.email}`}>{BOUTIQUE.email}</a>.</p>
           </div>
@@ -65,7 +65,7 @@ export default function Page() {
             <li>
               <span className="label muted num">02</span>
               <h3 className="t-2">Cu echipa Morph</h3>
-              <p className="muted">Recenziile Google ale magazinului (159 la momentul auditului) vorbesc mai ales despre oamenii din boutique și despre alegerea parfumului cu ajutorul lor.</p>
+              <p className="muted">Recenziile Google ale magazinului (159 la momentul auditului) vorbesc mai ales despre oamenii din magazin și despre alegerea parfumului cu ajutorul lor.</p>
             </li>
             <li>
               <span className="label muted num">03</span>
@@ -88,7 +88,7 @@ export default function Page() {
         <div className={`wrap ${s.listGrid}`}>
           <div className={s.listText}>
             <h2 id="lista" className="t-1">Selecția ta</h2>
-            <p className="muted">Parfumurile și perechile marcate „De încercat în Casa Morph” în Finder, Descoperă sau Layering. Lista rămâne doar în acest browser; o deschizi pe telefon în boutique.</p>
+            <p className="muted">Parfumurile și perechile marcate „De încercat în magazin” în Finder, Descoperă sau Layering. Lista rămâne doar în acest browser; o deschizi pe telefon în magazin.</p>
           </div>
           <TryListPanel />
         </div>

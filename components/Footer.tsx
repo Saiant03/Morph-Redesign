@@ -6,8 +6,8 @@ import s from './Footer.module.css';
 // Footer structure from docs/research/06. Items without a concept route are listed, not linked.
 const COLS: { title: string; items: (string | [string, string])[] }[] = [
   { title: 'Magazin', items: ['Livrare și plată', 'Retur', 'Urmărește comanda', ['Cadouri și gift card', '/cadouri']] },
-  { title: 'Ajutor', items: ['Întrebări frecvente', 'Contact', ['Verificare Certilogo', '/casa-morph#certilogo'], 'ANPC · SOL'] },
-  { title: 'Casa Morph', items: [['Povestea', '/casa-morph#povestea'], ['Boutique București', '/casa-morph'], 'Morph Points', 'Jurnal'] },
+  { title: 'Ajutor', items: ['Întrebări frecvente', 'Contact', ['Verificare Certilogo', '/magazin#certilogo'], 'ANPC · SOL'] },
+  { title: 'Despre Morph', items: [['Povestea', '/magazin#povestea'], ['Magazinul din București', '/magazin'], 'Morph Points', 'Jurnal'] },
 ];
 
 export function Footer() {
@@ -16,7 +16,7 @@ export function Footer() {
       <div className={`wrap ${s.grid}`}>
         <div className={s.brand}>
           <Logo className={s.logo} />
-          <p className="t-small muted">Magazinul oficial Morph în România.<br />{BOUTIQUE.name}, {BOUTIQUE.address}.</p>
+          <p className="t-small muted">Magazinul oficial Morph în România.<br />{BOUTIQUE.address}.</p>
         </div>
         {COLS.map(c => (
           <div key={c.title}>

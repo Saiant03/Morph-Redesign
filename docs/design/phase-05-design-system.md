@@ -1,6 +1,6 @@
 # Phase 05 — Design system (Niche · Matter · Light)
 
-Source of truth for implementation from Phase 05 on. It replaces the visual parts of `phase-03-design-system.md` (color principles, scent tokens, chords, strata, atlas, color keys). What still applies from Phase 03: the space scale, the 12-column grid, the buy-path rules, the accessibility checklist and the component contracts not listed here. Tokens live in `app/globals.css`. Why the reset happened: `phase-05-art-direction-reset.md`.
+Source of truth for implementation from Phase 05 on; extended and partly superseded by `phase-a-creative-system.md` (shop name, walnut, grain, light tokens, page transitions). It replaces the visual parts of `phase-03-design-system.md` (color principles, scent tokens, chords, strata, atlas, color keys). What still applies from Phase 03: the space scale, the 12-column grid, the buy-path rules, the accessibility checklist and the component contracts not listed here. Tokens live in `app/globals.css`. Why the reset happened: `phase-05-art-direction-reset.md`.
 
 ## Principles
 
