@@ -32,7 +32,7 @@ export default function Page() {
             <blockquote><p>Cremele de corp sunt „perfecte pentru a fi utilizate împreună cu parfumul preferat Morph, accentuând persistența acestuia”.</p></blockquote>
             <figcaption className="t-micro muted">Din pagina Despre noi, morphparfum.ro</figcaption>
           </figure>
-          <SectionNav label="Colecții" current="/parfumuri/corp" items={ROOM_TABS} />
+          <SectionNav label="Colecții" current="/parfumuri/corp" items={ROOM_TABS} types={['room']} />
         </div>
       </section>
 

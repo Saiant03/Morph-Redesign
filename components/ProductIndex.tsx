@@ -4,29 +4,40 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Flip } from 'gsap/Flip';
 import { gsap, reducedMotion, EASE } from '@/lib/motion';
 import { type Perfume, type Offer, bySlug, COLLECTIONS, concentration, hours, lei, productHref, travelFor, fullItem, sampleName } from '@/lib/catalog';
-import { type Filters, apply, toQuery, activeCount } from '@/lib/filters';
+import { type Filters, DEFAULT_FILTERS, apply, toQuery, activeCount, parseFilters } from '@/lib/filters';
 import { FilterBar } from './FilterBar';
 import { ProductIndexRow } from './ProductIndexRow';
 import { ProductCard } from './ProductCard';
 import { ProductVisual } from './ProductVisual';
 import { NotePyramid } from './NotePyramid';
 import { AddToCart } from './AddToCart';
+import { pick, usePicked, indexHolds } from '@/lib/pick';
 import s from './ProductIndex.module.css';
 
 if (typeof window !== 'undefined') gsap.registerPlugin(Flip);
 
-/** Collection browsing: an editorial index with a live preview in a niche, or a gallery of objects. */
-export function ProductIndex({ items, initial, trial }: { items: Perfume[]; initial: Filters; trial: Offer[] }) {
-  const [f, setF] = useState(initial);
+/**
+ * Collection browsing: an editorial index with a live preview in a niche, or a gallery of objects.
+ * The filters live in the URL but are read on the client, so the collection pages stay static (prefetched whole,
+ * no server render between the click and the room change).
+ */
+export function ProductIndex({ items, trial }: { items: Perfume[]; trial: Offer[] }) {
+  const [f, setF] = useState<Filters>(DEFAULT_FILTERS);
   const shown = useMemo(() => apply(items, f), [items, f]);
   const [active, setActive] = useState(shown.find(p => p.inStock)?.slug ?? items[0].slug);
   const list = useRef<HTMLDivElement>(null);
   const flip = useRef<Flip.FlipState | null>(null);
+  const picked = usePicked();
 
   function set(next: Partial<Filters>) {
     if (list.current && !reducedMotion()) flip.current = Flip.getState(list.current.querySelectorAll('[data-flip-id]'));
     setF(prev => ({ ...prev, ...next }));
   }
+
+  useLayoutEffect(() => {
+    const url = parseFilters(Object.fromEntries(new URLSearchParams(window.location.search)));
+    if (toQuery(url)) setF(url);
+  }, []);
 
   useEffect(() => {
     const q = toQuery(f);
@@ -68,7 +79,7 @@ export function ProductIndex({ items, initial, trial }: { items: Perfume[]; init
             <Preview p={shown.some(x => x.slug === active) ? a : shown[0]} />
           </div>
         ) : (
-          <div className={s.gallery}>{shown.map(p => <div key={p.slug} data-flip-id={p.slug}><ProductCard p={p} sizes="(max-width: 899px) 50vw, 30vw" vt /></div>)}</div>
+          <div className={s.gallery}>{shown.map(p => <div key={p.slug} data-flip-id={p.slug}><ProductCard p={p} sizes="(max-width: 899px) 50vw, 30vw" vt={indexHolds(picked, p.slug) || 'idle'} onPick={() => pick(p.slug, 'index')} /></div>)}</div>
         )}
       </div>
     </>

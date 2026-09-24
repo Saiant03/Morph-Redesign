@@ -2,17 +2,13 @@ import Link from 'next/link';
 import { ViewTransition } from 'react';
 import { ProductIndex } from '@/components/ProductIndex';
 import { SectionNav } from '@/components/SectionNav';
-import { ProductVisual } from '@/components/ProductVisual';
+import { ShelfItem } from '@/components/ShelfItem';
 import { RoomImage } from '@/components/RoomImage';
-import { CAMPAIGN } from '@/lib/campaign';
-import { perfumes, inCollection, COLLECTIONS, ALL_BY_COLLECTION, sampleSets, collectionHref, productHref, lei, type CollectionId } from '@/lib/catalog';
-import { parseFilters } from '@/lib/filters';
+import { CAMPAIGN, ALL_ROOM } from '@/lib/campaign';
+import { perfumes, inCollection, COLLECTIONS, ALL_BY_COLLECTION, sampleSets, collectionHref, lei, type CollectionId } from '@/lib/catalog';
 import s from './collection.module.css';
 
-type SP = Record<string, string | string[] | undefined>;
-
 export const ROOM_TABS = [{ href: '/parfumuri', label: 'Toate' }, ...ALL_BY_COLLECTION.map(c => ({ href: collectionHref(c), label: COLLECTIONS[c].name })), { href: '/parfumuri/corp', label: 'Baie & Corp' }];
-const ALL = { src: '/morph/campaign/bottle-row.avif', alt: 'Sticle Morph așezate în rând, cu reflexiile lor', pos: '50% 60%' };
 
 /**
  * Shared by /parfumuri (all) and /parfumuri/[colectie]: one room in four states. Morph's campaign is the window,
@@ -20,16 +16,16 @@ const ALL = { src: '/morph/campaign/bottle-row.avif', alt: 'Sticle Morph așezat
  * Changing collection is a change of state (docs/design/phase-b-core-commerce.md): the photograph changes under
  * light, the title drops and the next one rises, shared bottles move along the shelf.
  */
-export function CollectionPage({ id, searchParams }: { id: CollectionId | null; searchParams: SP }) {
+export function CollectionPage({ id }: { id: CollectionId | null }) {
   const items = id ? inCollection(id) : perfumes;
   const prices = [...new Set(items.map(p => p.price))].sort((a, b) => a - b);
   const trial = sampleSets.filter(x => x.inStock && (!id || (id === 'luxury' ? /luxury/.test(x.slug) : /exclusifs|ice/.test(x.slug))));
-  const env = id ? CAMPAIGN[id] : ALL;
+  const env = id ? CAMPAIGN[id] : ALL_ROOM;
   return (
     <>
       <section className={s.room} aria-labelledby="colectie-titlu">
         <div className={s.window}>
-          <RoomImage src={env.src} mobile={id ? CAMPAIGN[id].mobile : undefined} alt={env.alt} pos={env.pos} className={s.env} />
+          <RoomImage src={env.src} mobile={id ? CAMPAIGN[id].mobile : undefined} alt={env.alt} pos={env.pos} posM={id ? CAMPAIGN[id].posM : undefined} className={s.env} />
         </div>
         <div className={`wrap ${s.plateRow}`}>
           <div className={s.plate}>
@@ -42,27 +38,20 @@ export function CollectionPage({ id, searchParams }: { id: CollectionId | null; 
             <p className="t-lede">{id ? COLLECTIONS[id].line : 'Toate parfumurile Morph, unisex, în trei colecții: Les Exclusifs, Luxury și Ice.'}</p>
             <p className="label muted num">{id ? `${COLLECTIONS[id].type} · ` : ''}{items.length} parfumuri · 100 ml · {prices.map(lei).join(' / ')}</p>
           </div>
-          <SectionNav label="Colecții" current={collectionHref(id ?? undefined)} items={ROOM_TABS} />
+          <SectionNav label="Colecții" current={collectionHref(id ?? undefined)} items={ROOM_TABS} types={['room']} />
         </div>
         <div className={s.shelfBand} data-tone="wood">
           <div className={s.shelfWrap}>
             <ul className={`${s.shelf} wrap`} data-dense={items.length > 14} aria-label={`Vitrina ${id ? COLLECTIONS[id].name : 'Morph'}`}>
               {items.map(p => (
-                <li key={p.slug}>
-                  <ViewTransition name={`shelf-${p.slug}`} share="shelf" enter="shelf-in" exit="shelf-out" default="none">
-                    <Link href={productHref(p)} className={s.shelfItem} aria-label={p.shortName}>
-                      <ProductVisual p={p} sizes="120px" alt="" className={s.shelfNiche} />
-                      <span className="t-micro" aria-hidden>{p.shortName}</span>
-                    </Link>
-                  </ViewTransition>
-                </li>
+                <li key={p.slug}><ShelfItem p={p} className={s.shelfItem} nicheClassName={s.shelfNiche} /></li>
               ))}
             </ul>
           </div>
         </div>
       </section>
       <div className="wrap">
-        <ProductIndex items={items} initial={parseFilters(searchParams)} trial={trial} />
+        <ProductIndex items={items} trial={trial} />
       </div>
     </>
   );

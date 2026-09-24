@@ -1,6 +1,10 @@
 /* Morph concept — tokens and shared primitives. Source of truth: docs/design/phase-05-design-system.md */
 
 /* the light inside a niche; interpolates when the fragrance in it changes */
+/* 2.5D object light (components/ObjectLight): registered so the light and the tilt glide instead of jumping */
+@property --lx { syntax: '<percentage>'; inherits: true; initial-value: 38%; }
+@property --ly { syntax: '<percentage>'; inherits: true; initial-value: 30%; }
+@property --ry { syntax: '<angle>'; inherits: true; initial-value: 0deg; }
 @property --glow { syntax: '<color>'; inherits: true; initial-value: #f4efe7; }
 /* the key light of a room: one source, behind-above; rooms change by light, never by hue (phase-a-creative-system.md) */
 @property --key-x { syntax: '<percentage>'; inherits: true; initial-value: 30%; }
@@ -105,6 +109,9 @@ h1, h2, h3, p { margin: 0; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 
+/* Morph campaign photographs (components/RoomImage): the focal point follows the frame being served */
+.campaign-img { width: 100%; height: 100%; object-fit: cover; object-position: var(--pos-m, 50% 50%); }
+@media (min-width: 600px) { .campaign-img { object-position: var(--pos, 50% 50%); } }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .skip { position: absolute; left: 8px; top: -60px; z-index: 100; background: var(--fg); color: var(--bg); padding: 10px 16px; }
 .skip:focus { top: 8px; }
@@ -160,26 +167,43 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 [data-crop] img { transition: scale 1.4s var(--ease-out); }
 [data-crop='hidden'] img { scale: 1.07; }
 
-/* PAGE → STATE (phase-a-creative-system.md): the same room changing state.
+/* PAGE → STATE (phase-a-creative-system.md, timing refined in phase-b5-asset-transition.md): one room changing state.
    T0: the header has its own transition name and no animation, so it stays while the page changes.
-   T1 relight: the new page rises 8px as its light comes up (the page itself stays live; React does not snapshot it).
-   T2 morph: a named object (obj-<slug>) keeps its identity between a list and its product page. */
+   T1 relight: React does not snapshot the page (it cancels the root transition), so the new page is lit live: it
+      starts at 40% of its light, not from black, so there is never an empty frame between two pages, and rises 8px.
+      When an object travels (T2) the page's light waits for it (--vt-lead): the object leads, the room follows.
+   T2 morph: a named object (obj-<slug>) keeps its identity between a list and its product page and lands lit.
+   Room changes between collections (type 'room') keep the page still: only the window, title and shelf move. */
+:root { --vt-in: 460ms; --vt-lead: 90ms; --vt-morph: 620ms; --ease-light: cubic-bezier(0.33, 0, 0.2, 1); --ease-camera: cubic-bezier(0.45, 0, 0.12, 1); }
 .vt-marker { position: absolute; width: 1px; height: 1px; overflow: hidden; pointer-events: none; }
 ::view-transition-old(.page), ::view-transition-new(.page),
 ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
-::view-transition-group(site-header) { z-index: 3; }
+@media (prefers-reduced-motion: no-preference) {
+  html[data-nav] .page-enter { animation: var(--vt-in) var(--ease-light) var(--vt-lead) backwards vt-light; }
+  html:active-view-transition-type(room) .page-enter { animation: none; }
+}
+@keyframes vt-light { from { opacity: 0.4; transform: translateY(8px); filter: brightness(0.82); } }
+::view-transition-group(site-header) { z-index: 3; animation: none; }
 ::view-transition-old(site-header), ::view-transition-new(site-header) { animation: none; }
 ::view-transition-old(site-header) { display: none; }
-::view-transition-group(.morph) { animation-duration: 520ms; animation-timing-function: var(--ease-inout); z-index: 2; }
-::view-transition-old(.morph), ::view-transition-new(.morph) { animation-duration: 520ms; height: 100%; object-fit: contain; }
-@media (prefers-reduced-motion: no-preference) { html[data-nav] .page-enter { animation: 380ms var(--ease-out) backwards vt-light; } }
+/* the object: travels on the camera's curve; the old view hands over in the first half, the new one lands lit */
+::view-transition-group(.morph) { animation-duration: var(--vt-morph); animation-timing-function: var(--ease-camera); z-index: 2; }
+::view-transition-old(.morph), ::view-transition-new(.morph) { height: 100%; object-fit: contain; }
+::view-transition-old(.morph) { animation: calc(var(--vt-morph) * 0.55) var(--ease-inout) both vt-fade; }
+::view-transition-new(.morph) { animation: var(--vt-morph) var(--ease-inout) both obj-land; }
+@keyframes obj-land { from { opacity: 0; filter: brightness(1.18); } 45% { opacity: 1; } }
 /* room change (collections): the photograph changes in place under a passing band of light; the title drops,
    the next one rises; bottles shared by both shelves move, the others leave and arrive */
 ::view-transition-group(.room) { animation-duration: 0s; }
 ::view-transition-old(.room) { animation: 700ms var(--ease-inout) both vt-fade; }
-::view-transition-new(.room) { animation: 900ms var(--ease-inout) both room-light; mask-image: linear-gradient(100deg, #000 40%, rgb(0 0 0 / 0.6) 48%, transparent 56%); mask-size: 320% 100%; }
+::view-transition-new(.room), ::view-transition-new(.room-enter) { animation: 900ms var(--ease-inout) both room-light; mask-image: linear-gradient(100deg, #000 40%, rgb(0 0 0 / 0.6) 48%, transparent 56%); mask-size: 320% 100%; }
 @keyframes room-light { from { mask-position: 100% 0; filter: brightness(1.25); } to { mask-position: 0 0; filter: brightness(1); } }
 @keyframes vt-fade { to { opacity: 0; } }
+/* entering a room from the home worlds: the campaign on screen is the room's window. The frame travels to the
+   window's place and size (the camera settles), the photograph keeps filling it, the band of light crosses it */
+::view-transition-group(.room-enter) { animation-duration: var(--vt-morph); animation-timing-function: var(--ease-camera); z-index: 1; overflow: hidden; }
+::view-transition-old(.room-enter), ::view-transition-new(.room-enter) { height: 100%; object-fit: cover; }
+::view-transition-old(.room-enter) { animation: var(--vt-morph) var(--ease-inout) both vt-fade; }
 ::view-transition-group(.room-title) { animation-duration: 0s; }
 ::view-transition-old(.room-title), ::view-transition-new(.room-title) { height: 100%; width: auto; object-fit: none; object-position: left bottom; }
 ::view-transition-old(.room-title) { animation: 260ms var(--ease-inout) both title-drop; }
@@ -191,7 +215,6 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 ::view-transition-new(.shelf-in) { animation: 560ms var(--ease-out) 160ms both shelf-in; }
 @keyframes shelf-out { to { opacity: 0; transform: translateY(10%); filter: brightness(0.6); } }
 @keyframes shelf-in { from { opacity: 0; transform: translateY(10%); filter: brightness(0.6); } }
-@keyframes vt-light { from { opacity: 0; transform: translateY(8px); filter: brightness(0.75); } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }

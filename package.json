@@ -1,8 +1,8 @@
 {
   "name": "morph-redesign-concept",
   "private": true,
-  "version": "0.7.0",
-  "description": "Morph Parfum redesign concept (Phase B: homepage and core commerce). Not a production site.",
+  "version": "0.7.5",
+  "description": "Morph Parfum redesign concept (Phase B.5: asset and transition refinement). Not a production site.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,7 +13,8 @@
     "smoke": "node scripts/smoke.mjs",
     "materials": "node scripts/materials.mjs",
     "assets": "node scripts/assets.mjs",
-    "objects": "node scripts/objects.mjs"
+    "objects": "node scripts/objects.mjs",
+    "lightmask": "node scripts/lightmask.mjs"
   },
   "dependencies": {
     "gsap": "^3.15.0",

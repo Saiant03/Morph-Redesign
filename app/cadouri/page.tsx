@@ -115,7 +115,7 @@ export default function Page() {
       </section>
 
       {/* 4. Gift card */}
-      <section className="band" data-tone="wood" aria-labelledby="card-titlu">
+      <section id="card" className="band" data-tone="wood" aria-labelledby="card-titlu">
         <div className={`wrap ${s.card}`}>
           <h2 id="card-titlu" className="t-1">Gift card Morph</h2>
           <dl className={s.cardFacts}>

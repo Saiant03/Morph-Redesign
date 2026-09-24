@@ -3,6 +3,7 @@
 import catalog from '@/data/catalog.json';
 import colors from '@/data/colors.json';
 import objects from '@/data/objects.json';
+import lightmasks from '@/data/lightmasks.json';
 
 export type CollectionId = 'les-exclusifs' | 'luxury' | 'ice';
 
@@ -65,6 +66,8 @@ export const ritualPerfumes = () => perfumes.filter(p => bodyItems.some(b => b.s
 /** Where the object sits inside a packshot (fractions), measured by scripts/objects.mjs. */
 export type ObjectBox = { w: number; h: number; top: number; bottom: number; left: number; right: number };
 export const objectBox = (src: string) => (objects as Record<string, ObjectBox>)[src] ?? null;
+// 2.5D proof: the packshots cut out by scripts/lightmask.mjs (only Zeta for now) take light on the glass
+export const lightMask = (src: string) => (lightmasks as string[]).includes(src) ? `/morph/objects/${src.split('/').pop()!.replace(/\.\w+$/, '')}-mask.png` : null;
 
 export const COLLECTIONS: Record<CollectionId, { name: string; type: string; line: string }> = {
   // `line` paraphrases Morph's own collection copy (homepage "Colecțiile Morph")

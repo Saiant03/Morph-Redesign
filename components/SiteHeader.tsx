@@ -5,11 +5,16 @@ import { useEffect, useRef, useState } from 'react';
 import { Logo } from './Logo';
 import { cart, useCart } from '@/lib/cart';
 import { search } from '@/lib/search';
-import { NAV } from '@/lib/nav';
+import { NAV, type NavLink } from '@/lib/nav';
 import s from './SiteHeader.module.css';
 
 const isCurrent = (n: (typeof NAV)[number], path: string) =>
   n.href.startsWith('/') && (n.match ? n.match.test(path) : path === n.href || path.startsWith(n.href + '/'));
+
+// Jurnal lives on morphparfum.ro: it opens there, and says so
+const Item = ({ l, onClick }: { l: NavLink; onClick?: () => void }) => l.ext
+  ? <a href={l.href} target="_blank" rel="noopener">{l.label}<span className="sr-only"> (pe morphparfum.ro, se deschide într-o filă nouă)</span><span aria-hidden> ↗</span></a>
+  : <Link href={l.href} onClick={onClick}>{l.label}</Link>;
 
 /**
  * The header takes the tone of the chapter under it (SECTION → TRANSITION): dark over the night and wood rooms,
@@ -19,6 +24,9 @@ export function SiteHeader() {
   const path = usePathname() || '/';
   const { count } = useCart();
   const [open, setOpen] = useState(false);
+  // a desktop panel opens on hover or focus; after a choice it stays shut until the pointer leaves the header
+  const [shut, setShut] = useState(false);
+  const choose = () => { setShut(true); (document.activeElement as HTMLElement | null)?.blur(); };
   const [tone, setTone] = useState<string | undefined>(undefined);
   const ref = useRef<HTMLElement>(null);
 
@@ -48,12 +56,24 @@ export function SiteHeader() {
   }, [path]);
 
   return (
-    <header ref={ref} className={s.header} data-open={open} data-tone={open ? undefined : tone} style={{ viewTransitionName: 'site-header' }}>
+    <header ref={ref} className={s.header} data-open={open} data-tone={open ? undefined : tone} style={{ viewTransitionName: 'site-header' }} onMouseLeave={() => setShut(false)}>
       <div className={`wrap ${s.inner}`}>
         <Link href="/" className={s.logo} aria-label="Morph, pagina principală"><Logo /></Link>
-        <nav className={s.nav} aria-label="Principal">
+        <nav className={s.nav} aria-label="Principal" data-shut={shut}>
           {NAV.map(n => (
-            <Link key={n.label} href={n.href} aria-current={isCurrent(n, path) ? 'page' : undefined}>{n.label}</Link>
+            <div key={n.label} className={s.item}>
+              <Link href={n.href} className={s.top} aria-current={isCurrent(n, path) ? 'page' : undefined} onClick={choose}>{n.label}</Link>
+              <div className={s.panel}>
+                <div className={`wrap ${s.panelGrid}`}>
+                  {n.groups.map(g => (
+                    <div key={g.title}>
+                      <p className="label muted">{g.title}</p>
+                      <ul>{g.links.map(l => <li key={l.label}><Item l={l} onClick={choose} /></li>)}</ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           ))}
         </nav>
         <div className={s.utils}>
@@ -71,11 +91,12 @@ export function SiteHeader() {
           {NAV.map(n => (
             <li key={n.label}>
               <Link href={n.href} onClick={() => setOpen(false)} aria-current={isCurrent(n, path) ? 'page' : undefined}>{n.label}</Link>
-              {n.children && (
-                <ul className={s.sub}>
-                  {n.children.slice(1).map(c => <li key={c.href}><Link href={c.href} onClick={() => setOpen(false)}>{c.label}</Link></li>)}
-                </ul>
-              )}
+              {n.groups.map(g => (
+                <div key={g.title} className={s.sub}>
+                  {g.title !== n.label && <p className="label muted">{g.title}</p>}
+                  <ul>{g.links.filter(l => l.href !== n.href).map(l => <li key={l.label}><Item l={l} onClick={() => setOpen(false)} /></li>)}</ul>
+                </div>
+              ))}
             </li>
           ))}
         </ul>

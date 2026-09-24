@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useId, useState } from 'react';
 import { type Perfume, COLLECTIONS, familyGroup, hours, descriptor, lei, productHref, travelFor, fullItem } from '@/lib/catalog';
 import { ProductVisual } from './ProductVisual';
+import { pick, usePicked, indexHolds } from '@/lib/pick';
 import { NotePyramid } from './NotePyramid';
 import { AddToCart } from './AddToCart';
 import s from './ProductIndex.module.css';
@@ -12,13 +13,15 @@ export function ProductIndexRow({ p, active, onActivate, eager, showCollection }
   const [open, setOpen] = useState(false);
   const detail = useId();
   const travel = travelFor(p);
+  const holds = indexHolds(usePicked(), p.slug);
+  const onPick = () => pick(p.slug, 'index');
   return (
     <li className={`${s.row} ${p.inStock ? '' : s.soldout}`} data-flip-id={p.slug} data-active={active} onMouseEnter={onActivate} onFocus={onActivate}>
-      <Link href={productHref(p)} className={s.thumb} tabIndex={-1} aria-hidden>
-        <ProductVisual p={p} sizes="72px" alt="" priority={eager} className={s.thumbVisual} vt />
+      <Link href={productHref(p)} className={s.thumb} tabIndex={-1} aria-hidden onClick={onPick}>
+        <ProductVisual p={p} sizes="72px" alt="" priority={eager} className={s.thumbVisual} vt={holds || 'idle'} />
       </Link>
       <div className={s.nameCell}>
-        <h2 className={s.name}><Link href={productHref(p)}>{p.shortName}</Link></h2>
+        <h2 className={s.name}><Link href={productHref(p)} onClick={onPick}>{p.shortName}</Link></h2>
         {showCollection && <span className="label muted">{COLLECTIONS[p.collection].name}</span>}
       </div>
       <p className={s.notes}>{descriptor(p)}{travel && <span className="t-micro muted"><br />Și travel 2×8 ml, {lei(travel.price)}</span>}</p>
@@ -38,7 +41,7 @@ export function ProductIndexRow({ p, active, onActivate, eager, showCollection }
       <div id={detail} className={s.detail} hidden={!open}>
         <NotePyramid p={p} />
         <p className="t-small muted">Intensitate {p.intensity?.toLowerCase() ?? 'nespecificată'}{travel ? `. Travel 2×8 ml, ${lei(travel.price)}` : ''}.</p>
-        <Link href={productHref(p)} className="link t-small">Vezi parfumul</Link>
+        <Link href={productHref(p)} className="link t-small" onClick={onPick}>Vezi parfumul</Link>
       </div>
     </li>
   );

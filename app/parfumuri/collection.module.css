@@ -27,11 +27,15 @@
 .shelf[data-dense='true'] li { min-width: 40px; }
 .shelf[data-dense='true'] span { display: none; }
 
+@media (max-width: 1199px) { .plateRow > nav { grid-column: 1 / -1; justify-self: start; } }
 @media (max-width: 899px) {
-  .window { height: min(134vw, 72svh); }
+  .window { height: auto; aspect-ratio: 16 / 10; }
   .plateRow { grid-template-columns: 1fr; margin-top: calc(var(--s-8) * -1); }
   .plate { grid-column: 1; padding: var(--s-5); }
   .plate h1 { font-size: 56px; }
   .plateRow > nav { grid-column: 1; justify-self: start; }
   .shelf li { flex: 0 0 76px; }
+}
+@media (max-width: 599px) {
+  .window { aspect-ratio: auto; height: min(134vw, 72svh); }
 }

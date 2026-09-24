@@ -24,8 +24,9 @@
 .familyList a > :nth-child(3) { grid-column: 2; grid-row: 1; align-self: center; }
 .familyName { font-family: var(--serif); font-size: 30px; line-height: 1.05; font-weight: 300; }
 .familyList a:hover .familyName { font-style: italic; }
-.ritualImage { position: relative; width: 100%; aspect-ratio: 4 / 5; overflow: hidden; }
-.ritualImage img { object-fit: cover; object-position: 55% 50%; }
+/* Your Next Form box in hand: square, so the whole open box (21–80% of the frame's width) stays in */
+.ritualImage { position: relative; width: 100%; aspect-ratio: 1; overflow: hidden; }
+.ritualImage img { object-fit: cover; object-position: 50% 50%; }
 .textures { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; }
 .textures li { display: grid; gap: 6px; }
 .texture { position: relative; display: block; aspect-ratio: 3 / 4; }
@@ -55,6 +56,7 @@
   .formGrid, .shopGrid { grid-template-columns: 1fr; }
   .formImage, .formText { grid-column: 1; }
   .formImage { height: 44svh; margin-inline: calc(var(--m) * -1); }
+  .formImage img { object-position: 62% 30%; }
   .ritualGrid { grid-template-columns: 1fr; row-gap: var(--s-7); }
   .ritualsTitle { margin-bottom: var(--s-6); }
   .ritualImage { aspect-ratio: 16 / 9; }

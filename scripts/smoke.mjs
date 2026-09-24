@@ -210,6 +210,73 @@ await check('hero: "Metamorfoză prin parfum." never clipped, 320–1920 px ever
   assert(bad.length === 0, `clipped at ${bad.join(', ')}`);
 });
 
+const hookVT = t => t.evaluate(() => {
+  const vt = document.startViewTransition?.bind(document);
+  window.__vt = [];
+  if (vt) document.startViewTransition = (...a) => { const tr = vt(...a); window.__vt.push('start'); tr.ready.then(() => window.__vt.push([...document.getAnimations()].map(x => x.effect?.pseudoElement).filter(Boolean).join(' '))).catch(e => window.__vt.push('err ' + e)); return tr; };
+});
+
+await check('collection: filters in the URL survive a reload of the static page', async () => {
+  await pg.goto(BASE + '/parfumuri/luxury?familie=gourmand', { waitUntil: 'networkidle' });
+  assert(await pg.getByRole('group', { name: 'Familie olfactivă' }).getByRole('button', { name: /Gourmand/ }).getAttribute('aria-pressed') === 'true', 'Gourmand not pressed');
+  assert(/familie=gourmand/.test(pg.url()), pg.url());
+});
+
+await check('nav: panels expose Morph\'s structure (collections, Baie & Corp, Seturi, Despre Morph, Jurnal); keyboard reaches them', async () => {
+  const n = await page();
+  await n.goto(BASE + '/', { waitUntil: 'networkidle' });
+  const nav = n.getByRole('navigation', { name: 'Principal' });
+  assert(await nav.locator(':scope > div').count() === 5, 'five primary items');
+  await nav.getByRole('link', { name: 'Parfumuri', exact: true }).hover();
+  for (const l of ['Les Exclusifs', 'Geluri de duș și creme de corp', 'Parfum cu gel sau cremă', 'Travel 2×8 ml și mostre']) await wait(nav.getByRole('link', { name: l }), l);
+  await nav.getByRole('link', { name: 'Magazinul', exact: true }).focus();
+  await n.keyboard.press('Tab');
+  assert(await n.evaluate(() => document.activeElement?.textContent) === 'Magazinul Morph din București', 'Tab does not enter the panel');
+  const j = nav.getByRole('link', { name: /Jurnal/ });
+  assert(await j.getAttribute('href') === 'https://morphparfum.ro/blog/' && await j.getAttribute('target') === '_blank', 'Jurnal link');
+  const m = await page({ ...devices['iPhone 13'] });
+  await m.goto(BASE + '/', { waitUntil: 'networkidle' });
+  await m.getByRole('button', { name: 'Meniu' }).click();
+  for (const l of ['Parfum cu gel sau cremă', 'Despre Morph', 'Gift card']) await wait(m.locator('#meniu').getByRole('link', { name: l }), `sheet: ${l}`);
+});
+
+await check('page transition: home world → collection carries the campaign photograph (room-image), desktop and phone', async () => {
+  for (const opts of [{ viewport: { width: 1440, height: 900 } }, { ...devices['iPhone 13'] }]) {
+    const t = await page(opts);
+    await t.goto(BASE + '/', { waitUntil: 'networkidle' });
+    await hookVT(t);
+    await t.locator('[data-world="luxury"]').scrollIntoViewIfNeeded();
+    await t.waitForTimeout(600);
+    await t.locator('[data-world="luxury"] a.btn').click();
+    await t.waitForURL(/parfumuri\/luxury/);
+    await t.waitForTimeout(900);
+    const log = await t.evaluate(() => window.__vt);
+    assert(/view-transition-group\(room-image\)/.test(log[1] ?? ''), `${opts.viewport?.width ?? 'phone'}: ${JSON.stringify(log).slice(0, 160)}`);
+  }
+});
+
+await check('page transition: shelf bottle → product morphs into the stage (phone)', async () => {
+  const t = await page({ ...devices['iPhone 13'] });
+  await t.goto(BASE + '/parfumuri/luxury', { waitUntil: 'networkidle' });
+  await hookVT(t);
+  await t.getByRole('list', { name: 'Vitrina Luxury' }).getByRole('link', { name: 'Zeta' }).click();
+  await t.waitForURL(/morph-zeta-parfum-100ml/);
+  await t.waitForTimeout(900);
+  const log = await t.evaluate(() => window.__vt);
+  assert(/obj-morph-zeta-parfum-100ml/.test(log[1] ?? ''), JSON.stringify(log).slice(0, 200));
+});
+
+await check('2.5D Zeta: the glint follows the pointer on the product stage', async () => {
+  const t = await page();
+  await t.goto(BASE + '/morph-zeta-parfum-100ml', { waitUntil: 'networkidle' });
+  const st = t.locator('[data-lit]').first();
+  const b = await st.boundingBox();
+  await t.mouse.move(b.x + b.width * 0.8, b.y + b.height * 0.3, { steps: 4 });
+  await t.waitForTimeout(200);
+  const lx = await st.evaluate(e => e.style.getPropertyValue('--lx'));
+  assert(parseFloat(lx) > 70, `--lx ${lx}`);
+});
+
 await check('page transition: collection row → product runs a view transition with the shared bottle', async () => {
   const t = await page();
   await t.goto(BASE + '/parfumuri/luxury', { waitUntil: 'networkidle' });
