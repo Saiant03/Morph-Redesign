@@ -28,6 +28,7 @@ for (const mode of ['desktop', 'mobile']) {
     });
     const name = (p.replace(/[^a-z0-9]+/gi, '_') || 'home') + '_' + mode;
     let reqs = 0; pg.on('request', () => reqs++);
+    const errors = []; pg.on('console', m => { if (m.type() === 'error') errors.push(m.text()); }); pg.on('pageerror', e => errors.push(String(e)));
     try { await pg.goto(base.replace(/\/$/, '') + '/' + p, { waitUntil: 'networkidle', timeout: 60000 }); } catch (e) { console.log('WARN', p, e.message.split('\n')[0]); }
     await pg.waitForTimeout(1500);
     await pg.screenshot({ path: `${out}/shots/${name}_top.png` });
@@ -46,9 +47,10 @@ for (const mode of ['desktop', 'mobile']) {
         text: document.body.innerText.replace(/\n\s*\n+/g, '\n').slice(0, 9000)
       };
     });
-    d.requests = reqs;
+    d.requests = reqs; d.errors = errors;
+    const overflow = await pg.evaluate(() => document.documentElement.scrollWidth - window.innerWidth); d.overflowX = overflow;
     fs.writeFileSync(`${out}/data/${name}.json`, JSON.stringify(d, null, 1));
-    console.log(name, `${reqs} reqs`, `${d.height}px`);
+    console.log(name, `${reqs} reqs`, `${d.height}px`, overflow > 0 ? `OVERFLOW-X ${overflow}px` : '', errors.length ? `ERRORS ${errors.length}: ${errors[0].slice(0, 160)}` : '');
     await pg.close();
   }
   await ctx.close();

@@ -1,0 +1,236 @@
+{
+ "morph-primitivo-eau-de-parfum-unisex": {
+  "name": "Primitivo",
+  "collection": "ice",
+  "juice": "#f4ce74",
+  "accent": null,
+  "identity": "#f4ce74",
+  "method": "sampled",
+  "accentShare": 0
+ },
+ "morph-gate-17-100ml": {
+  "name": "GATE 17",
+  "collection": "ice",
+  "juice": "#ecc25c",
+  "accent": null,
+  "identity": "#ecc25c",
+  "method": "sampled",
+  "accentShare": 0
+ },
+ "morph-tonkatonic-100ml": {
+  "name": "Tonkatonic",
+  "collection": "ice",
+  "juice": "#f6be87",
+  "accent": null,
+  "identity": "#f6be87",
+  "method": "sampled+manual",
+  "accentShare": 0.11
+ },
+ "morph-oud-mafia-100ml": {
+  "name": "Oud Mafia",
+  "collection": "ice",
+  "juice": "#f6d897",
+  "accent": null,
+  "identity": "#f6d897",
+  "method": "sampled",
+  "accentShare": 0
+ },
+ "morph-antigua-bay-parfum-100ml": {
+  "name": "Antigua Bay",
+  "collection": "luxury",
+  "juice": "#a29b4d",
+  "accent": "#054d76",
+  "identity": "#054d76",
+  "method": "sampled",
+  "accentShare": 0.93
+ },
+ "morph_disumano_parfum_100ml": {
+  "name": "Disumano",
+  "collection": "ice",
+  "juice": "#2d5e5f",
+  "accent": "#3b6f6c",
+  "identity": "#3b6f6c",
+  "method": "sampled",
+  "accentShare": 1
+ },
+ "morph-cruda-parfum-100ml": {
+  "name": "Cruda",
+  "collection": "luxury",
+  "juice": "#cdae4d",
+  "accent": "#734155",
+  "identity": "#734155",
+  "method": "sampled",
+  "accentShare": 0.58
+ },
+ "morph-axum-parfum-100ml": {
+  "name": "Axum",
+  "collection": "luxury",
+  "juice": "#634504",
+  "accent": null,
+  "identity": "#634504",
+  "method": "sampled",
+  "accentShare": 0.02
+ },
+ "morph-malaga-parfum-100ml": {
+  "name": "Malaga",
+  "collection": "luxury",
+  "juice": "#e3c953",
+  "accent": null,
+  "identity": "#e3c953",
+  "method": "sampled",
+  "accentShare": 0
+ },
+ "morph-vision-parfum-100ml": {
+  "name": "Vision",
+  "collection": "luxury",
+  "juice": "#d1a81a",
+  "accent": "#db5503",
+  "identity": "#db5503",
+  "method": "sampled",
+  "accentShare": 0.54
+ },
+ "morph-miyazawa-parfum-100ml": {
+  "name": "Miyazawa",
+  "collection": "les-exclusifs",
+  "juice": "#d0a136",
+  "accent": null,
+  "identity": "#d0a136",
+  "method": "sampled",
+  "accentShare": 0.02
+ },
+ "morph-umhh-parfum-100ml": {
+  "name": "Umhh",
+  "collection": "les-exclusifs",
+  "juice": "#b78d41",
+  "accent": null,
+  "identity": "#b78d41",
+  "method": "sampled",
+  "accentShare": 0.02
+ },
+ "morph-arles-parfum-100ml": {
+  "name": "Arles",
+  "collection": "luxury",
+  "juice": "#95793a",
+  "accent": null,
+  "identity": "#95793a",
+  "method": "sampled",
+  "accentShare": 0.08
+ },
+ "morph-too-parfum-100ml": {
+  "name": "Too",
+  "collection": "les-exclusifs",
+  "juice": "#c47f08",
+  "accent": null,
+  "identity": "#c47f08",
+  "method": "sampled+manual",
+  "accentShare": 0.11
+ },
+ "morph-kolonaki-parfum-100ml": {
+  "name": "Kolonaki",
+  "collection": "luxury",
+  "juice": "#df8f12",
+  "accent": "#af0303",
+  "identity": "#af0303",
+  "method": "sampled",
+  "accentShare": 0.58
+ },
+ "morph-iconic-parfum-100ml": {
+  "name": "Iconic",
+  "collection": "les-exclusifs",
+  "juice": "#e6ac4a",
+  "accent": null,
+  "identity": "#e6ac4a",
+  "method": "sampled+manual",
+  "accentShare": 0.09
+ },
+ "morph-montmartre-parfum-100ml": {
+  "name": "Montmartre",
+  "collection": "luxury",
+  "juice": "#c3a93a",
+  "accent": null,
+  "identity": "#c3a93a",
+  "method": "sampled",
+  "accentShare": 0.01
+ },
+ "morph-nudo-parfum-100ml": {
+  "name": "Nudo",
+  "collection": "luxury",
+  "juice": "#896637",
+  "accent": null,
+  "identity": "#896637",
+  "method": "sampled",
+  "accentShare": 0
+ },
+ "morph-n8-parfum-100ml": {
+  "name": "N8",
+  "collection": "les-exclusifs",
+  "juice": "#dc9f6e",
+  "accent": null,
+  "identity": "#dc9f6e",
+  "method": "sampled+manual",
+  "accentShare": 0.55
+ },
+ "morph-indomable-parfum-100ml": {
+  "name": "Indomable",
+  "collection": "luxury",
+  "juice": "#d5aa6e",
+  "accent": "#a77560",
+  "identity": "#a77560",
+  "method": "sampled",
+  "accentShare": 0.19
+ },
+ "morph-a21-parfum-100ml": {
+  "name": "A21",
+  "collection": "les-exclusifs",
+  "juice": "#ea9d61",
+  "accent": "#ce6833",
+  "identity": "#ce6833",
+  "method": "sampled",
+  "accentShare": 0.98
+ },
+ "morph-rose-j-parfum-100ml": {
+  "name": "Rose J",
+  "collection": "les-exclusifs",
+  "juice": "#c8840c",
+  "accent": null,
+  "identity": "#c8840c",
+  "method": "sampled+manual",
+  "accentShare": 0.09
+ },
+ "morph-animal-parfum-100ml": {
+  "name": "Animal",
+  "collection": "les-exclusifs",
+  "juice": "#d5ac4e",
+  "accent": null,
+  "identity": "#d5ac4e",
+  "method": "sampled",
+  "accentShare": 0.01
+ },
+ "morph-vapor-parfum-100ml": {
+  "name": "Vapor",
+  "collection": "luxury",
+  "juice": "#cfc96b",
+  "accent": "#057266",
+  "identity": "#057266",
+  "method": "sampled",
+  "accentShare": 0.71
+ },
+ "morph-zeta-parfum-100ml": {
+  "name": "Zeta",
+  "collection": "luxury",
+  "juice": "#ebbb23",
+  "accent": null,
+  "identity": "#ebbb23",
+  "method": "sampled",
+  "accentShare": 0.01
+ },
+ "morph-pure-soul-parfum-100ml": {
+  "name": "Pure Soul",
+  "collection": "luxury",
+  "juice": "#f2da08",
+  "accent": "#04470d",
+  "identity": "#04470d",
+  "method": "sampled",
+  "accentShare": 0.4
+ }
+}

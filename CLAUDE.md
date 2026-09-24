@@ -4,7 +4,8 @@ Fișier de memorie pentru Claude. Se încarcă automat la începutul fiecărei s
 
 ## Git
 
-- Se lucrează doar pe `main`. Fără branch-uri noi și fără PR-uri, decât dacă se cere explicit.
+- Implicit se lucrează pe `main`, fără branch-uri noi și fără PR-uri, decât dacă se cere explicit.
+- Excepție cerută explicit: Faza 02 se face pe `feature/morph-phase-02-prototypes`.
 - Dacă sesiunea pornește pe alt branch (de ex. `claude/...`), treci pe `main` înainte de orice modificare: `git fetch origin main && git checkout main && git pull origin main`.
 - Commit și push direct pe `main`. Procedura: skill-ul `push-main` (`.claude/skills/push-main/SKILL.md`).
 
@@ -33,6 +34,9 @@ Fapte-cheie (verificate 2026-09-24):
 
 ## Decizii și context
 
+- Nu avem acces la nimeni de la Morph sau de la Levitate. Întrebările operaționale rămân ipoteze documentate, nu se presupun răspunsuri.
+
 - 2026-09-24: Faza 01 (cercetare) încheiată. Nu s-a ales încă direcția creativă (A Cromatic / B Forma / C Strata) și nici stack-ul de producție.
-- Concept recomandat: Next.js + GSAP pe un snapshot read-only al catalogului. De confirmat la începutul Fazei 02.
+- 2026-09-24: Faza 02 încheiată. Există 9 ecrane prototip: `/concept/{a|b|c}/{home|collection|product}`, construite cu Next.js 16 + GSAP pe snapshot-ul din `data/`. Documentele sunt în `docs/design/`. Direcția finală nu e aleasă.
+- Date: `npm run snapshot` (Store API) și `npm run colors` (culorile sticlelor). Nu se inventează prețuri, produse sau afirmații de brand.
 - Skill-urile externe se importă doar după inspecție și se înregistrează în `docs/research/skill-registry.md`.

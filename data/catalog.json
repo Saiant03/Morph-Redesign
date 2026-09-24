@@ -1,0 +1,2473 @@
+{
+ "source": "https://morphparfum.ro/wp-json/wc/store/v1/products",
+ "snapshotAt": "2026-09-24T02:21:20.661Z",
+ "perfumes": [
+  {
+   "id": 38315,
+   "slug": "morph-primitivo-eau-de-parfum-unisex",
+   "name": "Morph Primitivo Eau de Parfum Unisex 100 ml",
+   "price": 790,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-primitivo-eau-de-parfum-unisex",
+   "shortName": "Primitivo",
+   "collection": "ice",
+   "bestseller": false,
+   "type": "Apă intensă de parfum",
+   "notes": {
+    "top": [
+     "Chimion",
+     "Trandafir Lani"
+    ],
+    "heart": [
+     "Lapte de smochine",
+     "Sublimolidă"
+    ],
+    "base": [
+     "Acord de Oud",
+     "Patchouli Gayo"
+    ]
+   },
+   "family": "Gourmand",
+   "intensity": "Puternic",
+   "longevity": "10-12 h",
+   "season": [
+    "Primavară",
+    "Toamnă",
+    "Vară"
+   ],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Casual",
+   "summary": "Morph Primitivo este un parfum unisex creat de Mathieu Nardin, un apel ancestral la forța elementelor și libertatea unui spirit neîmblânzit. Notele condimentate și florale se împletesc cu accente lemnoase și oud, oferind o prezență memorabilă și senzuală.\nNote de vârf: Chimion, Trandafir Lani.\nNote de mijloc: Lapte de smochine, Sublimolidă.\nNote de bază: Patchouli Gayo, Acord de Oud.",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: Chimion, Trandafir Lani",
+     "body": ""
+    },
+    {
+     "heading": "Note de mijloc: Lapte de smochine, Sublimolidă",
+     "body": ""
+    },
+    {
+     "heading": "Note de bază: Patchouli Gayo, Acord de Oud",
+     "body": ""
+    },
+    {
+     "heading": "Avantaje principale",
+     "body": "Eau de Parfum unisex, cu prezență memorabilă și intensitate sofisticată.\nCompoziție complexă: condimentată, florală, lemnoasă și orientală.\nIdeal pentru ocazii speciale sau purtare zilnică pentru cei care caută un parfum cu personalitate.\nSemnătură olfactivă puternică, dar elegantă.\nPersistență și impact olfactiv de lungă durată."
+    },
+    {
+     "heading": "Pentru cine este recomandat",
+     "body": "Femei și bărbați care iubesc parfumurile cu caracter puternic.\nPersoane care caută un parfum sofisticat, cu accente orientale și lemnoase.\nCei care apreciază note primordiale, sălbatice și contrastante."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Imaginează-ți vântul ridicând nisipul, umbrele și lumina dansând peste peisaje sălbatice, iar un spirit neîmblânzit străbate ceruri nesfârșite. Primitivo captează această energie primară, trezind simțurile cu un amestec vibrant de putere și frumusețe.\nDeschiderea condimentată a chimionului trezește simțurile, completată de delicatețea trandafirului Lani, creând un contrast rafinat între intensitate și eleganță. Inima parfumului combină catifelarea lăptoasă a laptelui de smochine cu notele limpezi și învăluitoare ale sublimolidei, asemenea unui val care mângâie stânca.\nBaza este profundă și senzuală: patchouli Gayo și acordul intens de oud se contopesc pentru a lăsa o urmă memorabilă, evocând tărâmuri sălbatice și primordiale. Primitivo este parfumul celor care caută o prezență olfactivă puternică, sofisticată și cu caracter."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Ce tip de parfum este Morph Primitivo?\nEau de Parfum unisex, cu compoziție condimentată, florală și lemnoasă.\nEste potrivit pentru damă sau bărbat?\nUnisex – se adaptează subtil pe fiecare tip de piele.\nPersistă pe piele?\nDa, intens și persistent, cu o evoluție rafinată pe parcursul zilei.\nCe conține?\nChimion, Trandafir Lani, Lapte de smochine, Sublimolidă, Patchouli Gayo, Acord de Oud.\nEste potrivit pentru ocazii speciale?\nDa, recomandat pentru evenimente elegante sau momente în care vrei să lași o impresie memorabilă."
+    }
+   ],
+   "images": [
+    "/morph/morph-primitivo-eau-de-parfum-unisex-0.avif",
+    "/morph/morph-primitivo-eau-de-parfum-unisex-1.avif",
+    "/morph/morph-primitivo-eau-de-parfum-unisex-2.avif"
+   ]
+  },
+  {
+   "id": 35612,
+   "slug": "morph-gate-17-100ml",
+   "name": "GATE 17 Eau de Parfum Unisex 100 ml",
+   "price": 790,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-gate-17-100ml",
+   "shortName": "GATE 17",
+   "collection": "ice",
+   "bestseller": true,
+   "type": "Apă intensă de parfum",
+   "notes": {
+    "top": [
+     "Bergamotă",
+     "Ceară de albine",
+     "Florale"
+    ],
+    "heart": [
+     "Ambră",
+     "Iris",
+     "Lemn de cașmir",
+     "Mosc",
+     "Note marine"
+    ],
+    "base": [
+     "Bergamotă",
+     "Ceară de albine",
+     "Florale"
+    ]
+   },
+   "family": "Floral",
+   "intensity": "Medie",
+   "longevity": "8-10 h",
+   "season": [
+    "Iarnă",
+    "Primavară",
+    "Toamnă",
+    "Vară"
+   ],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Casual",
+   "summary": "GATE 17 Eau de Parfum este un parfum contemporan, creat pentru cei care caută o experiență senzorială complexă și magnetică. Bergamota luminoasă, florile proaspete și ceara de albine deschid compoziția cu o catifelare inedită, în timp ce irisul elegant, notele marine și lemnul de cașmir construiesc un nucleu modern, rafinat. Baza caldă, cu vanilie cremoasă și vetiver profund, conferă profunzime și persistență. Un parfum unisex, cu o semnătură sofisticată și versatilă, potrivit pentru zi sau seară.\nNote de vârf: Note florale, bergamotă, ceară de albine\nNote de mijloc: Iris, mosc, lemn de cașmir, note marine, ambră\nNote de bază: Vanilie, vetiver",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: Note florale, bergamotă, ceară de albine",
+     "body": "Un debut proaspăt și ușor solar, cu accente florale luminoase și o notă neașteptat de blândă și dulce de la ceara de albine."
+    },
+    {
+     "heading": "Note de mijloc: Iris, mosc, lemn de cașmir, note marine, ambră",
+     "body": "Inima parfumului este un joc între eleganță pudrată și prospețime sărată, cu iris delicat, mosc senzual și o ambră caldă care adaugă profunzime compoziției."
+    },
+    {
+     "heading": "Note de bază: Vanilie, vetiver",
+     "body": "Finalul este magnetic și persistent. Vanilia aduce o cremozitate subtilă, iar vetiverul echilibrează totul cu un contrast verde-lemnos, clar și elegant."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "GATE 17 este alegerea ideală pentru primăvară și toamnă, dar se adaptează bine în orice sezon. Potrivit pentru zi, seară, birou sau evenimente elegante. Este un parfum care te însoțește discret, dar memorabil, în orice context."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex – echilibrat, cu eleganță modernă și profunzime\nPe pielea feminină: se deschide floral și catifelat, cu o dulceață ușor solară\nPe pielea masculină: capătă o profunzime marin-lemnoasă, cu un aer curat și sofisticat\nGATE 17 este pentru cei care caută o prezență olfactivă cu contrast – între apă și foc, luminozitate și profunzime. Un parfum cu o identitate clară, dar subtilă."
+    },
+    {
+     "heading": "Descriere",
+     "body": "GATE 17 este mai mult decât un parfum – este o trecere senzorială spre o stare de echilibru și eleganță. Se deschide cu note florale proaspete și o bergamotă radiantă, ușor citrică, învăluite într-o dulceață neașteptat de blândă oferită de ceara de albine.\nApoi, parfumul evoluează spre o inimă rafinată, unde irisul pudrat se contopește cu mosc și note marine sărate, aducând claritate și profunzime. Lemnul de cașmir oferă structură și căldură, susținând întreaga compoziție cu o textură mătăsoasă.\nFinalul este cremos și sofisticat – vanilia aduce o atingere senzuală, iar vetiverul conferă stabilitate și caracter. Este acel tip de parfum care se imprimă în memorie fără efort, care inspiră rafinament și modernitate.\nIdeal pentru cei care iubesc parfumurile cu personalitate calmă, dar persistentă, GATE 17 devine o semnătură olfactivă pentru oamenii care știu să aprecieze subtilitatea."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Ce tip de parfum este GATE 17?\nEau de Parfum Intens – floral-lemnos, cu accente marine și vanilie caldă.\nEste potrivit pentru damă sau bărbat?\nUnisex – se adaptează subtil pe fiecare piele, cu eleganță și claritate.\nPersistă pe piele?\nDa, 8-10 ore, cu siaj moderat, dar bine conturat, in functie de ph-ul pielii.\nCe conține?\nNote florale, bergamotă, ceară de albine, iris, mosc, note marine, lemn de cașmir, ambră, vanilie, vetiver.\nPentru ce ocazii este potrivit?\nPerfect pentru zi, birou, evenimente elegante sau seri liniștite – un parfum echilibrat, cu rafinament."
+    }
+   ],
+   "images": [
+    "/morph/morph-gate-17-100ml-0.avif",
+    "/morph/morph-gate-17-100ml-1.avif",
+    "/morph/morph-gate-17-100ml-2.avif"
+   ]
+  },
+  {
+   "id": 13016,
+   "slug": "morph-tonkatonic-100ml",
+   "name": "Morph Tonkatonic Eau de Parfum Unisex 100 ml",
+   "price": 790,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-tonkatonic-100ml",
+   "shortName": "Tonkatonic",
+   "collection": "ice",
+   "bestseller": true,
+   "type": "Apă intensă de parfum",
+   "notes": {
+    "top": [
+     "Apă de cocos",
+     "Migdale",
+     "Smochină"
+    ],
+    "heart": [
+     "Floare de portocal",
+     "Iasomie spaniolă",
+     "Rășinoidă de benzoină"
+    ],
+    "base": [
+     "Boabe de tonka",
+     "Lemn de santal",
+     "Seminte de ambrette"
+    ]
+   },
+   "family": "Gourmand",
+   "intensity": "Puternic",
+   "longevity": "10-12 h",
+   "season": [
+    "Primavară",
+    "Toamnă",
+    "Vară"
+   ],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Casual",
+   "summary": "Morph Tonkatonic Ice Eau de Parfum propune o interpretare exotic-cremoasă a gamei Tonkatonic, un melanj sofisticat și senzual, unde migdalele și apa de cocos se contopesc cu iasomia spaniolă și boabele de tonka. O apă intensă de parfum cu accente gurmande și solare, care echilibrează lejeritatea exotică cu o profunzime cald-lemnoasă. Un parfum unisex, rafinat și senzual, ideal pentru momente de relaxare, vacanțe sau seri de vară.\nNote de vârf: Migdale, apă de cocos, fructe de smochin\nNote de mijloc: Iasomie spaniolă, floare de portocal, benzoină\nNote de bază: Boabe de tonka, lemn de santal, semințe de ambrette",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: Migdale, apă de cocos, fructe de smochin",
+     "body": "Deschidere gurmandă și solară, cu migdale fine și cremozitate tropicală de la apa de cocos, completate de accente verzi și dulci de smochine."
+    },
+    {
+     "heading": "Note de mijloc: Iasomie spaniolă, floare de portocal, benzoină",
+     "body": "Inima este florală, catifelată și balsamică, cu o iasomie intensă, floare de portocal solară și o tentă rășinoasă senzuală."
+    },
+    {
+     "heading": "Note de bază: Boabe de tonka, lemn de santal, semințe de ambrette",
+     "body": "Finalul este cald, mătăsos și ușor afumat, cu tonka dulce, lemn de santal cremos și ambrette fin, cu o atingere muscată."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Tonkatonic Ice strălucește în special vara, în vacanțe, pe timp de seară sau în momentele de relaxare. Este ideal pentru escapade urbane, ieșiri romantice, plimbări în natură sau seri cu prietenii. Crează un efect cald-exotic, perfect pentru pielea bronzată și serile lungi."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex – rafinat, cu tentă gurmandă și solară\n• Pe pielea feminină: se dezvoltă cremos și floral, cu o senzualitate delicată\n• Pe pielea masculină: scoate în evidență tonka, lemnul de santal și migdala cu un aer exotic-lemnos, discret gurmand\nTonkatonic Ice este pentru cei care vor o prezență olfactivă distinctă, sofisticată, cu un echilibru între prospețime tropicală și căldură orientală."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Tonkatonic Ice te transportă într-un peisaj exotic: un apus fierbinte, nisip fin, o adiere de apă de cocos și migdale delicate. Încă de la deschidere, aroma migdalelor și notele tropicale de cocos și smochine evocă vacanțe idilice, în timp ce inima florală, cu iasomie și floare de portocal, aduce luminozitate solară.\nBenzoinul îmbracă totul într-o căldură balsamică ușor vanilată, iar finalul, cu tonka și santal, oferă profunzime și persistență catifelată. Semințele de ambrette rotunjesc compoziția cu o notă muscată, subtil animalică, fără a deveni grea.\nEste acel tip de parfum gurmand-lemnos, perfect pentru zilele și serile de vară, când vrei o aromă sofisticată, dar ușor de purtat. Se simte rafinat, echilibrat, cu o personalitate caldă și solară."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Ce tip de parfum este Morph Tonkatonic Ice?\nEau de Parfum Intens – gurmand-lemnos, cu accente tropicale și florale solare.\nEste potrivit pentru damă sau bărbat?\nUnisex – echilibrat, cu nuanțe senzuale pe ambele tipuri de piele.\nPersistă pe piele?\nDa, 8-10 ore, cu siaj moderat și drydown cald-cremos.\nCe conține?\nMigdale, apă de cocos, smochine, iasomie spaniolă, floare de portocal, benzoină, boabe de tonka, lemn de santal, semințe de ambrette.\nPentru ce ocazii este potrivit?\nPerfect pentru primăvară-vară, vacanțe, seri romantice, plimbări, întâlniri sau relaxare."
+    }
+   ],
+   "images": [
+    "/morph/morph-tonkatonic-100ml-0.avif",
+    "/morph/morph-tonkatonic-100ml-1.avif",
+    "/morph/morph-tonkatonic-100ml-2.avif"
+   ]
+  },
+  {
+   "id": 11705,
+   "slug": "morph-oud-mafia-100ml",
+   "name": "Morph Oud Mafia Eau de Parfum Unisex 100 ml",
+   "price": 790,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-oud-mafia-100ml",
+   "shortName": "Oud Mafia",
+   "collection": "ice",
+   "bestseller": true,
+   "type": "Apă intensă de parfum",
+   "notes": {
+    "top": [
+     "Cimbru alb",
+     "Floare de șofran",
+     "Nucșoară"
+    ],
+    "heart": [
+     "Balsam Gurjun",
+     "Labdanum",
+     "Oud",
+     "Tămâie"
+    ],
+    "base": [
+     "Orcanox",
+     "Patchouli Gayo",
+     "Vetiver"
+    ]
+   },
+   "family": "Lemnos",
+   "intensity": "Puternic",
+   "longevity": "10-12 h",
+   "season": [
+    "Iarnă",
+    "Primavară",
+    "Toamnă",
+    "Vară"
+   ],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Casual",
+   "summary": "Morph Oud Mafia Eau de Parfum pune în prim-plan intensitatea oud-ului autentic și floarea de șofran, ce etalează rafinamentul, completată de nucșoara caldă și de prospețimea aromatică a cimbrului alb. Această apă de parfum intensă are o semnătură puternică, modernă, cu o evoluție clară, persistentă și rafinată. Creat pentru femei și bărbați care caută prezență olfactivă marcantă.\nNote de vârf: Floare de Șofran, Nucșoară, Cimbru Alb\nNote de mijloc: Labdanum, Balsam Gurjun, Tămâie, Oud\nNote de bază: Vetiver, Orcanox, Patchouli",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: Floare de Șofran, Nucșoară, Cimbru Alb",
+     "body": "Parfumul se deschide cu un amestec îndrăzneț și rafinat: floarea de șofran aduce o căldură prețioasă, delicat florală, în timp ce nucșoara oferă o adiere condimentată, ușor dulce, completată de prospețimea aromatică și tonică a cimbrului alb"
+    },
+    {
+     "heading": "Note de mijloc: Labdanum, Balsam Gurjun, Tămâie, Oud",
+     "body": "Inima parfumului vibrează cu o profunzime întunecată și rășinoasă: labdanumul aduce o căldură balsamică, ușor animalică, în timp ce balsamul Gurjun adaugă o textură lemnoasă și catifelată."
+    },
+    {
+     "heading": "Note de bază: Vetiver, Orcanox, Patchouli",
+     "body": "Baza parfumului combină prospețimea uscată a vetiverului cu profunzimea lemnoasă a patchouli-ului, rotunjite de căldura ambrată și muscată a orcanoxului, pentru un finish elegant și persistent"
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Oud Mafia se simte cel mai bine în serile de toamnă și iarnă, la evenimente speciale sau în zile în care vrei să lași o impresie puternică. E un parfum persistent, perfect pentru contexte elegante, dar și pentru cei care caută o semnătură distinctă pentru zi cu zi."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex – cu personalitate marcată\nParfum de damă: pe pielea feminină, foarea de șofran și nucșoara temperează oud-ul, creând o amprentă lemnos-orientală sofisticată\nParfum bărbătesc: pentru bărbați, oud-ul și vetiverul aduc structură și forță, cu un fond cald, masculin\nOud Mafia e alegerea potrivită pentru cei care vor un parfum cu oud persistent, echilibrat, care se dezvoltă elegant indiferent de context."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Oud Mafia deschide scena cu un acord de oud autentic, dens, care e imediat încălzit de tămâie. Prima impresie e memorabilă, modernă, fără excese. Pe măsură ce parfumul evoluează, floarea de șofran aduce echilibru și rotunjime, în timp ce patchouli-ul oferă o căldură subtilă, potrivită pentru serile reci sau momentele de liniște.\nPersistența parfumului este peste medie, iar siajul rămâne moderat, elegant.\nOud Mafia este o alegere ideală pentru femei și bărbați care caută un parfum lemnos persistent, cu note orientale, potrivit atât la costum, cât și la ținute relaxate. E parfumul care marchează diferența fără efort și lasă o amprentă clară în orice context."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Ce tip de parfum este Morph Oud Mafia?\nEau de Parfum intens, cu note de oud, floare de șofran, nucșoară, cimbru alb, vetiver, patchouli.\nEste potrivit pentru damă sau bărbat?\nUnisex, profilul se adaptează natural pe orice tip de ph.\nPersistă pe piele?\nDa, 10-14 ore, cu evoluție elegantă și siaj clar.\nCe conține?\nOud, Floare de Șofran, Nucșoară, Cimbru Alb, Tămâie, Vetiver, Orcanox, Patchouli.\nEste potrivit pentru ocazii speciale?\nPerfect pentru evenimente, dar și pentru cei care preferă un parfum de zi cu zi cu semnătură distinctă."
+    }
+   ],
+   "images": [
+    "/morph/morph-oud-mafia-100ml-0.avif",
+    "/morph/morph-oud-mafia-100ml-1.avif",
+    "/morph/morph-oud-mafia-100ml-2.avif"
+   ]
+  },
+  {
+   "id": 35608,
+   "slug": "morph-antigua-bay-parfum-100ml",
+   "name": "Morph Antigua Bay Eau de Parfum Unisex  100 ml",
+   "price": 690,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-antigua-bay-parfum-100ml",
+   "shortName": "Antigua Bay",
+   "collection": "luxury",
+   "bestseller": false,
+   "type": "Apă intensă de parfum",
+   "notes": {
+    "top": [
+     "Bergamotă",
+     "Note marine",
+     "Piper negru"
+    ],
+    "heart": [
+     "Flori albe",
+     "Note ozonice",
+     "Patchouli"
+    ],
+    "base": []
+   },
+   "family": "Marin-ozonic",
+   "intensity": "Puternic",
+   "longevity": "10-12 h",
+   "season": [
+    "Primavară",
+    "Toamnă",
+    "Vară"
+   ],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Casual",
+   "summary": "Morph Antigua Bay Eau de Parfum este un parfum unisex din gama de lux, lansat în 2023. Cu o compoziție marin-ozonică reinterpretată radical, exprimă o viziune curajoasă asupra prospețimii moderne. Antigua Bay este o reinterpretare olfactivă a temei marine – conceptuală, construită cu rigoare, contrast și eleganță.\nNote de vârf: note marine, bergamotă, piper negru\nNote de mijloc: note ozonice, patchouli, flori albe\nNote de bază: vanilie, ambra gri, cedru, lemn de santal, mosc alb",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: note marine, bergamotă, piper negru",
+     "body": "Deschiderea este tăioasă și proaspătă. Notele marine sunt dense, neașteptate, ca o adiere venită din adânc. Bergamota taie prin umiditate cu o strălucire citrică, în timp ce piperul negru aduce o vibrație condimentată, discretă dar prezentă."
+    },
+    {
+     "heading": "Note de mijloc: note ozonice, patchouli, flori albe",
+     "body": "Ozonul respiră pe piele ca un val rece în plin soare. Patchouli-ul adaugă greutate și stabilitate, iar florile albe aduc un contrast subtil, între rafinament și libertate. Totul se simte curat, dar deloc simplu."
+    },
+    {
+     "heading": "Note de bază: vanilie, ambra gri, cedru, lemn de santal, mosc alb",
+     "body": "Finalul e magnetic. Vanilia e subțire, dar senzuală. Ambra gri – complexă și persistentă – se lipește de piele cu o notă caldă, animalică. Lemnul de cedru și cel de santal fixează totul într-un schelet nobil. Moscul alb închide formula într-o notă calmă, elegantă, dar nu ștearsă."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Antigua Bay funcționează ideal primăvara, vara și în serile lungi de toamnă. Poate fi purtat în contexte casual-elegante, în oraș sau în călătorii, oriunde prospețimea trebuie să transmită mai mult decât curățenie. Este un parfum care își cere spațiul fără să-l impună agresiv."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex\nAntigua Bay este un parfum de lux pentru femei și bărbați care preferă prospețimea construită, stratificată, cu intenție. E creat pentru personalități care refuză mirosurile banale și caută o amprentă discretă, dar sofisticată."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Primele note nu lasă loc de interpretări greșite. Un val rece de aer marin, tăios și clar, atinge pielea, urmat de o bergamotă luminoasă și o atingere de piper negru care schimbă registrul. Parfumul nu alunecă în clișeu – vine cu intenție, cu textură. Pe măsură ce se așază, patchouli-ul devine ancora, iar florile albe oferă un contrast discret dar esențial. Notele ozonice nu sunt doar aer – sunt ritm. Spațiu. Control. E un parfum care respiră în pași lenti, dar siguri. Baza e bine gândită: ambra gri e acolo, caldă și pătrunzătoare. Lemnul de santal și cel de cedru construiesc scheletul. Vanilia și moscul învelesc totul într-o aură curată, dar nu neutră. E parfum de atitudine, nu de peisaj. Antigua Bay convinge fără efort. E alegerea celor care știu ce vor: prospețime cu profunzime, o semnătură olfactivă discretă, dar cu valoare de statement. Fie că îl porți într-un city break, la un rooftop bar sau într-o zi în care vrei să impresionezi fără efort, îți susține prezența. Și o face memorabil."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Este Morph Antigua Bay un parfum de lux?\nDa. Este parte din gama Luxury Morph, cu o compoziție originală, creată pentru cei care caută parfumuri conceptuale, moderne.\nCui i se potrivește acest parfum?\nPentru femei și bărbați care preferă parfumuri proaspete, dar nebanale, cu profunzime și personalitate.\nCând este recomandat să porți Antigua Bay?\nPrimăvara, vara și toamna devreme. Ziua sau seara, în contexte relaxate dar rafinate."
+    }
+   ],
+   "images": [
+    "/morph/morph-antigua-bay-parfum-100ml-0.avif",
+    "/morph/morph-antigua-bay-parfum-100ml-1.avif",
+    "/morph/morph-antigua-bay-parfum-100ml-2.avif"
+   ]
+  },
+  {
+   "id": 35607,
+   "slug": "morph_disumano_parfum_100ml",
+   "name": "Morph Disumano Eau de Parfum Unisex 100 ml",
+   "price": 790,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph_disumano_parfum_100ml",
+   "shortName": "Disumano",
+   "collection": "ice",
+   "bestseller": true,
+   "type": "Apă intensă de parfum",
+   "notes": {
+    "top": [
+     "Lapte de cocos",
+     "Mandarină"
+    ],
+    "heart": [
+     "Acord caramel",
+     "Flori albe",
+     "Iasomie"
+    ],
+    "base": [
+     "Ambră",
+     "Boabe de tonka",
+     "Mosc",
+     "Oud",
+     "Vanilie"
+    ]
+   },
+   "family": "Gourmand",
+   "intensity": "Puternic",
+   "longevity": "10-12 h",
+   "season": [
+    "Primavară",
+    "Toamnă",
+    "Vară"
+   ],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Casual",
+   "summary": "Morph Disumano Eau de Parfum surprinde energia verii și prospețimea modernă într-o apă intensă de parfum. O compoziție gurmandă și citrică, creată pentru bărbați și femei care vor să simtă pe piele curățenie, vitalitate și efervescență. Formula unisex răcorește, energizează și rămâne memorabilă, pe piele.\nNote de vârf: Mandarină, Lapte de cocos\nNote de mijloc: Iasomie, Flori albe, Acord caramel.\nNote de bază: Vanilie, Boabe de Tonka, Lemn pretios, Ambră, Mosc.",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: Mandarină, Lapte de cocos",
+     "body": "Debutul parfumului este o explozie solară de mandarină proaspătă, suculentă și luminoasă, îmblânzită de cremozitatea catifelată a laptelui de cocos, care adaugă o notă exotică, blândă și reconfortantă."
+    },
+    {
+     "heading": "Note de mijloc: Iasomie, Flori albe, Acord caramel",
+     "body": "Notele de mijloc dezvăluie un buchet opulent de iasomie și flori albe, care aduce o eleganță radiantă, învăluită într-un acord de caramel catifelat, gurmand și seducător."
+    },
+    {
+     "heading": "Note de bază: Vanilie, Boabe de Tonka, Lemn pretios, Ambră, Mosc",
+     "body": "Baza parfumului combină dulceața vaniliei și a boabelor de tonka cu notele lemnoase prețioase, încălzite de ambră și echilibrate de mosc, pentru o efect cald, persistent și elegant."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Disumano e parfumul ideal pentru vară, zile toride, activități în aer liber, dar și pentru ieșiri casual. Senzația de prospețime delicioasă îl face potrivit oricând ai nevoie de energie și claritate, fără să obosească simțurile."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex – adaptabil pe orice tip de ph\nParfum de damă: pe pielea feminină, laptele de cocos și mandarina domină cu o prospețime vibrantă\nParfum bărbătesc: pe pielea masculină, moscul și boabele de Tonka creează un profil energizant, gurmand, unic.\nDisumano e pentru cei care vor un parfum gurmand, citric, persistent, modern – pentru femei și bărbați cu viață activă și ritm rapid."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Disumano aduce pe piele energia zilelor de vară, cu lapte de cocos, mandarină și flori albe, care deschid compoziția direct și curat. Aroma te trimite în mijlocul orașului, pe malul apei sau acolo unde prospețimea și vitalitatea contează. Disumano evoluează natural, cu siaj moderat și persistență reală pentru un parfum fresh-citric.\nProfilul său este modern, adaptabil, unisex – pentru femei și bărbați cu ritm rapid, care vor un parfum citric, persistent și delicios.\nIdeal pentru vară, activități în aer liber, birou sau oricând vrei o semnătură olfactivă distinctă."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Ce tip de parfum este Morph Disumano?\nEau de Parfum intens, cu accent pe prospețime citrică, note gurmande și florale.\nEste potrivit pentru damă sau bărbat?\nUnisex – se adaptează armonios pe orice tip de ph, cu nuanțe diferite.\nPersistă pe piele?\nDa, peste 8-10 ore pentru un parfum fresh.\nCe conține?\nLapte de cocos, mandarină, iasomie, flori albe, acord caramel, vanilie, boabe de Tonka.\nPentru ce sezon este potrivit?\nMorph Disumano este un parfum pefect pentru primăvară-vară."
+    }
+   ],
+   "images": [
+    "/morph/morph_disumano_parfum_100ml-0.avif",
+    "/morph/morph_disumano_parfum_100ml-1.avif",
+    "/morph/morph_disumano_parfum_100ml-2.avif"
+   ]
+  },
+  {
+   "id": 866,
+   "slug": "morph-cruda-parfum-100ml",
+   "name": "Morph Cruda Eau de Parfum Unisex 100 ml",
+   "price": 690,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-cruda-parfum-100ml",
+   "shortName": "Cruda",
+   "collection": "luxury",
+   "bestseller": true,
+   "type": "Apă intensă de parfum",
+   "notes": {
+    "top": [
+     "Bergamotă",
+     "Cedru",
+     "Chimen negru"
+    ],
+    "heart": [
+     "Cuișoare",
+     "Scorțișoară",
+     "Trandafir de Damasc"
+    ],
+    "base": [
+     "Ambră",
+     "Boabe de tonka",
+     "Cashmeran",
+     "Labdanum",
+     "Mosc",
+     "Patchouli",
+     "Vanilie"
+    ]
+   },
+   "family": "Lemnos-oriental",
+   "intensity": "Puternic",
+   "longevity": "10-12 h",
+   "season": [
+    "Iarnă",
+    "Primavară",
+    "Toamnă"
+   ],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Extravagant",
+   "summary": "Morph Cruda Eau de Parfum este o creație olfactivă unisex din gama de lux, cu o compoziție oriental-florală. Un parfum rafinat și elegant, construit în jurul trandafirului de Damasc, bergamotei proaspete și patchouli-ului catifelat. Cruda evocă o senzualitate matură, o prospețime condimentat-florală și o persistență sofisticată.\nNote de vârf: bergamotă, cedru, chimen negru\nNote de mijloc: trandafir de Damasc, scorțișoară, cuișoare\nNote de bază: Ambra, patchouli, cashmeran, labdanum, vanilie, mosc, boabe de tonka",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: bergamotă, cedru, chimen negru",
+     "body": "Debutul parfumului este proaspăt, ușor condimentat, cu o notă citric-lemnoasă echilibrată. Bergamota aduce prospețime, cedrul susține structura, iar chimenul negru adaugă un accent aromatic discret."
+    },
+    {
+     "heading": "Note de mijloc: trandafir de Damasc, scorțișoară, cuișoare",
+     "body": "Inima parfumului este floral-condimentată, senzuală și rotundă. Trandafirul de Damasc domină cu eleganța sa nobilă, completat de scorțișoară caldă și cuișoare fine."
+    },
+    {
+     "heading": "Note de bază: Ambra, patchouli, cashmeran, labdanum, vanilie, mosc, boabe de tonka.",
+     "body": "Baza parfumului este densă, catifelată și foarte persistentă. Patchouli-ul și ambra oferă profunzime, vanilia și boabele de tonka îmnobilează finalul cu o dulceață caldă și echilibrată."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Cruda este ideal pentru toamnă și iarnă, dar poate fi purtat și în serile mai răcoroase din alte anotimpuri. Se potrivește la evenimente elegante, contexte profesionale sau ieșiri rafinate. Persistența și rafinamentul compoziției încadrează Cruda într-o categorie de parfumuri statement, dar purtabile."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex\nMorph Cruda este un parfum de lux pentru femei și bărbați care apreciază parfumurile florale-orientale cu caracter. Este pentru cei care evită banalul și preferă o semnătură olfactivă expresivă, dar elegantă."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Imaginează-ți o seară de toamnă, când mirosul frunzelor uscate se împregnează cu note dulci-condimentate. Cruda se deschide cu bergamotă clară, un strop de cedru și un chimen rafinat. Pe piele, trandafirul de Damasc domină scena cu o eleganță matură, susținut de scorțișoară și cuișoare care pulsează la fiecare pas. Baza de patchouli, ambră, tonka și cashmeran învăluie simțurile într-o prezență caldă, împăcată și memorabilă. Cruda nu e despre zgomot, ci despre profunzime. E un parfum care spune o poveste fără să strige. E luxul rostit calm. E acel miros care ți se lipește de piele, de gânduri, de prezență."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Este Morph Cruda un parfum de lux?\nDa. Face parte din gama Luxury Morph, cu o compoziție rafinată și persistentă, formulată cu ingrediente nobile.\nCui i se potrivește acest parfum?\nPentru femei și bărbați care preferă parfumuri cu structură floral-condimentată și bază orientală caldă.\nCând este recomandat să porți Cruda?\nToamna, iarna și serile răcoroase. Perfect pentru ocazii speciale, birou sau ieșiri elegante."
+    }
+   ],
+   "images": [
+    "/morph/morph-cruda-parfum-100ml-0.avif",
+    "/morph/morph-cruda-parfum-100ml-1.avif"
+   ]
+  },
+  {
+   "id": 862,
+   "slug": "morph-axum-parfum-100ml",
+   "name": "Morph Axum Eau de Parfum Unisex 100 ml",
+   "price": 690,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-axum-parfum-100ml",
+   "shortName": "Axum",
+   "collection": "luxury",
+   "bestseller": false,
+   "type": "Apă intensă de parfum",
+   "notes": {
+    "top": [
+     "Chimion",
+     "Cuișoare",
+     "Tămâie"
+    ],
+    "heart": [
+     "Cashmeran",
+     "Patchouli",
+     "Șampanie"
+    ],
+    "base": []
+   },
+   "family": "Lemnos-condimentat",
+   "intensity": null,
+   "longevity": "10-12 h",
+   "season": [
+    "Iarnă",
+    "Primavară",
+    "Toamnă"
+   ],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Extravagant",
+   "summary": "Morph Axum Eau de Parfum este o creație unisex din gama de lux, cu o construcție olfactivă atipică, intrigantă și memorabilă. Inspirat de vechiul regat Axum din Etiopia – loc istoric de comerț cu tămâie și mirodenii – parfumul mixează elemente orientale clasice cu accente contemporane. Tămâie, șampanie și cashmeran: un contrast curajos, dar echilibrat.\nNote de vârf: cuișoare, chimion, tămâie\nNote de mijloc: cashmeran, patchouli, șampanie\nNote de bază: mosc alb, vanilie, ambră cenușie",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: cuișoare, chimion, tămâie",
+     "body": "Parfumul debutează cu note fierbinți și sacre. Cuișoarele și chimionul aduc intensitate condimentată, iar tămâia dă profunzime ritualică. Un start dens, bogat, dar rafinat."
+    },
+    {
+     "heading": "Note de mijloc: cashmeran, patchouli, șampanie",
+     "body": "Inima parfumului este sofisticată și modernă. Cashmeranul creează o textură moale și lemnoasă, patchouli-ul adaugă caracter, iar nota de șampanie sparge compoziția cu efervescenȓă neașteptată. Este contrastul dintre fastul oriental și opulența modernă."
+    },
+    {
+     "heading": "Note de bază: mosc alb, vanilie, ambră cenușie",
+     "body": "Finalul parfumului este cald, persistent, senzual. Vanilia îmnobilează compoziția cu o dulceață fină, moscul alb leagă notele cu moliciune, iar ambra cenușie dă stabilitate și eleganță."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Axum strălucește toamna și iarna, dar poate fi purtat și primăvara, în special seara. Este parfumul ideal pentru cineva care vrea să transmită profunzime, putere și o amprentă olfactivă rafinată. Perfect pentru contexte elegante, dineuri, seri culturale sau ocazii speciale."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex\nAxum este un parfum cu personalitate, destinat atât femeilor cât și bărbaților care vor o semnătură olfactivă intensă, dar echilibrată. Nu e despre cumințenie, ci despre rafinament și contrast inteligent."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Deschiderea e grea ca o perdea de catifea. Cuișoarele și chimionul aduc căldură, tămâia umple aerul cu solemnitate. Dar din spate vine ceva imprevizibil: o efervescenȓă ușoară, aproape festivă. Șampania, notă rar folosită, creează un contrast electrizant cu baza grea orientală. Cashmeranul înglobează totul într-o textură lemnoasă, ușor minerală. Finalul e memorabil: ambra cenușie învelește vanilia într-o dulceață profundă, iar moscul alb adaugă echilibru. Axum nu vrea să impresioneze prin volum. Se impune prin arhitectură. Este acel parfum pe care-l porți la o cină discretă, la un concert de jazz sau când ai ceva important de spus. Nu ridică vocea, dar e ascultat."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Este Morph Axum un parfum de lux?\nDa. Face parte din gama Luxury Morph, cu o compoziție lemnos-condimentată, rafinată și intensă.\nCui i se potrivește acest parfum?\nPentru cei care vor să exprime eleganță cu profunzime, prin note atipice și contraste sofisticate.\nCând este recomandat să porți Axum?\nSeara, toamna și iarna. La evenimente speciale, în contexte formale sau când vrei să fii memorabil."
+    }
+   ],
+   "images": [
+    "/morph/morph-axum-parfum-100ml-0.avif",
+    "/morph/morph-axum-parfum-100ml-1.avif"
+   ]
+  },
+  {
+   "id": 858,
+   "slug": "morph-malaga-parfum-100ml",
+   "name": "Morph Malaga Eau de Parfum Unisex 100 ml",
+   "price": 690,
+   "currency": "lei",
+   "inStock": false,
+   "url": "https://morphparfum.ro/morph-malaga-parfum-100ml",
+   "shortName": "Malaga",
+   "collection": "luxury",
+   "bestseller": false,
+   "type": "Apă intensă de parfum",
+   "notes": {
+    "top": [
+     "Ciclama",
+     "Frezie",
+     "Lamâie",
+     "Portocală",
+     "Violetă"
+    ],
+    "heart": [
+     "Crin alb",
+     "Heliotrop",
+     "Iasomie",
+     "Lăcrămioară"
+    ],
+    "base": []
+   },
+   "family": "Floral",
+   "intensity": null,
+   "longevity": "10-12 h",
+   "season": [
+    "Primavară",
+    "Vară"
+   ],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Casual",
+   "summary": "Morph Malaga Eau de Parfum este un parfum de lux, unisex, construit pe contraste luminoase și senzuale. Inspirat de vibrația mediteraneană a orașului Malaga, parfumul aduce împreună note florale delicate, fructe solare și o bază catifelat-lemnoasă. Este o alegere rafinată pentru cei care vor să poarte prospețime cu profunzime.\nNote de vârf: portocală dulce, lămâie, violetă, frezie, ciclamă\nNote de mijloc: iasomie, lăcrămioară, crin alb, heliotrop\nNote de bază: vanilie, mosc alb, lemn de santal, patchouli",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: portocală dulce, lămâie, violetă, frezie, ciclamă",
+     "body": "Deschiderea este luminoasă și floral-citrică. Portocala dulce și lămâia energizează, frezia și ciclama dau claritate florală, iar violetă adaugă un ton pudrat, elegant."
+    },
+    {
+     "heading": "Note de mijloc: iasomie, lăcrămioară, crin alb, heliotrop",
+     "body": "Inima parfumului este alb-florală, clasică dar rafinat compusă. Iasomia domină, lacrămioara și crinul alb susțin puritatea, iar heliotropul adaugă o tentă balsamică, solară."
+    },
+    {
+     "heading": "Note de bază: vanilie, mosc alb, lemn de santal, patchouli",
+     "body": "Finalul este cald, senzual și mătăsos. Vanilia aduce dulceață, moscul alb închide curat, iar patchouli-ul și lemnul de santal adaugă profunzime și persistență. O combinație rotundă, echilibrată."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Malaga e perfect pentru primăvară și vară, dar poate funcționa fără efort și în toamnă. Se potrivește bine la birou, în ieșiri de zi, la evenimente casual-elegante sau în vacanțe. Este versatil, plin de viață, dar cu o eleganță care nu trece neobservată."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex\nMorph Malaga este un parfum construit pentru bărbați și femei care iubesc prospețimea citric-florală, dar vor mai mult de la ea: textură, contrast și persistență. E un parfum discret sofisticat, potrivit pentru toate vârstele."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Dimineață, lumină albă de Mediterană. Malaga se simte ca o explozie floral-citrică controlată. Portocala dulce și lămâia creează o atmosferă solară, aproape efervescentă, susținută de ciclamă și frezie. Violetă adaugă eleganță pudrată, o amprentă de feminitate subtilă. Apoi, florile albe preiau controlul. Iasomia are prezență, dar nu domină. Lacrămioara și crinul alb deschid spațiul, iar heliotropul, cu tonul său de soare dulce, leagă totul într-un ton cald, moale. Când parfumul se stabilizează, vanilia învăluie totul cu finețe. Patchouli-ul susține structura, moscul alb netezește marginea, iar lemnul de santal adaugă o coloană elegantă. Malaga rămâne pe piele ca o adiere caldă, purtabilă oricând. E parfumul zilelor cu chef de viață."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Este Morph Malaga un parfum de lux?\nDa. Este parte din gama Luxury Morph, cu o construcție floral-citrică sofisticată și persistentă.\nCui i se potrivește acest parfum?\nPentru femei și bărbați care preferă parfumuri florale proaspete, cu o tentă caldă și persistentă.\nCând este recomandat să porți Malaga?\nPrimăvara, vara, și la final de toamnă. Ziua, la birou, în vacanță sau la evenimente relaxate."
+    }
+   ],
+   "images": [
+    "/morph/morph-malaga-parfum-100ml-0.avif",
+    "/morph/morph-malaga-parfum-100ml-1.avif"
+   ]
+  },
+  {
+   "id": 851,
+   "slug": "morph-vision-parfum-100ml",
+   "name": "Morph Vision Eau de Parfum Unisex 100 ml",
+   "price": 690,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-vision-parfum-100ml",
+   "shortName": "Vision",
+   "collection": "luxury",
+   "bestseller": true,
+   "type": "Apă intensă de parfum",
+   "notes": {
+    "top": [
+     "Flori de iris",
+     "Portocală amară"
+    ],
+    "heart": [
+     "Litsea cubeba",
+     "Vetiver"
+    ],
+    "base": [
+     "Ambră cenușie",
+     "Cashmeran"
+    ]
+   },
+   "family": "Lemnos-citric",
+   "intensity": "Puternic",
+   "longevity": "8-10 h",
+   "season": [],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Casual",
+   "summary": "Morph Vision este un parfum unisex din gama de lux, cu o compoziție citric-lemnoasă sofisticată. Vision explorează contrastul dintre prospețimea luminoasă și profunzimea calmă. Un parfum conceptual, dar purtabil, creat pentru cei care știu ce vor.\nNote de vârf: portocală amară, flori de iris\nNote de mijloc: litsea cubeba, vetiver\nNote de bază: ambră cenușie, cashmeran",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: portocală amară, flori de iris",
+     "body": "Deschiderea este rafinată, citrică și puțin pudrată. Portocala amară oferă o prospețime amară, nobilă, în timp ce irisul adaugă o textură florală rece și elegantă."
+    },
+    {
+     "heading": "Note de mijloc: litsea cubeba, vetiver",
+     "body": "Inima parfumului este proaspăt-aromatică. Litsea cubeba, citrică și ușor lemnoasă, susține prospețimea, iar vetiverul adaugă o bază pământie, echilibrată, cu o tentă masculină subtilă."
+    },
+    {
+     "heading": "Note de bază: ambră cenușie, cashmeran",
+     "body": "Finalul este cald, curat și texturat. Ambra cenușie dă adâncime și persistență, iar cashmeranul adaugă un fundal catifelat, ușor lemnos și senzual."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Vision se potrivește perfect primăverii, toamnei și serilor răcoroase de vară. Este o alegere ideală pentru întâlniri, evenimente creative, contexte semi-formale sau atunci când vrei să proiectezi claritate și rafinament fără ostentație."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex\nMorph Vision este destinat celor care vor un parfum diferit, dar echilibrat. Pentru femei și bărbați care aleg conștient, nu convențional. Un parfum de atmosferă, de stare, nu de vitrină."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Debutul e limpede și amar, ca o portocală crudă ruptă sub soare. Se simte imediat un contrast: irisul vine cu o eleganță rece, ca o cămașă albă perfect călcată. Litsea cubeba aduce o vibrație citrică aparte, diferită de clasicele lămâi. E ușor efervescent, dar matur. Vetiverul se așază ca o bază solidă, calmă, echilibrând totul. Finalul e cald, fără a deveni dulce. Ambra cenușie dă densitate, iar cashmeranul se lipește de piele cu o moliciune tactilă. Vision nu este despre emoție explozivă, ci despre claritate. Despre a ști exact cine ești și ce vrei să spui. E parfum de decizie, nu de compromis."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Este Morph Vision un parfum de lux?\nDa. Face parte din gama Luxury Morph. Este un parfum conceptual, dar purtabil, rafinat și bine construit.\nCui i se potrivește acest parfum?\nPentru femei și bărbați care caută claritate, eleganță și o compoziție echilibrată. Potrivit pentru profesioniști, creativi sau spirite independente.\nCând este recomandat să porți Vision?\nPrimăvara, toamna, vara seara. La birou, la întâlniri, în contexte urbane sau intelectuale."
+    }
+   ],
+   "images": [
+    "/morph/morph-vision-parfum-100ml-0.avif",
+    "/morph/morph-vision-parfum-100ml-1.avif"
+   ]
+  },
+  {
+   "id": 847,
+   "slug": "morph-miyazawa-parfum-100ml",
+   "name": "Morph Miyazawa Extract de Parfum Unisex 100 ml",
+   "price": 790,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-miyazawa-parfum-100ml",
+   "shortName": "Miyazawa",
+   "collection": "les-exclusifs",
+   "bestseller": false,
+   "type": "Extract de parfum",
+   "notes": {
+    "top": [
+     "Iris",
+     "Lemn de santal",
+     "Mughetto",
+     "Trandafir"
+    ],
+    "heart": [
+     "Oud",
+     "Ylang Ylang"
+    ],
+    "base": [
+     "Tuberoză"
+    ]
+   },
+   "family": "Floral",
+   "intensity": "Medie",
+   "longevity": "8-10 h",
+   "season": [
+    "Primavară",
+    "Toamnă",
+    "Vară"
+   ],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Casual",
+   "summary": "Morph Miyazawa este un extract de parfum unisex, parte din gama Les Exclusifs. Compoziția echilibrează rafinamentul floral cu profunzimea oud-ului. Este potrivit atât ca parfum de damă, cât și ca parfum bărbătesc, cu o evoluție diferită în funcție de piele. Trandafirul, lăcrămioara, oud-ul, ylang-ylang-ul și tuberoza compun o experiență senzorială elegantă și persistentă.\nNote de vârf: Trandafir, Lăcrămioară\nNote de mijloc: Oud, Ylang-Ylang\nNote de bază: Tuberoză",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: Trandafir, Lăcrămioară",
+     "body": "Deschidere florală proaspătă și catifelată. Trandafirul adaugă noblețe, iar lăcrămioara dă o claritate delicată."
+    },
+    {
+     "heading": "Note de mijloc: Oud, Ylang-Ylang",
+     "body": "Oud-ul conferă structură și profunzime, în timp ce ylang-ylang-ul aduce un contrast senzual, ușor exotic."
+    },
+    {
+     "heading": "Note de bază: Tuberoză",
+     "body": "Notele finale sunt marcate de tuberoza cremoasă și persistentă, care încheie parfumul cu eleganță și seducție."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Ideal pentru zi și seară, în orice anotimp. Recomandat în contexte elegante, întâlniri, ieșiri rafinate sau momente în care vrei să te remarci prin stil fără efort."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex – cu nuanțe distincte\nParfum de damă: floral-cremos, cu tentă caldă și senzuală\nParfum bărbătesc: lemnos-floral, cu accente lemnoase și profunde\nMiyazawa este alegerea celor care preferă parfumuri bine construite, cu prezență și echilibru."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Miyazawa începe cu o claritate florală: trandafir și lăcrămioară. Este deschiderea care îți spune că urmează o compoziție atent reglată. Oud-ul nu este brutal – e rafinat, integrat. Ylang-ylang-ul îl completează cu fluiditate. Când parfumului i se așază baza pe piele, tuberoza se face simțită: profundă, calmă, ușor magnetică.\nEste un parfum care lasă urmă, dar nu apasă. Te însoțește natural, fără să ceară atenție. Miyazawa e discreție cu forță. E calmul elegant al parfumurilor construite corect."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Ce tip de parfum este Morph Miyazawa?\nExtract de parfum – concentrație mare, siaj controlat, persistență reală.\nEste potrivit ca parfum de damă sau parfum bărbătesc?\nDa. Este un parfum unisex care se dezvoltă diferit în funcție ph-ul pielii.\nCe conține Morph Miyazawa?\nTrandafir, lăcrămioară, oud, ylang-ylang, tuberoză – într-o construcție echilibrată floral-orientală.\nCât persistă pe piele?\nÎntre 10 și 14 ore. Notele de bază fixează compoziția pentru o evoluție completă.\nEste un cadou potrivit?\nDa. Designul și construcția parfumului îl recomandă pentru daruri elegante și personale."
+    }
+   ],
+   "images": [
+    "/morph/morph-miyazawa-parfum-100ml-0.avif",
+    "/morph/morph-miyazawa-parfum-100ml-1.avif",
+    "/morph/morph-miyazawa-parfum-100ml-2.avif"
+   ]
+  },
+  {
+   "id": 839,
+   "slug": "morph-umhh-parfum-100ml",
+   "name": "Morph Umhh Extract de Parfum Unisex 100 ml",
+   "price": 790,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-umhh-parfum-100ml",
+   "shortName": "Umhh",
+   "collection": "les-exclusifs",
+   "bestseller": true,
+   "type": "Extract de parfum",
+   "notes": {
+    "top": [
+     "Lemn ambrat"
+    ],
+    "heart": [
+     "Lemn exotic"
+    ],
+    "base": []
+   },
+   "family": "Lemnos",
+   "intensity": null,
+   "longevity": "8-10 h",
+   "season": [
+    "Iarnă",
+    "Primavară",
+    "Toamnă",
+    "Vară"
+   ],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Elegant",
+   "summary": "Morph Umhh este un extract de parfum unisex din colecția Les Exclusifs, care combină note lemnoase și ambrate pentru o experiență olfactivă profundă și sofisticată. Compoziția sa echilibrată îl face potrivit atât ca parfum de damă, cât și ca parfum bărbătesc, adaptându-se perfect ph-ului pielii fiecărui purtător.\nNote de vârf: Lemn Ambrat\nNote de mijloc: Lemne Exotice\nNote de bază: Cedru de Texas",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: Lemn Ambrat",
+     "body": "Debutul parfumului este dominat de lemnul ambrat, oferind o deschidere caldă și balsamică."
+    },
+    {
+     "heading": "Note de mijloc: Lemne Exotice",
+     "body": "Inima parfumului aduce profunzimea lemnelor exotice, creând un contrast fascinant între lemnos și misterios."
+    },
+    {
+     "heading": "Note de bază: Cedru de Texas",
+     "body": "Baza parfumului este învăluită de cedrul de Texas, adăugând o notă lemnoasă și persistentă care încheie compoziția cu rafinament."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Morph Umhh este ideal pentru toate anotimpurile și poate fi purtat atât ziua, cât și seara. Este alegerea perfectă pentru evenimente speciale, întâlniri elegante sau momente în care dorești să lași o impresie memorabilă."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex – adaptabil și sofisticat\nParfum de damă: Pe pielea feminină, accentuează notele lemnoase și delicate, oferind o prezență subtilă și elegantă.\nParfum bărbătesc: Pe pielea masculină, evidențiază notele lemnoase și ambrate, conferind profunzime și rafinament.\nMorph Umhh este pentru cei care apreciază echilibrul între tradiție și modernitate, între subtilitate și intensitate."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Morph Umhh începe cu o explozie de lemn ambrat, creând o deschidere caldă și balsamică. Pe măsură ce parfumul evoluează, notele de mijloc de lemne exotice adaugă profunzime și mister, învăluind simțurile într-o căldură reconfortantă. Baza de cedru de Texas încheie compoziția cu o notă lemnoasă și persistentă, lăsând o amprentă olfactivă distinctă.\nEste un parfum care nu strigă, ci șoptește cu eleganță, lăsând în urmă o impresie de rafinament și bun gust."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Ce tip de parfum este Morph Umhh?\nEste un extract de parfum, având o concentrație ridicată de uleiuri aromatice, ceea ce îi conferă o persistență îndelungată.\nEste Morph Umhh potrivit ca parfum de damă sau parfum bărbătesc?\nDa, este un parfum unisex, adaptabil atât pentru femei, cât și pentru bărbați, în funcție de ph-ul pielii fiecăruia.\nCât timp persistă pe piele?\nDatorită concentrației sale ridicate, Morph Umhh persistă între 8 și 12 ore, în funcție de tipul pielii și condițiile de mediu.\nEste potrivit pentru cadouri?\nAbsolut. Ambalajul elegant și compoziția sofisticată îl fac o alegere excelentă pentru cadouri speciale."
+    }
+   ],
+   "images": [
+    "/morph/morph-umhh-parfum-100ml-0.avif",
+    "/morph/morph-umhh-parfum-100ml-1.avif",
+    "/morph/morph-umhh-parfum-100ml-2.avif"
+   ]
+  },
+  {
+   "id": 835,
+   "slug": "morph-arles-parfum-100ml",
+   "name": "Morph Arles Eau de Parfum Unisex 100 ml",
+   "price": 690,
+   "currency": "lei",
+   "inStock": false,
+   "url": "https://morphparfum.ro/morph-arles-parfum-100ml",
+   "shortName": "Arles",
+   "collection": "luxury",
+   "bestseller": false,
+   "type": "Apă intensă de parfum",
+   "notes": {
+    "top": [
+     "Crin",
+     "Magnolie",
+     "Trandafir"
+    ],
+    "heart": [
+     "Caisă",
+     "Chimion",
+     "Cuișoare",
+     "Piersică",
+     "Piper negru",
+     "Scorțișoară"
+    ],
+    "base": [
+     "Ambră cenușie",
+     "Lemn de santal",
+     "Mosc",
+     "Vanilie"
+    ]
+   },
+   "family": "Lemnos-gourmand",
+   "intensity": "Puternic",
+   "longevity": "8-10 h",
+   "season": [
+    "Iarnă",
+    "Toamnă"
+   ],
+   "occasion": [
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Modern",
+   "summary": "Morph Arles Eau de Parfum este o compoziție unisex din gama de lux, care surprinde tensiunea perfectă dintre delicat și intens. Inspirat de lumina și senzualitatea sudului Franței, acest parfum condimentat-oriental îmbină note albe nobile, fructe moi și condimente vibrante cu o bază caldă, catifelată și persistentă. Arles este un parfum construit pentru cei care vor să lase o impresie memorabilă, fără să ridice tonul.\nNote de vârf: crin, trandafir, magnolie\nNote de mijloc: caisă, piersică, piper negru, scorțișoară, chimion, cuișoare\nNote de bază: vanilie, lemn de santal, ambra cenușie, mosc",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: crin, trandafir, magnolie",
+     "body": "Parfumul se deschide cu o trilogie florală clasică și sofisticată. Crinul conferă prospețime verde, trandafirul adaugă o tentă romantică, iar magnolia rotunjește deschiderea cu accente cremoase și luminoase."
+    },
+    {
+     "heading": "Note de mijloc: caisă, piersică, piper negru, scorțișoară, chimion, cuișoare",
+     "body": "Inima parfumului pulsează între fructat și condimentat. Caisa și piersica dau un ton moale, senzual, în timp ce piperul negru și scorțișoara adaugă profunzime. Chimionul și cuișoarele conferă structură și un aer exotic, mediteranean, fără a dezechilibra compoziția."
+    },
+    {
+     "heading": "Note de bază: vanilie, lemn de santal, ambra cenușie, mosc",
+     "body": "Baza este caldă, intensă și seducătoare. Vanilia adaugă dulceață controlată, lemnul de santal conferă un fond catifelat, iar ambra gri și moscul închid formula într-o notă elegantă, persistentă și curată."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Arles este un parfum potrivit pentru toate anotimpurile, dar strălucește în serile de primăvară și toamnă. Îl poți purta la evenimente elegante sau ca semnătură olfactivă de zi cu zi, dacă vrei să fii remarcat cu stil. Este o alegere inspirată pentru cine caută rafinament fără rigiditate."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex\nArles este o compoziție sofisticată, perfect echilibrată între notele florale, fructate și orientale. Se potrivește atât femeilor cât și bărbaților care apreciază parfumurile cu textură, contrast și o evoluție subtilă dar memorabilă."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Florile albe deschid dansul. Crinul și magnolia respiră aer curat, luminos, în timp ce trandafirul introduce o notă de rafinament clasic. Totul e clar, deschis, aproape naiv. Dar imediat apar umbrele senzuale: caisă coaptă, piersică suculentă, apoi o undă caldă de scorțișoară și piper negru. În fundal, chimionul și cuișoarele murmură a mister și dorință. Apoi vine momentul fixării: vanilie, lemn de santal, ambra cenușie. Totul se calmează, se așază. Nu e un parfum liniar – e o poveste spusă pe mai multe voci. Arles nu vrea să cucerească. Vrea să fascineze. Este mirosul unei amintiri vii, a unei prezențe care persistă după ce ai plecat."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Este Morph Arles un parfum de lux?\nDa. Face parte din gama Luxury Morph, cu o construcție floral-orientală rafinată, potrivită pentru orice anotimp.\nCui i se potrivește acest parfum?\nPentru femei și bărbați care vor un parfum elegant, senzual și cu personalitate.\nCând este recomandat să porți Arles?\nPrimăvara, toamna sau seara. La birou, în oraș sau în contexte speciale unde vrei să lași o amprentă."
+    }
+   ],
+   "images": [
+    "/morph/morph-arles-parfum-100ml-0.avif",
+    "/morph/morph-arles-parfum-100ml-1.avif",
+    "/morph/morph-arles-parfum-100ml-2.avif"
+   ]
+  },
+  {
+   "id": 831,
+   "slug": "morph-too-parfum-100ml",
+   "name": "Morph Too Extract de Parfum Unisex 100 ml",
+   "price": 790,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-too-parfum-100ml",
+   "shortName": "Too",
+   "collection": "les-exclusifs",
+   "bestseller": false,
+   "type": "Extract de parfum",
+   "notes": {
+    "top": [
+     "Mirto",
+     "Pachouli"
+    ],
+    "heart": [
+     "Ambră",
+     "Vanilie"
+    ],
+    "base": [
+     "Cedru de Atlas"
+    ]
+   },
+   "family": "Lemnos",
+   "intensity": "Puternic",
+   "longevity": "8-10 h",
+   "season": [
+    "Iarnă",
+    "Primavară",
+    "Toamnă",
+    "Vară"
+   ],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Casual",
+   "summary": "Morph Too este un extract de parfum unisex, parte din colecția Les Exclusifs. O combinație atent echilibrată între patchouli și note balsamice calde, care oferă o prezență memorabilă. Este ideal ca parfum de damă, parfum bărbătesc sau unisex, în funcție de pielea și stilul purtătorului.\nNote de vârf: Patchouli, Mirt\nNote de mijloc: Ambră, Vanilie\nNote de bază: Cedru de Atlas",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: Patchouli, Mirt",
+     "body": "Deschidere aromată, intensă, verde, dată de combinația dintre patchouli și mirt. Tonurile sunt clare, directe, cu tentă ușor rășinoasă."
+    },
+    {
+     "heading": "Note de mijloc: Ambră, Vanilie",
+     "body": "Inima parfumului este caldă și catifelată. Ambra adaugă profunzime și stabilitate, iar vanilia oferă un strat dulce discret, fără a deveni siropoasă."
+    },
+    {
+     "heading": "Note de bază: Cedru de Atlas",
+     "body": "Finalul este definit de cedrul de Atlas,  lemnos, ușor uscat, dar elegant. Lasă o urmă persistentă, curată, bine conturată."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Morph Too poate fi purtat în orice sezon, dar se simte cel mai bine în serile de toamnă și iarnă. Potrivit pentru evenimente, momente speciale sau contexte profesionale unde vrei să rămâi în minte fără să domini."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex – cu nuanțe diferite\nParfum de damă: cald, fin condimentat, cu bază balsamică blândă\nParfum bărbătesc: lemnos și solid, cu accente masculine clare\nMorph Too este un parfum echilibrat, ideal pentru cei care vor o semnătură olfactivă serioasă, fără ostentație."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Patchouli-ul te prinde de la început – este viu, intens, dar elegant. Mirtul îi adaugă un strat verde, aproape medicinal. În mijloc se simte o transformare: ambra începe să încălzească tonul, iar vanilia îl face mai prietenos, dar fără să-l înmoaie.\nCedrul de Atlas încheie compoziția cu o notă lemnoasă și bine articulată. Totul este așezat, matur, controlat. Nu este un parfum jucăuș. E un parfum care stă bine pe oameni conștienți de propria greutate. Clar, stabil, dar nu rigid."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Ce tip de parfum este Morph Too?\nExtract de parfum – formulă cu concentrație mare, persistență ridicată și siaj clar.\nEste potrivit ca parfum de damă sau parfum bărbătesc?\nDa. Are structură unisex, cu adaptare diferită în funcție de ph-ul pielii purtătorului.\nCe conține Morph Too?\nPatchouli, mirt, ambră, vanilie și cedru de Atlas – echilibru între verde, balsamic și lemnos.\nCât persistă?\nÎntre 10 și 14 ore, în funcție de piele și temperatură.\nEste un cadou potrivit?\nDa. Este un parfum matur, sofisticat, cu ambalaj elegant și compoziție versatilă."
+    }
+   ],
+   "images": [
+    "/morph/morph-too-parfum-100ml-0.avif",
+    "/morph/morph-too-parfum-100ml-1.avif",
+    "/morph/morph-too-parfum-100ml-2.avif"
+   ]
+  },
+  {
+   "id": 827,
+   "slug": "morph-kolonaki-parfum-100ml",
+   "name": "Morph Kolonaki Eau de Parfum Unisex 100 ml",
+   "price": 690,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-kolonaki-parfum-100ml",
+   "shortName": "Kolonaki",
+   "collection": "luxury",
+   "bestseller": false,
+   "type": "Apă intensă de parfum",
+   "notes": {
+    "top": [
+     "Anason stelat",
+     "Busuioc",
+     "Grapefruit",
+     "Mandarină",
+     "Trufă"
+    ],
+    "heart": [],
+    "base": [
+     "Labdanum",
+     "Oud",
+     "Patchouli",
+     "Vetiver"
+    ]
+   },
+   "family": "Gourmand",
+   "intensity": "Puternic",
+   "longevity": "10-12 h",
+   "season": [
+    "Iarnă",
+    "Primavară",
+    "Toamnă"
+   ],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Elegant",
+   "summary": "Morph Kolonaki Eau de Parfum este o creație olfactivă unisex din gama de lux, cu o compoziție citric-gurmandă. Un parfum intens și sofisticat, construit în jurul notei proaspete de grapefruit, trufei bogate și unui fond de oud catifelat. Kolonaki exprimă o eleganță curajoasă, cu accente citrice și o bază lemnos-ambrată de excepție.\nNote de vârf: grepfrut, mandarină, busuioc, anason stelat, trufă\nNote de mijloc: piper roz, chimen, cardamom, scorțișoară\nNote de bază: oud, patchouli, vetiver, labdanum",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: grepfrut, mandarină, busuioc, anason stelat, trufă",
+     "body": "Deschiderea parfumului este efervescentă, citric-aromatică și surprinzător de luminoasă. Grapefruitul și mandarina aduc energie, în timp ce busuiocul și anasonul stelat creează un contrast vegetal-condimentat. Nota de trufă adaugă un strat neașteptat de profunzime și mister."
+    },
+    {
+     "heading": "Note de mijloc: piper roz, chimen, cardamom, scorțișoară",
+     "body": "Inima parfumului este picantă și rotundă. Piperul roz deschide dansul condimentelor, urmat de chimenul cald, cardamomul exotic și scorțișoara cu tonuri dulci-lemnoase. Această etapă oferă Kolonaki-ului o coloană vertebrală vibrantă și sofisticată."
+    },
+    {
+     "heading": "Note de bază: oud, patchouli, vetiver, labdanum",
+     "body": "Baza parfumului este opulentă și persistentă. Oudul oferă structură și eleganță, patchouli-ul aduce adâncime pământoasă, vetiverul echilibrează cu o nuanță uscată și verde, iar labdanumul închide compoziția cu o notă balsamică și ușor rășinoasă."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Kolonaki este ideal pentru toamnă și iarnă, dar poate fi purtat și în serile reci din alte anotimpuri. Potrivit pentru evenimente de seară, întâlniri formale, sau contexte unde vrei să fii remarcat prin stil și substanță. Este un parfum statement, fără compromis."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex\nMorph Kolonaki este un parfum de lux creat pentru femei și bărbați care preferă arome intense, condimentate, cu bază oriental-lemnoasă. Se adresează celor care caută profunzime și caracter într-un parfum, dar nu acceptă vulgaritatea olfactivă. Este elegant, dar memorabil."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Imaginează-ți un început de seară în inima unui oraș vechi, unde luminile calde ale felinarelor se reflectă în caldarâmul umed. Kolonaki debutează cu un grapefruit suculent și o mandarină solară, contrabalansate de anason stelat tăios și trufa misterioasă. Busuiocul verde adaugă o vibrație aromatică. Apoi, inima preia controlul: piper roz care furnică pe piele, chimen intens, cardamom rafinat și scorțișoară care încălzește compoziția ca o mătase condimentată. Totul se stabilizează într-o bază puternică, unde oudul – nobil și profund – este însoțit de patchouli, vetiver și labdanum. Este un final sec, lemnos, dar cald, cu amprentă distinctă. Kolonaki e un parfum de prezență, nu de decor. Lasă urme. Se impune. Și o face cu clasă."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Este Morph Kolonaki un parfum de lux?\nDa. Face parte din gama Luxury Morph, cu o compoziție complexă și sofisticată, formulată din ingrediente nobile.\nCui i se potrivește acest parfum?\nEste ideal pentru femei și bărbați care preferă parfumuri picante, cu structură orientală și prezență puternică.\nCând este recomandat să porți Kolonaki?\nToamna, iarna și serile reci. Perfect pentru evenimente elegante sau contexte profesionale în care vrei să te remarci."
+    }
+   ],
+   "images": [
+    "/morph/morph-kolonaki-parfum-100ml-0.avif",
+    "/morph/morph-kolonaki-parfum-100ml-1.avif"
+   ]
+  },
+  {
+   "id": 823,
+   "slug": "morph-iconic-parfum-100ml",
+   "name": "Morph Iconic Extract de Parfum Unisex 100 ml",
+   "price": 790,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-iconic-parfum-100ml",
+   "shortName": "Iconic",
+   "collection": "les-exclusifs",
+   "bestseller": false,
+   "type": "Extract de parfum",
+   "notes": {
+    "top": [
+     "Iris",
+     "Lemn de santal"
+    ],
+    "heart": [
+     "Ambroxan"
+    ],
+    "base": []
+   },
+   "family": "Floral",
+   "intensity": null,
+   "longevity": "8-10 h",
+   "season": [
+    "Iarnă",
+    "Primavară",
+    "Toamnă",
+    "Vară"
+   ],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Elegant",
+   "summary": "Morph Iconic este un extract de parfum unisex ce captează esența contrastului perfect dintre delicatețea florilor albe și forța profundă a lemnului de santal extras la rece. O creație rafinată cu elemente occidentale moderne: iris pudrat, mosc și ambroxan cald. Iconic este un parfum-simbol, care vorbește despre identitate, echilibru și eleganță fără timp.\nNote de vârf: Flori albe, note picante, bergamotă\nNote de mijloc: Lemn de santal (extras la rece), iris, mosc\nNote de bază: Ambroxan, vetiver, note balsamice",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: Flori albe, note picante, bergamotă",
+     "body": "Deschidere eterică și strălucitoare, unde florile albe aduc puritate, iar notele picante și bergamota oferă un contrast subtil și sofisticat."
+    },
+    {
+     "heading": "Note de mijloc: Lemn de santal (extras la rece), iris, mosc",
+     "body": "Inima parfumului este stabilă și senină. Santalul oferă un caracter nobil, irisul aduce o textură pudrată, iar moscul rotunjește compoziția cu blândețe senzuală."
+    },
+    {
+     "heading": "Note de bază: Ambroxan, vetiver, note balsamice",
+     "body": "Baza este caldă, persistentă și elegantă. Ambroxanul oferă o aură minerală și ușor sărată, vetiverul închide totul cu profunzime clară și subtil masculină."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Morph Iconic strălucește în sezonul rece, dar este perfect și primăvara sau în serile de vară. Se potrivește la birou, în contexte rafinate, la evenimente formale, dar și în momente personale în care vrei să transmiți claritate, siguranță și stil."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex – echilibrat, rafinat, cu identitate distinctă\n• Pe pielea feminină: florile albe și irisul capătă o aură delicată, luminoasă\n• Pe pielea masculină: santalul, ambroxanul și vetiverul oferă stabilitate și profunzime calmă\nMorph Iconic este pentru cei care nu urmăresc tendințe, ci creează prezență. Un parfum care spune puțin, dar rămâne mult timp în memorie."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Morph Iconic este un parfum care vorbește în liniște, dar convinge cu forță. Inspirația vine din Tamil Nadu – o zonă a contrastelor: spiritual și viu, tradițional și modern. Aici santalul extras la rece e o adevărată comoară – curat, intens, dar și echilibrat.\nParfumul debutează cu flori albe, parcă plutitoare, și note picante care adaugă vibrație. Este un început aerisit, dar tensionat, ca un dans între puritate și instinct.\nÎn mijloc, compoziția devine stabilă: santalul aduce greutate nobilă, irisul adaugă pudrare și calm, moscul construiește un strat senzual. Totul e bine legat, fără nicio notă disonantă.\nFinalul este definit de ambroxan – cald, ușor sărat, cu acea senzație „skin-like” care persistă ore în șir. Vetiverul oferă claritate, structură și un aer elegant, ușor masculin.\nMorph Iconic este despre echilibru și despre a fi prezent în mod subtil, dar sigur. Este parfumul ideal pentru cei care apreciază compozițiile complexe, dar clare. Un extract de parfum cu identitate, durabilitate (10–14 ore) și siaj discret, dar impunător."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Ce tip de parfum este Morph Iconic?\nExtract de parfum – cu structură floral-lemnoasă, pudrată, caldă și modernă.\nEste potrivit ca parfum de damă sau bărbătesc?\nEste un parfum unisex, echilibrat, adaptabil – își schimbă tonul în funcție de piele.\nCe conține Morph Iconic?\nLemn de santal, flori albe, iris, mosc, ambroxan, note picante, vetiver.\nCât persistă pe piele?\nÎntre 10 și 14 ore, cu siaj moderat spre subtil – prezență clară, dar elegantă.\nE potrivit pentru cadou?\nDa, în special pentru iubitorii de parfumuri rafinate, cu o semnătură clară și calmă."
+    }
+   ],
+   "images": [
+    "/morph/morph-iconic-parfum-100ml-0.avif",
+    "/morph/morph-iconic-parfum-100ml-1.avif",
+    "/morph/morph-iconic-parfum-100ml-2.avif"
+   ]
+  },
+  {
+   "id": 819,
+   "slug": "morph-montmartre-parfum-100ml",
+   "name": "Morph Montmartre Eau de Parfum Unisex 100 ml",
+   "price": 690,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-montmartre-parfum-100ml",
+   "shortName": "Montmartre",
+   "collection": "luxury",
+   "bestseller": false,
+   "type": "Apă intensă de parfum",
+   "notes": {
+    "top": [
+     "Rășină",
+     "Tămâie"
+    ],
+    "heart": [
+     "Iris",
+     "Patchouli"
+    ],
+    "base": [
+     "Ambră cenușie",
+     "Mosc",
+     "Piele"
+    ]
+   },
+   "family": "Lemnos-oriental",
+   "intensity": null,
+   "longevity": "10-12 h",
+   "season": [],
+   "occasion": [
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Elegant",
+   "summary": "Morph Montmartre Eau de Parfum este o creație unisex din gama de lux, cu o construcție olfactivă artistică și rafinată. Inspirat de atmosfera boemă a cartierului parizian Montmartre, parfumul îmbină tămâie misterioasă, iris pudrat și note piele-ambra pentru a contura o semnătură elegantă, profundă și ușor melancolică.\nNote de vârf: rășină, tămâie\nNote de mijloc: iris, patchouli\nNote de bază: mosc, piele, ambră cenușie",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: rășină, tămâie",
+     "body": "Deschiderea este intensă și enigmatică. Rășinile aduc densitate balsamică, iar tămâia oferă o notă mistică, meditativă, ce dă tonul compoziției."
+    },
+    {
+     "heading": "Note de mijloc: iris, patchouli",
+     "body": "Inima parfumului este catifelat-pudrată. Irisul adaugă rafinament rece și o notă aristocratică, în timp ce patchouli-ul echilibrează cu adâncime și caracter pământos."
+    },
+    {
+     "heading": "Note de bază: mosc, piele, ambră cenușie",
+     "body": "Baza este caldă, îmbietoare, dar cu personalitate. Moscul susține totul cu o moliciune curată, pielea conferă intensitate subtilă, iar ambra cenușie dă persistență nobilă."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Montmartre se simte acasă în toamnă și iarnă, dar poate fi purtat și seara, oricând vrei o prezență sofisticată. Este alegerea ideală pentru contexte intime, evenimente culturale, cine rafinate sau plimbări cu sens. Funcționează ca parfum de zi cu zi pentru cei care trăiesc cu expresivitate."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex\nMorph Montmartre este un parfum pentru femei și bărbați care preferă compoziții profunde, cu note orientale, lemnoase și pudrate. Se adresează celor care văd parfumul ca pe o extensie a stilului personal, nu ca pe un simplu accesoriu."
+    },
+    {
+     "heading": "Descriere",
+     "body": "E seară în Paris. Lumina caldă cade peste străzile pietruite din Montmartre, iar aerul miroase a frunze umede și vin roșu. Parfumul se deschide cu rășini și tămâie, ca un atelier vechi de pictură unde fumul se împretește cu liniștea. Irisul, aristocratic și pudrat, împreună cu patchouli-ul, creează un contrast între fragil și teluric. În bază, pielea e fină, nu agresivă. Moscul alb netezește compoziția, iar ambra cenușie învăluie totul într-o aură de melancolie controlată. Montmartre nu strigă. Te prinde cu atmosferă, cu detaliu, cu memorie. Este parfumul celor care nu au nevoie de validare. Doar de un semn discret că au fost acolo."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Este Morph Montmartre un parfum de lux?\nDa. Face parte din gama Luxury Morph, cu o compoziție artistică, profundă și echilibrată.\nCui i se potrivește acest parfum?\nPentru femei și bărbați care preferă parfumuri elegante, atmosferice, cu note pudrat-lemnoase și textură.\nCând este recomandat să porți Montmartre?\nToamna, iarna, seara. Perfect pentru contexte cu substanță și stil personal asumat."
+    }
+   ],
+   "images": [
+    "/morph/morph-montmartre-parfum-100ml-0.avif",
+    "/morph/morph-montmartre-parfum-100ml-1.avif"
+   ]
+  },
+  {
+   "id": 815,
+   "slug": "morph-nudo-parfum-100ml",
+   "name": "Morph Nudo Eau de Parfum Unisex 100 ml",
+   "price": 690,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-nudo-parfum-100ml",
+   "shortName": "Nudo",
+   "collection": "luxury",
+   "bestseller": false,
+   "type": "Apă intensă de parfum",
+   "notes": {
+    "top": [
+     "Frunze de coca"
+    ],
+    "heart": [
+     "Tămâie"
+    ],
+    "base": []
+   },
+   "family": "Lemnos-oriental",
+   "intensity": "Puternic",
+   "longevity": "10-12 h",
+   "season": [
+    "Iarnă",
+    "Toamnă"
+   ],
+   "occasion": [
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Extravagant",
+   "summary": "Morph Nudo Eau de Parfum este un parfum unisex din gama de lux, cu o construcție olfactivă minimalistă, dar de impact. Trei note principale, trei direcții care se întrâlnesc într-o formulă de contrast pur: verde crud, lemnos-catifelat și mistic. Nudo este rafinamentul redus la esențial.\nNote de vârf: coca\nNote de mijloc: cashmeran\nNote de bază: tămâie",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: coca",
+     "body": "Parfumul debutează vegetal, ușor amar, cu o notă de frunză de coca care aduce o senzație tonifiantă, aproape tăioasă, neobișnuită în parfumeria clasică."
+    },
+    {
+     "heading": "Note de mijloc: cashmeran",
+     "body": "Cashmeranul aduce textură și fluiditate. Lemnos, cu accente moscate și ușor balsamice, echilibrează contrastul dintre debutul verde și tămâia densă ce urmează."
+    },
+    {
+     "heading": "Note de bază: tămâie",
+     "body": "Finalul parfumului e mistic, meditativ, cu o tămâie profundă și persistentă, dar rafinat inserată. Nu e bisericoasă, ci caldă, aerisind parcă greutatea compoziției prin claritate."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Nudo e construit pentru toamnă, iarnă și seri mai reci. E parfumul perfect pentru contexte intime, tăcute, personale. Se potrivește la o lectură seară, la un vin roșu sec, la o conversație rară. E o alegere pentru cineva care știe să asculte."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex\nMorph Nudo este un parfum unisex pentru cei care caută esența, nu stridența. Perfect pentru bărbați sau femei care preferă parfumuri scurte ca formulă, dar profunde ca impact."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Totul începe cu un verde amar, tonic, ca o frunză strivită între degete. Coca nu e dulce, nu e suavă. E brută, sinceră. Coboară apoi în cashmeran: confort, fluiditate, lemn moale. Pielea e deja caldă. Totul e pregătit pentru ce urmează. Tămâia nu vine din biserică. Vine din tăcere. Închide compoziția cu o notă densă, dar aerisibilă. Nu e un parfum liniar. Nudo se desface treptat, ca o idee spusă în șoaptă. Fără accesorii, fără decor. E un parfum care nu cere nimic. Dar oferă prezență."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Este Morph Nudo un parfum de lux?\nDa. Face parte din gama Luxury Morph, cu o construcție olfactivă neconvențională, minimalistă și profundă.\nCui i se potrivește acest parfum?\nPentru femei și bărbați care apreciază parfumuri scurte ca formulă, dar cu multă prezență. Ideal pentru introspecții, contexte tăcute, sau prezențe asumate.\nCând este recomandat să porți Nudo?\nToamna, iarna și în serile liniștite. E parfumul unei atmosfere calme, dar dense."
+    }
+   ],
+   "images": [
+    "/morph/morph-nudo-parfum-100ml-0.avif",
+    "/morph/morph-nudo-parfum-100ml-1.avif"
+   ]
+  },
+  {
+   "id": 811,
+   "slug": "morph-n8-parfum-100ml",
+   "name": "Morph N8 Extract de Parfum Unisex 100 ml",
+   "price": 790,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-n8-parfum-100ml",
+   "shortName": "N8",
+   "collection": "les-exclusifs",
+   "bestseller": true,
+   "type": "Extract de parfum",
+   "notes": {
+    "top": [
+     "Liliac",
+     "Stânjenel de Toscana"
+    ],
+    "heart": [
+     "Iris",
+     "Trandafir de Damasc",
+     "Violete de Parma"
+    ],
+    "base": [
+     "Mosc alb",
+     "Vanilie"
+    ]
+   },
+   "family": "Floral-pudrat",
+   "intensity": null,
+   "longevity": "8-10 h",
+   "season": [
+    "Primavară",
+    "Toamnă",
+    "Vară"
+   ],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Elegant",
+   "summary": "Morph N8 este un extract de parfum unisex din colecția Les Exclusifs, construit pe o structură floral-lemnoasă clară. Notele se așază elegant, cu o compoziție coerentă și bine echilibrată, potrivită ca parfum de damă, parfum bărbătesc sau pentru purtare unisex.\nNote de vârf: Iris Florentin, Liliac\nNote de mijloc: Violeta de Parma, Trandafir Damasc\nNote de bază: Vanilie de Zanzibar, Mosc Alb",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: Iris Florentin, Liliac",
+     "body": "Tonuri luminoase și curate. Irisul adaugă o textură pudrată sofisticată, iar liliacul oferă prospețime florală calmă."
+    },
+    {
+     "heading": "Note de mijloc: Violeta de Parma, Trandafir Damasc",
+     "body": "Inima parfumului este delicată și rotundă. Violeta are o tentă vintage discretă, în timp ce trandafirul adaugă echilibru floral clasic."
+    },
+    {
+     "heading": "Note de bază: Vanilie de Zanzibar, Mosc Alb",
+     "body": "Baza e caldă și reconfortantă. Vanilia este fină, iar moscul alb lasă o urmă curată, cu persistență moderată și confortabilă."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "N8 merge în orice sezon, dar își arată claritatea în zilele de primăvară și serile de toamnă. E potrivit în contexte profesionale, întâlniri personale, seri culturale sau ieșiri relaxate în oraș."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex – cu profil adaptiv\nParfum de damă: floral-pudrat, fin, cu ton romantic elegant\nParfum bărbătesc: ușor floral, dar sobru, cu bază vanilată discretă\nPentru cei care caută un parfum liniștit, dar cu caracter. O alegere care nu caută aplauze, dar rămâne în memorie."
+    },
+    {
+     "heading": "Descriere",
+     "body": "N8 este alegerea perfectă pentru cei care caută un parfum pudrat cu iris și violete, cu o evoluție calmă și persistentă. Irisul domină începutul, cu o textură curată și sofisticată, susținut de liliacul floral discret. Pe măsură ce se stabilizează, se simt notele de trandafir damasc și violeta de Parma, construind o identitate florală matură.\nBaza de vanilie de Zanzibar și mosc alb pudrat adaugă căldură și echilibru, fără a încărca. Este un parfum care completează perfect pielea, nu o acoperă. Ideal pentru cei care vor un parfum unisex floral-pudrat ce poate fi purtat atât în context casual, cât și elegant.\nCompoziția îl face potrivit și pentru cei care caută un parfum cu iris persistent, un parfum „clean” cu aer vintage subtil, dar reinterpretat modern. N8 nu e un parfum care domină, ci unul care clarifică prezența celui care îl poartă."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Ce tip de parfum este Morph N8?\nExtract de parfum – cu structură floral-pudrată, echilibrată și evoluție clară.\nEste potrivit ca parfum de damă sau parfum bărbătesc?\nDa. Este un parfum unisex care se adaptează armonios pe orice tip de ph.\nCe conține Morph N8?\nIris florentin, liliac, violeta de Parma, trandafir damasc, vanilie de Zanzibar, mosc alb.\nPersistă mult?\nÎntre 8 și 12 ore, în funcție de temperatură și chimia pielii.\nMerge pentru un cadou?\nDa – ambalajul, construcția și tonul său echilibrat îl recomandă pentru cadouri fără risc."
+    }
+   ],
+   "images": [
+    "/morph/morph-n8-parfum-100ml-0.avif",
+    "/morph/morph-n8-parfum-100ml-1.avif",
+    "/morph/morph-n8-parfum-100ml-2.avif"
+   ]
+  },
+  {
+   "id": 807,
+   "slug": "morph-indomable-parfum-100ml",
+   "name": "Morph Indomable Eau de Parfum Unisex 100 ml",
+   "price": 690,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-indomable-parfum-100ml",
+   "shortName": "Indomable",
+   "collection": "luxury",
+   "bestseller": true,
+   "type": "Apă intensă de parfum",
+   "notes": {
+    "top": [
+     "Cashmeran",
+     "Oud",
+     "Zahăr pudră"
+    ],
+    "heart": [
+     "Cuișoare",
+     "Labdanum",
+     "Patchouli"
+    ],
+    "base": [
+     "Ambră cenușie",
+     "Mosc alb",
+     "Vanilie"
+    ]
+   },
+   "family": "Lemnos-oriental",
+   "intensity": "Puternic",
+   "longevity": "10-12 h",
+   "season": [
+    "Primavară",
+    "Toamnă"
+   ],
+   "occasion": [
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Elegant",
+   "summary": "Morph Indomable Eau de Parfum este o creație intensă și elegantă din gama de lux. Un parfum unisex cu personalitate puternică, construit în jurul notelor de oud, lemn de cașmir și ambra gri. Indomable este despre forță tăcută, profunzime și rafinament persistent.\nNote de vârf: oud, zahăr pudră, cashmeran\nNote de mijloc: labdanum, patchouli, cuișoare\nNote de bază: Mosc alb, vanilie, ambra cenusie",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: oud, zahăr pudră, cashmeran",
+     "body": "Deschiderea parfumului este surprinzătoare: combinația dintre oud și zahăr pudră creează un contrast rafinat între lemnos și dulce. Lemnul de cașmir adaugă o textură caldă și sofisticată, învăluitoare."
+    },
+    {
+     "heading": "Note de mijloc: labdanum, patchouli, cuișoare",
+     "body": "Inima parfumului este bogată și balsamică. Labdanumul oferă profunzime rășinoasă, patchouli-ul aduce o amprentă pământoasă, iar cuișoarele încarcă compoziția cu un accent condimentat discret."
+    },
+    {
+     "heading": "Note de bază: Mosc alb, vanilie, ambra cenusie.",
+     "body": "Finalul parfumului este catifelat, dar persistent. Moscul alb și ambra gri dau stabilitate și semnătură olfactivă unică, în timp ce boabele de vanilie adaugă un strat subtil de căldură și rotunjime."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Indomable este potrivit pentru toamnă, iarnă și serile reci. Se simte natural în contexte elegante: dineuri, evenimente de seară, ieșiri rafinate. Este parfumul ideal pentru cei care caută o prezență olfactivă memorabilă, fără compromis."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex\nMorph Indomable este un parfum de lux unisex, creat pentru femei și bărbați care preferă parfumurile profunde, calde, cu evoluție complexă. Se adresează celor care doresc o semnătură puternică, dar echilibrată, fără a forța nota."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Imaginează-ți o seară de toamnă târzie, când aerul devine mai dens, iar orașul își pierde din zgomot. Morph Indomable începe cu o doză rafinată de oud, învăluit de dulceața fină a zahărului pudră și căldura lemnului de cașmir. Pe măsură ce se așază, compoziția evoluează spre o inimă de labdanum și patchouli, cu accente discrete de cuișoare. Totul este legat de o bază persistentă de ambra gri, mosc alb și vanilie – o prezență silențioasă, dar impunătoare.\nIndomable este o alegere de caracter. Nu e un parfum de compromis, ci unul de afirmare. Te însoțește, te definește, te lasă prezent fără a vorbi. Pentru cei care nu urmează, ci conduc."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Este Morph Indomable un parfum de lux?\nDa. Face parte din gama Luxury Morph, cu ingrediente de calitate și o construcție olfactivă sofisticată.\nCui i se potrivește acest parfum?\nPentru femei și bărbați care caută un parfum intens, rafinat și cu semnătură clară.\nCând se poartă cel mai bine?\nToamnă, iarnă, seara. Ideal pentru evenimente elegante și contexte sociale rafinate."
+    }
+   ],
+   "images": [
+    "/morph/morph-indomable-parfum-100ml-0.avif",
+    "/morph/morph-indomable-parfum-100ml-1.avif"
+   ]
+  },
+  {
+   "id": 804,
+   "slug": "morph-a21-parfum-100ml",
+   "name": "Morph A21 Extract de Parfum Unisex 100 ml",
+   "price": 790,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-a21-parfum-100ml",
+   "shortName": "A21",
+   "collection": "les-exclusifs",
+   "bestseller": false,
+   "type": "Extract de parfum",
+   "notes": {
+    "top": [
+     "Coăcaze negre",
+     "Osmanthus"
+    ],
+    "heart": [
+     "Cetalox",
+     "Mosc alb"
+    ],
+    "base": [
+     "Ambroxan",
+     "Vanilie de Madagascar"
+    ]
+   },
+   "family": "Gourmand",
+   "intensity": null,
+   "longevity": "8-10 h",
+   "season": [],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Elegant",
+   "summary": "Morph A21 este un extract de parfum cu intensitate ridicată și caracter olfactiv clar. O alegere potrivită ca parfum de damă, parfum bărbătesc, dar și unisex, în funcție de personalitatea celui care îl poartă. Compoziția aduce împreună Osmanto, trandafirul de Damasc și vanilia Madagascar, într-o formulă care exprimă profunzime, echilibru și prezență.\nNote de vârf: Osmanto\nNote de mijloc: trandafir de Damasc\nNote de bază: vanilie de Madagascar",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: Osmanto",
+     "body": "Un debut concentrate cu o armonie seducătoare între dulceața catifelată și ușor fructată oferită de osmanto și accentele vibrante, acrișor-picante ale coacăzelor, creând o impresie proaspătă, rafinată și intrigantă încă de la prima pulverizare."
+    },
+    {
+     "heading": "Note de mijloc: trandafir de Damasc",
+     "body": "Inima parfumului este dominată de un trandafir cald, catifelat, cu tentă ușor afumată. Echilibrează intensitatea oud-ului și adaugă o notă florală sofisticată."
+    },
+    {
+     "heading": "Note de bază: vanilie de Madagascar",
+     "body": "Baza este caldă, fin dulceagă și catifelată. Vanilia rotunjește compoziția și aduce un strat de confort durabil."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Morph A21 este ideal pentru seară, sezon rece, contexte elegante sau ceremonii speciale. Persistența ridicată și siajul intens îl recomandă ca parfum statement pentru ocazii în care vrei să fii reținut, nu doar remarcat."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex – dar cu impact adaptiv\nParfum de damă: devine floral-oriental, rotund, rafinat\nParfum bărbătesc: note ce oferă masculinitate prin prezența ambroxanului în combinție cu moscul alb. A21 este pentru cei care aleg parfumul nu ca pe un moft, ci ca pe o extensie autentică a personalității."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Noapte. Marmură rece. Tăcere. Aerul are densitate, și în el pulsează ceva: oud, trandafir, vanilie. Nu este un parfum liniar. Nu este un parfum superficial. Este o prezență. Un acord olfactiv ce curge între contrast și armonie.\nOsmanto-ul din deschidere e bogat, adânc, fructat. Trandafirul de Damasc vine ca un voal cald, rafinat, cu tentă dulce-lemnoasă. Vanilia nu copleșește, ci închide totul ca o semnătură.\nA21 nu este un parfum de zi. Nici de birou. Este alegerea persoanei care nu are nevoie de validări sau complimente, este alegerea persoanei care știe deja care îi este esența, pe care o îmbracă mereu în A21."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Ce tip de parfum este Morph A21?\nExtract de parfum – cu concentrație mare, persistență și siaj puternice.\nEste potrivit ca parfum de damă sau parfum bărbătesc?\nDa. Este un parfum unisex care dezvoltă un profil diferit în funcție de ph-ul pielii. Poate deveni floral-condimentat sau poate avea tente usor masculine. Este un parfum potrivit atât pentru femei, cât și pentru bărbați.\nCât persistă pe piele?\nÎntre 12 și 24 de ore, în funcție de ph-ul pielii, stilul de viață și context. Ideal pentru seri lungi, recepții, momente speciale.\nEste potrivit pentru un cadou?\nPerfect. Este alegerea celor care apreciază parfumurile concentrate, bine construite, cu semnătură olfactivă puternică."
+    }
+   ],
+   "images": [
+    "/morph/morph-a21-parfum-100ml-0.avif",
+    "/morph/morph-a21-parfum-100ml-1.avif"
+   ]
+  },
+  {
+   "id": 797,
+   "slug": "morph-rose-j-parfum-100ml",
+   "name": "Morph Rose J Extract de Parfum Unisex 100 ml",
+   "price": 790,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-rose-j-parfum-100ml",
+   "shortName": "Rose J",
+   "collection": "les-exclusifs",
+   "bestseller": false,
+   "type": "Extract de parfum",
+   "notes": {
+    "top": [
+     "Trandafir"
+    ],
+    "heart": [
+     "Ambră",
+     "Răsină"
+    ],
+    "base": [
+     "Oud"
+    ]
+   },
+   "family": "Floral-oriental",
+   "intensity": "Puternic",
+   "longevity": "8-10 h",
+   "season": [
+    "Iarnă",
+    "Toamnă"
+   ],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Casual",
+   "summary": "Morph Rose J este un extract de parfum unisex, parte din colecția Les Exclusifs, care îmbină armonios notele florale și condimentate. Compoziția sa echilibrată îl face potrivit atât ca parfum de damă, cât și ca parfum bărbătesc, adaptându-se perfect ph-ului pielii fiecărui purtător.\nNote de vârf: Tămăie\nNote de mijloc: Trandafir Orintal\nNote de bază: Rășină și Oud",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: Tămăie",
+     "body": "Debutul parfumului este dominat de tămâia ce deschide compoziția cu un ton misterios, o notă luminoasă ce pătrunde subtil în aer, pregătind simțurile pentru profunzimea caldă ce va urma."
+    },
+    {
+     "heading": "Note de mijloc: Trandafir Orintal",
+     "body": "În inima parfumului, trandafirul oriental înflorește cu o senzualitate caldă, îmbinând delicatețea florală cu accente condimentate și ambrate."
+    },
+    {
+     "heading": "Note de bază: Rășină și Oud",
+     "body": "Notele de bază de rășină și oud oferă parfumului o adâncime hipnotică, cu accente calde, balsamice și lemnoase. Rășina aduce o moliciune aromată, în timp ce oud-ul conferă o eleganță întunecată și o prezență intensă, lăsând în urmă o urmă persistentă și memorabilă."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Morph Rose J este ideal pentru toate anotimpurile și poate fi purtat atât ziua, cât și seara. Este alegerea perfectă pentru evenimente speciale, întâlniri elegante sau momente în care dorești să lași o impresie memorabilă."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex – adaptabil și sofisticat\nParfum de damă: Pe pielea feminină, accentuează notele florale și delicate, oferind o prezență subtilă și elegantă.\nParfum bărbătesc: Pe pielea masculină, evidențiază notele lemnoase și condimentate, conferind profunzime și rafinament.\nMorph Rose J este pentru cei care apreciază echilibrul între tradiție și modernitate, între subtilitate și intensitate."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Imaginează-ți o seară liniștită, în care aerul este impregnat cu arome fine de trandafir și condimente. Morph Rose J, o combinație mistică lemnos- florală, care se deschide treptat. Pe măsură ce parfumul evoluează, notele de bază de adaugă profunzime și persistență, lăsând o amprentă olfactivă distinctă.\nEste un parfum care nu strigă, ci șoptește cu eleganță, lăsând în urmă o impresie de rafinament și bun gust."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Ce tip de parfum este Morph Rose J?\nEste un extract de parfum, având o concentrație ridicată de uleiuri aromatice, ceea ce îi conferă o persistență îndelungată.\nEste Morph Rose J potrivit ca parfum de damă sau parfum bărbătesc?\nDa, este un parfum unisex, adaptabil atât pentru femei, cât și pentru bărbați, în funcție de ph-ul pielii.\nCât timp persistă pe piele?\nDatorită concentrației sale ridicate, Morph Rose J persistă între 8 și 12 ore, în funcție de tipul pielii și condițiile de mediu.\nEste potrivit pentru cadouri?\nAbsolut. Ambalajul elegant și compoziția sofisticată îl fac o alegere excelentă pentru cadouri speciale."
+    }
+   ],
+   "images": [
+    "/morph/morph-rose-j-parfum-100ml-0.avif",
+    "/morph/morph-rose-j-parfum-100ml-1.avif"
+   ]
+  },
+  {
+   "id": 789,
+   "slug": "morph-animal-parfum-100ml",
+   "name": "Morph Animal Extract de Parfum Unisex 100 ml",
+   "price": 790,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-animal-parfum-100ml",
+   "shortName": "Animal",
+   "collection": "les-exclusifs",
+   "bestseller": true,
+   "type": "Extract de parfum",
+   "notes": {
+    "top": [
+     "Iris",
+     "Lemn de santal"
+    ],
+    "heart": [
+     "Ambroxan"
+    ],
+    "base": [
+     "Mosc alb"
+    ]
+   },
+   "family": "Lemnos-oriental",
+   "intensity": "Puternic",
+   "longevity": "10-12 h",
+   "season": [
+    "Iarnă",
+    "Toamnă"
+   ],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Extravagant",
+   "summary": "Morph Animal este un extract de parfum unisex din colecția Les Exclusifs, cu o construcție lemnos-aromatică și tonuri orientale fine. Cu note dominante de santal, iris și ambroxan, este o alegere clară pentru cei care caută un parfum cu lemn de santal intens și iris pudrat, potrivit ca parfum de damă, parfum bărbătesc sau unisex.\nNote de vârf: Lemn de Santal, Iris\nNote de mijloc: Note picante, Mosc\nNote de bază: Ambroxan",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: Lemn de Santal, Iris",
+     "body": "Deschidere echilibrată între lemnos și pudrat. Santalul aduce stabilitate, irisul deschide parfumul cu un rafinament subtil, aproape catifelat."
+    },
+    {
+     "heading": "Note de mijloc: Note picante, Mosc",
+     "body": "Condimente discrete și o amprentă muscată ușor înăbușită dau parfumului volum și structură."
+    },
+    {
+     "heading": "Note de bază: Ambroxan",
+     "body": "Baza este ancorată în ambroxan – o notă caldă, minerală, ușor sărată, care fixează mirosul și îl face memorabil."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Morph Animal funcționează excelent în sezoanele reci, dar este suficient de bine echilibrat pentru a fi purtat oricând. Se potrivește cu ținute smart, contexte formale, întâlniri semnificative sau seri unde eleganța e exprimată prin detaliu, nu prin zgomot."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex – cu adaptare personalizată\nParfum de damă: accentuează irisul și nota caldă de ambroxan, cu o amprentă pudrată, elegantă\nParfum bărbătesc: scoate în evidență lemnul de santal și condimentele, cu o bază serioasă, profundă\nPentru cei care aleg parfumuri construite bine, fără artificii. Animal e echilibru între forță și reținere."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Morph Animal este unul dintre acele parfumuri care lasă impresie fără să ceară locul din centru. Compoziția lui se construiește în tăcere, dar rămâne – ca o prezență sigură de sine. Dacă ești în căutarea unui parfum cu lemn de santal și ambroxan persistent, a unui miros care nu doar însoțește, ci definește, atunci Animal livrează exact asta.\nDebutul te prinde cu un santal clar – nu dulce, nu închis, ci bine șlefuit. Irisul vine ca o ceață pudrată, care liniștește totul. Parfumul are un tempo lent. Nimic nu se grăbește. Pe măsură ce se așază pe piele, încep să se simtă condimentele: cumin, scorțișoară, toate integrate, fără ascuțime. Moscul dă volum, iar ambroxanul căldură – țin totul împreună, cu o stabilitate rară.\nPentru femei, devine catifelat, calm, sigur. Pentru bărbați, este lemnos-pudrat, cu o adâncime care vine din simplitatea bine calculată. Este exact genul de parfum cu iris și ambroxan pentru toamnă pe care îl porți fără să simți nevoia să mai spui altceva.\nEste recomandat celor care vor un parfum unisex cu santal și iris, pentru alegeri ce strigă autenticitate. Are persistență reală (10-14 ore) și siaj moderat, dar clar. Ideal pentru cei care nu vânează complimente, ci confirmări."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Ce tip de parfum este Morph Animal?\nExtract de parfum – cu structură lemnos-pudrată, intensă și rafinată.\nEste potrivit ca parfum de damă sau parfum bărbătesc?\nEste un parfum unisex, echilibrat, care reacționează diferit în funcție de ph-ul pielii.\nCe conține Morph Animal?\nSantal, iris, ambroxan, note picante, mosc.\nCât persistă pe piele?\nÎntre 10 și 14 ore. Siaj mediu, evoluție lentă și consistentă.\nEste o alegere bună pentru cadou?\nDa, în special pentru cunoscători, colecționari sau cei care preferă parfumuri autentice și echilibrate."
+    }
+   ],
+   "images": [
+    "/morph/morph-animal-parfum-100ml-0.avif",
+    "/morph/morph-animal-parfum-100ml-1.avif",
+    "/morph/morph-animal-parfum-100ml-2.avif"
+   ]
+  },
+  {
+   "id": 783,
+   "slug": "morph-vapor-parfum-100ml",
+   "name": "Morph Vapor Eau de Parfum Unisex 100 ml",
+   "price": 690,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-vapor-parfum-100ml",
+   "shortName": "Vapor",
+   "collection": "luxury",
+   "bestseller": true,
+   "type": "Apă intensă de parfum",
+   "notes": {
+    "top": [
+     "Ardei negru",
+     "Lime",
+     "Mandarină"
+    ],
+    "heart": [
+     "Bujor",
+     "Fructe de padure",
+     "Mușcată"
+    ],
+    "base": [
+     "Caramel",
+     "Chihlimbar",
+     "Lemn de santal",
+     "Vanilie de Madagascar"
+    ]
+   },
+   "family": "Gourmand",
+   "intensity": "Puternic",
+   "longevity": "10-12 h",
+   "season": [
+    "Primavară",
+    "Vară"
+   ],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Modern",
+   "summary": "Morph Vapor este un parfum unisex din gama de lux, care marchează o ruptură clară în stilul olfactiv tradițional. Cu o construcție vibrantă, fresh-fructată și condimentată fin, Vapor este o alegere pentru cei care nu se ascund după convenții. E despre libertate. Și despre curajul de a fi.\nNote de vârf: lime, mandarină, ardei negru\nNote de mijloc: bujor, zmeură, fructe de pădure, mușcată\nNote de bază: caramel, chihlimbar, vanilie de Madagascar, lemn de santal",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: lime, mandarină, ardei negru",
+     "body": "Startul este exploziv, citric și energizant. Lime-ul și mandarina aduc aciditate proaspătă, iar ardeiul negru pulsează în fundal, adăugând un contrast picant neașteptat."
+    },
+    {
+     "heading": "Note de mijloc: bujor, zmeură, fructe de pădure, mușcată",
+     "body": "Inima parfumului e vie, rotundă, cu flori și fructe care se întrepătrund. Bujorul dă lejeritate florală, zmeura și fructele de pădure amplifică dulceața, iar mușcata oferă un contrapunct aromatic, echilibrând între feminin și acidulat."
+    },
+    {
+     "heading": "Note de bază: caramel, chihlimbar, vanilie de Madagascar, lemn de santal",
+     "body": "Baza e densă, caldă și reconfortantă. Caramelul și vanilia construiesc dulceața, dar chihlimbarul și santalul vin să o fixeze în piele cu o structură lemnos-orientală. Rămâne mult. Și bine."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Vapor se simte acasă în primăvară și vară, dar poate merge și în serile răcoroase de toamnă. Este parfumul celor care se exprimă prin prezență. Bun pentru zi, dar surprinzător și seara. Te scoate din mulțime. Te ține acolo."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex\nMorph Vapor este un parfum unisex pentru personalități efervescente. Dulce, dar nu siropos. Proaspăt, dar cu adâncime. Ideal pentru oricine își dorește un parfum memorabil, cu caracter."
+    },
+    {
+     "heading": "Descriere lungă (stil cinematic și conversațional)",
+     "body": "Lime-ul e primul care “lovește”. Ascuțit, curat, ca o lamă rece. Apoi vine dulceața: fructe roșii, zmeură, ceva floral. Nimic greoi. Totul curge cu energie și curaj. E parfum de atitudine, nu de fundal. Ardeiul negru apare scurt, dar dă claritate. Mușcata adaugă tensiune aromatică. Și apoi – boom: caramel, vanilie, santal. Totul devine dens, cald, lipit de piele. Vapor nu se diluează. Evoluează. Se lipește. Se simte. Este acel parfum pe care-l porți când nu mai întrebi dacă e potrivit. Îți vine. Te definește. Nu e blând, dar e magnetic. Și asta e de ajuns."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Este Morph Vapor un parfum de lux?\nDa. Face parte din gama Luxury Morph. O compoziție nonconformistă, persistentă, construită pentru a fi remarcată.\nCui i se potrivește acest parfum?\nPentru femei și bărbați care preferă parfumuri vibrante, dulci-fructate, dar cu profunzime. Perfect pentru cei care vor să se exprime olfactiv.\nCând este recomandat să porți Vapor?\nPrimăvara, vara, serile calde de toamnă. Ziua, seara, la evenimente sau în viața de zi cu zi. Când vrei să fii tu."
+    }
+   ],
+   "images": [
+    "/morph/morph-vapor-parfum-100ml-0.avif",
+    "/morph/morph-vapor-parfum-100ml-1.avif"
+   ]
+  },
+  {
+   "id": 35605,
+   "slug": "morph-zeta-parfum-100ml",
+   "name": "Morph Zeta Eau de Parfum Unisex 100 ml",
+   "price": 690,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-zeta-parfum-100ml",
+   "shortName": "Zeta",
+   "collection": "luxury",
+   "bestseller": true,
+   "type": "Apă intensă de parfum",
+   "notes": {
+    "top": [
+     "Cacao din Venezuela"
+    ],
+    "heart": [
+     "Ambră gri"
+    ],
+    "base": [
+     "Migdală amară de avola"
+    ]
+   },
+   "family": "Gourmand",
+   "intensity": "Medie",
+   "longevity": "8-10 h",
+   "season": [
+    "Iarnă",
+    "Primavară",
+    "Toamnă"
+   ],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Elegant",
+   "summary": "Morph Zeta este un parfum unisex de lux, din gama gourmand-orientală, construit în jurul a trei note rare și puternice: cacao din Venezuela, ambră gri și migdale amare din Avola. O compoziție profundă, senzuală, cu o eleganță care nu caută confirmări. Ideal pentru sezonul rece, ocazii speciale sau pur și simplu pentru cei care trăiesc în profunzime.\nNote de vârf: cacao (Venezuela Chuao)\nNote de mijloc: ambră gri\nNote de bază: migdale amare (Avola)",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: cacao (Venezuela Chuao)",
+     "body": "Cacao pură, intensă și cremoasă. Absolutul de cacao din regiunea Chuao oferă o deschidere caldă, ușor amăruie, dar catifelată. Este o notă cu personalitate, care setează tonul parfumului de la prima pulverizare."
+    },
+    {
+     "heading": "Note de mijloc: ambră gri",
+     "body": "O notă animalică, nobilă, adâncă. Ambra gri este un ingredient prețios în parfumerie, cunoscut pentru efectul său de fixare și persistență. În Zeta, ambră adaugă profunzime, rotunjime și o vibrație discret senzuală."
+    },
+    {
+     "heading": "Note de bază: migdale amare (Avola)",
+     "body": "Finalul parfumului este dominat de o migdală amară distinctivă, ușor prăjită, cu accente de marțipan. Provenită din Avola, Sicilia, această notă completează experiența olfactivă cu o dulceață caldă, persistentă, fără a deveni siropoasă."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Zeta este parfumul ideal pentru toamnă și iarnă. Se potrivește în serile răcoroase, la evenimente elegante, dar și în momente intime. Este alegerea celor care nu se tem să atragă atenția prin profunzime și prezență olfactivă. Perfect pentru ocazii speciale, dar și pentru serile în care vrei să porți ceva care spune ceva despre tine."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex\nMorph Zeta este un parfum de lux creat pentru femei și bărbați care preferă aromele calde, complexe, cu o bază gourmand clară. Se adresează celor care nu se mulțumesc cu un eau de parfum generic, ci caută o semnătură olfactivă memorabilă. Zeta nu este despre modă. Este despre esență."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Prima impresie? Cacao fierbinte turnată pe piele. Caldă, catifelată, dar nu dulce. Apoi, parfumul începe să respire – ambra gri iese la suprafață și adaugă mister, adâncime și rafinament. Nu e nicio grabă. Zeta evoluează lent, dar sigur. Finalul aduce migdala amară. Elegantă, ușor gurmandă, cu o tentă de marțipan. Se așază pe piele cu naturalețe și rămâne acolo ore întregi. Nu învăluie, ci se imprimă. Este un parfum cu identitate, nu cu intenție. Zeta e pentru cei care nu întreabă „ce parfum porți?”, ci simt că ești altfel."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Este Morph Zeta un parfum de lux?\nDa. Face parte din gama Luxury Morph și folosește ingrediente rare și rafinate. Compoziția sa este echilibrată, dar cu prezență intensă.\nCui i se potrivește acest parfum?\nPentru femei și bărbați care caută un parfum gourmet sofisticat, cu note calde și persistente. Ideal pentru iubitorii de parfumuri orientale.\nCând este recomandat să porți Zeta?\nToamna, iarna, seara. Perfect pentru evenimente, întâlniri speciale sau momente în care vrei să rămâi în memorie."
+    }
+   ],
+   "images": [
+    "/morph/morph-zeta-parfum-100ml-0.avif",
+    "/morph/morph-zeta-parfum-100ml-1.avif",
+    "/morph/morph-zeta-parfum-100ml-2.avif"
+   ]
+  },
+  {
+   "id": 35606,
+   "slug": "morph-pure-soul-parfum-100ml",
+   "name": "Morph Pure Soul Eau de Parfum Unisex 100 ml",
+   "price": 690,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-pure-soul-parfum-100ml",
+   "shortName": "Pure Soul",
+   "collection": "luxury",
+   "bestseller": false,
+   "type": "Apă intensă de parfum",
+   "notes": {
+    "top": [
+     "Bergamotă",
+     "Lamâie"
+    ],
+    "heart": [
+     "Iasomie",
+     "Ylang Ylang"
+    ],
+    "base": [
+     "Boabe de tonka",
+     "Mosc alb",
+     "Talc"
+    ]
+   },
+   "family": "Floral",
+   "intensity": "Puternic",
+   "longevity": "10-12 h",
+   "season": [
+    "Iarnă",
+    "Primavară",
+    "Toamnă"
+   ],
+   "occasion": [
+    "Birou",
+    "Casual",
+    "Ocazii speciale",
+    "Seară"
+   ],
+   "style": "Casual",
+   "summary": "Morph Pure Soul este un parfum unisex din gama de lux, cu o construcție floral-pudrată fină și echilibrată. O compoziție cu tentă mediteraneană, unde bergamota și lămâia aduc luminozitate, florile albe adaugă eleganță, iar baza pudrată și moale conturează puritate, confort și o prezență discretă.\nNote de vârf: accente proaspete, bergamotă, lămâie\nNote de mijloc: iasomie, ylang-ylang\nNote de bază: talc, boabe de tonka, mosc alb",
+   "sections": [
+    {
+     "heading": "Compoziție olfactivă",
+     "body": ""
+    },
+    {
+     "heading": "Note de vârf: accente proaspete, bergamotă, lămâie",
+     "body": "Debutul parfumului este citric, ușor verde și curat. Bergamota și lămâia aduc claritate și prospețime, ca o dimineață senină. Nu este ascuțit, ci calm și luminos."
+    },
+    {
+     "heading": "Note de mijloc: iasomie, ylang-ylang",
+     "body": "Inima este florală și ușor exotică. Iasomia conferă delicatețe senzuală, iar ylang-ylang-ul dublat aduce rotunjime, o căldură moale și feminină fără a fi dulce."
+    },
+    {
+     "heading": "Note de bază: talc, boabe de tonka, mosc alb",
+     "body": "Baza parfumului e pudrată, curată, cu textură catifelată. Talcul este nota dominantă, boabele de tonka aduc un strop cald și discret de vanilie, iar moscul alb fixează totul într-o aură intimă."
+    },
+    {
+     "heading": "Sezon și ocazii de utilizare",
+     "body": "Perfect pentru primăvară și vară, dar potrivit și în contexte profesionale toamna. Este parfumul ideal pentru zi, birou, evenimente sociale relaxate sau momente în care ai nevoie de claritate și prezență fără ostentație."
+    },
+    {
+     "heading": "Destinație / Utilizator",
+     "body": "Unisex\nMorph Pure Soul este destinat femeilor și bărbaților care caută un parfum elegant, calm, cu o estetică olfactivă curată. Nu e invaziv, dar e recognoscibil. E despre rafinament liniștit."
+    },
+    {
+     "heading": "Descriere",
+     "body": "Parfumul se deschide ca o cameră luminoasă cu ferestre largi: aer proaspăt, soare filtrat prin perdele albe. Bergamota și lămâia intră ca o adiere citrică perfect echilibrată. Nu e despre impact, e despre armonie. Apoi vin florile. Iasomia – blândă, feminină. Ylang-ylangul – moale, cu o eleganță difuză, aproape balsamică. Totul e în nuanțe pastel, fără accente stridente. Finalul este o mângâiere: pudra fină de talc se lipește de piele cu naturalețe, tonka aduce o căldură subtilă, iar moscul alb curăță linia. Pure Soul nu se simte, se trăiește. Nu cere atenție, dar o primește."
+    },
+    {
+     "heading": "Întrebări frecvente (FAQ)",
+     "body": "Este Morph Pure Soul un parfum de lux?\nDa. Face parte din gama Luxury Morph. Un parfum pudrat, curat, discret și elegant.\nCui i se potrivește acest parfum?\nPentru femei și bărbați care preferă parfumuri florale-pudrate, fine, fără să fie banale. Ideal pentru birou sau prezențe echilibrate.\nCând este recomandat să porți Pure Soul?\nPrimăvara, vara, în contexte profesionale sau sociale relaxate. Perfect pentru zi."
+    }
+   ],
+   "images": [
+    "/morph/morph-pure-soul-parfum-100ml-0.avif",
+    "/morph/morph-pure-soul-parfum-100ml-1.avif"
+   ]
+  }
+ ],
+ "travel": [
+  {
+   "id": 39991,
+   "slug": "blind-set-6-samples-1-travel",
+   "name": "BLIND SET 6 SAMPLES + 1 TRAVEL",
+   "price": 250,
+   "currency": "lei",
+   "inStock": false,
+   "url": "https://morphparfum.ro/blind-set-6-samples-1-travel",
+   "image": "/morph/blind-set-6-samples-1-travel-0.avif",
+   "summary": "Un set pentru cei care nu aleg după reguli, ci după instinct.\nNu știi ce parfumuri sunt înăuntru până nu deschizi cutia. Asta face tot jocul interesant: fiecare mostră vine ca o surpriză și te duce într-o zonă diferită de arome. Morph te duce într-o zonă în care misterul contează mai mult decât descrierile lungi. Doar tu, mirosul și reacția ta de moment.\nÎn set găsești:\n• 6 mostre de 2.5 ml\n• 1 parfum travel de 8 ml\nPentru cei care nu se sperie de necunoscut, ci de lucrurile prea previzibile."
+  },
+  {
+   "id": 39987,
+   "slug": "set-mini-parfumuri-morph-discovery-travel-24-parfumuri-8ml",
+   "name": "Set Mini Parfumuri Morph Discovery Travel – 24 Parfumuri, 8ml",
+   "price": 1250,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-mini-parfumuri-morph-discovery-travel-24-parfumuri-8ml",
+   "image": "/morph/set-mini-parfumuri-morph-discovery-travel-24-parfumuri-8ml-0.avif",
+   "summary": "Setul Morph Travel cu 24 de fiole de 8ml adună toate parfumurile casei într-o selecție compactă și elegantă. Ai Luxury, Les Exclusifs și Ice împreună, într-o variantă practică pentru cei care vor varietate sau un cadou deosebit."
+  },
+  {
+   "id": 38261,
+   "slug": "set-mini-parfum-morph-too-travel-size-2x8ml",
+   "name": "Set Mini Parfum Morph Too Travel Size 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-mini-parfum-morph-too-travel-size-2x8ml",
+   "image": "/morph/set-mini-parfum-morph-too-travel-size-2x8ml-0.avif",
+   "summary": "Morph Too este un extract de parfum unisex din colecția Les Exclusifs, cu note balsamice și lemnoase, creat pentru o prezență olfactivă memorabilă. Setul mini conține două flacoane de 8ml, perfecte pentru testare, călătorii sau cadouri sofisticate."
+  },
+  {
+   "id": 38253,
+   "slug": "set-mini-parfum-morph-gate-17-travel-size-2x8ml",
+   "name": "Set Mini Parfum Morph Gate 17 Travel Size 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-mini-parfum-morph-gate-17-travel-size-2x8ml",
+   "image": "/morph/set-mini-parfum-morph-gate-17-travel-size-2x8ml-0.avif",
+   "summary": "Morph Gate 17 este un parfum unisex floral-lemnos cu accente marine, modern și sofisticat. În format mini travel size, setul conține două flacoane de 8 ml, ideale pentru testare, călătorii sau cadouri elegante."
+  },
+  {
+   "id": 38248,
+   "slug": "set-mini-parfum-morph-antigua-bay-travel-size-2x8ml",
+   "name": "Set Mini Parfum Morph Antigua Bay Travel Size 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-mini-parfum-morph-antigua-bay-travel-size-2x8ml",
+   "image": "/morph/set-mini-parfum-morph-antigua-bay-travel-size-2x8ml-0.avif",
+   "summary": "Descoperă Morph Antigua Bay, un parfum unisex de lux ce combină prospețimea marină cu note lemnoase și accente calde de ambra gri. Disponibil acum în format mini travel size, două flacoane de 8 ml, perfecte pentru testare, călătorii sau cadouri elegante."
+  },
+  {
+   "id": 38257,
+   "slug": "set-mini-parfum-morph-oud-mafia-travel-size-2x8ml",
+   "name": "Set Mini Parfum Morph Oud Mafia Travel Size 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-mini-parfum-morph-oud-mafia-travel-size-2x8ml",
+   "image": "/morph/set-mini-parfum-morph-oud-mafia-travel-size-2x8ml-0.avif",
+   "summary": "Morph Oud Mafia este un parfum unisex intens și rafinat, construit în jurul oud-ului autentic și al șofranului prețios. Setul mini conține două flacoane de 8 ml, ideale pentru testare, călătorii sau cadouri elegante."
+  },
+  {
+   "id": 20012,
+   "slug": "morph-discovery-travel-set-mini-parfumuri",
+   "name": "Set Mini Parfumuri Morph Discovery Travel – 22 Parfumuri, 8ml",
+   "price": 1100,
+   "currency": "lei",
+   "inStock": false,
+   "url": "https://morphparfum.ro/morph-discovery-travel-set-mini-parfumuri",
+   "image": "/morph/morph-discovery-travel-set-mini-parfumuri-0.avif",
+   "summary": "Setul Mini Parfumuri Morph Discovery Travel aduce 22 de parfumuri în format travel size de 8ml. Ai mereu la dispoziție esențele Morph preferate, fie că ești acasă, la birou sau pleci în călătorie. Soluția perfectă pentru testare, cadou sau colecție personală, într-un format compact și practic."
+  },
+  {
+   "id": 17659,
+   "slug": "set-travel-morph-tonkatonic",
+   "name": "Set Mini Parfum Morph Tonkatonic Travel Set 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-travel-morph-tonkatonic",
+   "image": "/morph/set-travel-morph-tonkatonic-0.avif",
+   "summary": "Setul Mini Parfum Morph Tonkatonic Travel Size 2x8ml aduce parfumul Tonkatonic într-un format practic și elegant. Două sticluțe de 8ml, ușor de luat cu tine oriunde. Perfect pentru testare, folosire zilnică sau ca idee de cadou rafinat."
+  },
+  {
+   "id": 12811,
+   "slug": "set-travel-morph-animal",
+   "name": "Set Mini Parfum Morph Animal Travel Size 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-travel-morph-animal",
+   "image": "/morph/set-travel-morph-animal-0.avif",
+   "summary": "Setul Mini Parfum Morph Animal Travel pune parfumul Animal într-un format de 8ml, practic și compact. Îl poți lua cu tine oriunde, în orice context, fără să ocupi spațiu sau să faci compromis la intensitate. Soluția perfectă pentru testare, folosire zilnică sau un cadou care se face remarcat prin originalitate."
+  },
+  {
+   "id": 12809,
+   "slug": "set-travel-morph-n8",
+   "name": "Set Mini Parfum Morph N8 Travel Size 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-travel-morph-n8",
+   "image": "/morph/set-travel-morph-n8-0.avif",
+   "summary": "Setul Mini Parfum Morph N8 Travel Size 2x8ml aduce parfumul N8 într-un format practic și elegant. Două sticluțe de 8ml, ușor de luat cu tine oriunde. Perfect pentru testare, folosire zilnică sau ca idee de cadou rafinat."
+  },
+  {
+   "id": 35609,
+   "slug": "set-travel-morph-disumano",
+   "name": "Set Mini Parfum Morph Disumano Travel Size 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-travel-morph-disumano",
+   "image": "/morph/set-travel-morph-disumano-0.avif",
+   "summary": "Setul Mini Parfum Morph Disumano Travel Size 2x8ml aduce aroma Disumano în două sticluțe compacte, ușor de folosit oriunde. Soluția ideală pentru testare, flexibilitate sau cadou premium – ai mereu la îndemână parfumul preferat, indiferent de context."
+  },
+  {
+   "id": 12006,
+   "slug": "set-travel-morph-indomable",
+   "name": "Set Mini Parfum Morph Indomable Travel Size 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-travel-morph-indomable",
+   "image": "/morph/set-travel-morph-indomable-0.avif",
+   "summary": "Setul Mini Parfumuri Morph Indomable Travel Size 2x8ml aduce parfumul Indomable într-un format practic și elegant. Două sticluțe de 8ml, ușor de luat cu tine oriunde. Perfect pentru testare, folosire zilnică sau ca idee de cadou rafinat."
+  },
+  {
+   "id": 12004,
+   "slug": "set-travel-morph-vapor",
+   "name": "Set Mini Parfum Morph Vapor Travel Size – 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-travel-morph-vapor",
+   "image": "/morph/set-travel-morph-vapor-0.avif",
+   "summary": "Setul Mini Parfum Morph Vapor Travel aduce parfumul Vapor într-un format compact de 8ml. Îl ai aproape în orice moment al zilei, indiferent unde ești: la serviciu, la sală, la evemimente de orice fel. Ai mereu cu tine aroma care te definește, fără să faci compromis la calitate sau persistență. Ideal pentru testare, pentru drumuri scurte sau ca idee de cadou practic și modern."
+  },
+  {
+   "id": 12002,
+   "slug": "set-travel-morph-nudo",
+   "name": "Set Mini Parfum Morph Nudo Travel Size 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-travel-morph-nudo",
+   "image": "/morph/set-travel-morph-nudo-0.avif",
+   "summary": "Setul Mini Parfum Morph Nudo Travel Size 2x8ml îți pune la dispoziție parfumul Nudo în două sticluțe compacte, fiecare de 8ml. Formatul este practic și adaptat pentru orice situație: perfect pentru testare, pentru călătorii sau ca idee de cadou elegant și util."
+  },
+  {
+   "id": 11924,
+   "slug": "set-travel-morph-zeta",
+   "name": "Set Mini Parfum Morph Zeta Travel Size 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-travel-morph-zeta",
+   "image": "/morph/set-travel-morph-zeta-0.avif",
+   "summary": "Setul Mini Parfum Morph Zeta Travel Size 2x8ml aduce parfumul Zeta într-un format practic și elegant. Două sticluțe de 8ml, ușor de luat cu tine oriunde. Perfect pentru testare, folosire zilnică sau ca idee de cadou rafinat."
+  }
+ ],
+ "samples": [
+  {
+   "id": 35611,
+   "slug": "morph-set-esantioane-les-exclusifs-ice-collections",
+   "name": "MORPH SET MOSTRE PARFUMURI – LES EXCLUSIFS & ICE COLLECTIONS",
+   "price": 260,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-set-esantioane-les-exclusifs-ice-collections",
+   "image": "/morph/morph-set-esantioane-les-exclusifs-ice-collections-0.webp",
+   "summary": ""
+  },
+  {
+   "id": 35610,
+   "slug": "morph-set-esantioane-luxury-collection",
+   "name": "MORPH ESANTIOANE PARFUM –  LUXURY COLLECTION",
+   "price": 260,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/morph-set-esantioane-luxury-collection",
+   "image": "/morph/morph-set-esantioane-luxury-collection-0.webp",
+   "summary": ""
+  },
+  {
+   "id": 890,
+   "slug": "morph-set-esantioane",
+   "name": "MORPH ESANTIOANE PARFUMURI",
+   "price": 200,
+   "currency": "lei",
+   "inStock": false,
+   "url": "https://morphparfum.ro/morph-set-esantioane",
+   "image": "/morph/morph-set-esantioane-0.avif",
+   "summary": "Incrucisarea in lemn de santal, extras la rece, reprezinta inima instinctiva a parfumului. Portretul olfactiv al mixului hipnotic de traditii milenare si viata pulsanta din Tamil Nadu. Un amestec intelept de elemente occidentale, precum irisul, moscul si ambroxanul, care isi croiesc drumul notelor orientale, cu indicii picante."
+  }
+ ],
+ "layering": [
+  {
+   "id": 44058,
+   "slug": "set-layering-parfum-morph-limitless-2x8ml",
+   "name": "Set Layering Parfum Morph Limitless 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-layering-parfum-morph-limitless-2x8ml",
+   "image": "/morph/set-layering-parfum-morph-limitless-2x8ml-0.avif",
+   "summary": "Descoperă Limitless, unul dintre cele 12 layering-uri Morph în ediție limitată. O combinație unisex intensă de trandafir, oud și acorduri condimentate, creată pentru cei care aleg să își depășească propriile limite. Profund, sofisticat și expresiv, acest layering dezvăluie o semnătură olfactivă memorabilă, construită în jurul trandafirului, oud-ului, laptelui de smochine și tuberozei.",
+   "state": "Limitless"
+  },
+  {
+   "id": 44055,
+   "slug": "set-layering-parfum-morph-reckless-2x8ml",
+   "name": "Set Layering Parfum Morph Reckless 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-layering-parfum-morph-reckless-2x8ml",
+   "image": "/morph/set-layering-parfum-morph-reckless-2x8ml-0.avif",
+   "summary": "Descoperă Reckless, unul dintre cele 12 layering-uri Morph în ediție limitată. O combinație unisex intensă de oud, condimente prețioase și accente citrice, creată pentru cei care aleg să trăiască fără limite impuse. Puternic, îndrăzneț și sofisticat, acest layering dezvăluie o semnătură olfactivă memorabilă, construită în jurul oud-ului, șofranului, trufei și grapefruitului.",
+   "state": "Reckless"
+  },
+  {
+   "id": 44052,
+   "slug": "set-layering-parfum-morph-irresistible-2x8ml",
+   "name": "Set Layering Parfum Morph Irresistible 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-layering-parfum-morph-irresistible-2x8ml",
+   "image": "/morph/set-layering-parfum-morph-irresistible-2x8ml-0.avif",
+   "summary": "Descoperă Irresistible, unul dintre cele 12 layering-uri Morph în ediție limitată. O combinație unisex de flori albe, iris și mosc alb, creată pentru momentele în care farmecul tău devine natural și imposibil de trecut cu vederea. Delicat, elegant și luminos, acest layering dezvăluie o semnătură olfactivă memorabilă, cu note de bergamotă, iris, trandafir de Damasc și vanilie.",
+   "state": "Irresistible"
+  },
+  {
+   "id": 44049,
+   "slug": "set-layering-parfum-morph-hypnotic-2x8ml",
+   "name": "Set Layering Parfum Morph Hypnotic 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-layering-parfum-morph-hypnotic-2x8ml",
+   "image": "/morph/set-layering-parfum-morph-hypnotic-2x8ml-0.avif",
+   "summary": "Descoperă Hypnotic, unul dintre cele 12 layering-uri Morph în ediție limitată. O combinație unisex de trandafir oriental, note exotice și accente gurmande, creată pentru momentele în care prezența ta devine imposibil de ignorat. Intens, captivant și sofisticat, acest layering dezvăluie o semnătură olfactivă memorabilă, cu note de trandafir, lapte de cocos, mandarină și oud.",
+   "state": "Hypnotic"
+  },
+  {
+   "id": 43873,
+   "slug": "set-layering-parfum-morph-desired-2x8ml",
+   "name": "Set Layering Parfum Morph Desired 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-layering-parfum-morph-desired-2x8ml",
+   "image": "/morph/set-layering-parfum-morph-desired-2x8ml-0.avif",
+   "summary": "Descoperă Desired, unul dintre cele 12 layering-uri Morph în ediție limitată. O combinație unisex captivantă între accente fresh-fructate, note catifelate și acorduri misterioase, creată pentru momentul în care prezența ta devine imposibil de ignorat. Intens, sofisticat și memorabil, acest layering dezvăluie o semnătură olfactivă cu accente vibrante și senzuale.",
+   "state": "Desired"
+  },
+  {
+   "id": 43871,
+   "slug": "set-layering-parfum-morph-mysterious-2x8ml",
+   "name": "Set Layering Parfum Morph Mysterious 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-layering-parfum-morph-mysterious-2x8ml",
+   "image": "/morph/set-layering-parfum-morph-mysterious-2x8ml-0.avif",
+   "summary": "Descoperă Mysterious, unul dintre cele 12 layering-uri Morph în ediție limitată. O combinație unisex de acorduri condimentate, lemnoase și ambrate, creată pentru cei care lasă mereu loc imaginației. Intens, elegant și enigmatic, acest layering dezvăluie o semnătură olfactivă memorabilă, construită în jurul condimentelor, rășinilor și lemnelor nobile.",
+   "state": "Mysterious"
+  },
+  {
+   "id": 43869,
+   "slug": "set-layering-parfum-morph-unforgettable-2x8ml",
+   "name": "Set Layering Parfum Morph Unforgettable 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-layering-parfum-morph-unforgettable-2x8ml",
+   "image": "/morph/set-layering-parfum-morph-unforgettable-2x8ml-0.avif",
+   "summary": "Descoperă Unforgettable, unul dintre cele 12 layering-uri Morph în ediție limitată. O combinație unisex de acorduri ambrate, lemnoase și gurmande, creată pentru cei care lasă o impresie de neuitat. Cald, sofisticat și elegant, acest layering dezvăluie o semnătură olfactivă memorabilă, cu note de patchouli, cocos, tonka și lemn de santal.",
+   "state": "Unforgettable"
+  },
+  {
+   "id": 43867,
+   "slug": "set-layering-parfum-morph-untamed-2x8ml",
+   "name": "Set Layering Parfum Morph Untamed 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-layering-parfum-morph-untamed-2x8ml",
+   "image": "/morph/set-layering-parfum-morph-untamed-2x8ml-0.avif",
+   "summary": "Descoperă Untamed, unul dintre cele 12 layering-uri Morph în ediție limitată. O combinație unisex de acorduri orientale, florale și ambrate, creată pentru cei care refuză să fie definiți de reguli. Intens și sofisticat, acest layering dezvăluie o semnătură olfactivă memorabilă, cu note de oud, trandafir de Damasc, vanilie și ambră gri.",
+   "state": "Untamed"
+  },
+  {
+   "id": 43787,
+   "slug": "set-layering-parfum-morph-addictive-2x8ml",
+   "name": "Set Layering Parfum Morph Addictive 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-layering-parfum-morph-addictive-2x8ml",
+   "image": "/morph/set-layering-parfum-morph-addictive-2x8ml-0.avif",
+   "summary": "Descoperă Addictive, unul dintre cele 12 layering-uri Morph în ediție limitată. O combinație unisex de iris, note florale și accente catifelate de ceară de albine, creată pentru momentele în care prezența ta capătă un farmec irezistibil. Luminos, rafinat și armonios, acest layering dezvăluie o semnătură olfactivă memorabilă, cu note de bergamotă, iris, ceară de albine și vanilie.",
+   "state": "Addictive"
+  },
+  {
+   "id": 43785,
+   "slug": "set-layering-parfum-morph-euphoric-2x8ml",
+   "name": "Set Layering Parfum Morph Euphoric 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-layering-parfum-morph-euphoric-2x8ml",
+   "image": "/morph/set-layering-parfum-morph-euphoric-2x8ml-0.avif",
+   "summary": "Descoperă Euphoric, unul dintre cele 12 layering-uri Morph în ediție limitată. O combinație unisex de acorduri citrice, florale și condimentate, creată pentru cei care trăiesc fiecare moment cu intensitate. Elegant și vibrant, acest layering dezvăluie o semnătură olfactivă memorabilă, cu note de iris, trandafir de Damasc, condimente prețioase și ambră.",
+   "state": "Euphoric"
+  },
+  {
+   "id": 43783,
+   "slug": "set-layering-parfum-morph-fearless-2x8ml",
+   "name": "Set Layering Parfum Morph Fearless 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-layering-parfum-morph-fearless-2x8ml",
+   "image": "/morph/set-layering-parfum-morph-fearless-2x8ml-0.avif",
+   "summary": "Descoperă Fearless, unul dintre cele 12 layering-uri Morph în ediție limitată. O combinație unisex de acorduri marine, citrice și lemnoase, creată pentru cei care privesc fiecare provocare cu încredere. Fresh, elegant și energizant, acest layering dezvăluie o semnătură olfactivă memorabilă, cu note marine, bergamotă, iris și lemn de santal.",
+   "state": "Fearless"
+  },
+  {
+   "id": 43781,
+   "slug": "set-layering-parfum-morph-magnetic-2x8ml",
+   "name": "Set Layering Parfum Morph Magnetic 2x8ml",
+   "price": 230,
+   "currency": "lei",
+   "inStock": true,
+   "url": "https://morphparfum.ro/set-layering-parfum-morph-magnetic-2x8ml",
+   "image": "/morph/set-layering-parfum-morph-magnetic-2x8ml-0.avif",
+   "summary": "Descoperă Magnetic, unul dintre cele 12 layering-uri Morph în ediție limitată. O combinație unisex de acorduri lemnoase, ambrate și gurmande, creată pentru o prezență intensă și memorabilă. Sofisticat și magnetic, acest layering dezvăluie o semnătură olfactivă profundă, cu note de lemn de santal, iris, cacao și ambră gri",
+   "state": "Magnetic"
+  }
+ ]
+}

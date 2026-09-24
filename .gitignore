@@ -61,3 +61,8 @@ CLAUDE.local.md
 tmp/
 temp/
 *.tmp
+
+# Next.js
+.next/
+next-env.d.ts
+*.tsbuildinfo
