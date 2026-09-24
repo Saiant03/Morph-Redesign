@@ -854,5 +854,125 @@
   "bottom": 0.974,
   "left": 0.097,
   "right": 0.903
+ },
+ "/morph/blind-set-6-samples-1-travel-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.084,
+  "bottom": 1,
+  "left": 0,
+  "right": 1
+ },
+ "/morph/set-mini-parfumuri-morph-discovery-travel-24-parfumuri-8ml-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.087,
+  "bottom": 0.911,
+  "left": 0.16,
+  "right": 0.838
+ },
+ "/morph/set-mini-parfum-morph-too-travel-size-2x8ml-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.224,
+  "bottom": 0.873,
+  "left": 0.113,
+  "right": 0.87
+ },
+ "/morph/set-mini-parfum-morph-gate-17-travel-size-2x8ml-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.232,
+  "bottom": 0.867,
+  "left": 0.118,
+  "right": 0.848
+ },
+ "/morph/set-mini-parfum-morph-antigua-bay-travel-size-2x8ml-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.229,
+  "bottom": 0.865,
+  "left": 0.117,
+  "right": 0.872
+ },
+ "/morph/set-mini-parfum-morph-oud-mafia-travel-size-2x8ml-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.232,
+  "bottom": 0.868,
+  "left": 0.118,
+  "right": 0.848
+ },
+ "/morph/morph-discovery-travel-set-mini-parfumuri-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.076,
+  "bottom": 0.92,
+  "left": 0.103,
+  "right": 0.912
+ },
+ "/morph/set-travel-morph-tonkatonic-0.avif": {
+  "w": 600,
+  "h": 753,
+  "top": 0.255,
+  "bottom": 0.876,
+  "left": 0.122,
+  "right": 0.86
+ },
+ "/morph/set-travel-morph-animal-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.225,
+  "bottom": 0.875,
+  "left": 0.115,
+  "right": 0.883
+ },
+ "/morph/set-travel-morph-n8-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.244,
+  "bottom": 0.872,
+  "left": 0.127,
+  "right": 0.87
+ },
+ "/morph/set-travel-morph-disumano-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.251,
+  "bottom": 0.872,
+  "left": 0.122,
+  "right": 0.867
+ },
+ "/morph/set-travel-morph-indomable-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.232,
+  "bottom": 0.873,
+  "left": 0.123,
+  "right": 0.877
+ },
+ "/morph/set-travel-morph-vapor-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.219,
+  "bottom": 0.872,
+  "left": 0.133,
+  "right": 0.895
+ },
+ "/morph/set-travel-morph-nudo-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.243,
+  "bottom": 0.872,
+  "left": 0.13,
+  "right": 0.868
+ },
+ "/morph/set-travel-morph-zeta-0.avif": {
+  "w": 600,
+  "h": 750,
+  "top": 0.229,
+  "bottom": 0.871,
+  "left": 0.118,
+  "right": 0.875
  }
 }

@@ -5,7 +5,7 @@ import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { search, useSearchOpen } from '@/lib/search';
 import {
   perfumes, FAMILY_GROUPS, familyGroup, familyNotes, COLLECTIONS, travelSets, sampleSets, layeringSets, TRIAL, bestsellerMix,
-  descriptor, lei, productHref, collectionHref, ALL_BY_COLLECTION, bodyItems, BODY_KIND, bySlug, type Perfume,
+  descriptor, lei, productHref, travelFor, collectionHref, ALL_BY_COLLECTION, bodyItems, BODY_KIND, bySlug, bodyHref, type Perfume,
 } from '@/lib/catalog';
 import { CAMPAIGN } from '@/lib/campaign';
 import { norm, topNotes } from '@/lib/discover';
@@ -19,13 +19,16 @@ const PAGES = [
   { href: '/descopera#incearca', label: 'Încearcă înainte de sticlă', words: 'mostre esantioane travel incearca proba discovery' },
   { href: '/cadouri', label: 'Cadouri', words: 'cadou cadouri gift card cutie' },
   { href: '/parfumuri/corp', label: 'Baie & Corp: geluri de duș și creme de corp', words: 'baie corp gel dus crema creme ritual body' },
+  { href: '/parfumuri/corp#coffret', label: 'Coffret: parfum cu gel de duș sau cremă de corp', words: 'coffret set seturi parfum gel crema cadou cutie' },
+  { href: '/descopera#travel', label: 'Travel Editions 2×8 ml', words: 'travel mini calatorie drum 8 ml 2x8 portabil' },
   { href: '/magazin', label: 'Magazinul Morph din București', words: 'magazin boutique bucuresti adresa program lahovari' },
   { href: '/magazin#certilogo', label: 'Verificare Certilogo', words: 'certilogo original autentic verificare cod' },
 ];
 const OFFERS = [
   ...[...travelSets, ...sampleSets].filter(o => TRIAL[o.slug]).map(o => ({ o, name: TRIAL[o.slug].name, href: '/descopera#incearca' })),
+  ...perfumes.filter(p => travelFor(p)).map(p => ({ o: travelFor(p)!, name: `Travel Editions ${p.shortName}`, href: '/descopera#travel' })),
   ...layeringSets.map(o => ({ o, name: `Your Next Form ${o.state}`, href: '/layering/your-next-form' })),
-  ...bodyItems.filter(b => b.scent).map(b => ({ o: b, name: `${BODY_KIND[b.kind].name} ${bySlug(b.scent!).shortName}`, href: '/parfumuri/corp' })),
+  ...bodyItems.filter(b => b.scent).map(b => ({ o: b, name: `${BODY_KIND[b.kind].name} ${bySlug(b.scent!).shortName}`, href: bodyHref(b) })),
 ];
 const TIER_WORD = { top: 'deschidere', heart: 'inimă', base: 'bază' } as const;
 const SUGGESTED = topNotes(8);

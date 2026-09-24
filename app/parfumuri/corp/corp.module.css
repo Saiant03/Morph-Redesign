@@ -1,24 +1,89 @@
-.head { background: var(--surface) var(--mat-grain) 0 0 / 160px; padding: clamp(28px, 4vw, 64px) 0 var(--s-7); margin-bottom: var(--s-7); }
-.headGrid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-5); align-items: end; }
-.plate { grid-column: 1 / span 7; display: grid; gap: var(--s-3); }
-.crumb { display: flex; gap: 8px; margin-bottom: var(--s-3); }
-.quote { grid-column: 9 / -1; margin: 0; display: grid; gap: var(--s-2); padding-left: var(--s-4); border-left: 1px solid var(--metal); }
-.quote p { font-family: var(--serif); font-style: italic; font-size: var(--t-3); line-height: 1.35; }
-.headGrid > nav { grid-column: 1 / -1; }
+/* Baie & Corp (docs/design/phase-c2-bath-body-ritual.md): night window, stone rituals, walnut Coffret */
 
-/* one scent per row: its name, then its textures standing side by side, then the sets that combine them */
-.rituals { display: grid; }
-.ritual { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-4); padding: var(--s-6) 0; border-top: 1px solid var(--border); }
-.name { grid-column: 1 / span 3; display: grid; gap: var(--s-2); align-content: start; }
-.name h2 a:hover { font-style: italic; }
-.set { grid-column: 4 / -1; }
+/* the window: one scent in three textures on the night stage; the plate (collection.module.css) crosses its lower
+   edge, so the stage leaves that band dark */
+.window { padding: 0 0 clamp(140px, 15vh, 200px); overflow: hidden; }
 
-@media (max-width: 1100px) {
-  .name { grid-column: 1 / span 4; }
-  .set { grid-column: 5 / -1; }
+.h2 { font-family: var(--serif); font-weight: 300; font-size: var(--t-1); line-height: 0.98; letter-spacing: -0.02em; }
+.intro { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-4); align-items: end; margin-bottom: var(--s-7); }
+.intro > :first-child { grid-column: 1 / span 6; }
+.quote { grid-column: 8 / -1; margin: 0; display: grid; gap: var(--s-2); padding-left: var(--s-4); border-left: 1px solid var(--metal); }
+.quote blockquote { margin: 0; }
+.quote p { font-family: var(--serif); font-style: italic; font-size: clamp(18px, 1.5vw, 22px); line-height: 1.4; }
+
+/* every scent's ritual: its own shelf and light on the stone, two to a row, so the page reads as scents, not a grid */
+.rituals.rituals { padding-block: var(--s-8) var(--s-9); }
+.groups { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--gap); row-gap: var(--s-9); }
+.index { display: flex; flex-wrap: wrap; gap: 6px var(--s-4); margin: calc(var(--s-5) * -1) 0 var(--s-7); font-family: var(--serif); font-size: 20px; }
+.index a:hover { font-style: italic; }
+.group { display: grid; align-content: start; gap: var(--s-4); scroll-margin-top: 96px; }
+.groupHead { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 4px var(--s-4); }
+.name { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 2.6vw, 44px); line-height: 1; letter-spacing: -0.02em; }
+
+/* the Coffret: each box in its own recess on the walnut wall, recesses touching (as in the perfume vitrine) */
+.coffret { padding: var(--s-8) 0 var(--s-9); scroll-margin-top: 64px; }
+.coffretHead { display: grid; gap: var(--s-3); }
+.setGroup + .setGroup { margin-top: var(--s-8); }
+.setHead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px var(--s-4); margin-bottom: var(--s-4); }
+.setTitle { font-family: var(--serif); font-weight: 400; font-size: clamp(24px, 2vw, 30px); line-height: 1.1; }
+.nowrap { white-space: nowrap; }
+/* rows balanced from the count, as in the vitrine: 11 boxes at four a row stand 4 · 4 · 3, not 5 · 5 · 1 */
+.sets {
+  --max: 2; --rows: round(up, calc(var(--n) / var(--max)), 1); --cols: round(up, calc(var(--n) / var(--rows)), 1);
+  display: flex; flex-wrap: wrap; justify-content: center; row-gap: var(--s-6); max-width: calc(var(--cols) * 250px); margin-inline: auto;
+}
+@supports not (width: calc(round(up, 1.5, 1) * 1px)) { .sets { --cols: var(--max); } }
+.sets > li { flex: 0 0 min(250px, 100% / var(--cols)); min-width: 0; }
+@media (min-width: 600px) { .sets { --max: 3; } }
+@media (min-width: 900px) { .sets { --max: 4; } }
+@media (min-width: 1600px) { .sets { --max: 6; } }
+.setItem { display: grid; gap: var(--s-3); outline-offset: -2px; }
+.setItem .niche {
+  aspect-ratio: 4 / 5; border-radius: 0;
+  background: radial-gradient(62% 72% at 50% 42%, var(--glow) 0%, var(--niche-mid) 46%, var(--niche-edge) 100%);
+  box-shadow: inset 0 48px 56px -44px rgb(10 7 5 / 0.55);
+  transition: filter var(--d-slow) var(--ease-out);
+}
+.niche img { transform-origin: 50% 88%; transition: transform var(--d-slow) var(--ease-out); }
+.setLabel { display: grid; gap: 2px; padding: 0 var(--s-3); }
+.setName { font-family: var(--serif); font-size: clamp(20px, 1.6vw, 24px); line-height: 1; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; text-decoration-color: transparent; transition: text-decoration-color var(--d-fast); }
+.soldout .niche { filter: grayscale(0.6); }
+.soldout .setName { color: var(--muted); }
+@media (hover: hover) {
+  .setItem:hover .niche { filter: brightness(1.08); }
+  .soldout .setItem:hover .niche { filter: grayscale(0.6) brightness(1.08); }
+  .setItem:hover .niche img { transform: translateY(-2%) scale(1.03); }
+  .setItem:hover .setName { text-decoration-color: currentColor; }
+}
+.setItem:focus-visible .niche img { transform: translateY(-2%) scale(1.03); }
+.setItem:focus-visible .setName { text-decoration-color: currentColor; }
+@media (prefers-reduced-motion: reduce) { .niche img { transform: none !important; } }
+.gift { margin-top: var(--s-8); padding-top: var(--s-5); border-top: 1px solid var(--border); max-width: 72ch; }
+
+/* the other sets Morph sells, each on the page that serves it */
+.more.more { padding-block: var(--s-8) var(--s-9); }
+.more .h2 { margin-bottom: var(--s-5); }
+.moreList { border-top: 1px solid var(--border); }
+.moreLink { display: grid; grid-template-columns: minmax(200px, 3fr) 6fr minmax(90px, 1.5fr); gap: var(--s-2) var(--gap); align-items: baseline; padding: var(--s-4) 0; border-bottom: 1px solid var(--border); }
+.moreLink > :last-child { justify-self: end; }
+.moreName { font-family: var(--serif); font-size: clamp(22px, 1.9vw, 30px); line-height: 1.05; }
+@media (hover: hover) { .moreLink:hover .moreName { font-style: italic; } }
+
+@media (max-width: 699px) {
+  .groups { grid-template-columns: 1fr; row-gap: var(--s-8); }
 }
 @media (max-width: 899px) {
-  .headGrid, .ritual { grid-template-columns: 1fr; }
-  .plate, .quote, .headGrid > nav, .name, .set { grid-column: 1; }
-  .plate h1 { font-size: 56px; }
+  .intro { grid-template-columns: 1fr; }
+  .intro > :first-child, .quote { grid-column: 1; }
+  .moreLink { grid-template-columns: 1fr auto; }
+  .moreLink > :nth-child(2) { grid-column: 1 / -1; grid-row: 2; }
+  .moreLink > :last-child { grid-row: 1; grid-column: 2; }
+}
+@media (max-width: 599px) {
+  .h2 { font-size: 44px; }
+  .window { padding: 0 0 calc(var(--s-8) + 24px); }
+  .rituals.rituals, .coffret, .more.more { padding-block: var(--s-7) var(--s-8); }
+  .intro { margin-bottom: var(--s-5); }
+  .index { margin-top: 0; font-size: 18px; }
+  .setLabel { padding: 0 var(--s-2); }
 }

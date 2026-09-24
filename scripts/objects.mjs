@@ -11,7 +11,7 @@ const { chromium } = require(execSync('npm root -g').toString().trim() + '/playw
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const cat = JSON.parse(readFileSync(path.join(root, 'data/catalog.json'), 'utf8'));
-const files = [...cat.perfumes.flatMap(p => p.images), ...cat.body.map(b => b.image), ...cat.gift.map(g => g.image)].filter(Boolean);
+const files = [...cat.perfumes.flatMap(p => p.images), ...cat.body.map(b => b.image), ...cat.gift.map(g => g.image), ...cat.travel.map(t => t.image)].filter(Boolean);
 
 const browser = await chromium.launch();
 const page = await browser.newPage();

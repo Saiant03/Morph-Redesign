@@ -1,58 +1,55 @@
 import Link from 'next/link';
-import Image from 'next/image';
-import { ProductVisual } from './ProductVisual';
-import { AddToCart } from './AddToCart';
-import { type Perfume, bodyFor, bodyItems, BODY_KIND, lei, productHref, fullItem, bodyItem } from '@/lib/catalog';
+import { ObjectShelf, type ShelfObject } from './ObjectShelf';
+import { type Perfume, type BodyItem, bodyFor, bodyItems, BODY_KIND, lei, productHref, bodyHref, isSet } from '@/lib/catalog';
 import s from './Ritual.module.css';
 
+/** The scent's objects in ritual order, as Morph sells them: the 100 ml perfume, then shower gel, then body cream. */
+export function ritualObjects(p: Perfume, vt = true): ShelfObject[] {
+  const body = bodyFor(p).filter(b => !isSet(b));
+  return [
+    { key: p.slug, src: p.images[0], kind: 'Parfum', line: `100 ml · ${lei(p.price)}`, of: p.shortName, href: productHref(p), vt: vt ? p.slug : undefined, soldOut: !p.inStock },
+    ...body.map(b => ({ key: b.slug, src: b.image!, kind: BODY_KIND[b.kind].name, line: `200 ml · ${lei(b.price)}`, of: p.shortName, href: bodyHref(b), vt: vt ? b.slug : undefined, soldOut: !b.inStock })),
+  ];
+}
+
+/** Morph's perfume + body sets (Coffret) for a scent, with the separate price only when the set costs less. */
+export function CoffretLines({ p, current, className = '' }: { p: Perfume; current?: string; className?: string }) {
+  const sets = bodyFor(p).filter(isSet);
+  if (!sets.length) return null;
+  return (
+    <ul className={`${s.sets} t-small ${className}`}>
+      {sets.map(b => {
+        const sum = separate(p, b);
+        return (
+          <li key={b.slug}>
+            {b.slug === current
+              ? <span aria-current="page">{BODY_KIND[b.kind].name}</span>
+              : <Link className="link" href={bodyHref(b)}>{BODY_KIND[b.kind].name}</Link>}
+            <span className="num">{lei(b.price)}{sum && sum > b.price ? <span className="muted"> · separat {lei(sum)}</span> : null}{b.inStock ? null : <span className="muted"> · stoc epuizat</span>}</span>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+/** What the set's two products cost bought one by one (perfume 100 ml + the gel or cream of the same scent). */
+export function separate(p: Perfume, set: BodyItem) {
+  const part = bodyItems.find(x => x.scent === p.slug && x.kind === (set.kind === 'set-gel' ? 'gel' : 'cream'));
+  return part ? p.price + part.price : null;
+}
+
 /**
- * One scent in its textures: shower gel, body cream and the 100 ml perfume standing side by side, then the sets
- * Morph sells that combine them (with the separate price only when the set costs less). Shared by the product
- * page ("Ritualul") and /parfumuri/corp.
+ * One scent in its textures, standing together on one glass shelf: perfume, shower gel, body cream; then the
+ * Coffret sets that combine them. Shared by the product page, the body product page and /parfumuri/corp.
+ * Buying happens on each object's own page, so the shelf carries no row of identical buttons.
  */
-export function Ritual({ p }: { p: Perfume }) {
-  const body = bodyFor(p);
-  const single = body.filter(b => b.kind === 'gel' || b.kind === 'cream');
-  const sets = body.filter(b => b.kind === 'set-gel' || b.kind === 'set-cream');
+export function Ritual({ p, current, size = 'chapter', vt = true }: { p: Perfume; current?: string; size?: 'monument' | 'room' | 'chapter'; vt?: boolean }) {
+  const sizes = size === 'monument' ? '(max-width: 599px) 62vw, 36vw' : size === 'room' ? '(max-width: 599px) 58vw, 22vw' : '(max-width: 599px) 58vw, 26vw';
   return (
     <div className={s.ritual}>
-      <ul className={s.textures}>
-        {single.map(b => (
-          <li key={b.slug} className={b.inStock ? '' : s.out}>
-            <span className={`niche-sm ${s.obj}`}>{b.image && <Image src={b.image} alt={`${BODY_KIND[b.kind].name} ${p.shortName}`} fill sizes="160px" />}</span>
-            <span className={s.kind}>{BODY_KIND[b.kind].name}</span>
-            <span className="t-small num">200 ml · {lei(b.price)}</span>
-            {b.inStock
-              ? <AddToCart className="btn btn-sm btn-secondary" items={[bodyItem(b, p)]} aria-label={`Adaugă ${BODY_KIND[b.kind].name.toLowerCase()} ${p.shortName} în coș`}>Adaugă</AddToCart>
-              : <span className="t-small muted">Stoc epuizat</span>}
-          </li>
-        ))}
-        <li>
-          <Link href={productHref(p)} aria-label={`${p.shortName}, parfum 100 ml`}><ProductVisual p={p} sizes="160px" alt="" className={s.obj} /></Link>
-          <span className={s.kind}>Parfum</span>
-          <span className="t-small num">100 ml · {lei(p.price)}</span>
-          {p.inStock
-            ? <AddToCart className="btn btn-sm btn-secondary" items={[fullItem(p)]} aria-label={`Adaugă ${p.shortName} 100 ml în coș`}>Adaugă</AddToCart>
-            : <span className="t-small muted">Stoc epuizat</span>}
-        </li>
-      </ul>
-      {sets.length > 0 && (
-        <ul className={`${s.sets} t-small`}>
-          {sets.map(b => {
-            const part = bodyItems.find(x => x.scent === p.slug && x.kind === (b.kind === 'set-gel' ? 'gel' : 'cream'));
-            const sum = part ? p.price + part.price : null;
-            return (
-              <li key={b.slug}>
-                <span>{BODY_KIND[b.kind].name}</span>
-                <span className="num">{lei(b.price)}{sum && sum > b.price ? <span className="muted"> · separat {lei(sum)}</span> : null}</span>
-                {b.inStock
-                  ? <AddToCart className="text-btn link" items={[bodyItem(b, p)]} aria-label={`Adaugă ${BODY_KIND[b.kind].name.toLowerCase()} ${p.shortName} în coș`}>Adaugă setul</AddToCart>
-                  : <span className="muted">Stoc epuizat</span>}
-              </li>
-            );
-          })}
-        </ul>
-      )}
+      <ObjectShelf p={p} items={ritualObjects(p, vt)} size={size} sizes={sizes} label={`Ritualul ${p.shortName}`} current={current} />
+      {size === 'chapter' && <CoffretLines p={p} current={current} />}
     </div>
   );
 }

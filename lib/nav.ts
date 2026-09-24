@@ -13,8 +13,9 @@ export const NAV: NavItem[] = [
     href: '/parfumuri', label: 'Parfumuri', match: /^\/(parfumuri|morph[-_])/,
     groups: [
       { title: 'Colecții', links: [{ href: '/parfumuri', label: 'Toate parfumurile' }, { href: '/parfumuri/les-exclusifs', label: 'Les Exclusifs' }, { href: '/parfumuri/luxury', label: 'Luxury' }, { href: '/parfumuri/ice', label: 'Ice' }] },
-      { title: 'Baie & Corp', links: [{ href: '/parfumuri/corp', label: 'Geluri de duș și creme de corp' }] },
-      { title: 'Seturi', links: [{ href: '/parfumuri/corp', label: 'Parfum cu gel sau cremă' }, { href: '/descopera#incearca', label: 'Travel 2×8 ml și mostre' }, { href: '/layering/your-next-form', label: 'Seturi layering Your Next Form' }] },
+      { title: 'Baie & Corp', links: [{ href: '/parfumuri/corp', label: 'Geluri de duș și creme de corp' }, { href: '/parfumuri/corp#ritualuri', label: 'Ritualul fiecărui parfum' }] },
+      // Morph's sets are three intents (research 01 §11); each link goes to the page that serves it (phase C2)
+      { title: 'Seturi', links: [{ href: '/parfumuri/corp#coffret', label: 'Coffret: parfum cu gel sau cremă' }, { href: '/descopera#travel', label: 'Travel Editions 2×8 ml' }, { href: '/descopera#incearca', label: 'Mostre și Discovery' }, { href: '/layering/your-next-form', label: 'Seturi layering Your Next Form' }] },
     ],
   },
   {

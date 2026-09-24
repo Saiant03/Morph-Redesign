@@ -3,7 +3,8 @@
 // fill); near-white pixels inside the outline (the clear glass shell, the base) are left out too, because on a dark
 // stage they read as empty and a streak over them showed as a floating white line. Writes
 // public/morph/objects/<file>-mask.png (white, alpha = juice, cap and label, half resolution, 2 px feather) and data/lightmasks.json (the images that have a mask).
-// Rendered in the preinstalled Chromium (global Playwright). Usage: npm run lightmask [slug ...] (default: Zeta)
+// Rendered in the preinstalled Chromium (global Playwright). Usage: npm run lightmask [slug ...] (default: Zeta); a slug may be
+// a perfume or a body product.
 import { createRequire } from 'module';
 import { execSync } from 'child_process';
 import { readFileSync, writeFileSync } from 'fs';
@@ -14,7 +15,8 @@ const { chromium } = require(execSync('npm root -g').toString().trim() + '/playw
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const cat = JSON.parse(readFileSync(path.join(root, 'data/catalog.json'), 'utf8'));
 const slugs = process.argv.slice(2).length ? process.argv.slice(2) : ['morph-zeta-parfum-100ml'];
-const files = slugs.map(s => cat.perfumes.find(p => p.slug === s)?.images[0]).filter(Boolean);
+// perfumes by slug; body products (the shower gels, glass like the bottles) by their own slug
+const files = slugs.map(s => cat.perfumes.find(p => p.slug === s)?.images[0] ?? cat.body.find(b => b.slug === s)?.image).filter(Boolean);
 
 const browser = await chromium.launch();
 const page = await browser.newPage();

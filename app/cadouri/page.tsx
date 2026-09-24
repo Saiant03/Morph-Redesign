@@ -95,7 +95,7 @@ export default function Page() {
               <Niche src="/morph/set-travel-morph-zeta-0.avif" alt="Set travel Morph Zeta" sizes="(max-width: 899px) 80vw, 24vw" className={s.setNiche} />
               <h3 className={s.setName}>Travel 2×8 ml</h3>
               <p className="t-small muted">Un singur parfum, în două flacoane de 8 ml. Există pentru {withTravel.length} parfumuri: {withTravel.map(p => p.shortName).join(', ')}.</p>
-              <p className={s.setFoot}><span className="num">{lei(travelPrice)}</span><Link className="link t-small" href="/descopera#incearca">Alege parfumul</Link></p>
+              <p className={s.setFoot}><span className="num">{lei(travelPrice)}</span><Link className="link t-small" href="/descopera#travel">Alege parfumul</Link></p>
             </li>
           </ul>
         </div>

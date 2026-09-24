@@ -160,9 +160,9 @@ await check('reduced motion: hero and reveals fully visible', async () => {
   assert(op === '0', `hero dim ${op}`);
 });
 
-await check('no horizontal overflow at 390 / 768 / 1024 / 1440', async () => {
-  const routes = ['/', '/parfumuri', '/parfumuri/luxury', '/parfumuri/corp', '/morph-zeta-parfum-100ml', '/descopera', '/descopera/finder', '/layering', '/layering/your-next-form', '/magazin', '/cadouri'];
-  for (const w of [390, 768, 1024, 1440]) {
+await check('no horizontal overflow at 390 / 768 / 1024 / 1440 / 1920', async () => {
+  const routes = ['/', '/parfumuri', '/parfumuri/luxury', '/parfumuri/corp', '/morph-zeta-parfum-100ml', '/morph-zeta-gel-de-dus-200-ml', '/morph-crema-de-corp-tonkatonic', '/morph-set-vision', '/descopera', '/descopera/finder', '/layering', '/layering/your-next-form', '/magazin', '/cadouri'];
+  for (const w of [390, 768, 1024, 1440, 1920]) {
     const p = await page(w === 390 ? { ...devices['iPhone 13'] } : { viewport: { width: w, height: 900 } });
     for (const r of routes) {
       await p.goto(BASE + r, { waitUntil: 'networkidle' });
@@ -228,7 +228,7 @@ await check('nav: panels expose Morph\'s structure (collections, Baie & Corp, Se
   const nav = n.getByRole('navigation', { name: 'Principal' });
   assert(await nav.locator(':scope > div').count() === 5, 'five primary items');
   await nav.getByRole('link', { name: 'Parfumuri', exact: true }).hover();
-  for (const l of ['Les Exclusifs', 'Geluri de duș și creme de corp', 'Parfum cu gel sau cremă', 'Travel 2×8 ml și mostre']) await wait(nav.getByRole('link', { name: l }), l);
+  for (const l of ['Les Exclusifs', 'Geluri de duș și creme de corp', 'Coffret: parfum cu gel sau cremă', 'Travel Editions 2×8 ml']) await wait(nav.getByRole('link', { name: l }), l);
   await nav.getByRole('link', { name: 'Magazinul', exact: true }).focus();
   await n.keyboard.press('Tab');
   assert(await n.evaluate(() => document.activeElement?.textContent) === 'Magazinul Morph din București', 'Tab does not enter the panel');
@@ -237,7 +237,7 @@ await check('nav: panels expose Morph\'s structure (collections, Baie & Corp, Se
   const m = await page({ ...devices['iPhone 13'] });
   await m.goto(BASE + '/', { waitUntil: 'networkidle' });
   await m.getByRole('button', { name: 'Meniu' }).click();
-  for (const l of ['Parfum cu gel sau cremă', 'Despre Morph', 'Gift card']) await wait(m.locator('#meniu').getByRole('link', { name: l }), `sheet: ${l}`);
+  for (const l of ['Coffret: parfum cu gel sau cremă', 'Travel Editions 2×8 ml', 'Despre Morph', 'Gift card']) await wait(m.locator('#meniu').getByRole('link', { name: l }), `sheet: ${l}`);
 });
 
 await check('page transition: home world → collection carries the campaign photograph (room-image), desktop and phone', async () => {
@@ -382,16 +382,111 @@ await check('vitrine bottle → product morphs into the stage (desktop, /parfumu
   assert(/obj-morph-animal-parfum-100ml/.test(log[1] ?? ''), JSON.stringify(log).slice(0, 200));
 });
 
-await check('Baie & Corp: rituals by scent, real prices, add a gel; PDP ritual', async () => {
+// Phase C2 (docs/design/phase-c2-bath-body-ritual.md): Baie & Corp room, body pages, Coffret, Travel, Seturi
+await check('Baie & Corp room: Zeta in three textures on the window, 12 real rituals, Coffret 8 + 11, no rows of add buttons', async () => {
   await pg.goto(BASE + '/parfumuri/corp', { waitUntil: 'networkidle' });
-  assert(await pg.locator('ol > li h2').count() === 12, 'ritual rows');
-  await pg.getByRole('button', { name: 'Adaugă gel de duș Zeta în coș' }).click();
-  const dialog = pg.getByRole('dialog', { name: 'Coșul tău' });
+  const win = pg.getByRole('list', { name: 'Ritualul Zeta' }).first();
+  assert((await win.getByRole('link').allInnerTexts()).map(t => t.replace(/^Zeta,\s*/, '').split('\n')[0]).join('|') === 'Parfum|Gel de duș|Cremă de corp', 'window textures');
+  assert(await pg.locator('#ritualuri h3').count() === 12, 'ritual groups');
+  // only real pairs: Animal has a cream and no gel, so its shelf holds two objects
+  assert(await pg.getByRole('list', { name: 'Ritualul Animal' }).locator(':scope > li').count() === 2, 'Animal shelf');
+  assert(await pg.getByRole('list', { name: 'Set parfum și gel de duș' }).getByRole('link').count() === 8, 'gel sets');
+  assert(await pg.getByRole('list', { name: 'Set parfum și cremă de corp' }).getByRole('link').count() === 11, 'cream sets');
+  assert(await pg.locator('main').getByRole('button', { name: /^Adaugă/ }).count() === 0, 'add buttons on the room');
+  // every object stands on the shelf line: feet within 2 px in the window
+  const feet = await win.locator('li').evaluateAll(ls => ls.map(l => Math.round(l.firstElementChild.firstElementChild.getBoundingClientRect().bottom)));
+  assert(Math.max(...feet) - Math.min(...feet) <= 2, `feet ${feet}`);
+});
+
+await check('Baie & Corp → gel page: the gel morphs into the stage; add to cart at 240 lei; its ritual leads to the perfume', async () => {
+  const t = await page();
+  await t.goto(BASE + '/parfumuri/corp', { waitUntil: 'networkidle' });
+  await hookVT(t);
+  await t.getByRole('list', { name: 'Ritualul Zeta' }).first().getByRole('link', { name: /Gel de duș/ }).click();
+  await t.waitForURL(/morph-zeta-gel-de-dus-200-ml/);
+  await t.waitForTimeout(900);
+  const log = await t.evaluate(() => window.__vt);
+  assert(/obj-morph-zeta-gel-de-dus-200-ml/.test(log[1] ?? ''), JSON.stringify(log).slice(0, 200));
+  assert(await t.locator('h1').innerText() === 'Zeta' && /Gel de duș/i.test(await t.locator('main').innerText()), 'gel page');
+  await t.getByRole('button', { name: /Adaugă gel de duș Zeta în coș/ }).click();
+  const dialog = t.getByRole('dialog', { name: 'Coșul tău' });
   await dialog.waitFor({ state: 'visible' });
-  assert(/240 lei/.test(await dialog.innerText()), 'gel price');
-  await pg.keyboard.press('Escape');
-  await pg.goto(BASE + '/morph-zeta-parfum-100ml', { waitUntil: 'networkidle' });
-  assert(await pg.getByRole('heading', { name: 'Ritualul Zeta' }).count() === 1, 'PDP ritual');
+  assert(/240 lei/.test(await dialog.innerText()), 'gel price in cart');
+  await t.keyboard.press('Escape');
+  await dialog.waitFor({ state: 'hidden' });
+  const shelf = t.getByRole('list', { name: 'Ritualul Zeta' });
+  assert(await shelf.locator('[aria-current="page"]').count() === 1, 'current object not marked');
+  await hookVT(t);
+  await shelf.getByRole('link', { name: /Parfum/ }).click();
+  await t.waitForURL(/morph-zeta-parfum-100ml$/);
+  await t.waitForTimeout(900);
+  assert(/group\(obj-morph-zeta-parfum-100ml\)/.test((await t.evaluate(() => window.__vt)).join(' ')), 'body → perfume morph');
+});
+
+await check('perfume PDP ritual (phone): N8 cream on the shelf → its page with the object morph', async () => {
+  const t = await page({ ...devices['iPhone 13'] });
+  await t.goto(BASE + '/morph-n8-parfum-100ml', { waitUntil: 'networkidle' });
+  const shelf = t.getByRole('list', { name: 'Ritualul N8' });
+  assert(await shelf.locator('[aria-current="page"]').innerText().then(x => /Parfum/.test(x)), 'perfume is current');
+  await shelf.scrollIntoViewIfNeeded();
+  await hookVT(t);
+  await shelf.getByRole('link', { name: /Cremă de corp/ }).click();
+  await t.waitForURL(/morph-crema-de-corp-n8/);
+  await t.waitForTimeout(900);
+  assert(/obj-morph-crema-de-corp-n8/.test((await t.evaluate(() => window.__vt))[1] ?? ''), 'cream morph');
+});
+
+await check('Coffret: a set opens its page with the separate price; a cream set quotes Morph on the yearly edition', async () => {
+  const t = await page();
+  await t.goto(BASE + '/parfumuri/corp#coffret', { waitUntil: 'networkidle' });
+  await t.getByRole('list', { name: 'Set parfum și cremă de corp' }).getByRole('link', { name: /Zeta/ }).click();
+  await t.waitForURL(/morph-set-zeta/);
+  const main = await t.locator('main').innerText();
+  assert(/840 lei/.test(main) && /separat 1\.000 lei/.test(main), 'set prices');
+  assert(/o dată pe an/.test(main), 'Morph line on cream sets');
+});
+
+await check('Seturi: every link in the nav resolves to a real destination on the page', async () => {
+  const n = await page();
+  const targets = { 'Coffret: parfum cu gel sau cremă': '#coffret', 'Travel Editions 2×8 ml': '#travel', 'Mostre și Discovery': '#incearca', 'Seturi layering Your Next Form': 'h1' };
+  for (const [label, sel] of Object.entries(targets)) {
+    await n.goto(BASE + '/', { waitUntil: 'networkidle' });
+    const nav = n.getByRole('navigation', { name: 'Principal' });
+    await nav.getByRole('link', { name: 'Parfumuri', exact: true }).hover();
+    const link = nav.getByRole('link', { name: label });
+    const href = await link.getAttribute('href');
+    await link.click();
+    await n.waitForURL(u => u.pathname === href.split('#')[0]);
+    await n.locator(sel).first().waitFor({ state: 'attached', timeout: 5000 }).catch(() => {});
+    assert(await n.locator(sel).count() >= 1, `${label}: ${sel} missing at ${n.url()}`);
+  }
+});
+
+await check('Travel Editions: bottle and travel box on one shelf, 12 scents with a travel set', async () => {
+  const t = await page();
+  await t.goto(BASE + '/descopera#travel', { waitUntil: 'networkidle' });
+  const shelf = t.getByRole('list', { name: /Zeta: sticla și Travel Editions/ });
+  assert(await shelf.locator(':scope > li').count() === 2, 'travel shelf');
+  assert(/2×8 ml · 230 lei/.test(await shelf.innerText()), 'travel price');
+  assert(await t.locator('#travel').getByRole('button', { name: /travel 2×8 ml în coș/ }).count() === 12, 'travel scents');
+});
+
+await check('ritual objects: keyboard focus lifts the object as hover does; reduced motion keeps it still', async () => {
+  const lift = async (t, how) => {
+    const a = t.getByRole('list', { name: 'Ritualul GATE 17' }).getByRole('link', { name: /Gel de duș/ });
+    await a.scrollIntoViewIfNeeded();
+    if (how === 'focus') await a.focus(); else await a.hover();
+    await t.waitForTimeout(800);
+    return a.locator('img').first().evaluate(e => getComputedStyle(e.parentElement).transform);
+  };
+  const t = await page();
+  await t.goto(BASE + '/parfumuri/corp', { waitUntil: 'networkidle' });
+  await t.keyboard.press('Tab');
+  assert((await lift(t, 'focus')) !== 'none', 'focus: no lift');
+  assert((await lift(t, 'hover')) !== 'none', 'hover: no lift');
+  const r = await page({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+  await r.goto(BASE + '/parfumuri/corp', { waitUntil: 'networkidle' });
+  assert((await lift(r, 'hover')) === 'none', 'reduced motion lifts');
 });
 
 await check('cart: threshold suggestion is a real product that covers the gap; gift box line', async () => {

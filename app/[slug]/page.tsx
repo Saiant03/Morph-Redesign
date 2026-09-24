@@ -6,27 +6,34 @@ import { TimeOnSkin } from '@/components/TimeOnSkin';
 import { Ritual } from '@/components/Ritual';
 import { ProductVisual } from '@/components/ProductVisual';
 import { ProductCard } from '@/components/ProductCard';
+import { BodyProduct } from './BodyProduct';
 import {
   perfumes, COLLECTIONS, concentration, familyGroup, travelFor, samplesFor, related, section, hours, descriptor,
-  firstSentences, collectionHref, lei, FREE_SHIPPING, BOUTIQUE, bodyFor, layeringSets,
+  firstSentences, collectionHref, lei, FREE_SHIPPING, BOUTIQUE, bodyFor, layeringSets, bodyItems, bodyBySlug, BODY_KIND, bySlug,
 } from '@/lib/catalog';
 import s from './product.module.css';
 
 type Params = Promise<{ slug: string }>;
 export const dynamicParams = false;
-// Product URLs keep Morph's existing slugs (research 06: preserve URLs).
-export const generateStaticParams = () => perfumes.map(p => ({ slug: p.slug }));
+// Product URLs keep Morph's existing slugs (research 06: preserve URLs): the perfumes, and since Phase C2 the body
+// products and Coffret sets linked to a perfume.
+export const generateStaticParams = () => [...perfumes, ...bodyItems.filter(b => b.scent)].map(p => ({ slug: p.slug }));
 
 export async function generateMetadata({ params }: { params: Params }) {
   const { slug } = await params;
   const p = perfumes.find(x => x.slug === slug);
-  return { title: p ? p.shortName : 'Parfum' };
+  const b = p ? null : bodyBySlug(slug);
+  return { title: p ? p.shortName : b ? `${BODY_KIND[b.kind].name} ${bySlug(b.scent!).shortName}` : 'Parfum' };
 }
 
 export default async function Product({ params }: { params: Params }) {
   const { slug } = await params;
   const p = perfumes.find(x => x.slug === slug);
-  if (!p) notFound();
+  if (!p) {
+    const b = bodyBySlug(slug);
+    if (!b) notFound();
+    return <BodyProduct b={b} />;
+  }
   const fam = familyGroup(p);
   const desc = section(p, /^Descriere/i);
   const travel = travelFor(p);
@@ -94,12 +101,11 @@ export default async function Product({ params }: { params: Params }) {
       {bodyFor(p).length > 0 && (
         <section className={`wrap ${s.ritual}`} aria-labelledby="ritual-titlu">
           <div className={s.ritualHead}>
-            <p className="label muted">Baie & Corp</p>
             <h2 id="ritual-titlu" className="t-1">Ritualul {p.shortName}</h2>
             <p className="muted">Același parfum în gel de duș și cremă de corp, de la Morph. Cremele sunt, spune Morph, „perfecte pentru a fi utilizate împreună cu parfumul preferat”.</p>
-            <Link className="link t-small" href="/parfumuri/corp">Toate ritualurile Baie & Corp</Link>
+            <Link className="link t-small" href={`/parfumuri/corp#ritual-${p.slug}`}>Toate ritualurile Baie & Corp</Link>
           </div>
-          <Ritual p={p} />
+          <Ritual p={p} current={p.slug} />
         </section>
       )}
 

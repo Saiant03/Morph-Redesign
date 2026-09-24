@@ -9,8 +9,13 @@
 .finder > :nth-child(3) { grid-column: 10 / -1; justify-self: end; }
 
 .travel { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-4); padding: var(--s-5) 0; border-top: 1px solid var(--fg); }
-.travelIntro { grid-column: 1 / span 4; display: grid; gap: var(--s-2); align-content: start; }
-.travelList { grid-column: 6 / -1; display: grid; grid-template-columns: repeat(3, 1fr); column-gap: var(--gap); }
+.travel { scroll-margin-top: 80px; }
+.travelIntro { grid-column: 1 / span 4; display: grid; gap: var(--s-3); align-content: start; }
+.travelQuote { font-family: var(--serif); font-style: italic; font-size: 19px; line-height: 1.4; }
+.travelQuote span { display: block; margin-top: 6px; font-family: var(--font); font-style: normal; }
+/* the bottle and its travel box on one shelf: the same scent, carried out of the house */
+.travelShelf { grid-column: 5 / -1; }
+.travelList { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, 1fr); column-gap: var(--gap); margin-top: var(--s-4); }
 .travelList li { display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); padding: 4px 0; }
 .travelImg { width: 32px; height: 40px; flex: none; }
 .travelName { flex: 1; font-family: var(--serif); font-size: 20px; }

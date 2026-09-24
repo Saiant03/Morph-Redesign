@@ -62,6 +62,16 @@ export function bodyFor(p: Perfume) {
 }
 /** Perfumes that have at least one body product, in catalog order. */
 export const ritualPerfumes = () => perfumes.filter(p => bodyItems.some(b => b.scent === p.slug));
+/** A body product keeps Morph's own URL (research 06: preserve URLs), like the perfumes. */
+export const bodyHref = (b: BodyItem) => `/${b.slug}`;
+export const bodyBySlug = (slug: string) => bodyItems.find(b => b.slug === slug && b.scent) ?? null;
+export const isSet = (b: BodyItem) => b.kind === 'set-gel' || b.kind === 'set-cream';
+// Morph's own lines (morphparfum.ro, Despre noi), quoted verbatim where they are used.
+export const MORPH_SAYS = {
+  creams: 'Concepute pentru a oferi hidratare profundă și o aromă persistentă, aceste creme sunt perfecte pentru a fi utilizate împreună cu parfumul preferat Morph, accentuând persistența acestuia și creând un efect olfactiv unic.',
+  creamSets: 'Pentru ocaziile cu adevărat speciale, casa Morph oferă seturi în ediție limitată formate din cremă + parfum, produse exclusiv o dată pe an, în preajma sărbătorilor de iarnă.',
+  travel: 'Pentru cei care iubesc călătoriile, Morph a creat seturile travel, concepute pentru a transforma fiecare deplasare într-o experiență olfactivă de neuitat.',
+};
 
 /** Where the object sits inside a packshot (fractions), measured by scripts/objects.mjs. */
 export type ObjectBox = { w: number; h: number; top: number; bottom: number; left: number; right: number };

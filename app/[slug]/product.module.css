@@ -28,6 +28,12 @@
 .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
 
 /* Ritualul: the scent in its textures */
+.bodyStage { height: calc(100vh - var(--header-h) - 120px); min-height: 520px; max-height: 860px; }
+.bodyBuy { display: grid; gap: var(--s-3); justify-items: start; padding: var(--s-4) 0; border-block: 1px solid var(--border); }
+.bodyPrice { font-size: 26px; font-weight: 500; }
+.bodyText { display: grid; gap: var(--s-3); }
+.bodyText .summary { order: 0; }
+.notesOf { display: block; margin-bottom: 4px; font-family: var(--font); font-style: normal; }
 .ritual.ritual { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-6); margin-block: var(--section); align-items: end; }
 .ritualHead { grid-column: 1 / span 4; display: grid; gap: var(--s-3); justify-items: start; }
 .ritual > :last-child { grid-column: 6 / -1; }
@@ -53,6 +59,7 @@
   .story.story { grid-template-columns: 1fr; }
   .ritual.ritual, .compose { grid-template-columns: 1fr; }
   .ritualHead, .ritual > :last-child, .pair, .composeText { grid-column: 1; }
+  .bodyStage { height: 44vh; min-height: 280px; max-height: 400px; }
   .pair { height: 320px; }
   .quote, .context { grid-column: 1; }
   .cards { grid-auto-flow: column; grid-auto-columns: 74%; grid-template-columns: none; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(var(--m) * -1); padding-inline: var(--m); scroll-padding-inline: var(--m); }

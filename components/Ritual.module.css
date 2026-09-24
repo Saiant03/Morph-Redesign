@@ -1,17 +1,5 @@
-/* textures side by side (gel, cream, perfume), the sets beside them */
-.ritual { display: grid; grid-template-columns: minmax(0, 2fr) minmax(200px, 1fr); column-gap: var(--gap); row-gap: var(--s-4); align-items: end; }
-.textures { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); align-items: end; }
-.textures li { display: grid; gap: 6px; justify-items: start; }
-.textures li > a { display: block; width: 100%; }
-.obj { position: relative; display: block; width: 100%; aspect-ratio: 3 / 4; }
-.obj img { object-fit: contain; }
-.kind { font-family: var(--serif); font-size: 22px; line-height: 1.1; }
-.out .obj { filter: grayscale(0.6); }
-.sets { border-top: 1px solid var(--border); }
-.sets li { display: grid; gap: 2px; padding: 10px 0; border-bottom: 1px solid var(--border); }
-.sets li > :last-child { justify-self: start; min-height: 32px; }
-@media (max-width: 899px) {
-  .ritual { grid-template-columns: 1fr; }
-  .textures { gap: 10px; }
-  .kind { font-size: 18px; }
-}
+/* the scent's shelf, then its Coffret sets as quiet lines beside or under it */
+.ritual { display: grid; gap: var(--s-5); }
+.sets { border-top: 1px solid var(--border); width: min(100%, 560px); margin-inline: auto; }
+.sets li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px var(--s-4); padding: 10px 0; border-bottom: 1px solid var(--border); }
+.sets [aria-current] { font-style: italic; }

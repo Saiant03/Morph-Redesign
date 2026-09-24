@@ -6,9 +6,10 @@ import { DiscoverInstrument } from '@/components/DiscoverInstrument';
 import { AddToCart } from '@/components/AddToCart';
 import { Niche } from '@/components/ProductVisual';
 import { OpenNow } from '@/components/OpenNow';
+import { ObjectShelf } from '@/components/ObjectShelf';
 import { DESCOPERA_NAV } from '@/lib/nav';
 import { LENSES, topNotes, type LensId } from '@/lib/discover';
-import { perfumes, HERO_SLUG, travelSets, sampleSets, travelFor, lei, FREE_SHIPPING, productHref, BOUTIQUE, TRIAL, travelItem, offerItem, type Offer } from '@/lib/catalog';
+import { perfumes, HERO_SLUG, bySlug, MORPH_SAYS, travelSets, sampleSets, travelFor, lei, FREE_SHIPPING, productHref, BOUTIQUE, TRIAL, travelItem, offerItem, type Offer } from '@/lib/catalog';
 import { QUESTIONS } from '@/lib/finder';
 import s from './descopera.module.css';
 
@@ -21,6 +22,8 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
   const slug = typeof sp.parfum === 'string' && perfumes.some(p => p.slug === sp.parfum) ? sp.parfum : HERO_SLUG;
 
   const withTravel = perfumes.filter(p => travelFor(p));
+  // the travel chapter's example: the house's hero scent, as bottle and as its travel box
+  const hero = bySlug(HERO_SLUG), heroTravel = travelFor(hero)!;
   const offers = [...sampleSets, ...travelSets.filter(t => TRIAL[t.slug])].sort((a, b) => Number(b.inStock) - Number(a.inStock) || a.price - b.price);
 
   return (
@@ -48,18 +51,24 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
           <p className="muted">Un parfum se alege pe piele, în câteva zile. Acasă, cu formatele mici Morph; în persoană, în {BOUTIQUE.short} din București. Stocul e cel de la data instantaneului.</p>
         </div>
 
-        <div className={s.travel}>
+        <div id="travel" className={s.travel}>
           <div className={s.travelIntro}>
-            <p className="label muted">Acasă</p>
-            <h3 className="t-2">Travel 2×8 ml</h3>
+            <h3 className="t-2">Travel Editions</h3>
             <p className="t-small muted">Același parfum, în două flacoane de 8 ml, <span className="num">{lei(travelFor(withTravel[0])!.price)}</span>. Există pentru {withTravel.length} din cele {perfumes.length} de parfumuri.</p>
+            <p className={s.travelQuote}>„{MORPH_SAYS.travel}” <span className="t-micro muted">Morph, Despre noi</span></p>
+          </div>
+          <div className={s.travelShelf}>
+            <ObjectShelf p={hero} size="chapter" sizes="(max-width: 599px) 58vw, 26vw" label={`${hero.shortName}: sticla și Travel Editions`} items={[
+              { key: hero.slug, src: hero.images[0], kind: 'Parfum', line: `100 ml · ${lei(hero.price)}`, of: hero.shortName },
+              { key: heroTravel.slug, src: heroTravel.image!, kind: 'Travel', line: `2×8 ml · ${lei(heroTravel.price)}`, of: hero.shortName },
+            ]} />
           </div>
           <ul className={s.travelList}>
             {withTravel.map(p => {
               const t = travelFor(p)!;
               return (
                 <li key={p.slug}>
-                  <span className={`niche-sm ${s.travelImg}`} aria-hidden><Image src={p.images[0]} alt="" fill sizes="40px" /></span>
+                  <span className={`niche-sm ${s.travelImg}`} aria-hidden><Image src={t.image ?? p.images[0]} alt="" fill sizes="40px" /></span>
                   <Link className={s.travelName} href={productHref(p)}>{p.shortName}</Link>
                   <AddToCart className="text-btn link t-small muted" items={[travelItem(p, t)]} aria-label={`Adaugă ${p.shortName} travel 2×8 ml în coș`}>Adaugă</AddToCart>
                 </li>

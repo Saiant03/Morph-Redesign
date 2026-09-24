@@ -5,15 +5,16 @@ import { ObjectLight } from './ObjectLight';
 import { scentVars } from '@/lib/scent';
 import s from './Stage.module.css';
 
-type Props = { p: Perfume; image?: number; sizes: string; priority?: boolean; className?: string; alt?: string; vt?: boolean };
+// `src`/`id`: another object of the same scent (a body product) on the scent's stage, named obj-<id> for its own page
+type Props = { p: Perfume; image?: number; src?: string; id?: string; sizes: string; priority?: boolean; className?: string; alt?: string; vt?: boolean };
 
 /**
  * A fragrance at monument scale: standing on a glass shelf in the room's key light, with its reflection.
  * The foot of the bottle sits exactly on the shelf line because the packshot's object box is measured
  * (scripts/objects.mjs). The scent's --glow tints the light by 14%, as in the niche; nothing else is coloured.
  */
-export function Stage({ p, image = 0, sizes, priority, className = '', alt, vt }: Props) {
-  const src = p.images[image] ?? p.images[0];
+export function Stage({ p, image = 0, src: other, id = p.slug, sizes, priority, className = '', alt, vt }: Props) {
+  const src = other ?? p.images[image] ?? p.images[0];
   const box = objectBox(src);
   const mask = lightMask(src);
   const vars = {
@@ -34,5 +35,5 @@ export function Stage({ p, image = 0, sizes, priority, className = '', alt, vt }
       {mask && <ObjectLight mask={mask} className={s.glint} />}
     </div>
   );
-  return vt ? <ViewTransition name={`obj-${p.slug}`} share="morph" default="none">{stage}</ViewTransition> : stage;
+  return vt ? <ViewTransition name={`obj-${id}`} share="morph" default="none">{stage}</ViewTransition> : stage;
 }
