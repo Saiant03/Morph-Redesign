@@ -14,7 +14,7 @@
 .spread {
   flex: 0 0 100%; scroll-snap-align: start; position: relative;
   display: grid; grid-template-columns: repeat(12, 1fr); grid-template-rows: auto 1fr; column-gap: var(--gap);
-  max-width: 1560px; padding: 0 var(--m); box-sizing: border-box;
+  padding: 0 max(var(--m), (100% - 1560px) / 2 + var(--m)); box-sizing: border-box;
 }
 .stageLink { grid-column: 1 / span 6; grid-row: 1 / span 2; display: block; }
 .stage { height: min(80svh, 820px); min-height: 520px; }
@@ -31,7 +31,7 @@
 .facts dd { margin: 4px 0 0; }
 .buy { display: grid; gap: var(--s-2); justify-items: start; }
 .cta { justify-content: space-between; min-width: 280px; }
-.second { position: absolute; right: var(--m); top: clamp(24px, 6vh, 80px); width: clamp(90px, 8vw, 140px); aspect-ratio: 4 / 5; }
+.second { position: absolute; right: max(var(--m), (100% - 1560px) / 2 + var(--m)); top: clamp(24px, 6vh, 80px); width: clamp(90px, 8vw, 140px); aspect-ratio: 4 / 5; }
 
 /* PRODUCT → REVEAL: out of the light / into the light */
 .stageLink, .name, .info { transition: opacity 700ms var(--ease-out), translate 700ms var(--ease-out), filter 700ms var(--ease-out); }

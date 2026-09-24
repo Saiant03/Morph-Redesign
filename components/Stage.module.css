@@ -5,7 +5,8 @@
   position: relative; overflow: hidden; isolation: isolate;
   background:
     var(--mat-grain) 0 0 / 160px,
-    radial-gradient(50% 54% at 50% 47%, var(--glow) 0%, var(--niche-mid) 36%, color-mix(in srgb, var(--niche-mid) 62%, var(--bg)) 58%, color-mix(in srgb, var(--niche-mid) 28%, var(--bg)) 78%, color-mix(in srgb, var(--niche-mid) 8%, var(--bg)) 92%, var(--bg) 100%);
+    /* the pool reaches the room's own tone before the box's top edge (47% / 54% = 87%), so no edge shows on dark */
+    radial-gradient(50% 54% at 50% 47%, var(--glow) 0%, var(--niche-mid) 31%, color-mix(in srgb, var(--niche-mid) 62%, var(--bg)) 50%, color-mix(in srgb, var(--niche-mid) 28%, var(--bg)) 67%, color-mix(in srgb, var(--niche-mid) 8%, var(--bg)) 79%, var(--bg) 86%);
   transition: --glow var(--d-story) var(--ease-inout);
 }
 .obj, .refl { position: absolute; left: 50%; height: var(--oh); aspect-ratio: var(--ar); translate: -50% 0; mix-blend-mode: multiply; }
@@ -27,7 +28,8 @@
   background:
     linear-gradient(to bottom, rgb(255 252 246 / 0.7) 0 1px, rgb(255 252 246 / 0.16) 1px, rgb(255 252 246 / 0) 14px),
     linear-gradient(to bottom, rgb(20 14 10 / 0.03), rgb(20 14 10 / 0.18));
-  mask-image: linear-gradient(to right, transparent, #000 22%, #000 78%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 22%, #000 78%, transparent), linear-gradient(to bottom, #000 40%, transparent);
+  mask-composite: intersect; -webkit-mask-composite: source-in;
 }
 
 /* 2.5D (only packshots with a silhouette mask, scripts/lightmask.mjs): the key light moves over the glass, the
@@ -38,7 +40,7 @@
 .stage[data-lit] .contact { translate: calc((50% - var(--lx)) * 0.25) 0; }
 .glint {
   position: absolute; left: 50%; top: calc(var(--shelf) - var(--foot) * var(--oh)); height: var(--oh); aspect-ratio: var(--ar); translate: -50% 0;
-  z-index: 3; pointer-events: none; mask-size: contain; mask-repeat: no-repeat; mask-position: center; mix-blend-mode: screen;
+  z-index: 3; pointer-events: none; mask-size: contain; mask-repeat: no-repeat; mask-position: center; mask-composite: intersect; -webkit-mask-composite: source-in; mix-blend-mode: screen;
   /* --c: where the light crosses the bottle (--lx mapped onto the measured object box): a crisp streak and the
      thinner second reflection of thick glass beside it */
   --c: calc(var(--ol) * 100% + var(--lx) * var(--ow));

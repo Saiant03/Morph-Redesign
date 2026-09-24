@@ -76,7 +76,15 @@ Recommendations not applied: an add-to-cart on every object (it would bring back
 
 ## Known limitations
 
-- The masks include the packshots' floor reflection under the bottle, so the streak can touch it. It is minor at this scale.
+- The masks include the packshots' floor reflection and the thick glass of the base. Fixed after review (below): the streak now fades out before the base.
+
+## Fixes after review (owner, 2026-09-24)
+
+Three defects, seen on the dark stages (home lookbook, 1920 px):
+
+1. **Hard top edge on the halo.** The stage's radial pool (center at 47%, vertical radius 54%) was still lighter than the room at the box's top edge, so the box showed as a band above the bottle. The ramp now reaches `--bg` at 86% of the radius (`components/Stage.module.css`). The glass floor also fades toward the bottom of the box, so no bottom edge shows either.
+2. **Hard white line at the lower left of the bottle.** The light streak crossed the thick glass of the base, where the silhouette has thin bright edges. `ObjectLight` now adds a second mask layer, intersected with the silhouette (`mask-composite: intersect`), so the light fades out between 55% and 78% of the packshot's height. The fix applies everywhere the object is lit: stage, vitrine, niches.
+3. **The next lookbook spread showed dimmed at the right.** Spreads were capped at 1560 px inside a full-width track, so on wider screens the next one was visible. A spread now spans the track, and its content is centered with padding (`max(var(--m), (100% − 1560px) / 2 + var(--m))`), aligned with the bar above it.
 - The square Les Exclusifs packshots render their bottles visibly shorter than the 4:5 packshots at the same niche height. The images are Morph's and were not rescaled or cropped.
 - The light is still a 2D approximation. The label and the embossing do not respond to it.
 - A room change animates up to 26 named shelf items, most of them off screen. It was fine in headless Chromium and has not been measured on a low-end phone.

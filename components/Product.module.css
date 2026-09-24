@@ -17,7 +17,7 @@
 .visual[data-lit] { transition: --glow var(--d-story) var(--ease-inout), --lx 500ms var(--ease-out), --ly 500ms var(--ease-out); }
 .glint {
   position: absolute; inset: 0; padding: 7% 0 5%; z-index: 1; pointer-events: none; mix-blend-mode: screen; opacity: 0.8;
-  mask-size: contain; mask-repeat: no-repeat; mask-position: center; mask-origin: content-box; mask-clip: content-box;
+  mask-size: contain; mask-repeat: no-repeat; mask-position: center; mask-origin: content-box; mask-clip: content-box; mask-composite: intersect; -webkit-mask-composite: source-in;
   --c: calc(var(--ol) * 100% + var(--lx) * var(--ow));
   background: linear-gradient(104deg, transparent calc(var(--c) - 5%), rgb(255 253 248 / 0.7) var(--c), transparent calc(var(--c) + 3%));
 }
