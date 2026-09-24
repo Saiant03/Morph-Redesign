@@ -4,10 +4,20 @@ Fișier de memorie pentru Claude. Se încarcă automat la începutul fiecărei s
 
 ## Git
 
-- Implicit se lucrează pe `main`, fără branch-uri noi și fără PR-uri, decât dacă se cere explicit.
-- Excepție cerută explicit: Faza 02 se face pe `feature/morph-phase-02-prototypes`.
+Proiect cu un singur proprietar. `main` e sursa de adevăr.
+
+- Se lucrează direct pe `main`. Fără branch-uri de feature, decât dacă proprietarul le cere explicit. (Fazele 02 și 03 au fost pe branch-uri cerute explicit; ambele sunt acum în `main`.)
 - Dacă sesiunea pornește pe alt branch (de ex. `claude/...`), treci pe `main` înainte de orice modificare: `git fetch origin main && git checkout main && git pull origin main`.
-- Commit și push direct pe `main`. Procedura: skill-ul `push-main` (`.claude/skills/push-main/SKILL.md`).
+- La finalul fiecărei faze încheiate:
+  1. verifică build-ul;
+  2. rulează testele / QA relevante;
+  3. revizuiește modificările;
+  4. actualizează documentația necesară;
+  5. commit cu toată munca încheiată pe `main`.
+- Un singur commit clar și descriptiv pe fază.
+- Nu se rescriu și nu se resetează commit-uri existente fără instrucțiune explicită. Niciodată force-push.
+- Înainte de modificări distructive: `git status` și păstrarea muncii existente.
+- Procedura de commit/push: skill-ul `push-main` (`.claude/skills/push-main/SKILL.md`).
 
 ## Stil de răspuns
 
@@ -39,5 +49,5 @@ Fapte-cheie (verificate 2026-09-24):
 - 2026-09-24: Faza 01 (cercetare) încheiată. Nu s-a ales încă direcția creativă (A Cromatic / B Forma / C Strata) și nici stack-ul de producție.
 - 2026-09-24: Faza 02 încheiată. Există 9 ecrane prototip: `/concept/{a|b|c}/{home|collection|product}`, construite cu Next.js 16 + GSAP pe snapshot-ul din `data/`. Documentele sunt în `docs/design/`. Direcția finală nu e aleasă.
 - Date: `npm run snapshot` (Store API) și `npm run colors` (culorile sticlelor). Nu se inventează prețuri, produse sau afirmații de brand.
-- 2026-09-24: Faza 03: direcția aleasă e hibridul A Cromatic + C Strata (plus indexul de colecție din B ca pattern). Sursa de adevăr: `docs/design/phase-03-design-system.md` și `phase-03-consolidation.md`. Rute: `/`, `/parfumuri`, `/parfumuri/[colectie]`, `/[slug]`. Faza 03 e pe branch-ul `feature/morph-phase-03-consolidation` (cerut explicit).
+- 2026-09-24: Faza 03: direcția aleasă e hibridul A Cromatic + C Strata (plus indexul de colecție din B ca pattern). Sursa de adevăr: `docs/design/phase-03-design-system.md` și `phase-03-consolidation.md`. Rute: `/`, `/parfumuri`, `/parfumuri/[colectie]`, `/[slug]`. Adusă în `main` prin fast-forward.
 - Skill-urile externe se importă doar după inspecție și se înregistrează în `docs/research/skill-registry.md`.
