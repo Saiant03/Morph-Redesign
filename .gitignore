@@ -71,3 +71,7 @@ next-env.d.ts
 .claude/skills/impeccable/scripts/bin/
 .claude/skills/impeccable/scripts/update-check.json
 .impeccable/
+
+# Skill runtime caches
+__pycache__/
+*.pyc

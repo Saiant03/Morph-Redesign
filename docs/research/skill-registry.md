@@ -66,6 +66,94 @@ Inspection procedure applied to every candidate:
 | Known limitations | Its generative defaults (bold "out-of-distribution" direction, PRODUCT.md/DESIGN.md setup, interactive questions, two subagents per critique) are not used; Morph's art direction in `docs/design/` wins. Used for critique, craft floor and detector only. The detector returned no findings on the C1 files, so it adds little beyond the manual review for this codebase |
 | Date added | 2026-09-24 |
 
+### Skill stack round (2026-09-24)
+
+Same inspection procedure as above: shallow clone into the scratchpad, SKILL.md read, bundled scripts grepped for network, subprocess, environment and file-write calls, URL inventory, hidden-Unicode scan (zero-width, bidi, BOM, tag characters), prompt-injection patterns, license. No installer or script was run. Files were copied verbatim; the diff against the source is clean except where noted.
+
+**Local change applied to four skills:** one frontmatter line, `disable-model-invocation: true`, added to `design-taste-frontend`, `humanizer`, `stop-slop` and `design-md`. Claude Code then no longer loads them by description match; they run only when the owner invokes them (`/humanizer` etc.) or asks for them by name, in which case the SKILL.md is read directly. Reason: these four have broad triggers (any frontend page, any prose) and would otherwise compete with the Morph art direction, or with each other (Humanizer and Stop Slop on the same text).
+
+### design-taste-frontend
+| Field | Value |
+|---|---|
+| Source | https://github.com/Leonxlnx/taste-skill, `skills/taste-skill/` (the folder is named `taste-skill`, the skill `design-taste-frontend`; v2) |
+| Commit | `c184364c58658b2f131b4ae8bd3d206cabb3deee` (2026-09-23) |
+| License | MIT (`LICENSE` copied) |
+| Copied | `SKILL.md`, `LICENSE`. Not copied: the other 12 skills in the repo (v1, brutalist, soft, minimalist, image generation, brandkit, stitch …), `skill.sh`, examples, research |
+| Inspected | SKILL.md (87 KB) searched for commands, URLs, injection patterns and hidden characters: none of concern. No scripts. No hooks |
+| Invocation | On demand only (`disable-model-invocation`) |
+| Use in Morph | Composition, hierarchy, spacing and motion critique; checking a new layout for generic AI patterns. Advisory: Morph's materials, type, object presentation, navigation and transitions win on any conflict. Its image-placeholder and "infer a direction" rules do not apply; the direction is fixed in `docs/design/` |
+
+### humanizer
+| Field | Value |
+|---|---|
+| Source | https://github.com/spuvr/humanizer (root `SKILL.md`) |
+| Commit | `0d5a8cf82bc36232b79afafd4993ca4f8226c8bd` (2026-05-16) |
+| License | MIT, stated in `README.md` (the repo has no LICENSE file); `README.md` copied to keep the license statement |
+| Copied | `SKILL.md`, `README.md`. Not copied: `Testing/`, `BENCHMARK/` |
+| Inspected | Prose-only skill: no scripts, commands, URLs or hooks; hidden characters: none |
+| Invocation | On demand only |
+| Use in Morph | Marketing, editorial and UX copy, human-facing docs. Never code, JSON/YAML, product data, prices, notes, legal text. Meaning and facts stay unchanged |
+
+### stop-slop
+| Field | Value |
+|---|---|
+| Source | https://github.com/hardikpandya/stop-slop |
+| Commit | `8da1f030185bdfe8471220585162991eaeb970e9` (2026-03-18) |
+| License | MIT (`LICENSE` copied) |
+| Copied | `SKILL.md`, `references/` (3 files), `LICENSE` |
+| Inspected | No scripts or hooks; one URL (author homepage in metadata); hidden characters: none |
+| Invocation | On demand only |
+| Use in Morph | Explicit AI-pattern review of copy, design docs and reports. Pick either this or Humanizer for a given text, never both |
+
+### diagram-design
+| Field | Value |
+|---|---|
+| Source | https://github.com/cathrynlavery/diagram-design, `skills/diagram-design/` |
+| Commit | `dc1ace47b99a419e42d01a03cb6ace5346efa8ae` (2026-09-19), skill version 2.6 |
+| License | MIT (`LICENSE` copied) plus `THIRD_PARTY_LICENSES.md` (Tabler Icons MIT, Simple Icons CC0) |
+| Copied | The whole skill folder (3.6 MB: `SKILL.md`, 57 references, 174 example/template HTML assets, 4 Python scripts). Not copied: repo tooling, plugin manifests for other agents, docs |
+| Inspected | The 4 scripts (`self_check.py`, `drawio_extract.py`, `excalidraw_extract.py`, `mermaid_extract.py`) are standard-library only: they parse local files and print; no network, no subprocess, no writes outside the given output. The one BOM hit is a `lstrip("\ufeff")` literal. 5 asset HTML files carry the skill's own inline motion controller; no remote scripts (only Google Fonts links) |
+| Invocation | Auto by description (narrow trigger: a diagram is requested) |
+| Use in Morph | Architecture, journey, dependency and flow diagrams in `docs/`. Never application UI; nothing enters the app bundle |
+
+### frontend-slides
+| Field | Value |
+|---|---|
+| Source | https://github.com/zarazhangrui/frontend-slides, `plugins/frontend-slides/skills/frontend-slides/` (identical to the repo-root copy) |
+| Commit | `9906a34d640d2111f724544cbc50f7f130569ae1` (2026-06-23) |
+| License | MIT (`LICENSE` copied) |
+| Copied | `SKILL.md`, style presets, animation patterns, HTML template, `viewport-base.css`, `bold-template-pack/`, `scripts/extract-pptx.py` |
+| **Removed** | `scripts/deploy.sh` (installs the Vercel CLI globally and publishes the deck to Vercel; this concept must not be published) and `scripts/export-pdf.sh` (runs `npm install playwright` and `npx playwright install chromium` in a temp dir, against this environment's rule). SKILL.md still mentions both; for PDF export use the preinstalled Chromium through `site-capture`-style Playwright instead |
+| Inspected | `extract-pptx.py` reads a .pptx with python-pptx and writes images/JSON to the given output dir only |
+| Invocation | Auto by description (narrow trigger: a presentation is requested) |
+| Use in Morph | Pitch or case-study deck for the proposal to Morph. Its presets and slide styling never enter the website |
+
+### design-md
+| Field | Value |
+|---|---|
+| Source | https://github.com/google-labs-code/stitch-skills, `plugins/stitch-utilities/skills/design-md/` |
+| Commit | `0337446dadde6f8c94210444e2aa9d546126480f` (2026-08-17) |
+| License | Apache 2.0 (repo `LICENSE` copied) |
+| Copied | `SKILL.md`, `README.md`, `examples/DESIGN.md`, `LICENSE` |
+| Inspected | No scripts or hooks. The frontmatter `allowed-tools` lists `stitch*:*`, `Read`, `Write`, `web_fetch`; no Stitch MCP server is configured here, so only Read/Write apply. It fetches Stitch screens by default |
+| Invocation | On demand only |
+| Use in Morph | Only the DESIGN.md format and section structure. Source is the Morph implementation (`app/globals.css`, components) and `docs/design/phase-05-design-system.md`, `phase-a-creative-system.md`, `phase-c1-product-index.md`; not a Stitch project and not a generic template. Must also record materials, object treatment, motion and anti-patterns (color is an accent only). No DESIGN.md exists yet |
+
+### Retained, checked again (2026-09-24)
+- **ui-ux-pro-max**: installed copy is from `dcc40ff`, which is still the upstream HEAD of nextlevelbuilder/ui-ux-pro-max-skill (the original; forks exist). Diff against upstream: identical apart from the added `LICENSE`. Tracked `scripts/__pycache__/*.pyc` files (runtime cache from the Phase B queries) were removed from Git and `__pycache__/` added to `.gitignore`.
+- **impeccable**: installed copy (skill 4.3.1 via the official installer) kept. Upstream's in-repo `.claude/skills/impeccable` at the same commit differs slightly (unreleased edits after the npm release); no update needed. Still no hooks in `.claude/settings*.json`, no `.claude/agents/`; `scripts/bin/` and `update-check.json` remain gitignored.
+
+## External references (not vendored)
+
+| Resource | Source @ commit | License | Why not in the repo | How to use |
+|---|---|---|---|---|
+| Understand Anything | https://github.com/Egonex-AI/Understand-Anything @ `6df3065` (2026-09-12), plugin 2.9.7 | MIT | Egonex-AI is the upstream: the README credits the original author Lum1104 and `github.com/Lum1104/Understand-Anything` resolves to the same HEAD (transferred repo, not a fork). It is a full Claude Code plugin, not a standalone skill: `/understand` needs a pnpm TypeScript workspace built on first run (`pnpm install && pnpm --filter @understand-anything/core build`, tree-sitter WASM), dispatches up to 5 subagents per batch, and ships hooks (PostToolUse on every Bash call; a SessionStart hook that tells the agent to rebuild a stale graph "without asking"). Vendoring means committing the external repo wholesale | Not installed. When the repo becomes hard to reason about, the owner installs it for one session with `/plugin marketplace add Egonex-AI/Understand-Anything`, keeps `autoUpdate` off, runs `/understand` once, and adds `.understand-anything/` to `.gitignore`. Reuse an existing `.understand-anything/` or `.ua/` graph instead of rebuilding. For normal tasks, read the relevant files directly |
+| awesome-design-md | https://github.com/VoltAgent/awesome-design-md @ `f696123` (2026-09-21) | MIT | A reference library of 74 DESIGN.md files describing other brands; copying it would import unrelated identities | For a specific visual problem, clone it into the scratchpad, read only the relevant references, extract the principle, adapt it to Morph. Nothing is copied into the repo without a named reason and attribution |
+
+## Not provided
+
+Skill #11 was not provided, so no installation was attempted.
+
 ## Local (authored for this project)
 
 | Skill | Purpose | Scripts | Date |
@@ -84,4 +172,4 @@ Inspection procedure applied to every candidate:
 | web-artifacts-builder, theme-factory, canvas-design, brand-guidelines | anthropics/skills | Aimed at claude.ai artifacts or Anthropic branding; not relevant | — |
 | claude-code plugins (feature-dev, code-review, security-guidance …) | anthropics/claude-code @ d78be94 | General dev workflow, largely covered by built-in skills in this environment | If a specific gap appears |
 
-Apart from ui-ux-pro-max and impeccable (both requested by the owner), no third-party (non-vendor) skill repositories were imported. The official vendor sources covered the needs, and unvetted community skill aggregators add risk without a clear gain.
+Apart from ui-ux-pro-max and impeccable (both requested by the owner), no third-party (non-vendor) skill repositories were imported. (Updated 2026-09-24: the owner then requested the skill stack above; each item went through the same inspection.) The official vendor sources covered the needs, and unvetted community skill aggregators add risk without a clear gain.

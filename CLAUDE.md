@@ -31,6 +31,19 @@ Proiect cu un singur proprietar. `main` e sursa de adevăr.
 - Fără abstracții, dependențe sau comentarii inutile.
 - La debugging: cauza reală, explicată scurt, apoi fix-ul.
 
+## Skill-uri
+
+Registrul, cu sursa și limitele fiecăruia: `docs/research/skill-registry.md`. Nu se folosesc toate la fiecare task. Se alege skill-ul potrivit și se citește doar SKILL.md-ul lui, plus referințele de care e nevoie. Bibliotecile de referință nu se încarcă întregi.
+
+- UI: `impeccable` (critică, polish, audit responsive și motion), `ui-ux-pro-max` (doar regulile UX/accesibilitate, interogări țintite), `/design-taste-frontend` (compoziție, ierarhie; doar consultativ).
+- Text pentru oameni: `/humanizer` (voce naturală) sau `/stop-slop` (curățarea tiparelor AI), niciodată amândouă pe același text. Nu se folosesc pe cod, date structurate, date de produs sau text legal.
+- `diagram-design`: doar când e nevoie de o diagramă (în `docs/`). `frontend-slides`: doar pentru prezentări.
+- `/design-md`: doar pentru un DESIGN.md derivat din implementarea Morph și din `docs/design/`.
+- Understand Anything (neinstalat) și awesome-design-md: referințe externe; când se folosesc, vezi registrul.
+- Skill-urile marcate cu `/` pornesc doar la cerere. Dacă proprietarul le numește în text, se citește direct `.claude/skills/<nume>/SKILL.md`.
+- Direcția artistică Morph din `docs/design/` are prioritate față de orice skill.
+- Munca mecanică se face cu scripturi deterministe sau cu modele mai ieftine. Fluxurile cu mai mulți agenți se folosesc doar când aduc un câștig real.
+
 ## Proiect
 
 Concept de redesign pentru https://morphparfum.ro (propunere profesională către Morph). Nu e site-ul de producție și nu se publică.
