@@ -20,6 +20,19 @@ Fișier de memorie pentru Claude. Se încarcă automat la începutul fiecărei s
 - Fără abstracții, dependențe sau comentarii inutile.
 - La debugging: cauza reală, explicată scurt, apoi fix-ul.
 
+## Proiect
+
+Concept de redesign pentru https://morphparfum.ro (propunere profesională către Morph). Nu e site-ul de producție și nu se publică.
+
+Sursa de adevăr pentru cercetare: `docs/research/`. Începe cu `00-executive-summary.md`; nu redescoperi fapte deja documentate acolo. `raw/` conține notițele brute ale subagenților, iar fișierele 01–08 au prioritate față de ele.
+
+Fapte-cheie (verificate 2026-09-24):
+- Morph e un brand italian de nișă (Napoli, 2002, Andrea Angelino). morphparfum.ro e magazinul oficial din România, cu boutique-ul Casa Morph din București.
+- Stack actual: WordPress + WooCommerce + Breakdance. Store API public: `https://morphparfum.ro/wp-json/wc/store/v1/products`. Doar citire, fără credențiale.
+- Captură de pagini: skill-ul `site-capture`.
+
 ## Decizii și context
 
-(de completat pe parcurs)
+- 2026-09-24: Faza 01 (cercetare) încheiată. Nu s-a ales încă direcția creativă (A Cromatic / B Forma / C Strata) și nici stack-ul de producție.
+- Concept recomandat: Next.js + GSAP pe un snapshot read-only al catalogului. De confirmat la începutul Fazei 02.
+- Skill-urile externe se importă doar după inspecție și se înregistrează în `docs/research/skill-registry.md`.
