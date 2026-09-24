@@ -51,4 +51,10 @@ Fapte-cheie (verificate 2026-09-24):
 - Date: `npm run snapshot` (Store API) și `npm run colors` (culorile sticlelor). Nu se inventează prețuri, produse sau afirmații de brand.
 - 2026-09-24: Faza 03: direcția aleasă e hibridul A Cromatic + C Strata (plus indexul de colecție din B ca pattern). Sursa de adevăr: `docs/design/phase-03-design-system.md` și `phase-03-consolidation.md`. Rute: `/`, `/parfumuri`, `/parfumuri/[colectie]`, `/[slug]`. Adusă în `main` prin fast-forward.
 - 2026-09-24: Faza 04 încheiată: `/descopera`, `/descopera/finder` (+ `/rezultat`), `/layering`, `/layering/your-next-form`, `/casa-morph`. Logica finder-ului e a Morph (`data/finder.json`, `npm run finder`, script public parsat, neexecutat). Documente: `docs/design/phase-04-journey-expansion.md`, `phase-04-ux-review.md`.
+- 2026-09-24: **Direcție de brand (după boutique-ul fizic și Pomelli Business DNA). Suprascrie rolul culorii din Faza 03.** Morph nu se reprezintă în primul rând printr-un sistem de culoare.
+  - Teritoriu: meșteșug artizanal, inovație olfactivă, identitate personală, calitate premium, metamorfoză suprarealistă, precizie științifică, rafinament editorial, eleganță avangardistă.
+  - Repere fizice: lemn închis la culoare, sticlă, reflexii, lumină dramatică/caldă, sculptură, materialitate, artă, lux intim.
+  - Principiu digital: PRODUS + FORMĂ + MATERIE + LUMINĂ + PARFUM + TRANSFORMARE.
+  - Culoarea derivată din parfum e doar accent atmosferic, nu taxonomie și nu limbaj vizual principal.
+  - Niciodată familii olfactive reprezentate în principal ca palete de culori. Niciodată catalogul ca sistem de culori. Niciodată layering-ul ca amestec de vopsea.
 - Skill-urile externe se importă doar după inspecție și se înregistrează în `docs/research/skill-registry.md`.
