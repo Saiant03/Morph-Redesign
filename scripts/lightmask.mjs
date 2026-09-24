@@ -1,7 +1,8 @@
 // 2.5D object proof (docs/design/phase-b5-asset-transition.md): cuts the silhouette out of a Morph packshot so
-// light can be laid on the glass alone. The background is the white sweep connected to the image border (flood
-// fill), so clear glass inside the outline stays part of the object. Writes public/morph/objects/<file>-mask.png
-// (white, alpha = object, half resolution, 1 px feather) and data/lightmasks.json (the images that have a mask).
+// light can be laid on the bottle alone. The background is the white sweep connected to the image border (flood
+// fill); near-white pixels inside the outline (the clear glass shell, the base) are left out too, because on a dark
+// stage they read as empty and a streak over them showed as a floating white line. Writes
+// public/morph/objects/<file>-mask.png (white, alpha = juice, cap and label, half resolution, 2 px feather) and data/lightmasks.json (the images that have a mask).
 // Rendered in the preinstalled Chromium (global Playwright). Usage: npm run lightmask [slug ...] (default: Zeta)
 import { createRequire } from 'module';
 import { execSync } from 'child_process';
@@ -28,6 +29,8 @@ for (const f of files) {
     const d = x.getImageData(0, 0, w, h).data;
     // background: near-white pixels reachable from the border
     const white = i => 255 * 3 - (d[i] + d[i + 1] + d[i + 2]) < 22;
+    // clear glass reads as empty on a dark stage: light only what has body (juice, cap, label), never the clear shell
+    const clear = i => 255 * 3 - (d[i] + d[i + 1] + d[i + 2]) < 60;
     const bg = new Uint8Array(w * h), stack = [];
     for (let xx = 0; xx < w; xx++) stack.push(xx, (h - 1) * w + xx);
     for (let yy = 0; yy < h; yy++) stack.push(yy * w, yy * w + w - 1);
@@ -40,10 +43,10 @@ for (const f of files) {
       if (p >= w) stack.push(p - w); if (p < w * (h - 1)) stack.push(p + w);
     }
     const out = x.createImageData(w, h);
-    for (let p = 0; p < w * h; p++) { out.data[p * 4] = out.data[p * 4 + 1] = out.data[p * 4 + 2] = 255; out.data[p * 4 + 3] = bg[p] ? 0 : 255; }
+    for (let p = 0; p < w * h; p++) { out.data[p * 4] = out.data[p * 4 + 1] = out.data[p * 4 + 2] = 255; out.data[p * 4 + 3] = bg[p] || clear(p * 4) ? 0 : 255; }
     x.clearRect(0, 0, w, h); x.putImageData(out, 0, 0);
     const half = document.createElement('canvas'); half.width = w / 2; half.height = h / 2;
-    const hx = half.getContext('2d'); hx.filter = 'blur(0.5px)'; hx.drawImage(c, 0, 0, w / 2, h / 2);
+    const hx = half.getContext('2d'); hx.filter = 'blur(1px)'; hx.drawImage(c, 0, 0, w / 2, h / 2);
     return half.toDataURL('image/png');
   }, `data:image/${path.extname(f).slice(1)};base64,${b64}`);
   const name = `/morph/objects/${path.basename(f, path.extname(f))}-mask.png`;

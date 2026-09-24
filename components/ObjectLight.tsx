@@ -44,8 +44,8 @@ export function ObjectLight({ mask, className, mode = 'stage' }: { mask: string;
     addEventListener('scroll', scroll, { passive: true });
     return () => { removeEventListener('scroll', scroll); if (raf) cancelAnimationFrame(raf); };
   }, [mode]);
-  // second mask layer (intersected in CSS): the light fades out before the thick glass of the base, where the
-  // silhouette's thin bright edges turned the streak into a hard white line
-  const m = `url(${mask}), linear-gradient(to bottom, #000 55%, transparent 78%)`;
+  // the key light is behind-above: the streak is brightest on the shoulders and gone before the base, where its
+  // lower end used to run along the edge of the bottle as a hard line (second mask layer, intersected in CSS)
+  const m = `url(${mask}), linear-gradient(to bottom, #000 38%, transparent 66%)`;
   return <span ref={ref} className={className} aria-hidden style={{ maskImage: m, WebkitMaskImage: m }} />;
 }
