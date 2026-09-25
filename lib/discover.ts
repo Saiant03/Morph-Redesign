@@ -1,23 +1,14 @@
-// Lenses for Descoperă: the same 26 perfumes regrouped by one attribute at a time. Every grouping reads a field
-// that exists in the Store API snapshot; nothing is scored or inferred.
-import { perfumes, FAMILY_GROUPS, familyGroup, familyNotes, COLLECTIONS, ALL_BY_COLLECTION, inCollection, lei, type Perfume } from './catalog';
-
-export type LensId = 'familie' | 'nota' | 'anotimp' | 'intensitate' | 'colectie';
-export const LENSES: { id: LensId; label: string; hint: string }[] = [
-  { id: 'familie', label: 'Familie', hint: 'Cinci familii olfactive, fiecare descrisă prin notele care apar cel mai des în parfumurile ei.' },
-  { id: 'nota', label: 'Notă', hint: 'Unde apare o notă în evoluția fiecărui parfum: la deschidere, în inimă sau în bază.' },
-  { id: 'anotimp', label: 'Anotimp', hint: 'Anotimpurile indicate de Morph. Un parfum poate apărea în mai multe.' },
-  { id: 'intensitate', label: 'Intensitate și durată', hint: 'Intensitatea și longevitatea declarate de Morph, de la discret la persistent.' },
-  { id: 'colectie', label: 'Colecție', hint: 'Cele trei colecții Morph, cu concentrația și prețul lor.' },
-];
-
-export type Group = { id: string; title: string; line: string; items: Perfume[] };
+// Descoperă (Phase C3): the family chapters and the notes index. Everything is read from the Store API snapshot;
+// nothing is scored or inferred. The five families are the concept's proposed grouping of Morph's own
+// "Încadrare parfum" values (FAMILY_GROUPS, docs/research/06), and are labelled as such on the page.
+import { perfumes, FAMILY_GROUPS, familyGroup, familyNotes, COLLECTIONS, ALL_BY_COLLECTION, type Perfume } from './catalog';
 
 export const norm = (t: string) => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ţ/g, 't').trim();
-const SEASONS = [['Primăvară', 'Primăvară'], ['Vară', 'Vară'], ['Toamnă', 'Toamnă'], ['Iarnă', 'Iarnă']] as const;
-const TIERS = [['top', 'La deschidere'], ['heart', 'În inimă'], ['base', 'În bază']] as const;
 
-/** Most frequent notes (merged by accent-free spelling), for the note lens chips. */
+const TIERS = [['top', 'deschidere'], ['heart', 'inimă'], ['base', 'bază']] as const;
+export type Tier = (typeof TIERS)[number][1];
+
+/** Most frequent notes (merged by accent-free spelling), suggested in search. */
 export function topNotes(n = 14) {
   const count = new Map<string, { name: string; c: number }>();
   for (const p of perfumes) for (const note of [...p.notes.top, ...p.notes.heart, ...p.notes.base]) {
@@ -27,26 +18,52 @@ export function topNotes(n = 14) {
   return [...count.values()].sort((a, b) => b.c - a.c).slice(0, n).map(x => x.name);
 }
 
-export const hasNote = (note: string) => (n: string) => !!note && norm(n).includes(norm(note));
+/** A note opens the vitrine searched for it (the /parfumuri search covers names and every note). */
+export const noteHref = (note: string) => `/parfumuri?q=${encodeURIComponent(note)}`;
 
-export function groups(lens: LensId, note: string): Group[] {
-  switch (lens) {
-    case 'familie':
-      return FAMILY_GROUPS.map(g => ({ id: g.id, title: g.name, line: familyNotes(g.id).join(', '), items: perfumes.filter(p => familyGroup(p)?.id === g.id) }));
-    case 'nota': {
-      const m = hasNote(note);
-      return TIERS.map(([k, title]) => ({ id: k, title, line: '', items: note ? perfumes.filter(p => p.notes[k].some(m)) : [] }));
-    }
-    case 'anotimp':
-      return SEASONS.map(([v, title]) => ({ id: norm(title), title, line: '', items: perfumes.filter(p => p.season.includes(v)) }));
-    case 'intensitate': {
-      const cells: [string | null, string][] = [['Medie', '8-10 h'], ['Medie', '10-12 h'], ['Puternic', '8-10 h'], ['Puternic', '10-12 h'], [null, '8-10 h'], [null, '10-12 h']];
-      return cells.map(([i, l]) => ({
-        id: `${i ?? 'nespecificat'}-${l}`, title: `${i ?? 'Intensitate nespecificată'}, ${l.replace('-', '–')}`, line: '',
-        items: perfumes.filter(p => p.intensity === i && p.longevity === l),
-      })).filter(g => g.items.length);
-    }
-    case 'colectie':
-      return ALL_BY_COLLECTION.map(c => ({ id: c, title: COLLECTIONS[c].name, line: `${COLLECTIONS[c].type}, ${[...new Set(inCollection(c).map(p => p.price))].sort().map(lei).join(' sau ')}`, items: inCollection(c) }));
-  }
+export type Family = {
+  id: string; name: string; notes: string[]; items: Perfume[]; lead: Perfume;
+  /** Morph's own classification values inside this group */
+  morph: string[]; intensity: string; longevity: string; collections: string;
+};
+
+const joinRo = (xs: string[]) => (xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} și ${xs[xs.length - 1]}`);
+
+export function families(): Family[] {
+  return FAMILY_GROUPS.map(g => {
+    const items = perfumes.filter(p => familyGroup(p)?.id === g.id);
+    // the family's object: its first in-stock bestseller, in catalog order. Ice bottles are clear and pale, and on
+    // the stone stage they barely read, so an Ice bottle stands here only when the family has nothing else in stock.
+    const pick = (xs: Perfume[]) => xs.find(p => p.inStock && p.bestseller) ?? xs.find(p => p.inStock);
+    const lead = pick(items.filter(p => p.collection !== 'ice')) ?? pick(items) ?? items[0];
+    const int = [...new Set(items.map(p => p.intensity).filter(Boolean))] as string[];
+    const unspecified = items.filter(p => !p.intensity).length;
+    const lon = ([...new Set(items.map(p => p.longevity).filter(Boolean))] as string[]).sort((a, b) => parseInt(a) - parseInt(b));
+    return {
+      id: g.id, name: g.name, notes: familyNotes(g.id), items, lead,
+      morph: [...new Set(items.map(p => p.family!))],
+      intensity: int.length
+        ? `${joinRo(int.map(x => x.toLowerCase()))}${unspecified ? `; ${unspecified} fără intensitate declarată` : ''}`
+        : 'nedeclarată',
+      longevity: lon.map(x => x.replace('-', '–')).join(' sau '),
+      collections: joinRo(ALL_BY_COLLECTION.filter(c => items.some(p => p.collection === c)).map(c => COLLECTIONS[c].name)),
+    };
+  });
 }
+
+export type NoteEntry = { key: string; name: string; where: { p: Perfume; tier: Tier }[] };
+
+/** Every note in the catalog, merged by accent-free spelling (Morph's spelling kept for display). */
+export function notesIndex(): NoteEntry[] {
+  const map = new Map<string, NoteEntry>();
+  for (const p of perfumes) for (const [k, tier] of TIERS) for (const note of p.notes[k]) {
+    const key = norm(note);
+    const e = map.get(key) ?? { key, name: note.charAt(0).toLowerCase() + note.slice(1), where: [] };
+    if (!e.where.some(w => w.p.slug === p.slug)) e.where.push({ p, tier });
+    map.set(key, e);
+  }
+  return [...map.values()].sort((a, b) => a.key.localeCompare(b.key, 'ro'));
+}
+
+/** The notes that recur most across the house (by the number of perfumes that carry them). */
+export const recurringNotes = (n = 8) => [...notesIndex()].sort((a, b) => b.where.length - a.where.length || a.key.localeCompare(b.key, 'ro')).slice(0, n);

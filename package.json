@@ -1,8 +1,8 @@
 {
   "name": "morph-redesign-concept",
   "private": true,
-  "version": "0.9.0",
-  "description": "Morph Parfum redesign concept (Phase C2: Bath & Body, Coffret and Travel as one ritual). Not a production site.",
+  "version": "0.10.0",
+  "description": "Morph Parfum redesign concept (Phase C3: Descoperă and the Fragrance Finder). Not a production site.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

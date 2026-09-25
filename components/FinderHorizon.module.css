@@ -1,0 +1,31 @@
+/* One continuous recess on the night wall: 23 pools of light that touch, a glass edge under all of them.
+   --w (0–1) is how much light a bottle keeps; below full it dims, greys and lowers 4px (FINDER → NARROW). */
+.horizon {
+  display: grid; grid-template-columns: repeat(23, minmax(0, 1fr));
+  position: relative; padding-bottom: 10px;
+}
+.horizon::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 10px; height: 1px;
+  background: linear-gradient(to right, transparent, rgb(255 252 246 / 0.42) 12%, rgb(255 252 246 / 0.42) 88%, transparent);
+}
+.horizon li {
+  --lit: calc(0.22 + var(--w) * 0.78);
+  transition: opacity var(--d-slow) var(--ease-inout), filter var(--d-slow) var(--ease-inout), transform var(--d-slow) var(--ease-out);
+  opacity: var(--lit);
+  filter: grayscale(calc(1 - var(--w))) brightness(calc(0.62 + var(--w) * 0.38));
+  transform: translateY(calc((1 - var(--w)) * 4px));
+}
+.horizon li[data-off] { opacity: 0.16; }
+.horizon[data-landing] li[data-off] { opacity: 0.06; }
+.niche {
+  display: block; position: relative; height: clamp(60px, 5.8vw, 104px); overflow: hidden; isolation: isolate;
+  /* a pool under a downlight that falls off into the room's own tone, so the row reads as lights, not a strip */
+  background: radial-gradient(50% 56% at 50% 50%, var(--glow) 0%, var(--niche-mid) 38%, color-mix(in srgb, var(--niche-mid) 40%, var(--bg)) 64%, var(--bg) 92%);
+  transition: --glow var(--d-story) var(--ease-inout);
+}
+.niche img { object-fit: contain; mix-blend-mode: multiply; padding: 10% 0 6%; }
+@media (max-width: 599px) {
+  .niche { height: 46px; }
+  .niche img { padding: 8% 0 4%; }
+}
+@media (prefers-reduced-motion: reduce) { .horizon li { transform: none; } }

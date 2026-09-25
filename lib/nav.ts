@@ -21,7 +21,7 @@ export const NAV: NavItem[] = [
   {
     href: '/descopera', label: 'Descoperă',
     children: [{ href: '/descopera', label: 'Explorează' }, { href: '/descopera/finder', label: 'Fragrance Finder' }],
-    groups: [{ title: 'Descoperă', links: [{ href: '/descopera', label: 'Explorează familiile' }, { href: '/descopera/finder', label: 'Fragrance Finder' }, { href: '/descopera#incearca', label: 'Încearcă înainte de sticlă' }] }],
+    groups: [{ title: 'Descoperă', links: [{ href: '/descopera#familii', label: 'Cinci familii' }, { href: '/descopera#note', label: 'Notele, de la A la Z' }, { href: '/descopera/finder', label: 'Fragrance Finder' }, { href: '/descopera#incearca', label: 'Încearcă înainte de sticlă' }] }],
   },
   {
     href: '/layering', label: 'Layering',
@@ -40,5 +40,4 @@ export const NAV: NavItem[] = [
     ],
   },
 ];
-export const DESCOPERA_NAV = NAV[1].children!;
 export const LAYERING_NAV = NAV[2].children!;

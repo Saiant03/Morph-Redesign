@@ -84,4 +84,15 @@ Fapte-cheie (verificate 2026-09-24):
   - Test: `npm run smoke`, 28 de verificări.
 - 2026-09-24: Faza C1 (indexul de parfumuri) încheiată: vitrina de nuc devine vederea implicită a `/parfumuri` și a camerelor colecțiilor (un raft luminat pe colecție, câte o lumină pe sticlă, etichetă cu nume, note, preț; rânduri echilibrate în CSS). Vederea „Index” rămâne (`?vedere=index`); galeria de carduri a fost scoasă. Măștile 2.5D există acum pentru toate cele 26 de parfumuri. Skill importat: `impeccable` (oficial, fără hook-uri; binarul e în `.gitignore`). Document: `docs/design/phase-c1-product-index.md`. Test: `npm run smoke`, 31 de verificări. C2–C4 doar la cerere.
 - 2026-09-24: Faza C2 (Baie & Corp, Coffret, Travel) încheiată: `/parfumuri/corp` devine cameră (fereastra = Zeta parfum + gel + cremă pe un raft de sticlă, ritualurile pe piatră, Coffret pe nuc, „Alte seturi Morph”). Componenta nouă `ObjectShelf` (mai multe obiecte ale aceluiași parfum pe un raft, o lumină); `Ritual` o folosește pe PDP, pe pagina produsului de corp și în cameră. Produsele de corp și seturile au pagini la slug-urile Morph (`/[slug]`, 65 de pagini). Seturi în nav: Coffret → `/parfumuri/corp#coffret`, Travel Editions → `/descopera#travel`, Mostre → `/descopera#incearca`, Your Next Form. Fără `/seturi`. Geluri cu mască 2.5D; creme și cutii fără. Document: `docs/design/phase-c2-bath-body-ritual.md`. Test: `npm run smoke`, 37 de verificări. C3–C4 doar la cerere.
+- 2026-09-25: Faza C3 (Descoperă + Fragrance Finder) încheiată: `/descopera` = deschidere (natura moartă N8 Morph) → Cinci familii (câte un obiect pe `Stage`, notele frecvente ca linkuri spre vitrina căutată, lumină CSS pe notă) → Notele (4 recurente + index A–Z de 101) → Finder-ul ca bandă de noapte cu prima întrebare Morph (formular GET) → Încearcă (neschimbat din C2). Instrumentul cu lentile a fost scos. Finder: o întrebare pe ecran, radio-uri native, Continuă/Înapoi, pasul în URL (`pas`), funcționează fără JS; orizontul celor 23 de sticle etichetate (`FinderHorizon`) se stinge după scor, iar sticla rezultatului trece în scena rezultatului (`obj-<slug>`) și apoi pe PDP. Logica Morph (întrebări, etichete, ponderi, `results()`) neschimbată. Document: `docs/design/phase-c3-discover-finder.md`. Test: `npm run smoke`, 45 de verificări. C3.5 și C4 doar la cerere.
 - Skill-urile externe se importă doar după inspecție și se înregistrează în `docs/research/skill-registry.md`.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

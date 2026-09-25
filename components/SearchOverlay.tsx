@@ -14,6 +14,7 @@ import s from './SearchOverlay.module.css';
 
 const PAGES = [
   { href: '/descopera/finder', label: 'Fragrance Finder', words: 'finder quiz test intrebari recomandare gaseste' },
+  { href: '/descopera#note', label: 'Notele parfumurilor Morph, de la A la Z', words: 'note nota ingrediente index familii olfactive' },
   { href: '/layering', label: 'Layering: compune două parfumuri', words: 'layering combina doua pereche strat' },
   { href: '/layering/your-next-form', label: 'Your Next Form: seturile blind', words: 'your next form blind set layering surpriza' },
   { href: '/descopera#incearca', label: 'Încearcă înainte de sticlă', words: 'mostre esantioane travel incearca proba discovery' },

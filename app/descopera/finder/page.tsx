@@ -1,22 +1,15 @@
-import { PageHead } from '@/components/PageHead';
-import { SectionNav } from '@/components/SectionNav';
 import { FinderFlow } from '@/components/FinderFlow';
-import { DESCOPERA_NAV } from '@/lib/nav';
-import { parseAnswers, QUESTIONS, TAGGED } from '@/lib/finder';
+import { parseAnswers, QUESTIONS } from '@/lib/finder';
 
 export const metadata = { title: 'Fragrance Finder' };
 
+// Answers and the step live in the URL (?q1=…&pas=3), so a reload, a shared link or the no-JavaScript form all
+// land on the same question. Without a valid step: the first unanswered question, or the last one.
 export default async function Page({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const sp = await searchParams;
-  const step = Number(typeof sp.pas === 'string' ? sp.pas : NaN);
-  return (
-    <div className="wrap">
-      <PageHead id="finder-titlu" title="Fragrance Finder" crumbs={[{ href: '/descopera', label: 'Descoperă' }, { label: 'Fragrance Finder' }]}
-        lede={`${QUESTIONS.length} întrebări, cu logica finder-ului Morph. La final vezi de ce ți se potrivește fiecare parfum, cât costă și cum îl încerci înainte de sticlă.`}
-        meta={`${TAGGED.length} parfumuri din toate cele trei colecții. Durează un minut.`}>
-        <SectionNav label="Descoperă" items={DESCOPERA_NAV} current="/descopera/finder" />
-      </PageHead>
-      <FinderFlow initial={parseAnswers(sp)} step={Number.isInteger(step) && step >= 1 && step <= QUESTIONS.length ? step - 1 : null} />
-    </div>
-  );
+  const answers = parseAnswers(sp);
+  const pas = Number(typeof sp.pas === 'string' ? sp.pas : NaN);
+  const open = QUESTIONS.findIndex(q => !answers[q.id]);
+  const step = Number.isInteger(pas) && pas >= 1 && pas <= QUESTIONS.length ? pas - 1 : open >= 0 ? open : QUESTIONS.length - 1;
+  return <FinderFlow key={`${step}-${JSON.stringify(answers)}`} initial={answers} step={step} />;
 }

@@ -26,6 +26,7 @@ async function page(opts = { viewport: { width: 1440, height: 900 } }) {
 }
 
 const pg = await page();
+const RESULT_ANY = '/descopera/finder/rezultat?q1=seductive&q2=sophisticated&q3=oriental&q4=events&q5=moderate&q6=autumn&q7=any';
 
 await check('home: hero, motto as h1', async () => {
   await pg.goto(BASE + '/', { waitUntil: 'networkidle' });
@@ -113,12 +114,19 @@ await check('PDP: travel format updates CTA, buy bar, time on skin', async () =>
   assert(await pg.locator('[data-show="true"]').count() === 1, 'buy bar not shown');
 });
 
+const SEVEN = ['Seducătoare și magnetică', 'Sofisticat', 'Condimente și orient', 'La evenimente', 'Elegant și echilibrat', 'Toamna', 'Oricare colecție'];
+// the Finder (Phase C3): one question at a time, native radios, Continuă moves on
+const answerFinder = async (t, labels) => {
+  for (const label of labels) {
+    await t.getByRole('radio', { name: new RegExp(label) }).check();
+    await t.getByRole('button', { name: /Continuă|Vezi rezultatul/ }).click();
+    await t.waitForTimeout(80);
+  }
+};
+
 await check('finder: seven answers → Zeta, why, try, buy', async () => {
   await pg.goto(BASE + '/descopera/finder', { waitUntil: 'networkidle' });
-  for (const label of ['Seducătoare și magnetică', 'Sofisticat', 'Condimente și orient', 'La evenimente', 'Elegant și echilibrat', 'Toamna', 'Oricare colecție']) {
-    await pg.getByRole('button', { name: new RegExp(label) }).click();
-    await pg.waitForTimeout(450);
-  }
+  await answerFinder(pg, SEVEN);
   await pg.waitForURL(/rezultat/);
   await pg.waitForLoadState('networkidle');
   assert(/Zeta/.test(await pg.locator('h1').innerText()), 'not Zeta');
@@ -137,8 +145,8 @@ await check('layering: URL pair, change slot updates URL, disclaimer', async () 
   assert(await pg.locator('h1').count() === 1, 'invalid slugs broke the page');
 });
 
-await check('try list: Descoperă → shop selection', async () => {
-  await pg.goto(BASE + '/descopera', { waitUntil: 'networkidle' });
+await check('try list: finder result → shop selection', async () => {
+  await pg.goto(BASE + '/descopera/finder/rezultat?q1=seductive&q2=sophisticated&q3=oriental&q4=events&q5=moderate&q6=autumn&q7=any', { waitUntil: 'networkidle' });
   await pg.getByRole('button', { name: /Adaugă Zeta pe lista/ }).click();
   await pg.goto(BASE + '/magazin', { waitUntil: 'networkidle' });
   await pg.getByRole('link', { name: 'Zeta' }).first().waitFor();
@@ -161,7 +169,7 @@ await check('reduced motion: hero and reveals fully visible', async () => {
 });
 
 await check('no horizontal overflow at 390 / 768 / 1024 / 1440 / 1920', async () => {
-  const routes = ['/', '/parfumuri', '/parfumuri/luxury', '/parfumuri/corp', '/morph-zeta-parfum-100ml', '/morph-zeta-gel-de-dus-200-ml', '/morph-crema-de-corp-tonkatonic', '/morph-set-vision', '/descopera', '/descopera/finder', '/layering', '/layering/your-next-form', '/magazin', '/cadouri'];
+  const routes = ['/', '/parfumuri', '/parfumuri/luxury', '/parfumuri/corp', '/morph-zeta-parfum-100ml', '/morph-zeta-gel-de-dus-200-ml', '/morph-crema-de-corp-tonkatonic', '/morph-set-vision', '/descopera', '/descopera/finder', '/descopera/finder?q1=elegant&q2=calm&pas=3', RESULT_ANY, '/layering', '/layering/your-next-form', '/magazin', '/cadouri'];
   for (const w of [390, 768, 1024, 1440, 1920]) {
     const p = await page(w === 390 ? { ...devices['iPhone 13'] } : { viewport: { width: w, height: 900 } });
     for (const r of routes) {
@@ -499,6 +507,135 @@ await check('cart: threshold suggestion is a real product that covers the gap; g
   assert(/Mai ai 60 lei/.test(text) && /Îl acoperă:.*(Travel 2×8 ml|Gel de duș) Zeta/.test(text.replace(/\n/g, ' ')), text.slice(0, 200));
   await dialog.getByRole('checkbox', { name: /Cutie cadou/ }).check();
   assert(/Cutie cadou/.test(await dialog.locator('ul').first().innerText()), 'gift box line');
+});
+
+// Phase C3 (docs/design/phase-c3-discover-finder.md): Descoperă, Fragrance Finder, result
+await check('Descoperă: opening, five family chapters on stages, 4 recurring notes + the full index, the Finder with its first question', async () => {
+  const t = await page();
+  await t.goto(BASE + '/descopera', { waitUntil: 'networkidle' });
+  assert((await t.locator('h1').innerText()) === 'Descoperă', 'h1');
+  const fams = t.locator('#familii article');
+  assert(await fams.count() === 5, `families ${await fams.count()}`);
+  for (let i = 0; i < 5; i++) assert(await fams.nth(i).locator('h3').count() === 1 && await fams.nth(i).locator('a[href^="/parfumuri?familie="]').count() === 1, `family ${i}`);
+  assert(await t.locator('#note h3').count() === 4, 'recurring notes');
+  await t.getByText(/Toate cele \d+ de note, de la A la Z/).click();
+  const az = await t.locator('#note details a[href^="/parfumuri?q="]').count();
+  assert(az > 90, `A–Z ${az}`);
+  assert(await t.locator('#finder button[name="q1"]').count() === 4, 'first question');
+  assert(await t.locator('#finder ul[aria-hidden] li').count() === 23, 'horizon');
+  assert(await t.getByRole('button', { name: /Adaugă/ }).count() >= 12, 'try chapter kept');
+});
+
+await check('Descoperă exploration: a note dims the bottles without it and opens the vitrine searched for it; a family opens the filtered vitrine', async () => {
+  const t = await page();
+  await t.goto(BASE + '/descopera', { waitUntil: 'networkidle' });
+  const ch = t.locator('#familii article').first();
+  await ch.scrollIntoViewIfNeeded();
+  const note = ch.locator('[data-k="0"]');
+  await note.hover();
+  await t.waitForTimeout(900);
+  const ops = await ch.locator('[data-n]').evaluateAll(els => els.map(e => [e.dataset.n.split(' ').includes('0'), +getComputedStyle(e).opacity]));
+  assert(ops.some(([has]) => !has) && ops.every(([has, o]) => (has ? o > 0.9 : o < 0.5)), JSON.stringify(ops));
+  const name = await note.innerText();
+  await note.click();
+  await t.waitForURL(/parfumuri\?q=/);
+  assert(decodeURIComponent(t.url()).includes(name), t.url());
+  assert(/\d+ parfum/.test(await t.locator('[aria-live="polite"]').first().innerText()), 'count line');
+  await t.goto(BASE + '/descopera', { waitUntil: 'networkidle' });
+  await t.locator('a[href="/parfumuri?familie=floral"]').click();
+  await t.waitForURL(/familie=floral/);
+});
+
+await check('Descoperă → Finder: the first answer given on Descoperă opens question 2', async () => {
+  const t = await page();
+  await t.goto(BASE + '/descopera#finder', { waitUntil: 'networkidle' });
+  await t.getByRole('button', { name: 'Elegantă și rafinată' }).click();
+  await t.waitForURL(/finder\?q1=elegant&pas=2/);
+  assert(/Ce te reprezintă/.test(await t.locator('h2').first().innerText()), 'not question 2');
+  assert(await t.getByRole('link', { name: /Întrebarea 1, Prezență: Elegantă/ }).count() === 1, 'step 1 answer not shown');
+});
+
+await check('Finder: Continuă needs an answer, Înapoi keeps it, a reload lands on the same question', async () => {
+  const t = await page();
+  await t.goto(BASE + '/descopera/finder', { waitUntil: 'networkidle' });
+  await t.getByRole('button', { name: 'Continuă' }).click();
+  await t.waitForTimeout(200);
+  assert(/Ce prezență/.test(await t.locator('h2').first().innerText()), 'advanced without an answer');
+  await answerFinder(t, ['Misterioasă', 'Rebel']);
+  assert(/pas=3/.test(t.url()) && /Ce univers olfactiv/.test(await t.locator('h2').first().innerText()), t.url());
+  await t.getByRole('link', { name: 'Înapoi' }).click();
+  assert(await t.getByRole('radio', { name: 'Rebel' }).isChecked(), 'answer lost on Back');
+  await t.reload({ waitUntil: 'networkidle' });
+  assert(/Ce te reprezintă/.test(await t.locator('h2').first().innerText()) && await t.getByRole('radio', { name: 'Rebel' }).isChecked(), 'reload lost the step');
+  const off = await t.locator('ul[aria-hidden] li[data-off]').count();
+  assert(off > 0 && off < 23, `horizon off ${off}`);
+});
+
+await check('Finder keyboard: arrows choose, Enter continues, focus moves to the next question', async () => {
+  const t = await page();
+  await t.goto(BASE + '/descopera/finder', { waitUntil: 'networkidle' });
+  await t.getByRole('radio').first().focus();
+  await t.keyboard.press('ArrowDown');
+  assert(await t.getByRole('radio', { name: 'Seducătoare și magnetică' }).isChecked(), 'arrow did not choose');
+  const ring = await t.locator('label:has(input:focus-visible)').count();
+  assert(ring === 1, 'no visible focus on the answer');
+  await t.keyboard.press('Enter');
+  await t.waitForTimeout(200);
+  assert(await t.evaluate(() => document.activeElement?.id) === 'intrebare-q2', 'focus not on question 2');
+});
+
+await check('Finder → result: the lit bottle travels into the result stage; result → product morphs into the product stage', async () => {
+  const t = await page();
+  await t.goto(BASE + '/descopera/finder?q1=seductive&q2=sophisticated&q3=oriental&q4=events&q5=moderate&q6=autumn&pas=7', { waitUntil: 'networkidle' });
+  await hookVT(t);
+  await answerFinder(t, ['Oricare colecție']);
+  await t.waitForURL(/rezultat/);
+  await t.waitForTimeout(900);
+  let log = await t.evaluate(() => window.__vt);
+  assert(/obj-morph-zeta-parfum-100ml/.test(log[1] ?? ''), `finder → result: ${JSON.stringify(log).slice(0, 200)}`);
+  await t.waitForLoadState('networkidle');
+  await t.waitForTimeout(1500);
+  await hookVT(t);
+  await t.getByRole('link', { name: 'Intră în pagina parfumului' }).click();
+  await t.waitForURL(/morph-zeta-parfum-100ml/);
+  await t.waitForTimeout(900);
+  log = await t.evaluate(() => window.__vt);
+  // hookVT wraps the already wrapped function on this page, so every transition is logged twice
+  assert(log.some(x => /obj-morph-zeta-parfum-100ml/.test(x)), `result → product: ${JSON.stringify(log).slice(0, 200)}`);
+});
+
+await check('result: Morph\'s selection kept (3 for any collection, one per collection; 2 inside a chosen one); incomplete answers ask to continue', async () => {
+  const t = await page();
+  await t.goto(BASE + RESULT_ANY, { waitUntil: 'networkidle' });
+  assert(await t.locator('article h3').count() === 2, 'any: not 1 + 2');
+  assert(await t.getByRole('heading', { name: 'Din celelalte colecții' }).count() === 1, 'any heading');
+  await t.goto(BASE + RESULT_ANY.replace('q7=any', 'q7=luxury'), { waitUntil: 'networkidle' });
+  assert(await t.locator('article h3').count() === 1 && await t.getByRole('heading', { name: 'Tot din Luxury' }).count() === 1, 'luxury: not 2');
+  await t.goto(BASE + '/descopera/finder/rezultat?q1=elegant', { waitUntil: 'networkidle' });
+  await t.getByRole('link', { name: 'Continuă Fragrance Finder' }).click();
+  await t.waitForURL(/finder\?q1=elegant/);
+  assert(/Ce te reprezintă/.test(await t.locator('h2').first().innerText()), 'did not resume at question 2');
+});
+
+await check('Finder under reduced motion and without JavaScript: fully usable', async () => {
+  const r = await page({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
+  await r.goto(BASE + '/descopera/finder', { waitUntil: 'networkidle' });
+  await answerFinder(r, SEVEN);
+  await r.waitForURL(/rezultat/);
+  await r.waitForTimeout(60);
+  const slow = await r.evaluate(() => document.getAnimations().filter(a => (a.effect?.getTiming().duration ?? 0) > 1 && a.playState === 'running').length);
+  assert(slow === 0, `${slow} running animations`);
+  const ctx = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 1440, height: 900 } });
+  const n = await ctx.newPage();
+  await n.goto(BASE + '/descopera/finder?q1=elegant&q2=calm&q3=woody&q4=office&q5=skin&q6=winter&pas=7');
+  // Playwright's stability check does not settle with JavaScript off; the clicks are still real mouse clicks
+  await n.waitForTimeout(800);
+  await n.locator('label', { hasText: 'Les Exclusifs' }).click({ force: true });
+  assert(await n.getByRole('radio', { name: /Les Exclusifs/ }).isChecked(), 'no-JS radio');
+  await n.getByRole('button', { name: 'Vezi rezultatul' }).click({ force: true });
+  await n.waitForURL(/rezultat\?.*q7=exclusive/);
+  assert(await n.locator('h1').count() === 1 && !/Mai sunt/.test(await n.locator('h1').innerText()), 'no-JS result');
+  await ctx.close();
 });
 
 await check('no console errors', async () => { assert(errors.length === 0, errors.slice(0, 3).join(' | ')); });

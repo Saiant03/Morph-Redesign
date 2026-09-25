@@ -1,12 +1,95 @@
-.h { margin-bottom: var(--s-5); }
-.head { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-3); align-items: end; margin-bottom: var(--s-7); }
-.head > :first-child { grid-column: 1 / span 7; }
-.head > :last-child { grid-column: 9 / -1; max-width: 44ch; }
+/* Descoperă (docs/design/phase-c3-discover-finder.md). Stone for understanding (opening, families, notes), the
+   night room for asking (the Finder), stone and walnut for trying. Every section has its own anatomy. */
 
-.finder { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-3); align-items: center; padding: var(--s-5) 0; border-top: 1px solid var(--fg); border-bottom: 1px solid var(--border); margin-top: var(--s-4); }
-.finder > :nth-child(1) { grid-column: 1 / span 5; }
-.finder > :nth-child(2) { grid-column: 6 / span 4; }
-.finder > :nth-child(3) { grid-column: 10 / -1; justify-self: end; }
+.head { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-3); align-items: end; margin-bottom: var(--s-7); }
+.head > :first-child { grid-column: 1 / span 6; }
+.head > :last-child { grid-column: 8 / -1; max-width: 48ch; }
+
+/* opening: the title and the way through the page on the left; Morph's own still life on the right */
+.opening { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-6); align-items: start; padding-top: var(--s-7); }
+.openText { grid-column: 1 / span 6; display: grid; gap: var(--s-5); align-content: start; padding-top: var(--s-5); }
+.openText nav a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.lede { max-width: 44ch; }
+.path { display: grid; border-top: 1px solid var(--fg); margin-top: var(--s-3); }
+.path a { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-4); min-height: 52px; padding: var(--s-3) 0; border-bottom: 1px solid var(--border); font-family: var(--serif); font-size: clamp(20px, 1.6vw, 26px); line-height: 1.1; }
+.path a > :first-child { transition: translate var(--d-base) var(--ease-out); }
+.path a > :last-child { font-family: var(--font); text-align: right; }
+@media (hover: hover) { .path a:hover > :first-child { translate: var(--s-3) 0; } }
+.still { grid-column: 8 / -1; margin: 0; display: grid; gap: var(--s-3); }
+.stillImg { position: relative; aspect-ratio: 5 / 4; overflow: hidden; border-radius: var(--r); }
+.stillImg img { object-fit: cover; object-position: 38% 60%; }
+.quote { margin: var(--s-3) 0 0; display: grid; gap: 6px; }
+.quote p { font-family: var(--serif); font-style: italic; font-size: clamp(22px, 1.8vw, 30px); line-height: 1.15; }
+
+/* families: one chapter per family, the object and the words alternating sides */
+.families { padding-top: var(--section); }
+.chapter { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-5); align-items: center; padding: var(--s-6) 0; border-top: 1px solid var(--border); }
+.object { grid-column: 1 / span 5; justify-self: center; width: 100%; transition: opacity var(--d-slow) var(--ease-inout), filter var(--d-slow) var(--ease-inout); }
+.chapterText { grid-column: 7 / -1; display: grid; gap: var(--s-5); justify-items: start; }
+.chapter[data-flip] .object { grid-column: 8 / -1; grid-row: 1; }
+.chapter[data-flip] .chapterText { grid-column: 1 / span 6; grid-row: 1; }
+.objectLink { display: grid; gap: 4px; justify-items: center; text-align: center; }
+.stage { width: min(100%, 420px); aspect-ratio: 4 / 5; }
+.objectName { font-family: var(--serif); font-size: 26px; line-height: 1.1; margin-top: var(--s-2); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; text-decoration-color: transparent; transition: text-decoration-color var(--d-fast); }
+.objectLink:is(:hover, :focus-visible) .objectName { text-decoration-color: currentColor; }
+.familyName { font-family: var(--serif); font-weight: 300; font-size: clamp(52px, 6vw, 104px); line-height: 0.94; letter-spacing: -0.025em; }
+.familyNotes { font-family: var(--serif); font-style: italic; font-size: clamp(24px, 2.2vw, 36px); line-height: 1.15; max-width: 24ch; }
+.familyNotes a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); transition: text-decoration-color var(--d-fast); }
+.familyNotes a:is(:hover, :focus-visible) { text-decoration-color: currentColor; }
+.facts { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; border-top: 1px solid var(--border); }
+.facts > div { padding: 10px 0; border-bottom: 1px solid var(--border); }
+.facts > div:nth-child(even) { padding-left: 14px; border-left: 1px solid var(--border); }
+.facts dd { margin: 4px 0 0; }
+.members { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 2px var(--gap); width: 100%; }
+.members li { transition: opacity var(--d-slow) var(--ease-inout), filter var(--d-slow) var(--ease-inout); }
+.members a { display: grid; grid-template-columns: 36px 1fr; column-gap: var(--s-3); align-items: center; min-height: 52px; }
+.members a > :nth-child(3) { grid-column: 2; margin-top: -6px; }
+.memberImg { width: 36px; height: 45px; }
+.memberName { font-family: var(--serif); font-size: 20px; line-height: 1.1; }
+.members a:is(:hover, :focus-visible) .memberName { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.members [data-soldout] .memberImg { filter: grayscale(0.6); }
+/* a note in the family line lights the bottles that carry it and dims the others (the finder's light grammar) */
+.chapter:has([data-k='0']:is(:hover, :focus-visible)) [data-n]:not([data-n~='0']),
+.chapter:has([data-k='1']:is(:hover, :focus-visible)) [data-n]:not([data-n~='1']),
+.chapter:has([data-k='2']:is(:hover, :focus-visible)) [data-n]:not([data-n~='2']) { opacity: 0.28; filter: grayscale(1) brightness(0.9); }
+
+/* notes: the recurring ones as a typographic spread, the full index behind one disclosure */
+.notes { padding-top: var(--section); }
+.recurring { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--gap); row-gap: var(--s-7); border-top: 1px solid var(--fg); padding-top: var(--s-6); }
+.recurring > li { display: grid; gap: var(--s-2); align-content: start; }
+.noteName { font-family: var(--serif); font-weight: 300; font-size: clamp(34px, 3.2vw, 54px); line-height: 1; letter-spacing: -0.015em; }
+.noteName a:is(:hover, :focus-visible) { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
+.where { display: grid; gap: 2px; margin-top: var(--s-2); }
+.where li { display: flex; justify-content: space-between; gap: var(--s-3); align-items: baseline; padding: 6px 0; border-bottom: 1px solid var(--border); }
+.where a { min-height: 32px; display: inline-flex; align-items: center; }
+.chapterText > a:last-child { min-height: 44px; display: inline-flex; align-items: center; }
+@media (pointer: coarse) { .where a { min-height: 44px; } .letter a { min-height: 32px; display: inline-flex; align-items: center; } }
+.az { margin-top: var(--s-8); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.az summary { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--s-2) var(--s-5); padding: var(--s-4) 0; min-height: 60px; cursor: pointer; list-style: none; }
+.az summary::-webkit-details-marker { display: none; }
+.az summary > :first-child::after { content: '+'; display: inline-block; margin-left: var(--s-3); font-weight: 400; transition: transform var(--d-base) var(--ease-out); }
+.az[open] summary > :first-child::after { transform: rotate(45deg); }
+.azBody { columns: 4 200px; column-gap: var(--gap); padding: var(--s-3) 0 var(--s-6); }
+.letter { break-inside: avoid; padding-bottom: var(--s-4); display: grid; grid-template-columns: 24px 1fr; }
+.letter li { padding: 3px 0; }
+.letter a { display: inline-block; min-height: 24px; }
+.letterMark { padding-top: 5px; }
+
+/* the Finder: the night room; the first question is already here, the 23 lit bottles stand along its floor */
+.finder { margin-top: var(--section); padding-bottom: var(--s-7); }
+.finderGrid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-7); align-items: start; }
+.finderIntro { grid-column: 1 / span 5; display: grid; gap: var(--s-4); }
+.finderIntro .t-lede { max-width: 42ch; }
+.firstQ { grid-column: 7 / -1; }
+.firstQ fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: var(--s-3); min-width: 0; }
+.firstQ legend { padding: 0; margin-bottom: var(--s-2); }
+.firstAnswers { display: grid; border-top: 1px solid var(--border); margin-top: var(--s-3); }
+.firstAnswer { display: flex; justify-content: space-between; align-items: center; gap: var(--s-4); min-height: 64px; padding: var(--s-3) 0; border: 0; border-bottom: 1px solid var(--border); background: none; text-align: left; font-family: var(--serif); font-size: clamp(22px, 1.9vw, 30px); line-height: 1.1; }
+.firstAnswer > span { transition: translate var(--d-base) var(--ease-out); }
+.firstAnswer::after { content: '→'; font-family: var(--font); font-size: 18px; color: var(--muted); transition: transform var(--d-base) var(--ease-out), color var(--d-fast); }
+@media (hover: hover) { .firstAnswer:hover > span { translate: var(--s-3) 0; } .firstAnswer:hover::after { color: var(--fg); transform: translateX(4px); } }
+.firstAnswer:focus-visible { outline-offset: -2px; }
+.finderHorizon.finderHorizon { display: grid; gap: var(--s-3); margin-top: var(--s-8); }
 
 .travel { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-4); padding: var(--s-5) 0; border-top: 1px solid var(--fg); }
 .travel { scroll-margin-top: 80px; }
@@ -42,8 +125,8 @@
 
 @media (max-width: 1100px) { .travelList { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 899px) {
-  .head, .finder, .travel, .next, .person { grid-template-columns: 1fr; }
-  .head > *, .finder > *, .travel > *, .next > *, .person > * { grid-column: 1 !important; justify-self: stretch !important; }
+  .travel, .next, .person { grid-template-columns: 1fr; }
+  .travel > *, .next > *, .person > * { grid-column: 1 !important; justify-self: stretch !important; }
   .travelList { grid-template-columns: 1fr; }
   .offer { grid-template-columns: 72px minmax(0, 1fr) auto; grid-template-areas: 'v n n' 'v p a'; row-gap: var(--s-2); }
   .offer > :nth-child(1) { grid-area: v; width: 72px; height: 72px; }
@@ -52,4 +135,30 @@
   .offer > :nth-child(4) { grid-area: a; }
   .offerName { font-size: 22px; }
   .person { margin-inline: calc(var(--m) * -1); padding: var(--s-5) var(--m); border-radius: 0; }
+}
+
+@media (max-width: 899px) {
+  .head, .opening, .chapter, .finderGrid { grid-template-columns: 1fr; }
+  .head > *, .opening > *, .finderGrid > * { grid-column: 1 !important; }
+  .opening { padding-top: var(--s-5); }
+  .still { grid-row: 2; }
+  .stillImg { aspect-ratio: 4 / 3; }
+  .chapter, .chapter[data-flip] { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; column-gap: var(--s-4); padding: var(--s-6) 0; }
+  .chapter .object, .chapter[data-flip] .object { grid-column: 1; grid-row: 1 / span 2; }
+  .chapter .chapterText, .chapter[data-flip] .chapterText { display: contents; }
+  .familyName { grid-column: 2; grid-row: 1; align-self: end; font-size: clamp(40px, 11vw, 64px); }
+  .familyNotes { grid-column: 2; grid-row: 2; align-self: start; font-size: 21px; }
+  .chapterText > :not(.familyName, .familyNotes) { grid-column: 1 / -1; }
+  .stage { width: 100%; aspect-ratio: 3 / 4; }
+  .objectName { font-size: 20px; }
+  .recurring { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--s-6); }
+  .firstQ { margin-top: 0; }
+}
+@media (max-width: 599px) {
+  .recurring { column-gap: var(--s-4); row-gap: var(--s-6); }
+  .noteName { font-size: 28px; }
+  .where li { padding: 3px 0; font-size: var(--t-small); }
+  .where li > :last-child { font-size: 12px; }
+  .members { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .facts dd { font-size: var(--t-small); }
 }

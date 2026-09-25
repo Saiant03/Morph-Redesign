@@ -1,61 +1,101 @@
-.flow { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-6); align-items: start; padding: var(--s-6) 0 var(--section); border-top: 1px solid var(--fg); }
-.main { grid-column: 1 / span 7; display: grid; gap: var(--s-5); }
+/* The Finder as a consultation in the night room. The key light (--key, registered in globals.css) rises with
+   every answer; the question changes in place; the 23 tagged bottles stand along the floor. */
+.room {
+  min-height: calc(100svh - var(--header-h));
+  display: flex; flex-direction: column;
+  background-image:
+    radial-gradient(90% 70% at 72% 0%, rgb(255 214 170 / calc(0.085 * var(--key))), transparent 62%),
+    var(--mat-grain);
+  background-size: 100% 100%, 160px;
+  transition: --key var(--d-light) var(--ease-inout);
+}
+.grid {
+  flex: 1; width: 100%;
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: auto 1fr auto;
+  column-gap: var(--gap); row-gap: var(--s-5);
+  padding-top: var(--s-6); padding-bottom: var(--s-5);
+}
 
-/* progress: seven strata, filled as answered */
-.progress { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
-.progress button { display: block; width: 100%; height: 24px; padding: 10px 0; border: 0; background: none; }
-.progress button::before { content: ''; display: block; height: 4px; border-radius: 1px; background: var(--border); transition: background var(--d-base); }
-.progress [data-state='done'] button::before { background: var(--muted); }
-.progress [data-state='current'] button::before { background: var(--fg); }
-.progress button:disabled { cursor: default; }
-.meta { display: flex; justify-content: space-between; align-items: center; min-height: 44px; }
+.top { grid-column: 1 / span 3; grid-row: 1; display: grid; gap: var(--s-2); align-content: start; }
+.top nav a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.title { font-family: var(--serif); font-weight: 400; font-size: var(--t-3); line-height: 1.2; }
+.intro { max-width: 30ch; }
 
-.question { display: grid; gap: var(--s-6); animation: enter var(--d-slow) var(--ease-out); }
-.label { outline: none; max-width: 20ch; }
+/* the consultation so far: seven steps, each with the answer given */
+.steps { grid-column: 1 / span 3; grid-row: 2; align-self: start; display: grid; border-top: 1px solid var(--border); }
+.steps li > * { display: grid; grid-template-columns: 28px 1fr; column-gap: var(--s-2); padding: 10px 0; min-height: 48px; border-bottom: 1px solid var(--border); align-content: center; }
+.stepNo { font-size: var(--t-micro); color: var(--muted); padding-top: 2px; }
+.stepName { font-size: var(--t-small); }
+.stepAnswer { grid-column: 2; font-family: var(--serif); font-style: italic; font-size: 17px; line-height: 1.25; color: var(--fg); }
+.steps [data-state='todo'] .stepName { color: var(--muted); }
+.steps [data-state='current'] > * { border-bottom-color: var(--fg); }
+.steps [data-state='current'] .stepName { font-weight: 500; }
+.steps [data-state='current'] .stepNo { color: var(--fg); }
+.steps a > * { transition: translate var(--d-base) var(--ease-out); }
+@media (hover: hover) { .steps a:hover > * { translate: var(--s-2) 0; } .steps a:hover .stepName { text-decoration: underline; text-underline-offset: 3px; } }
+
+/* the question */
+.main { grid-column: 5 / -1; grid-row: 1 / span 2; display: grid; align-content: start; gap: var(--s-4); max-width: 900px; }
+.question { display: grid; gap: var(--s-4); animation: enter var(--d-slow) var(--ease-out); }
+.label { font-family: var(--serif); font-weight: 300; font-size: clamp(40px, 4.4vw, 76px); line-height: 0.98; letter-spacing: -0.02em; max-width: 18ch; outline: none; }
 .answers { display: grid; border-top: 1px solid var(--border); }
 .answer {
-  display: grid; grid-template-columns: 40px 1fr auto; gap: var(--s-4); align-items: center; text-align: left;
-  min-height: 64px; padding: var(--s-3) var(--s-3) var(--s-3) 0; border: 0; border-bottom: 1px solid var(--border); background: transparent;
-  transition: background var(--d-fast), padding var(--d-base) var(--ease-out);
+  position: relative; display: grid; grid-template-columns: 22px 1fr; gap: var(--s-4); align-items: center;
+  min-height: 60px; padding: 10px var(--s-3) 10px 0; border-bottom: 1px solid var(--border); cursor: pointer;
+  transition: background var(--d-base);
 }
-.answer:hover { background: var(--surface-raised); padding-left: var(--s-3); }
-.answer[aria-pressed='true'] { background: var(--fg); color: var(--bg); padding-left: var(--s-3); }
-.answer[aria-pressed='true'] :global(.muted) { color: inherit; opacity: 0.75; }
-.index { font-size: var(--t-micro); color: var(--muted); }
-.answer[aria-pressed='true'] .index { color: inherit; }
+.answer > :is(.mark, .text) { transition: translate var(--d-base) var(--ease-out); }
+.answer input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+/* the mark: an empty ring, filled when chosen (shape, not only light) */
+.mark { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--border-strong); display: grid; place-items: center; transition: border-color var(--d-fast); }
+.mark::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--fg); scale: 0; transition: scale var(--d-base) var(--ease-out); }
 .text { display: grid; gap: 2px; }
-.answerLabel { font-family: var(--serif); font-size: clamp(22px, 1.9vw, 30px); letter-spacing: -0.01em; line-height: 1.1; }
-.answerObjects { display: inline-flex; align-items: center; gap: 10px; }
-.stack { display: inline-flex; }
-.stackImg { width: 24px; height: 30px; border-radius: 1px; box-shadow: 0 0 0 1.5px var(--bg); }
-.stackImg + .stackImg { margin-left: -8px; }
-.note { max-width: 60ch; }
+.answerLabel { font-family: var(--serif); font-size: clamp(22px, 2vw, 32px); letter-spacing: -0.01em; line-height: 1.1; }
+@media (hover: hover) { .answer:hover > :is(.mark, .text) { translate: var(--s-3) 0; } .answer:hover .mark { border-color: var(--fg); } }
+.answer:has(input:checked) > :is(.mark, .text) { translate: var(--s-3) 0; }
+.answer:has(input:checked) { background: linear-gradient(to right, rgb(255 244 228 / 0.07), transparent 70%); }
+.answer:has(input:checked) .mark { border-color: var(--fg); }
+.answer:has(input:checked) .mark::after { scale: 1; }
+.answer:has(input:checked) .answerLabel { font-style: italic; }
+.answer:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: -2px; }
+.status { min-height: 1.45em; }
+/* on desktop the steps beside the question already say where you are */
+@media (min-width: 900px) { .counter { display: none; } }
 
-/* side: the shelf of tagged bottles; matches stay lit, the rest dim */
-.side { grid-column: 9 / -1; position: sticky; top: calc(var(--header-h) + 24px); display: grid; gap: var(--s-4); }
-.shelf { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
-.shelf li { transition: opacity var(--d-slow) var(--ease-inout), filter var(--d-slow) var(--ease-inout), transform var(--d-slow) var(--ease-out); }
-.shelfImg { display: block; aspect-ratio: 4 / 5; }
-.shelfImg img { padding: 6% 0; }
-.shelf li[data-lit='some'] { opacity: calc(0.35 + var(--w) * 0.5); filter: grayscale(calc(1 - var(--w))) brightness(calc(0.7 + var(--w) * 0.3)); }
-.shelf li[data-lit='off'] { opacity: 0.18; filter: grayscale(1) brightness(0.6); }
-.shelf li[data-lit='lead'] { transform: translateY(-4px); }
-.shelf li[data-lit='lead'] .shelfImg { box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--fg); }
-.lead { display: grid; gap: var(--s-2); }
-.lead ol { display: grid; gap: 2px; font-family: var(--serif); font-size: 28px; line-height: 1.1; }
+.actions { display: flex; justify-content: space-between; align-items: center; gap: var(--s-4); padding-top: var(--s-4); border-top: 1px solid var(--border); }
+.back { min-height: 44px; display: inline-flex; align-items: center; }
+.actions :global(.btn) { min-width: 180px; }
 
-@keyframes enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+/* the floor: the horizon of tagged bottles */
+.floor { grid-column: 1 / -1; grid-row: 3; display: grid; gap: var(--s-2); padding-top: var(--s-3); }
 
+@keyframes enter { from { opacity: 0; transform: translateY(12px); } }
+
+@media (max-width: 1100px) {
+  .top, .steps { grid-column: 1 / span 4; }
+  .main { grid-column: 6 / -1; }
+}
 @media (max-width: 899px) {
-  .flow { grid-template-columns: 1fr; padding-top: var(--s-4); row-gap: var(--s-5); }
-  .main, .side { grid-column: 1; }
-  /* phones: no shelf; the three leaders stay named above the question */
-  .side { order: -1; position: static; gap: var(--s-2); }
-  .side > p { display: none; }
-  .shelf { display: none; }
-  .lead { grid-auto-flow: column; justify-content: start; align-items: baseline; gap: var(--s-3); }
-  .lead ol { display: flex; gap: 12px; font-size: 18px; }
+  .room { min-height: 0; }
+  .grid { grid-template-columns: 1fr; grid-template-rows: none; row-gap: var(--s-4); padding-top: var(--s-4); }
+  .top, .steps, .main, .floor { grid-column: 1; grid-row: auto; }
+  .intro { display: none; }
+  /* phones: the steps become a seven-part bar; names and answers stay for screen readers */
+  .steps { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; border: 0; }
+  .steps li > * { display: block; min-height: 44px; padding: 20px 0; border: 0; position: relative; }
+  .steps li > *::before { content: ''; display: block; height: 3px; border-radius: 1px; background: var(--border); }
+  .steps [data-state='done'] > *::before { background: var(--muted); }
+  .steps [data-state='current'] > *::before { background: var(--fg); }
+  .stepNo, .stepName, .stepAnswer { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .floor { order: -1; padding-top: 0; }
+  .floor p { display: none; }
+  .steps { order: -2; }
+  .top { order: -3; }
+  .main { gap: var(--s-4); }
   .question { gap: var(--s-4); }
-  .answer { grid-template-columns: 28px 1fr auto; min-height: 60px; }
-  .answerObjects .label { display: none; }
+  .label { font-size: clamp(34px, 9vw, 48px); }
+  .answer { min-height: 58px; gap: var(--s-3); }
+  .answerLabel { font-size: 22px; }
+  .actions { position: sticky; bottom: 0; z-index: 2; background: var(--bg); padding-bottom: var(--s-3); margin-inline: calc(var(--m) * -1); padding-inline: var(--m); }
+  .actions :global(.btn) { min-width: 0; flex: 1; max-width: 240px; }
 }
