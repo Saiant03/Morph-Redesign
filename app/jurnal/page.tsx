@@ -2,7 +2,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { PageHead } from '@/components/PageHead';
 import { ENTRIES, MORPH_BLOG, longDate, type JournalEntry } from '@/lib/journal';
-import { Ext, MorphQuote } from './Ext';
+import { Ext, MorphQuote } from '@/components/Ext';
+import { EntryTitle } from './Title';
 import s from './jurnal.module.css';
 
 export const metadata = { title: 'Jurnal' };
@@ -18,7 +19,7 @@ function Entry({ e, sizes, className }: { e: JournalEntry; sizes: string; classN
         <Image src={e.lead.src} alt="" fill sizes={sizes} />
       </Link>
       <p className={`label ${s.type}`}>{e.type}{e.date ? <span className="muted num"> · {longDate(e.date)}</span> : <span className="muted"> · pagină a conceptului</span>}</p>
-      <h3 id={`j-${e.key}`} className={`t-2 ${s.entryTitle}`}><Link href={href(e)}>{e.title}</Link></h3>
+      <h3 id={`j-${e.key}`} className={`t-2 ${s.entryTitle}`}><Link href={href(e)}><EntryTitle e={e} /></Link></h3>
       <p className="muted">{e.lede}</p>
       <MorphQuote className={s.quoteSm} text={e.excerpt.text} href={e.source.url}
         cite={<>{article ? 'Morph, din articol' : 'Morph, din descrierea parfumului'}. <Ext href={e.source.url}>Sursa pe morphparfum.ro</Ext></>} />

@@ -117,6 +117,7 @@ export default function Page() {
           <h2 id="povestea-titlu" className="t-1">Morph, din Napoli</h2>
           <div>
             <p className="t-lede">Casă italiană de nișă, fondată în 2002 la Napoli de Andrea Angelino. Sticla, de la Bormioli Luigi, e răsucită ca să exprime „echilibru și mișcare continuă”. Deviza casei: „evoluție constantă și Metamorfoză prin parfum”.</p>
+            <p><Link className="link" href="/despre-noi">Despre Morph: Napoli, sticla, parfumierii</Link></p>
             <p className="t-small muted">Toate parfumurile Morph sunt unisex. Livrare gratuită de la {lei(FREE_SHIPPING)} pentru comenzile online; există și programul de fidelitate Morph Points.</p>
           </div>
         </div>

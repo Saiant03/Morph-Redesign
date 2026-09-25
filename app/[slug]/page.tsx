@@ -7,6 +7,8 @@ import { Ritual } from '@/components/Ritual';
 import { ProductVisual } from '@/components/ProductVisual';
 import { ProductCard } from '@/components/ProductCard';
 import { BodyProduct } from './BodyProduct';
+import { Ext } from '@/components/Ext';
+import { creditFor } from '@/lib/perfumers';
 import {
   perfumes, COLLECTIONS, concentration, familyGroup, travelFor, samplesFor, related, section, hours, descriptor,
   firstSentences, collectionHref, lei, FREE_SHIPPING, BOUTIQUE, bodyFor, layeringSets, bodyItems, bodyBySlug, BODY_KIND, bySlug,
@@ -40,6 +42,7 @@ export default async function Product({ params }: { params: Params }) {
   // example partner for the composer: same family, has a travel size. Labelled as the visitor's choice, not Morph's.
   const partner = related(p, 8).find(r => travelFor(r)) ?? related(p, 1)[0] ?? perfumes.find(x => x.slug !== p.slug)!;
   const alternatives = p.inStock ? [] : related(p, 3);
+  const credit = creditFor(p.slug);
 
   return (
     <>
@@ -52,6 +55,13 @@ export default async function Product({ params }: { params: Params }) {
             </nav>
             <h1 className={`t-1 ${s.title}`}>{p.shortName}</h1>
             <p className={`${s.sub} label muted`}>{COLLECTIONS[p.collection].name} · {concentration(p)} · unisex · 100 ml</p>
+            {/* only perfumes a Morph source credits (data/perfumers.json) */}
+            {credit && (
+              <p className={`${s.credit} t-small`} data-credit>
+                Creat de <Link className="link" href="/despre-noi#parfumieri">{credit.perfumer}</Link>
+                <span className="muted"> · <Ext href={credit.sources[0].url} className="link">Sursa Morph</Ext></span>
+              </p>
+            )}
           </div>
           <p className={s.notesLine}>{descriptor(p)}</p>
 

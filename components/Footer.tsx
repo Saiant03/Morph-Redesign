@@ -8,7 +8,7 @@ import s from './Footer.module.css';
 const COLS: { title: string; items: (string | [string, string])[] }[] = [
   { title: 'Magazin', items: ['Livrare și plată', 'Retur', 'Urmărește comanda', ['Cadouri și gift card', '/cadouri']] },
   { title: 'Ajutor', items: ['Întrebări frecvente', 'Contact', ['Verificare Certilogo', '/magazin#certilogo'], 'ANPC · SOL'] },
-  { title: 'Despre Morph', items: [['Povestea', '/magazin#povestea'], ['Magazinul din București', '/magazin'], 'Morph Points', ['Jurnal', JOURNAL]] },
+  { title: 'Despre Morph', items: [['Povestea', '/despre-noi'], ['Magazinul din București', '/magazin'], 'Morph Points', ['Jurnal', JOURNAL]] },
 ];
 
 export function Footer() {

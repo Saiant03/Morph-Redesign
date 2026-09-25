@@ -1,0 +1,51 @@
+{
+  "note": "Perfumer credits shown in the concept (docs/design/phase-c4-1c-about-perfumers.md). Only attributions stated by a Morph source; each source was re-read on the date in `checked`. Hand-maintained: no credit is inferred from Morph's list of perfumers.",
+  "checked": "2026-09-25",
+  "noses": "https://en.morphparfum.com/nose-perfumer/",
+  "credits": [
+    {
+      "slug": "morph-tonkatonic-100ml",
+      "perfumer": "Mathieu Nardin",
+      "sources": [
+        { "url": "https://morphparfum.ro/note-de-parfumuri-cele-mai-dorite-parfumuri-ale-sezonului", "kind": "blog post 21969", "published": "2024-11-20", "quote": "Tonkatonic poartă semnătura lui Mathieu Nardin" },
+        { "url": "https://morphparfum.ro/idei-de-cadouri-de-craciun-40-idei-pentru-a-crea-amintiri-deosebite", "kind": "blog post 18326", "published": "2024-12-18", "quote": "Creat de Nose Mathieu Nardin" },
+        { "url": "https://morphparfum.ro/cadouri-de-craciun", "kind": "blog post 38915", "published": "2025-10-21", "quote": "Creat de parfumerul Mathieu Nardin, Tonkatonic îmbină" }
+      ]
+    },
+    {
+      "slug": "morph-primitivo-eau-de-parfum-unisex",
+      "perfumer": "Mathieu Nardin",
+      "sources": [
+        { "url": "https://morphparfum.ro/morph-primitivo-eau-de-parfum-unisex", "kind": "product description (Store API, product 38315)", "published": null, "quote": "Morph Primitivo este un parfum unisex creat de Mathieu Nardin" },
+        { "url": "https://morphparfum.ro/cadou-8-martie-mama-iubita-parfum", "kind": "blog post 41095", "published": "2026-01-18", "quote": "Morph Primitivo este un parfum unisex creat de Mathieu Nardin" }
+      ]
+    },
+    {
+      "slug": "morph-antigua-bay-parfum-100ml",
+      "perfumer": "Arturetto Landi",
+      "sources": [
+        { "url": "https://morphparfum.ro/parfumurile-contrafacute-iluzia-aromei-si-pericolele-ascunse", "kind": "blog post 35633", "published": "2025-03-31", "quote": "Această creație semnată de maestrul parfumier Arturetto Landi" },
+        { "url": "https://morphparfum.ro/note-de-parfumuri-cele-mai-dorite-parfumuri-ale-sezonului", "kind": "blog post 21969", "published": "2024-11-20", "quote": "creată de talentatul maestru parfumier Arturetto Landi" }
+      ]
+    },
+    {
+      "slug": "morph-oud-mafia-100ml",
+      "perfumer": "Véronique Nyberg",
+      "sources": [
+        { "url": "https://morphparfum.ro/ce-inseamna-parfum-de-nisa-intra-in-lumea-exclusivista-a-parfumeriei", "kind": "blog post 35645", "published": "2025-03-03", "quote": "acestei creații semnate de parfumierul Véronique Nyberg" }
+      ]
+    }
+  ],
+  "withheld": [
+    {
+      "slug": "morph-gate-17-100ml",
+      "names": ["Christian Carbonnel", "Christian Carbonell"],
+      "reason": "Morph's sources spell the name two ways: 'Carbonnel' in the Gate 17 body cream description and the YouTube short 4Smei6-E0Sk; the Noses page heading reads 'Christian Carbonell' while its body reads 'Christian Carbonnel' and 'Carbonnel S.A.'. Waits for the owner's decision."
+    },
+    {
+      "slug": "morph_disumano_parfum_100ml",
+      "names": ["Douglas Morel"],
+      "reason": "Third-party attribution only (Fragrantica); no Morph source links Disumano to a perfumer."
+    }
+  ]
+}

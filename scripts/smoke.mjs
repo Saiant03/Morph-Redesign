@@ -939,6 +939,90 @@ await check('Ice image: the corrected description (Primitivo bottle, blotter str
   await t.context().close();
 });
 
+const perfumersJson = JSON.parse(readFileSync(new URL('../data/perfumers.json', import.meta.url), 'utf8'));
+const catalogJson = JSON.parse(readFileSync(new URL('../data/catalog.json', import.meta.url), 'utf8'));
+const DESPRE_SOURCES = ['https://morphparfum.ro/despre-noi', 'https://en.morphparfum.com/maison/', 'https://en.morphparfum.com/nose-perfumer/'];
+// held out of /despre-noi (docs/design/phase-c4-1c-about-perfumers.md): disputed figures, the founder narrative, unsupported credits
+const DESPRE_NEVER = /Carbonn?ell?|Morel|25[–-]35|cea mai nouă creație|o dată pe an|siderurgic|lucrată manual|\b13 referințe|4 referințe/;
+
+await check('nav and footer: Despre Morph goes to /despre-noi; /magazin links to it', async () => {
+  const t = await page();
+  await t.goto(BASE + '/', { waitUntil: 'networkidle' });
+  const nav = t.getByRole('navigation', { name: 'Principal' });
+  assert(await nav.locator('a', { hasText: 'Despre Morph' }).getAttribute('href') === '/despre-noi', 'nav link');
+  assert(await t.locator('footer a[href="/despre-noi"]').count() === 1, 'footer link');
+  assert(await t.locator('a[href="/magazin#povestea"]').count() === 0, 'old /magazin#povestea link');
+  await t.goto(BASE + '/magazin', { waitUntil: 'networkidle' });
+  assert(await t.locator('main a[href="/despre-noi"]').count() >= 1, '/magazin → /despre-noi');
+  await t.context().close();
+});
+
+await check('/despre-noi: sources, English quote marked, only the Morph-attributed perfumers, no held-out claims, alt text, no overflow', async () => {
+  for (const opts of [{ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' }, { ...devices['iPhone 13'], reducedMotion: 'reduce' }]) {
+    const t = await page(opts);
+    await t.goto(BASE + '/despre-noi', { waitUntil: 'networkidle' });
+    const main = t.locator('main');
+    assert((await main.locator('h1').innerText()) === 'Despre Morph', 'h1');
+    if (opts.viewport?.width === 1440) assert(await t.getByRole('navigation', { name: 'Principal' }).getByRole('link', { name: 'Magazinul', exact: true }).getAttribute('aria-current') === 'page', 'Magazinul not marked current');
+    for (const u of DESPRE_SOURCES) assert(await main.locator(`a[href="${u}"][target="_blank"]`).count() >= 1, `source ${u}`);
+    assert(await main.locator('[data-voice="morph"] blockquote[lang="en"]').count() === 1, 'Maison quote lang=en');
+    assert(/Traducere pentru concept/i.test(await main.innerText()), 'translation label');
+    const names = await main.locator('#parfumieri h3').allInnerTexts();
+    const expected = [...new Set(perfumersJson.credits.map(c => c.perfumer))];
+    assert(JSON.stringify(names) === JSON.stringify(expected), `perfumers ${names.join(', ')}`);
+    for (const c of perfumersJson.credits) {
+      const row = main.locator('#parfumieri li', { has: t.locator(`a[href="/${c.slug}"]`) }).last();
+      assert(await row.locator(`a[href="${c.sources[0].url}"][target="_blank"]`).count() === 1, `${c.slug}: source`);
+    }
+    assert(!DESPRE_NEVER.test(await main.innerText()), `held-out text: ${(await main.innerText()).match(DESPRE_NEVER)}`);
+    const noAlt = await main.locator('img:not([alt])').count();
+    assert(noAlt === 0, `${noAlt} images without alt`);
+    const refs = await main.evaluate(m => [...m.querySelectorAll('img, source')].map(i => `${i.getAttribute('src') ?? ''} ${i.getAttribute('srcset') ?? ''}`).join(' '));
+    const hit = BLOCKED.find(b => refs.includes(b)) ?? ['animal', 'Lansare'].find(b => refs.includes(b));
+    assert(!hit, `renders ${hit}`);
+    assert(await t.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'horizontal overflow');
+    await t.context().close();
+  }
+});
+
+await check('perfumer credits: exactly the four Morph-attributed PDPs, with their source; none elsewhere (Gate 17, Disumano included)', async () => {
+  const credits = new Map(perfumersJson.credits.map(c => [c.slug, c]));
+  assert(credits.size === 4, `${credits.size} credits in data`);
+  for (const p of catalogJson.perfumes) {
+    const html = await (await fetch(`${BASE}/${p.slug}`)).text();
+    const main = html.slice(html.indexOf('<main'), html.indexOf('</main>'));
+    const c = credits.get(p.slug);
+    const shown = (main.match(/data-credit/g) ?? []).length;
+    if (c) {
+      assert(shown === 1, `${p.slug}: ${shown} credits`);
+      const line = main.slice(main.indexOf('data-credit'), main.indexOf('</p>', main.indexOf('data-credit')));
+      assert(line.includes(c.perfumer) && line.includes(`href="${c.sources[0].url}"`) && /Creat de/.test(line), `${p.slug}: credit line`);
+    } else {
+      assert(shown === 0 && !/Creat de/.test(main), `${p.slug}: unsupported credit`);
+      assert(!/Carbonn?ell?|Douglas Morel/.test(main), `${p.slug}: names a withheld perfumer`);
+    }
+  }
+});
+
+await check('Journal: the workshop title keeps its full text and never breaks inside "Layering-ului" (desktop and phone)', async () => {
+  const J2 = '/jurnal/primul-workshop-morph-dedicat-layering-ului-cum-a-prins-viata-universul-your-next-form';
+  const full = 'Primul workshop Morph dedicat Layering-ului: Cum a prins viață universul Your Next Form';
+  for (const opts of [{ viewport: { width: 1440, height: 900 } }, { viewport: { width: 1024, height: 800 } }, { ...devices['iPhone 13'] }]) {
+    const t = await page(opts);
+    for (const [u, sel] of [[J2, 'main h1'], ['/jurnal', `main h3:has(a[href="${J2}"])`]]) {
+      await t.goto(BASE + u, { waitUntil: 'networkidle' });
+      const h = t.locator(sel);
+      assert((await h.evaluate(e => e.textContent.replace(/\s+/g, ' ').trim())) === full, `${u}: title text`);
+      const broken = await h.evaluate(e => [...e.querySelectorAll('span')].filter(s => /-/.test(s.textContent) && !s.querySelector('span')).some(s => s.getClientRects().length > 1));
+      assert(!broken, `${u}: hyphenated word broken across lines`);
+    }
+    assert((await t.title()).includes('Jurnal'), 'index title');
+    await t.goto(BASE + J2, { waitUntil: 'networkidle' });
+    assert((await t.title()).startsWith(full), `document title ${await t.title()}`);
+    await t.context().close();
+  }
+});
+
 await check('no console errors', async () => { assert(errors.length === 0, errors.slice(0, 3).join(' | ')); });
 
 await browser.close();

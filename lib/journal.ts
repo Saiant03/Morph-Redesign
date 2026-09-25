@@ -13,6 +13,8 @@ export type JournalEntry = {
   slug: string;
   type: 'Articol Morph' | 'Campanie';
   title: string;
+  /** display only: set the part after the colon as a smaller second line, and keep hyphenated words whole */
+  titleBreak?: boolean;
   /** publication date (ISO), for Morph articles only; the campaign page carries no date */
   date?: string;
   source: Source['source'];
@@ -59,7 +61,7 @@ export const ENTRIES: JournalEntry[] = [
     related: [{ href: '/layering/your-next-form', label: 'Cele 12 seturi Your Next Form' }, { href: `/jurnal/${J2_SLUG}`, label: 'Primul workshop Morph dedicat layering-ului' }],
   },
   {
-    key: J2.key, slug: J2_SLUG, type: 'Articol Morph', title: J2.source.title!, date: J2.source.published,
+    key: J2.key, slug: J2_SLUG, type: 'Articol Morph', title: J2.source.title!, titleBreak: true, date: J2.source.published,
     source: J2.source, excerpt: { voice: 'morph', text: J2.excerpt.text },
     lede: 'Articolul Morph despre primul workshop dedicat colecției Your Next Form, ținut înainte de lansare.',
     summary: [

@@ -17,6 +17,8 @@
 .entry:has(.entryTitle a:hover) .entryImg img, .entryImg:hover img { scale: 1.02; }
 .type { color: var(--fg); }
 .entryTitle { max-width: 22ch; text-wrap: balance; }
+.titleSub { display: block; margin-top: 0.22em; font-size: 0.64em; line-height: 1.12; letter-spacing: -0.005em; }
+.nobreak { white-space: nowrap; }
 .entryTitle a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
 .blog { padding-block: var(--section); text-wrap: balance; }
 .blogLink { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 8px; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); }

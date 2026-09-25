@@ -33,10 +33,10 @@ export const NAV: NavItem[] = [
     groups: [{ title: 'Cadouri', links: [{ href: '/cadouri', label: 'După buget' }, { href: '/cadouri#sticla', label: 'Dacă știi parfumul' }, { href: '/cadouri#descoperire', label: 'Dacă nu știi încă' }, { href: '/cadouri#card', label: 'Gift card' }] }],
   },
   {
-    href: '/magazin', label: 'Magazinul', match: /^\/(magazin|jurnal)(\/|$)/,
+    href: '/magazin', label: 'Magazinul', match: /^\/(magazin|jurnal|despre-noi)(\/|$)/,
     groups: [
       { title: 'Magazinul', links: [{ href: '/magazin', label: 'Magazinul Morph din București' }, { href: '/magazin#certilogo', label: 'Autenticitate Certilogo' }] },
-      { title: 'Morph', links: [{ href: '/magazin#povestea', label: 'Despre Morph' }, { href: JOURNAL, label: 'Jurnal' }] },
+      { title: 'Morph', links: [{ href: '/despre-noi', label: 'Despre Morph' }, { href: JOURNAL, label: 'Jurnal' }] },
     ],
   },
 ];

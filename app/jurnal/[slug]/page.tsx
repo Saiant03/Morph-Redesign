@@ -6,7 +6,8 @@ import { NotePyramid } from '@/components/NotePyramid';
 import { TryToggle } from '@/components/TryToggle';
 import { bySlug as perfume, COLLECTIONS, collectionHref, lei, productHref, concentration } from '@/lib/catalog';
 import { ENTRIES, bySlug, longDate, imageSource, YNF_STAGES, PRIMITIVO_MORPH, type JournalEntry, type JournalImage } from '@/lib/journal';
-import { Ext, MorphQuote } from '../Ext';
+import { Ext, MorphQuote } from '@/components/Ext';
+import { EntryTitle } from '../Title';
 import s from '../jurnal.module.css';
 
 type Params = Promise<{ slug: string }>;
@@ -36,7 +37,7 @@ function Head({ e, children }: { e: JournalEntry; children?: React.ReactNode }) 
     <header className={s.head}>
       <nav className="t-small muted" aria-label="Breadcrumb"><Link href="/jurnal">Jurnal</Link> / <span aria-current="page">{e.type}</span></nav>
       <p className={`label ${s.type}`}>{e.type}{e.date ? <span className="muted num"> · Publicat de Morph pe {longDate(e.date)}</span> : <span className="muted"> · pagină a conceptului</span>}</p>
-      <h1 id="j-titlu" className={e.type === 'Campanie' ? 't-display' : `t-1 ${s.articleTitle}`}>{e.title}</h1>
+      <h1 id="j-titlu" className={e.type === 'Campanie' ? 't-display' : `t-1 ${s.articleTitle}`}><EntryTitle e={e} /></h1>
       <p className="t-lede">{e.lede}</p>
       {children}
     </header>
