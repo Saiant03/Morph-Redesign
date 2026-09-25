@@ -80,7 +80,7 @@ export default async function Product({ params }: { params: Params }) {
           <ul className={`${s.assure} t-small muted`}>
             <li>Livrare gratuită de la {lei(FREE_SHIPPING)}.</li>
             <li>Cod Certilogo: autenticitate verificabilă online.</li>
-            <li>Îl poți încerca în <Link className="link" href={BOUTIQUE.href}>{BOUTIQUE.short}</Link>, {BOUTIQUE.address}.</li>
+            <li>Parfumurile Morph se pot testa în <Link className="link" href={BOUTIQUE.href}>magazinul din București</Link>.</li>
           </ul>
 
           {alternatives.length > 0 && (

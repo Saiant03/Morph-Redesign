@@ -1023,6 +1023,55 @@ await check('Journal: the workshop title keeps its full text and never breaks in
   }
 });
 
+const SHOP_MAPS = 'https://maps.app.goo.gl/BtVSJc4s7KvkUQh57';
+// removed in C4.2b (docs/design/phase-c4-2b-store.md): review figures, staff names, the stock claim, the old map search
+const SHOP_NEVER = /\b159\b|\b223\b|4[,.]5|★|Andreea|Bogdan|Toate cele trei colecții|De ce să vii|google\.com\/maps\/search/;
+
+await check('/magazin: address, hours, Morph map link, two labelled phones, sourced trying, one store-review link, no figures (desktop and phone, reduced motion)', async () => {
+  for (const opts of [{ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' }, { ...devices['iPhone 13'], reducedMotion: 'reduce' }]) {
+    const t = await page(opts);
+    await t.goto(BASE + '/magazin', { waitUntil: 'networkidle' });
+    const main = t.locator('main');
+    const text = (await main.innerText()).replace(/\s+/g, ' ');
+    const addr = (await main.locator('address').innerText()).replace(/\s+/g, ' ');
+    assert(/Piața Alexandru Lahovari nr\. 5/.test(addr) && /Sector 1, București/.test(addr), `address ${addr}`);
+    const hours = (await main.getByRole('definition').allInnerTexts()).join(' ');
+    assert(hours.includes('12:00–20:00') && hours.includes('10:00–18:00'), `hours ${hours}`);
+    assert(/Comenzi online și asistență clienți 0799 400 949, L–V 09:00–17:00, S–D închis/.test(text), 'online-order line');
+    assert(await main.locator('a[href="tel:+40733400949"]').count() >= 1 && await main.locator('a[href="tel:+40799400949"]').count() === 1, 'phones');
+    const maps = main.getByRole('link', { name: /Deschide în Google Maps/ });
+    assert(await maps.getAttribute('href') === SHOP_MAPS && await maps.getAttribute('target') === '_blank', 'maps button');
+    const box = await maps.boundingBox();
+    assert(box.height >= 44, `maps button ${box.height}px`);
+    const rev = main.locator('section[aria-labelledby="recenzii"]');
+    assert((await rev.locator('h2').textContent()).trim() === 'Recenzii despre magazin', 'review label');
+    assert(await rev.locator('a').count() === 1 && await rev.locator(`a[href="${SHOP_MAPS}"][target="_blank"][rel="noopener"]`).count() === 1, 'one review link');
+    assert(await main.locator('iframe, [class*="trustindex" i], [class*="stars" i]').count() === 0, 'embedded widget or stars');
+    assert(!SHOP_NEVER.test(text), `removed text: ${text.match(SHOP_NEVER)}`);
+    assert(!/AggregateRating|ratingValue/.test(await t.content()), 'rating markup');
+    assert(await main.locator('[data-voice="morph"] a[href="https://morphparfum.ro/"]').count() === 1, 'FAQ source');
+    assert(await main.locator('a[href="https://morphparfum.ro/cum-testezi-un-parfum-inainte-sa-il-cumperi"]').count() === 1, 'guide link');
+    assert(await main.locator('#certilogo').count() === 1 && await main.locator('a[href="/descopera#incearca"]').count() === 1, 'certilogo, try at home');
+    const small = await main.evaluate(m => [...m.querySelectorAll('address, dl, [aria-labelledby="recenzii"] p, figcaption')].flatMap(e => [...e.querySelectorAll('*')]).filter(e => !e.closest('.label') && [...e.childNodes].some(n => n.nodeType === 3 && n.textContent.trim())).map(e => parseFloat(getComputedStyle(e).fontSize)).filter(f => f < 13));
+    assert(small.length === 0, `practical text under 13px (caps labels aside): ${small.join(', ')}`);
+    assert(await t.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'horizontal overflow');
+    await t.context().close();
+  }
+});
+
+await check('store hours read from one source: /, /descopera and /magazin agree; PDPs use the general testing line, no store reviews', async () => {
+  for (const u of ['/', '/descopera']) {
+    const html = await (await fetch(BASE + u)).text();
+    assert(html.includes('L–V 12:00–20:00') && html.includes('S–D 10:00–18:00'), `${u}: hours`);
+  }
+  for (const slug of ['morph-zeta-parfum-100ml', 'morph-oud-mafia-100ml', catalogJson.perfumes.at(-1).slug]) {
+    const html = await (await fetch(`${BASE}/${slug}`)).text();
+    const main = html.slice(html.indexOf('<main'), html.indexOf('</main>'));
+    assert(/Parfumurile Morph se pot testa în <a[^>]*href="\/magazin"[^>]*>magazinul din București<\/a>/.test(main), `${slug}: testing line`);
+    assert(!/Îl poți încerca|Recenzii despre magazin|recenzi|★|AggregateRating/i.test(main), `${slug}: store reviews or old line`);
+  }
+});
+
 await check('no console errors', async () => { assert(errors.length === 0, errors.slice(0, 3).join(' | ')); });
 
 await browser.close();

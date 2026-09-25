@@ -26,14 +26,32 @@
 @keyframes display-light { from { filter: brightness(0.45); } }
 .niche { aspect-ratio: 3 / 4; box-shadow: inset 0 50px 70px -40px rgba(0, 0, 0, 0.5), 0 24px 40px -24px rgba(0, 0, 0, 0.7); }
 .visit { grid-column: 9 / -1; grid-row: 1 / span 2; align-self: end; display: grid; gap: var(--s-5); }
+.address { font-style: normal; display: grid; gap: 4px; }
+.address h2 { text-wrap: balance; }
 .hours { margin: 0; display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .hours > div { padding: 12px 0; }
 .hours > div + div { padding-left: 14px; border-left: 1px solid var(--border); }
 .hours dd { margin: 4px 0 0; font-size: 22px; font-weight: 500; }
 .actions { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+/* the two phone lines keep Morph's own labels: the shop, and online orders with their own hours */
+.contact { margin: 0; display: grid; gap: var(--s-2); }
+.contact > div { display: grid; gap: 2px; }
+.contact dd { margin: 0; }
 
-.reasons { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
-.reasons li { display: grid; gap: var(--s-3); align-content: start; padding-top: var(--s-4); border-top: 1px solid var(--fg); }
+/* how to try: Morph's FAQ answer, then the three lines of its testing guide */
+.faq, .faq blockquote { margin: 0; }
+.faq blockquote p { font-size: 19px; line-height: 1.45; }
+.faq figcaption { margin-top: var(--s-3); }
+.method { margin: 0; display: grid; gap: var(--s-5); }
+.method .steps { grid-template-columns: repeat(3, 1fr); }
+.method blockquote { margin: 0; }
+.method blockquote p { max-width: 36ch; }
+
+/* store reviews: one quiet line on stone, below the visit */
+.reviews { padding: var(--s-7) 0; border-top: 1px solid var(--border); }
+.reviews :global(.wrap) { display: grid; gap: var(--s-3); justify-items: start; }
+.reviews p { max-width: 62ch; }
+.reviews h2 + p { font-size: 19px; line-height: 1.45; }
 
 /* the selection */
 .listBand { background: var(--surface); }
@@ -49,7 +67,7 @@
 .story > div { grid-column: 7 / -1; display: grid; gap: var(--s-4); max-width: 60ch; }
 
 @media (max-width: 1100px) {
-  .reasons, .steps { grid-template-columns: repeat(2, 1fr); row-gap: var(--s-6); }
+  .steps, .method .steps { grid-template-columns: repeat(2, 1fr); row-gap: var(--s-6); }
   .roomText, .artWall { grid-column: 1 / span 7; }
   .visit { grid-column: 8 / -1; }
 }
@@ -60,6 +78,6 @@
   .artWall { margin-inline: calc(var(--m) * -1); border-radius: 0; gap: 10px; padding: 32px var(--m) 20px; }
   .wallNiche { margin-bottom: calc(var(--k) * 14px); }
   .listText { position: static; }
-  .reasons, .steps { grid-template-columns: 1fr; gap: var(--s-5); }
+  .steps, .method .steps { grid-template-columns: 1fr; gap: var(--s-5); }
   .actions > * { flex: 1 1 100%; }
 }
