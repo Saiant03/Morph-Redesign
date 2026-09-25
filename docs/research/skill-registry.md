@@ -143,6 +143,31 @@ Same inspection procedure as above: shallow clone into the scratchpad, SKILL.md 
 - **ui-ux-pro-max**: installed copy is from `dcc40ff`, which is still the upstream HEAD of nextlevelbuilder/ui-ux-pro-max-skill (the original; forks exist). Diff against upstream: identical apart from the added `LICENSE`. Tracked `scripts/__pycache__/*.pyc` files (runtime cache from the Phase B queries) were removed from Git and `__pycache__/` added to `.gitignore`.
 - **impeccable**: installed copy (skill 4.3.1 via the official installer) kept. Upstream's in-repo `.claude/skills/impeccable` at the same commit differs slightly (unreleased edits after the npm release); no update needed. Still no hooks in `.claude/settings*.json`, no `.claude/agents/`; `scripts/bin/` and `update-check.json` remain gitignored.
 
+### Owner request round (2026-09-25)
+
+The owner uploaded a snapshot of anthropics/skills (`skills-main.zip`, main branch; upstream HEAD at import time `3337550`, not verified byte-identical to the zip) and pasted Vercel's `web-design-guidelines` skill, asking for them to be added. Same inspection as above: every SKILL.md and bundled script read or grepped for network, subprocess, environment and install calls; URL inventory (localhost, example.com, github.com, apache.org, openfontlicense.org, Google Fonts, cdnjs for p5.js, modelcontextprotocol.io, ui.shadcn.com); hidden-Unicode scan: none; prompt-injection patterns: none; the two HTML comments found are code-sample comments. No script was run. Files copied verbatim (diff clean), except one frontmatter line `disable-model-invocation: true` on the skills marked "on demand" below, for the same reason as the round above: broad triggers or a visual language that conflicts with `docs/design/`.
+
+| Skill | Source | License | Invocation | Use in Morph / limits |
+|---|---|---|---|---|
+| webapp-testing | anthropics/skills | Apache 2.0 | Auto | Interactive QA of the concept app. Assumes Python Playwright (not installed); `scripts/with_server.py` starts servers with `subprocess` `shell=True`. `npm run smoke` and `site-capture` (Node Playwright) stay the default |
+| web-design-guidelines | vercel-labs/agent-skills @ `063bee9` (README: MIT); rules from vercel-labs/web-interface-guidelines @ `e3d624b` (`LICENSE` copied) | MIT | Auto | UI review in `file:line` format. It fetches its rules from `main` at run time, so the reviewed rules are pinned in `references/command.md`; one line added to SKILL.md to use that copy when the fetch fails. Some rules (curly quotes, `onKeyDown` on every interactive element) must be weighed against native HTML semantics |
+| mcp-builder | anthropics/skills | Apache 2.0 | Auto | Only if an MCP server is ever built (e.g. over the Store API). `scripts/` need the Python `mcp` and `anthropic` packages, not installed |
+| web-artifacts-builder | anthropics/skills | Apache 2.0 | On demand | claude.ai artifacts only. `init-artifact.sh` installs pnpm globally and a Vite/React/Tailwind/shadcn stack; never run inside this repo |
+| canvas-design | anthropics/skills | Apache 2.0 (fonts: OFL, 27 families, 5.6 MB) | On demand | Static posters/PNG/PDF. Its fonts and "design philosophy" never enter the site; Morph type is Newsreader |
+| algorithmic-art | anthropics/skills | Apache 2.0 | On demand | p5.js generative sketches (loads p5 from cdnjs). Exploration only |
+| theme-factory | anthropics/skills | Apache 2.0 | On demand | 10 preset color/font themes for decks and docs. Conflicts with the Morph direction; never on the site |
+| doc-coauthoring | anthropics/skills | none stated in the source folder | On demand | Structured co-writing of specs and proposals |
+| internal-comms | anthropics/skills | Apache 2.0 | On demand | Status updates, newsletters, FAQs, under the voice rules in `CLAUDE.md` |
+| slack-gif-creator | anthropics/skills | Apache 2.0 | On demand | Animated GIFs for Slack; needs Pillow/imageio (`requirements.txt`, not installed) |
+
+Not imported from the zip:
+- `frontend-design`: identical to the copy already in `.claude/skills/`.
+- `docx`, `pdf`, `pptx`, `xlsx`, `skill-creator`, `claude-api`: already available in this environment as built-in or `anthropic-skills:` skills; a second copy (about 5.6 MB) would duplicate names and triggers.
+- `brand-guidelines`: applies Anthropic's colors and type; conflicts with the Morph identity.
+- `academy-guide`, `discernment-nudge`: fire on every how-to answer or substantive reply (course links, appended follow-up questions); they conflict with the response rules in `CLAUDE.md`.
+
+Also pasted, not imported: an "Azure Compute" skill (VM sizing, troubleshooting). Only its SKILL.md router was provided, without the workflow and reference files it routes to, and it has no use in this project.
+
 ## External references (not vendored)
 
 | Resource | Source @ commit | License | Why not in the repo | How to use |
@@ -169,11 +194,9 @@ Skill #11 was not provided, so no installation was attempted.
 
 | Candidate | Source @ commit | Why not now | Revisit when |
 |---|---|---|---|
-| webapp-testing | anthropics/skills @ 34040c9 (Apache 2.0) | Clean (read `with_server.py`: starts local servers via `subprocess` with `shell=True`, polls the port, runs a command, terminates). It assumes Python Playwright, which is not installed; `site-capture` covers the need with Node Playwright | Concept app has interactive flows to test (Phase 2 QA) |
 | gsap-react, gsap-plugins (Flip, SplitText), gsap-timeline, gsap-frameworks, gsap-utils | greensock/gsap-skills @ aed9cfd | Stack not chosen; avoid unused context | After the Phase 2 stack decision (gsap-react + gsap-plugins likely) |
+| brand-guidelines | anthropics/skills | Anthropic branding; conflicts with Morph | — |
 | react-best-practices | vercel-labs/agent-skills @ 063bee9 | Only relevant if Next.js is confirmed | Concept build starts |
-| web-design-guidelines | vercel-labs/agent-skills @ 063bee9 | Fetches its rules from a remote URL at run time (the content can change after review); prefer a pinned local copy of the guidelines if adopted | UI review pass in Phase 2 |
-| web-artifacts-builder, theme-factory, canvas-design, brand-guidelines | anthropics/skills | Aimed at claude.ai artifacts or Anthropic branding; not relevant | — |
 | claude-code plugins (feature-dev, code-review, security-guidance …) | anthropics/claude-code @ d78be94 | General dev workflow, largely covered by built-in skills in this environment | If a specific gap appears |
 
 Apart from ui-ux-pro-max and impeccable (both requested by the owner), no third-party (non-vendor) skill repositories were imported. (Updated 2026-09-24: the owner then requested the skill stack above; each item went through the same inspection.) The official vendor sources covered the needs, and unvetted community skill aggregators add risk without a clear gain.

@@ -38,6 +38,8 @@ Registrul, cu sursa și limitele fiecăruia: `docs/research/skill-registry.md`. 
 - UI: `impeccable` (critică, polish, audit responsive și motion), `ui-ux-pro-max` (doar regulile UX/accesibilitate, interogări țintite), `/design-taste-frontend` (compoziție, ierarhie; doar consultativ).
 - Text pentru oameni: `/humanizer` (voce naturală) sau `/stop-slop` (curățarea tiparelor AI), niciodată amândouă pe același text. Nu se folosesc pe cod, date structurate, date de produs sau text legal.
 - `diagram-design`: doar când e nevoie de o diagramă (în `docs/`). `frontend-slides`: doar pentru prezentări.
+- Review UI: `web-design-guidelines` (regulile Vercel, copie fixată în `references/`). QA interactiv: `webapp-testing` (Python Playwright, neinstalat; implicit rămân `npm run smoke` și `site-capture`). `mcp-builder`: doar dacă se construiește un server MCP.
+- Din anthropics/skills, doar la cerere: `canvas-design`, `algorithmic-art`, `theme-factory`, `web-artifacts-builder`, `doc-coauthoring`, `internal-comms`, `slack-gif-creator`. Nu intră în site.
 - `/design-md`: doar pentru un DESIGN.md derivat din implementarea Morph și din `docs/design/`.
 - Understand Anything (neinstalat) și awesome-design-md: referințe externe; când se folosesc, vezi registrul.
 - Skill-urile marcate cu `/` pornesc doar la cerere. Dacă proprietarul le numește în text, se citește direct `.claude/skills/<nume>/SKILL.md`.
