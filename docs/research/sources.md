@@ -73,3 +73,12 @@ Secondary (S), to be re-verified before client-facing numbers:
 Morph (F, fetched): https://morphparfum.ro/despre-noi, /blog, /contact, /abonare-newsletter, /colectie, /spring-selection-2026, /cum-testezi-un-parfum-inainte-sa-il-cumperi; WordPress REST `wp-json/wp/v2/posts` (45 RO posts) and `wp-json/wp/v2/media` (1,017 items; searched by keyword); Store API `wc/store/v1/products` (105 products; Body & Bath, sets, gift card, gift box). Detail in `docs/design/phase-05-5-content-opportunity-map.md`.
 
 Awwwards (F, fetched): https://www.awwwards.com/websites/fragrance/, /websites/beauty/, /websites/fashion/, /websites/e-commerce/, /sites/abel-fragrance, /sites/annatwelve-fragrances, /sites/the-tuscan-journey-begins, /sites/omr-beauty, /sites/essentiality-of-beauty, /sites/lacoste-ace-breaker, /inspiration/perfume-product-page, /inspiration/fragrance-finder-kayali. Detail in `docs/design/phase-05-5-awwwards-reference-map.md`.
+
+## C4.0 campaign and brand archive (2026-09-25)
+
+Detail, verification levels (F / T / I / ?, WF / SN / OE) and every URL: `morph-romania-campaign-archive.md` §1 and §10.
+
+- Morph RO (F): sitemaps; WordPress REST posts (45), pages (27, including `/naughty`, `/nice`, `/scrisori-de-dragoste-morph`, `/aplicatia-morph`, `/termeni-voucher-cadou`, which are not in the sitemap), media (973), products (105 creation dates); Store API descriptions for 6 launch products; 40 campaign images viewed in the scratchpad (not committed).
+- Morph IT (F): morphparfum.com and en.morphparfum.com (home, Maison, The Noses, sitemap.php), rendered.
+- Social: Instagram `@morphparfumromania` and `@morphparfum` (profiles behind a login wall; 11 posts read through WebFetch); TikTok `@morphparfumro` (oEmbed); YouTube `@MorphParfumRomania` (RSS); Facebook `morphromania` (titles).
+- Third party (T, snippet level): Fragrantica, Parfumo (403 on fetch), interview listings (Jovoy, ShoppingMap.it).
