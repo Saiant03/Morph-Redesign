@@ -1,0 +1,73 @@
+/* Journal (docs/design/phase-c4-1b-journal.md): stone room, 12-column grid, one reading column of 62–68ch.
+   Morph's words are set in the serif between „ ”, with their source under them; the concept's words stay in the grotesk. */
+
+/* index */
+.pair, .campaign { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-6); padding-top: var(--s-5); border-top: 1px solid var(--border-strong); }
+.campaign { margin-top: var(--section); }
+.pairHead { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s-2) var(--s-5); align-items: baseline; }
+.entry { display: grid; gap: var(--s-3); align-content: start; }
+.wide { grid-column: 1 / span 7; }
+.narrow { grid-column: 9 / -1; }
+/* the campaign: the photograph beside its text, the way a room is entered */
+.feature { grid-column: 1 / -1; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); }
+.feature > * { grid-column: 9 / -1; }
+.feature > .entryImg { grid-column: 1 / span 7; grid-row: 1 / span 5; }
+.entryImg { position: relative; display: block; overflow: hidden; background: var(--surface); margin-bottom: var(--s-2); }
+.entryImg img { object-fit: cover; transition: scale var(--d-slow) var(--ease-out); }
+.entry:has(.entryTitle a:hover) .entryImg img, .entryImg:hover img { scale: 1.02; }
+.type { color: var(--fg); }
+.entryTitle { max-width: 22ch; text-wrap: balance; }
+.entryTitle a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
+.blog { padding-block: var(--section); text-wrap: balance; }
+.blogLink { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 8px; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); }
+.blogLink:hover { text-decoration-color: currentColor; }
+
+/* Morph's words */
+.quote, .quoteSm { margin: 0; display: grid; gap: var(--s-3); padding-left: var(--s-4); border-left: 1px solid var(--metal); }
+.quote blockquote, .quoteSm blockquote { margin: 0; }
+.quote p { font-family: var(--serif); font-weight: 300; font-size: clamp(24px, 2.3vw, 36px); line-height: 1.18; letter-spacing: -0.01em; }
+.quoteSm p { font-family: var(--serif); font-size: var(--t-3); line-height: 1.3; }
+
+/* entry page */
+.head { display: grid; gap: var(--s-4); justify-items: start; max-width: 68ch; padding: clamp(28px, 4vw, 64px) 0 var(--s-7); }
+.head nav a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.articleTitle { font-size: clamp(36px, 4.2vw, 72px); text-wrap: balance; }
+.body { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-7); align-items: start; }
+.lead { grid-column: 1 / span 5; position: sticky; top: calc(var(--header-h) + var(--s-5)); }
+.leadWide { grid-column: 1 / -1; }
+.column { grid-column: 7 / -1; display: grid; gap: var(--s-7); max-width: 68ch; }
+.leadWide + .column { grid-column: 4 / span 7; }
+.figure { margin: 0; display: grid; gap: var(--s-2); }
+.frame { position: relative; overflow: hidden; background: var(--surface); }
+.frame img { object-fit: cover; }
+.bleed { margin-bottom: var(--s-8); }
+.bleed .frame { max-height: 82svh; width: 100%; }
+.bleed figcaption { padding-inline: var(--m); }
+.summary { display: grid; gap: var(--s-3); }
+.summary ul { display: grid; border-top: 1px solid var(--fg); }
+.summary li { padding: 10px 0; border-bottom: 1px solid var(--border); }
+.stages { margin: var(--s-3) 0 0; display: grid; }
+.stages > div { display: grid; grid-template-columns: 11ch 1fr; gap: var(--s-4); padding: 8px 0; border-bottom: 1px solid var(--border); }
+.stages dd { margin: 0; }
+.notes { display: grid; gap: var(--s-2); padding: var(--s-4); background: var(--surface); border-radius: var(--r); }
+.full { padding-top: var(--s-4); border-top: 1px solid var(--border); }
+.related { display: flex; flex-wrap: wrap; gap: var(--s-3) var(--s-6); padding: var(--s-6) 0 var(--section); margin-top: var(--section); border-top: 1px solid var(--border-strong); }
+
+/* campaign page */
+.rig { margin-top: var(--section); }
+.roomLink { margin-top: var(--s-3); }
+.product { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-6); align-items: center; margin-top: var(--section); }
+.productStage { grid-column: 1 / span 5; display: block; }
+.productStage > div { aspect-ratio: 4 / 5; }
+.productText { grid-column: 7 / -1; display: grid; gap: var(--s-4); max-width: 62ch; }
+.actions { display: flex; flex-wrap: wrap; gap: var(--s-4); align-items: center; }
+
+@media (max-width: 899px) {
+  .pair, .campaign, .feature, .body, .product { grid-template-columns: 1fr; }
+  .pair > *, .campaign > *, .feature > *, .feature > .entryImg, .body > *, .leadWide + .column, .product > * { grid-column: 1 !important; grid-row: auto !important; }
+  .lead { position: static; }
+  .column { gap: var(--s-6); }
+  .head { padding: var(--s-4) 0 var(--s-6); }
+  .bleed .frame { max-height: none; }
+  .productStage { max-width: 420px; width: 100%; justify-self: center; }
+}

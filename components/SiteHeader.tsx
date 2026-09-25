@@ -11,7 +11,7 @@ import s from './SiteHeader.module.css';
 const isCurrent = (n: (typeof NAV)[number], path: string) =>
   n.href.startsWith('/') && (n.match ? n.match.test(path) : path === n.href || path.startsWith(n.href + '/'));
 
-// Jurnal lives on morphparfum.ro: it opens there, and says so
+// a link that leaves the concept for morphparfum.ro opens there, and says so
 const Item = ({ l, onClick }: { l: NavLink; onClick?: () => void }) => l.ext
   ? <a href={l.href} target="_blank" rel="noopener">{l.label}<span className="sr-only"> (pe morphparfum.ro, se deschide într-o filă nouă)</span><span aria-hidden> ↗</span></a>
   : <Link href={l.href} onClick={onClick}>{l.label}</Link>;

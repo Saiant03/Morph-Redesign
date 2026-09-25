@@ -4,11 +4,11 @@ import { BOUTIQUE, snapshotAt } from '@/lib/catalog';
 import { JOURNAL } from '@/lib/nav';
 import s from './Footer.module.css';
 
-// Footer structure from docs/research/06. Items without a concept route are listed, not linked; the Jurnal links to Morph's blog.
+// Footer structure from docs/research/06. Items without a concept route are listed, not linked.
 const COLS: { title: string; items: (string | [string, string])[] }[] = [
   { title: 'Magazin', items: ['Livrare și plată', 'Retur', 'Urmărește comanda', ['Cadouri și gift card', '/cadouri']] },
   { title: 'Ajutor', items: ['Întrebări frecvente', 'Contact', ['Verificare Certilogo', '/magazin#certilogo'], 'ANPC · SOL'] },
-  { title: 'Despre Morph', items: [['Povestea', '/magazin#povestea'], ['Magazinul din București', '/magazin'], 'Morph Points', ['Jurnal ↗', JOURNAL]] },
+  { title: 'Despre Morph', items: [['Povestea', '/magazin#povestea'], ['Magazinul din București', '/magazin'], 'Morph Points', ['Jurnal', JOURNAL]] },
 ];
 
 export function Footer() {

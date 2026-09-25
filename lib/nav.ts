@@ -5,8 +5,8 @@
 export type NavLink = { href: string; label: string; ext?: boolean };
 export type NavItem = { href: string; label: string; match?: RegExp; children?: NavLink[]; groups: { title: string; links: NavLink[] }[] };
 
-// Morph's journal stays on morphparfum.ro: the concept has no article pages, and none are invented.
-export const JOURNAL = 'https://morphparfum.ro/blog/';
+// The Journal (phase C4.1b): three entries in the concept; Morph's full blog stays on morphparfum.ro, linked from it.
+export const JOURNAL = '/jurnal';
 
 export const NAV: NavItem[] = [
   {
@@ -33,10 +33,10 @@ export const NAV: NavItem[] = [
     groups: [{ title: 'Cadouri', links: [{ href: '/cadouri', label: 'După buget' }, { href: '/cadouri#sticla', label: 'Dacă știi parfumul' }, { href: '/cadouri#descoperire', label: 'Dacă nu știi încă' }, { href: '/cadouri#card', label: 'Gift card' }] }],
   },
   {
-    href: '/magazin', label: 'Magazinul',
+    href: '/magazin', label: 'Magazinul', match: /^\/(magazin|jurnal)(\/|$)/,
     groups: [
       { title: 'Magazinul', links: [{ href: '/magazin', label: 'Magazinul Morph din București' }, { href: '/magazin#certilogo', label: 'Autenticitate Certilogo' }] },
-      { title: 'Morph', links: [{ href: '/magazin#povestea', label: 'Despre Morph' }, { href: JOURNAL, label: 'Jurnal', ext: true }] },
+      { title: 'Morph', links: [{ href: '/magazin#povestea', label: 'Despre Morph' }, { href: JOURNAL, label: 'Jurnal' }] },
     ],
   },
 ];

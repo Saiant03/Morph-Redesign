@@ -231,7 +231,8 @@ await check('nav: panels expose Morph\'s structure (collections, Baie & Corp, Se
   await n.keyboard.press('Tab');
   assert(await n.evaluate(() => document.activeElement?.textContent) === 'Magazinul Morph din București', 'Tab does not enter the panel');
   const j = nav.getByRole('link', { name: /Jurnal/ });
-  assert(await j.getAttribute('href') === 'https://morphparfum.ro/blog/' && await j.getAttribute('target') === '_blank', 'Jurnal link');
+  assert(await j.getAttribute('href') === '/jurnal' && await j.getAttribute('target') === null, 'Jurnal link');
+  assert(await n.locator('footer a[href="/jurnal"]').count() === 1, 'footer Jurnal link');
   const m = await page({ ...devices['iPhone 13'] });
   await m.goto(BASE + '/', { waitUntil: 'networkidle' });
   await m.getByRole('button', { name: 'Meniu' }).click();
@@ -870,6 +871,71 @@ await check('→ /magazin: in-site navigation lights the walnut room up from dar
   await t.waitForTimeout(1000);
   assert((await t.locator('h1').innerText()) === 'Magazinul Morph', 'h1');
   assert(await t.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'horizontal overflow');
+  await t.context().close();
+});
+
+const JOURNAL = {
+  '/jurnal/your-next-form-noua-colectie-morph-dedicata-layering-ului': { type: 'Articol Morph', source: 'https://morphparfum.ro/your-next-form-noua-colectie-morph-dedicata-layering-ului' },
+  '/jurnal/primul-workshop-morph-dedicat-layering-ului-cum-a-prins-viata-universul-your-next-form': { type: 'Articol Morph', source: 'https://morphparfum.ro/primul-workshop-morph-dedicat-layering-ului-cum-a-prins-viata-universul-your-next-form' },
+  '/jurnal/primitivo': { type: 'Campanie', source: 'https://morphparfum.ro/morph-primitivo-eau-de-parfum-unisex' },
+};
+// images the owner has not cleared (data/assets.json "pending") and the unchecked Your Next Form article images
+const assetsJson = JSON.parse(readFileSync(new URL('../data/assets.json', import.meta.url), 'utf8'));
+const BLOCKED = [...assetsJson.assets.filter(a => a.status === 'pending').flatMap(a => [a.file, a.src.split('/').pop()]), 'your-next-form-1', 'your-next-form-2', 'your-next-form-3', 'workshop-3.avif']
+  .map(x => x.replace(/\.\w+$/, '').replace(/ .*/, ''));
+const imgRefs = t => t.evaluate(() => [...document.querySelectorAll('img, source')].map(i => `${i.getAttribute('src') ?? ''} ${i.getAttribute('srcset') ?? ''}`).join(' '));
+
+await check('/jurnal: three entries, each with its type label and a source link; link to the whole Morph blog', async () => {
+  const t = await page();
+  await t.goto(BASE + '/jurnal', { waitUntil: 'networkidle' });
+  const entries = t.locator('main article');
+  assert(await entries.count() === 3, `${await entries.count()} entries`);
+  for (const [href, { type, source }] of Object.entries(JOURNAL)) {
+    const e = t.locator('main article', { has: t.locator(`h3 a[href="${href}"]`) });
+    assert((await e.innerText()).toUpperCase().includes(type.toUpperCase()), `${href}: type ${type}`);
+    assert(await e.locator(`a[href="${source}"][target="_blank"]`).count() > 0, `${href}: source link`);
+  }
+  assert(/Lansări, campanii și povești Morph, fiecare cu sursa ei\./.test(await t.locator('main').innerText()), 'lede');
+  assert(await t.locator('main a[href="https://morphparfum.ro/blog/"]').count() === 1, 'blog link');
+  await t.context().close();
+});
+
+await check('Journal entries: type label, source link, Morph excerpt as a quotation, no pending or unchecked image, no overflow', async () => {
+  for (const opts of [{ viewport: { width: 1440, height: 900 } }, { ...devices['iPhone 13'] }]) {
+    const t = await page(opts);
+    for (const [href, { type, source }] of Object.entries(JOURNAL)) {
+      await t.goto(BASE + href, { waitUntil: 'networkidle' });
+      const main = t.locator('main');
+      assert((await main.locator('header .label').first().innerText()).toUpperCase().startsWith(type.toUpperCase()), `${href}: type`);
+      assert(await main.locator(`a[href="${source}"]`).count() > 0, `${href}: source link`);
+      assert(await main.locator('[data-voice="morph"] blockquote').count() > 0, `${href}: Morph quote`);
+      if (type === 'Articol Morph') {
+        assert(await main.getByRole('link', { name: /Citește articolul integral pe morphparfum\.ro/ }).count() >= 1, `${href}: full article link`);
+        assert(/Publicat de Morph pe 16 iulie 2026/i.test(await main.locator('header').innerText()), `${href}: date`);
+      } else assert(/pagină a conceptului/i.test(await main.locator('header').innerText()) && /Nu e un articol Morph/.test(await main.innerText()), `${href}: concept label`);
+      const refs = await imgRefs(t);
+      const hit = BLOCKED.find(b => refs.includes(b));
+      assert(!hit, `${href}: renders ${hit}`);
+      assert(await t.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${href}: horizontal overflow`);
+    }
+    await t.context().close();
+  }
+});
+
+await check('/layering/your-next-form links to the workshop article', async () => {
+  const t = await page();
+  await t.goto(BASE + '/layering/your-next-form', { waitUntil: 'networkidle' });
+  assert(await t.locator('main a[href="/jurnal/primul-workshop-morph-dedicat-layering-ului-cum-a-prins-viata-universul-your-next-form"]').count() === 1, 'no J2 link');
+  await t.context().close();
+});
+
+await check('Ice image: the corrected description (Primitivo bottle, blotter strip; no vial) on the room and the home card', async () => {
+  const t = await page({ ...devices['iPhone 13'] });
+  for (const u of ['/parfumuri/ice', '/']) {
+    await t.goto(BASE + u, { waitUntil: 'networkidle' });
+    const alt = await t.locator('img[src*="ice-campaign"]:not([alt=""])').first().getAttribute('alt');
+    assert(/sticla Primitivo/.test(alt) && /fâșie de testare/.test(alt) && !/fiol/.test(alt), `${u}: ${alt}`);
+  }
   await t.context().close();
 });
 

@@ -5,6 +5,7 @@ import { SectionNav } from '@/components/SectionNav';
 import { YnfIndex } from '@/components/YnfIndex';
 import { LAYERING_NAV } from '@/lib/nav';
 import { layeringSets, lei, BOUTIQUE, stateKey } from '@/lib/catalog';
+import { journalHref } from '@/lib/journal';
 import s from './ynf.module.css';
 
 export const metadata = { title: 'Your Next Form' };
@@ -47,6 +48,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
             <footer className="t-small muted">Morph, pagina fiecărui set</footer>
           </blockquote>
           <p className="muted t-small">Deviza Morph e „evoluție constantă și Metamorfoză prin parfum”. Setul blind o ia literal: următoarea formă a semnăturii tale, aleasă după stare, nu după nume.</p>
+          <p className="t-small"><Link className="link" href={journalHref('workshop-layering')}>Cum a început: workshopul Morph de layering</Link></p>
         </div>
       </section>
 
