@@ -36,6 +36,7 @@
 .next button { min-height: 32px; }
 .gift { display: flex; align-items: center; gap: var(--s-2); min-height: 44px; }
 .gift input { width: 20px; height: 20px; accent-color: var(--fg); }
+.box { grid-column: 2 / -1; }
 /* the empty cart: a niche with no light in it */
 .unlit { display: block; width: 96px; aspect-ratio: 3 / 4; margin-bottom: var(--s-3); background: radial-gradient(90% 70% at 50% 40%, #2a231d, #17130f); box-shadow: inset 0 30px 40px -30px rgb(0 0 0 / 0.8), inset 0 0 0 1px rgb(255 255 255 / 0.05); }
 .total { display: flex; justify-content: space-between; font-weight: 500; font-size: 18px; border-top: 1px solid var(--border); padding-top: var(--s-4); }

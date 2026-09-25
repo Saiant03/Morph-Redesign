@@ -1,12 +1,11 @@
 'use client';
 import { useEffect, useId, useRef, useState } from 'react';
-import { type Perfume, type Offer, lei, FREE_SHIPPING, fullItem, travelItem, imageFor } from '@/lib/catalog';
+import { type Perfume, type Offer, lei, FREE_SHIPPING, fullItem, travelItem, imageFor, giftBox, boxable, boxItem } from '@/lib/catalog';
 import { cart } from '@/lib/cart';
 import Image from 'next/image';
 import s from './PurchaseBlock.module.css';
 
 type Fmt = 'full' | 'travel';
-const GIFT_BOX = 20; // "Cutie cadou (+20 lei)", as offered on morphparfum.ro PDPs
 
 /**
  * The buy path stays obvious however immersive the page gets: format, price, one primary action,
@@ -20,7 +19,10 @@ export function PurchaseBlock({ p, travel, samples }: { p: Perfume; travel: Offe
   const name = useId();
   const price = fmt === 'full' ? p.price : travel!.price;
   const label = fmt === 'full' ? '100 ml' : 'Travel 2×8 ml';
-  const total = price + (gift ? GIFT_BOX : 0);
+  const item = fmt === 'full' ? fullItem(p) : travelItem(p, travel!);
+  const canBox = !!giftBox && boxable(item.key);
+  const boxed = gift && canBox;
+  const total = price + (boxed ? giftBox!.price : 0);
 
   useEffect(() => {
     const el = cta.current; if (!el) return;
@@ -29,10 +31,7 @@ export function PurchaseBlock({ p, travel, samples }: { p: Perfume; travel: Offe
     return () => io.disconnect();
   }, []);
 
-  const add = () => cart.add([
-    fmt === 'full' ? fullItem(p) : travelItem(p, travel!),
-    ...(gift ? [{ key: 'cutie', name: 'Cutie cadou', format: p.shortName, price: GIFT_BOX }] : []),
-  ]);
+  const add = () => cart.add([item, ...(boxed ? [boxItem(item.key, `${p.shortName}, ${item.format}`)] : [])]);
   const helper = travel ?? samples;
   const gap = FREE_SHIPPING - total;
 
@@ -57,8 +56,8 @@ export function PurchaseBlock({ p, travel, samples }: { p: Perfume; travel: Offe
         {p.inStock ? (
           <>
             <button type="button" className={`btn ${s.cta}`} onClick={add}>Adaugă în coș <span className="num">{lei(total)}</span></button>
-            {fmt === 'full' && (
-              <label className={s.gift}><input type="checkbox" checked={gift} onChange={e => setGift(e.target.checked)} /> Cutie cadou, +{lei(GIFT_BOX)}</label>
+            {canBox && (
+              <label className={s.gift}><input type="checkbox" checked={gift} onChange={e => setGift(e.target.checked)} /> Cutie cadou, +{lei(giftBox!.price)}</label>
             )}
             <p className="t-micro muted">Plată cu cardul, Apple Pay sau Google Pay.</p>
           </>

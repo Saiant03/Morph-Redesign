@@ -30,7 +30,8 @@ export const NAV: NavItem[] = [
   },
   {
     href: '/cadouri', label: 'Cadouri',
-    groups: [{ title: 'Cadouri', links: [{ href: '/cadouri', label: 'După buget' }, { href: '/cadouri#sticla', label: 'Dacă știi parfumul' }, { href: '/cadouri#descoperire', label: 'Dacă nu știi încă' }, { href: '/cadouri#card', label: 'Gift card' }] }],
+    // in the page's order (phase C4.3b): the buyer's certainty first, the budget index last
+    groups: [{ title: 'Cadouri', links: [{ href: '/cadouri#sticla', label: 'Știu ce poartă' }, { href: '/cadouri#descoperire', label: 'Nu știu încă' }, { href: '/cadouri#surpriza', label: 'O surpriză' }, { href: '/cadouri#card', label: 'Gift card' }, { href: '/cadouri#buget', label: 'După buget' }] }],
   },
   {
     href: '/magazin', label: 'Magazinul', match: /^\/(magazin|jurnal|despre-noi)(\/|$)/,

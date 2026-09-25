@@ -58,7 +58,8 @@ export const stateKey = (o: Offer) => (o.state ?? o.slug).toLowerCase();
 export const snapshotAt = catalog.snapshotAt;
 export const bodyItems = catalog.body as BodyItem[];
 export const giftBox = (catalog.gift as (Offer & { range: number[] | null })[]).find(g => g.slug === 'gift-box') ?? null;
-export const giftCard = (catalog.gift as (Offer & { range: number[] | null })[]).find(g => /gift-card/.test(g.slug)) ?? null;
+// the gift card's fixed amounts come from the snapshot (`values`, since phase C4.3b); `range` is the API's min–max
+export const giftCard = (catalog.gift as (Offer & { range: number[] | null; values?: number[] | null })[]).find(g => /gift-card/.test(g.slug)) ?? null;
 
 export const BODY_KIND: Record<BodyKind, { name: string; format: string }> = {
   gel: { name: 'Gel de duș', format: 'Gel de duș, 200 ml' },
@@ -233,9 +234,18 @@ export const travelItem = (p: Perfume, t: Offer) => ({ key: t.slug, name: p.shor
 export const offerItem = (o: Offer, name: string, format: string) => ({ key: o.slug, name, format, price: o.price });
 export const bodyItem = (b: BodyItem, p: Perfume) => ({ key: b.slug, name: p.shortName, format: BODY_KIND[b.kind].format, price: b.price });
 
+/** Morph offers "Cutie cadou (+20 lei)" only on some product pages (checked 2026-09-25, docs/design/phase-c4-3-gifting-newsletter-plan.md §2.2):
+ *  the 100 ml bottle, the single-scent travel 2×8 ml, the sample sets and the shower gels. Not on Your Next Form,
+ *  Coffret or Discovery Travel; body creams were not checked, so they are left out. */
+export const boxable = (key: string) =>
+  perfumes.some(p => p.slug === key) || sampleSets.some(o => o.slug === key) || bodyItems.some(b => b.slug === key && b.kind === 'gel') ||
+  travelSets.some(t => t.slug === key && !/discovery|blind/.test(t.slug));
+/** The gift box of one cart line: its own line, tied to that line (lib/cart.ts), so each box is ticked on its own. */
+export const boxItem = (key: string, name: string) => ({ key: `cutie:${key}`, of: key, name: 'Cutie cadou', format: `pentru ${name}`, price: giftBox!.price });
+
 /** Image for a cart line: the bottle for a perfume, the box for a set. */
 export function imageFor(key: string) {
-  if (key === 'cutie') return giftBox?.image ?? null;
+  if (key.startsWith('cutie:')) return giftBox?.image ?? null;
   const p = perfumes.find(x => x.slug === key);
   if (p) return p.images[0];
   return [...travelSets, ...sampleSets, ...layeringSets, ...bodyItems, ...(catalog.gift as Offer[])].find(o => o.slug === key)?.image ?? null;

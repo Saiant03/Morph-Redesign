@@ -1,8 +1,15 @@
 .footer { padding: var(--s-8) 0 var(--s-8); }
+/* .wrap sets `margin: 0 auto` and `padding: 0 var(--m)`; the footer scope keeps the vertical spacing below */
+.news { display: grid; grid-template-columns: 2fr 3fr 2fr; gap: var(--gap); align-items: start; }
+.footer .news { margin-bottom: var(--s-7); padding-bottom: var(--s-7); border-bottom: 1px solid var(--border); }
+.promise { margin: 0; display: grid; gap: var(--s-2); }
+.promise blockquote { margin: 0; }
+.promise p { max-width: 56ch; }
+.newsAct { display: grid; gap: var(--s-3); justify-items: start; }
 .grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: var(--gap); }
 .brand { display: grid; gap: var(--s-4); align-content: start; }
 .logo { width: 140px; }
 .h { margin-bottom: var(--s-3); }
 .grid ul { display: grid; gap: 8px; }
-.note { margin-top: var(--s-8); padding-top: var(--s-4); border-top: 1px solid var(--border); }
-@media (max-width: 899px) { .grid { grid-template-columns: 1fr 1fr; row-gap: var(--s-6); } .brand { grid-column: 1 / -1; } }
+.footer .note { margin-top: var(--s-8); padding-top: var(--s-4); border-top: 1px solid var(--border); }
+@media (max-width: 899px) { .news { grid-template-columns: 1fr; } .grid { grid-template-columns: 1fr 1fr; row-gap: var(--s-6); } .brand { grid-column: 1 / -1; } }

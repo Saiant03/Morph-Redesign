@@ -1,10 +1,17 @@
 import Link from 'next/link';
 import { Logo } from './Logo';
+import { Ext, MorphQuote } from './Ext';
 import { BOUTIQUE, snapshotAt } from '@/lib/catalog';
 import { JOURNAL } from '@/lib/nav';
 import s from './Footer.module.css';
 
 // Footer structure from docs/research/06. Items without a concept route are listed, not linked.
+// The newsletter is Morph's: its page, its form, its consent. The concept only links there and collects nothing
+// (docs/design/phase-c4-3-gifting-newsletter-plan.md §6). Promise and unsubscribe line are Morph's, verified 2026-09-25.
+const NEWSLETTER = 'https://morphparfum.ro/abonare-newsletter';
+const PRIVACY = 'https://morphparfum.ro/politica-de-confidentialitate';
+const PROMISE = 'Află înaintea tuturor ultimele noutăți, campaniile în derulare, dar și beneficiile exclusive special create pentru membrii comunității Morph.';
+
 const COLS: { title: string; items: (string | [string, string])[] }[] = [
   { title: 'Magazin', items: ['Livrare și plată', 'Retur', 'Urmărește comanda', ['Cadouri și gift card', '/cadouri']] },
   { title: 'Ajutor', items: ['Întrebări frecvente', 'Contact', ['Verificare Certilogo', '/magazin#certilogo'], 'ANPC · SOL'] },
@@ -14,6 +21,14 @@ const COLS: { title: string; items: (string | [string, string])[] }[] = [
 export function Footer() {
   return (
     <footer className={s.footer} data-tone="dark">
+      <section className={`wrap ${s.news}`} aria-labelledby="newsletter-titlu">
+        <h2 id="newsletter-titlu" className="t-2">Newsletter Morph</h2>
+        <MorphQuote className={s.promise} text={PROMISE} cite="Pagina de abonare, morphparfum.ro" href={NEWSLETTER} />
+        <div className={s.newsAct}>
+          <Ext className="btn btn-secondary" href={NEWSLETTER}>Abonează-te pe morphparfum.ro</Ext>
+          <p className="t-micro muted">Abonarea se face în formularul Morph. „Vă puteți dezabona oricând doriți.” Detalii în <Ext href={PRIVACY}>politica de confidențialitate Morph</Ext>.</p>
+        </div>
+      </section>
       <div className={`wrap ${s.grid}`}>
         <div className={s.brand}>
           <Logo className={s.logo} />

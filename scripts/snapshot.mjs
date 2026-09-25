@@ -79,7 +79,9 @@ for (const p of items) {
   } else if (/^(gift box|morph gift card)$/i.test(decode(p.name).trim())) {
     const image = p.images[0] ? await img(sized(p.images[0], 600), `${p.slug}-0`) : null;
     const range = p.prices.price_range ? [+p.prices.price_range.min_amount, +p.prices.price_range.max_amount].map(v => v / 10 ** p.prices.currency_minor_unit) : null;
-    gift.push({ ...base, image, range, summary: strip(p.short_description) });
+    // the gift card's fixed amounts ("Alege suma"), e.g. "1.100 lei" → 1100; null when the product has none
+    const values = p.attributes.find(a => /suma/i.test(a.name))?.terms.map(t => +decode(t.name).replace(/\D/g, '')) ?? null;
+    gift.push({ ...base, image, range, values, summary: strip(p.short_description) });
   } else if (c.includes('Set travel') || c.includes('Eșantioane parfumuri') || c.includes('Layering')) {
     const image = p.images[0] ? await img(sized(p.images[0], 600), `${p.slug}-0`) : null;
     const rec = { ...base, image, summary: strip(p.short_description) };

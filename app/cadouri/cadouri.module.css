@@ -2,7 +2,27 @@
 .head > :first-child { grid-column: 1 / span 7; }
 .head > :last-child { grid-column: 9 / -1; max-width: 42ch; }
 
-.budget { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); padding-top: var(--s-5); border-top: 1px solid var(--fg); }
+.ask { display: grid; gap: var(--s-6); padding-top: var(--s-5); border-top: 1px solid var(--fg); margin-bottom: var(--s-8); }
+.answers { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+.answer { display: grid; gap: var(--s-2); align-content: start; }
+.answerNiche { aspect-ratio: 4 / 5; margin-bottom: var(--s-2); }
+.answerName { font-family: var(--serif); font-size: clamp(26px, 2.4vw, 36px); line-height: 1.05; }
+.answer:hover .answerName { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
+/* the gift card as an object: its name on walnut, no graphic */
+.cardObject { display: grid; place-items: center; border-radius: var(--r); }
+.cardObject > span { font-family: var(--serif); font-size: clamp(28px, 3vw, 44px); letter-spacing: 0.02em; }
+
+.box { display: grid; grid-template-columns: 120px minmax(0, 52ch); gap: var(--s-4); align-items: center; margin-top: var(--s-7); padding-top: var(--s-4); border-top: 1px solid var(--border); }
+.boxNiche { aspect-ratio: 1; }
+.quote { margin: 0; display: grid; gap: var(--s-2); max-width: 44ch; }
+.quote blockquote { margin: 0; }
+.counts { margin-bottom: var(--s-5); }
+.hunch { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-3); align-items: center; padding: var(--s-5) 0; margin-bottom: var(--s-7); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.hunch > h3 { grid-column: 1 / span 3; }
+.hunch > p { grid-column: 4 / span 6; max-width: 60ch; }
+.hunch > a { grid-column: 10 / -1; justify-self: start; }
+
+.budget { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); padding-top: var(--s-5); margin-top: var(--s-8); border-top: 1px solid var(--fg); }
 .budget > h2 { grid-column: 1 / span 3; padding-top: 14px; }
 .budget > ol { grid-column: 4 / -1; }
 .budgetRow { display: grid; grid-template-columns: minmax(150px, 1fr) 3fr; gap: var(--gap); align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--border); }
@@ -20,7 +40,7 @@
 .more a { min-height: 44px; display: inline-flex; align-items: center; }
 
 .discover { background: var(--surface); }
-.sets { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
+.sets { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--gap); }
 .set { display: grid; gap: var(--s-3); align-content: start; }
 .setNiche { aspect-ratio: 1; }
 .setName { font-family: var(--serif); font-weight: 400; font-size: 28px; line-height: 1.05; }
@@ -31,7 +51,9 @@
 .surpriseText { grid-column: 6 / span 6; display: grid; gap: var(--s-4); justify-items: start; }
 
 .card { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-5); align-items: end; }
-.card > h2 { grid-column: 1 / span 5; }
+.cardHead { grid-column: 1 / span 5; display: grid; gap: var(--s-4); }
+.values { display: flex; flex-wrap: wrap; gap: 0 var(--s-4); font-family: var(--serif); font-weight: 300; font-size: clamp(30px, 3vw, 48px); line-height: 1.1; }
+.practical { margin: var(--s-5) 0 var(--s-8); max-width: 72ch; }
 .cardFacts { grid-column: 6 / span 4; margin: 0; display: grid; border-top: 1px solid var(--border); }
 .cardFacts > div { display: grid; gap: 4px; padding: 10px 0; border-bottom: 1px solid var(--border); }
 .cardFacts dd { margin: 0; }
@@ -39,7 +61,17 @@
 
 @media (max-width: 1100px) { .sets { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 899px) {
+  .answers { grid-template-columns: 1fr; }
+  .answer { grid-template-columns: 96px 1fr; column-gap: var(--s-4); align-items: center; }
+  .answerNiche { grid-row: span 2; margin: 0; }
+  .cardObject > span { font-size: 18px; }
+  .hunch { grid-template-columns: 1fr; }
+  .hunch > * { grid-column: 1 !important; }
+  .box { grid-template-columns: 72px 1fr; }
+}
+@media (max-width: 899px) {
   .head, .budget, .surprise, .card { grid-template-columns: 1fr; }
+  .values { font-size: 30px; }
   .head > *, .budget > *, .surprise > *, .card > * { grid-column: 1 !important; }
   .budgetRow { grid-template-columns: 1fr; gap: 4px; }
   .objects { grid-auto-flow: column; grid-auto-columns: 78%; grid-template-columns: none; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(var(--m) * -1); padding-inline: var(--m); scroll-padding-inline: var(--m); }

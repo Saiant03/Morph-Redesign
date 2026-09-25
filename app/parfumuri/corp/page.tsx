@@ -101,7 +101,7 @@ export default function Page() {
               </ul>
             </div>
           ))}
-          {giftBox && <p className={`${s.gift} t-small`}>Cutia cadou Morph, {lei(giftBox.price)}, se adaugă din coș. Pentru cineva care își alege singur parfumul: <Link className="link" href="/cadouri#card">gift card</Link>.</p>}
+          {giftBox && <p className={`${s.gift} t-small`}>Coffret-ul vine în cutia lui. Cutia cadou Morph, {lei(giftBox.price)}, se alege la sticla de 100 ml, la travel, la mostre și la gel. Pentru cineva care își alege singur parfumul: <Link className="link" href="/cadouri#card">gift card</Link>.</p>}
         </div>
       </section>
 

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import { cart, useCart } from '@/lib/cart';
-import { FREE_SHIPPING, lei, imageFor, perfumes, travelFor, travelItem, bodyFor, bodyItem, giftBox, BODY_KIND } from '@/lib/catalog';
+import { FREE_SHIPPING, lei, imageFor, perfumes, travelFor, travelItem, bodyFor, bodyItem, giftBox, boxable, boxItem, BODY_KIND } from '@/lib/catalog';
 import s from './CartDrawer.module.css';
 
 /** Something from the perfumes already in the cart (their travel size or same-scent shower gel) that crosses the
@@ -24,7 +24,7 @@ function suggestion(keys: string[], gap: number) {
 
 /**
  * Mock cart on the night tone: each line an object on a glass edge, quantities, the free-shipping threshold as a
- * sentence over a metal rule, one real suggestion, the gift box. Checkout is out of scope for the concept.
+ * sentence over a metal rule, one real suggestion, a gift box per line where Morph offers one. Checkout is out of scope.
  */
 export function CartDrawer() {
   const { items, open, total, count } = useCart();
@@ -42,7 +42,6 @@ export function CartDrawer() {
 
   const gap = FREE_SHIPPING - total;
   const next = suggestion(items.map(i => i.key), gap);
-  const boxed = items.some(i => i.key === 'cutie');
   return (
     <div className={s.root} data-open={open} aria-hidden={!open} inert={!open}>
       <div className={s.scrim} onClick={cart.close} />
@@ -66,8 +65,9 @@ export function CartDrawer() {
           </div>
         ) : (
           <ul className={s.items}>
-            {items.map(i => {
+            {items.filter(i => !i.of).map(i => {
               const img = imageFor(i.key);
+              const box = items.find(x => x.of === i.key);
               return (
                 <li key={i.key} className={s.item}>
                   <span className={`niche-sm ${s.thumb}`} aria-hidden>{img && <Image src={img} alt="" fill sizes="72px" />}</span>
@@ -82,6 +82,12 @@ export function CartDrawer() {
                     <button type="button" onClick={() => cart.setQty(i.key, i.qty + 1)} aria-label={`Crește cantitatea pentru ${i.name}`}>+</button>
                   </span>
                   <button type="button" className={`${s.remove} text-btn link t-small muted`} onClick={() => cart.remove(i.key)} aria-label={`Scoate ${i.name}, ${i.format}`}>Scoate</button>
+                  {giftBox && boxable(i.key) && (
+                    <label className={`${s.gift} ${s.box} t-small`}>
+                      <input type="checkbox" checked={!!box} onChange={e => e.target.checked ? cart.add([boxItem(i.key, `${i.name}, ${i.format}`)]) : cart.remove(box!.key)} aria-label={`Cutie cadou pentru ${i.name}, ${i.format}, ${lei(giftBox.price)}`} />
+                      <span>Cutie cadou, <span className="num">+{lei(giftBox.price)}{box && box.qty > 1 ? ` × ${box.qty}` : ''}</span></span>
+                    </label>
+                  )}
                 </li>
               );
             })}
@@ -99,12 +105,6 @@ export function CartDrawer() {
               </p>
             )}
           </div>
-          {items.length > 0 && giftBox && (
-            <label className={`${s.gift} t-small`}>
-              <input type="checkbox" checked={boxed} onChange={e => e.target.checked ? cart.add([{ key: 'cutie', name: 'Cutie cadou', format: 'Ambalaj Morph', price: giftBox!.price }]) : cart.remove('cutie')} />
-              <span>Cutie cadou, <span className="num">+{lei(giftBox.price)}</span></span>
-            </label>
-          )}
           <p className={s.total}><span>Subtotal</span><span className="num">{lei(total)}</span></p>
           <button type="button" className="btn" disabled>Finalizează comanda</button>
           <p className="t-micro muted">Concept: checkout-ul, plata și contul rămân în WooCommerce și nu sunt simulate aici. Coșul se golește la reîncărcarea paginii.</p>

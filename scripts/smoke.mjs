@@ -7,6 +7,7 @@ const require = createRequire(import.meta.url);
 const { chromium, devices } = require(execSync('npm root -g').toString().trim() + '/playwright');
 
 const BASE = process.argv[2] ?? 'http://localhost:3000';
+const catalogJson = JSON.parse(readFileSync(new URL('../data/catalog.json', import.meta.url), 'utf8'));
 const results = [];
 let failed = 0;
 async function check(name, fn) {
@@ -142,10 +143,37 @@ await check('try list: finder result → shop selection', async () => {
   await pg.getByRole('link', { name: 'Zeta' }).first().waitFor();
 });
 
-await check('cadouri: budget index and gift card facts', async () => {
+// Phase C4.3b (docs/design/phase-c4-3-gifting-newsletter-plan.md): the buyer's question first, Coffret, the Finder, the gift card from data
+await check('cadouri: three answers, Coffret, Finder, gift card values from data, budget last, no voucher, no form', async () => {
   await pg.goto(BASE + '/cadouri', { waitUntil: 'networkidle' });
-  assert(await pg.getByRole('region', { name: 'După buget' }).getByRole('link').count() >= 4, 'budget rows');
+  const ask = pg.getByRole('region', { name: 'Cât de bine știi parfumul cuiva?' });
+  for (const [l, h] of [['Știu ce poartă', '#sticla'], ['Am o bănuială', '#descoperire'], ['Prefer să aleagă singur', '#card']])
+    assert(await ask.getByRole('link', { name: new RegExp(l) }).getAttribute('href') === h, `answer ${l}`);
+  const coffret = pg.getByRole('region', { name: 'Coffret' });
+  const n = await coffret.getByRole('button', { name: /^Adaugă/ }).count();
+  assert(n >= 1 && n <= 3, `coffret picks ${n}`);
+  assert(await coffret.getByRole('link', { name: 'Toate seturile Coffret' }).getAttribute('href') === '/parfumuri/corp#coffret', 'coffret link');
+  assert(await pg.getByRole('link', { name: 'Fragrance Finder', exact: true }).first().getAttribute('href') === '/descopera/finder', 'finder link');
+  assert(await pg.getByText('verifică formatul și disponibilitatea parfumului înainte de a alege').count() === 1, 'finder sentence');
+  const values = catalogJson.gift.find(g => /gift-card/.test(g.slug)).values;
+  const shown = (await pg.getByLabel('Valori').innerText()).replace(/\s+/g, ' ');
+  assert(values.length === 5 && values.every(v => shown.includes(v.toLocaleString('ro-RO'))), `values: ${shown}`);
   assert(await pg.getByText('180 de zile').count() === 1, 'gift card validity');
+  assert(await pg.locator('#card img').count() === 0, 'gift card graphic');
+  const ids = await pg.locator('main section[id]').evaluateAll(els => els.map(e => e.id));
+  assert(ids.at(-1) === 'buget', `budget not last: ${ids.join(',')}`);
+  assert(await pg.getByRole('region', { name: 'După buget' }).getByRole('link').count() >= 6, 'budget rows');
+  const main = await pg.locator('main').innerText();
+  assert(!/voucher|Burlat|Fil Rouge/i.test(main), 'voucher or room fragrance on /cadouri');
+  assert(await pg.locator('main form, main input[type=email], footer form, footer input[type=email]').count() === 0, 'a form on /cadouri or in the footer');
+});
+
+await check('footer: Newsletter Morph links out to Morph, collects nothing', async () => {
+  const f = pg.locator('footer');
+  const a = f.getByRole('link', { name: /Abonează-te pe morphparfum\.ro/ });
+  assert(await a.getAttribute('href') === 'https://morphparfum.ro/abonare-newsletter' && await a.getAttribute('target') === '_blank', 'newsletter link');
+  assert(await f.getByRole('heading', { name: 'Newsletter Morph' }).count() === 1, 'label');
+  assert(!/Scrisoarea|reducere|discount|voucher|mostră gratuită/i.test(await f.innerText()), 'invented label or incentive');
 });
 
 await check('reduced motion: hero and reveals fully visible', async () => {
@@ -236,7 +264,7 @@ await check('nav: panels expose Morph\'s structure (collections, Baie & Corp, Se
   const m = await page({ ...devices['iPhone 13'] });
   await m.goto(BASE + '/', { waitUntil: 'networkidle' });
   await m.getByRole('button', { name: 'Meniu' }).click();
-  for (const l of ['Coffret: parfum cu gel sau cremă', 'Travel Editions 2×8 ml', 'Despre Morph', 'Gift card']) await wait(m.locator('#meniu').getByRole('link', { name: l }), `sheet: ${l}`);
+  for (const l of ['Coffret: parfum cu gel sau cremă', 'Travel Editions 2×8 ml', 'Despre Morph', 'Gift card', 'Știu ce poartă']) await wait(m.locator('#meniu').getByRole('link', { name: l }), `sheet: ${l}`);
 });
 
 await check('page transition: home world → collection carries the campaign photograph (room-image), desktop and phone', async () => {
@@ -498,6 +526,39 @@ await check('cart: threshold suggestion is a real product that covers the gap; g
   assert(/Mai ai 60 lei/.test(text) && /Îl acoperă:.*(Travel 2×8 ml|Gel de duș) Zeta/.test(text.replace(/\n/g, ' ')), text.slice(0, 200));
   await dialog.getByRole('checkbox', { name: /Cutie cadou/ }).check();
   assert(/Cutie cadou/.test(await dialog.locator('ul').first().innerText()), 'gift box line');
+});
+
+// the gift box belongs to one line: only where Morph offers it, and unticking one leaves the others (phase C4.3b)
+await check('cart: one gift box per eligible line, independent; none on Coffret', async () => {
+  const c = await page();
+  await c.goto(BASE + '/morph-zeta-parfum-100ml', { waitUntil: 'networkidle' });
+  const pdpBox = c.getByRole('checkbox', { name: /Cutie cadou/ });
+  await pdpBox.check();
+  await c.getByRole('button', { name: /Adaugă în coș/ }).click();
+  const dialog = c.getByRole('dialog', { name: 'Coșul tău' });
+  await dialog.waitFor({ state: 'visible' });
+  await dialog.getByRole('button', { name: 'Închide' }).click();
+  await c.getByRole('radio', { name: /Travel/ }).click();
+  assert(await pdpBox.isChecked(), 'PDP box on travel');
+  await c.getByRole('button', { name: /Adaugă în coș/ }).first().click();
+  await dialog.waitFor({ state: 'visible' });
+  const boxes = dialog.getByRole('checkbox', { name: /Cutie cadou/ });
+  assert(await boxes.count() === 2, `boxes ${await boxes.count()}`);
+  assert(await boxes.nth(0).isChecked() && await boxes.nth(1).isChecked(), 'both boxed');
+  const total = async () => +(await dialog.getByText('Subtotal').locator('..').innerText()).replace(/\D/g, '');
+  const before = await total();
+  await dialog.getByRole('checkbox', { name: /Cutie cadou pentru Zeta, 100 ml/ }).uncheck();
+  assert(!(await dialog.getByRole('checkbox', { name: /Cutie cadou pentru Zeta, 100 ml/ }).isChecked()), 'bottle box still on');
+  assert(await dialog.getByRole('checkbox', { name: /Cutie cadou pentru Zeta, Travel/ }).isChecked(), 'travel box removed with the other');
+  assert(before - await total() === 20, `subtotal ${before} → ${await total()}`);
+  await dialog.getByRole('button', { name: /Scoate Zeta, Travel/ }).click();
+  assert(!/Cutie cadou pentru Zeta, Travel/.test(await dialog.innerHTML()), 'box outlived its line');
+  await c.goto(BASE + '/cadouri', { waitUntil: 'networkidle' });
+  await c.getByRole('region', { name: 'Coffret' }).getByRole('button', { name: /^Adaugă/ }).first().click();
+  const d2 = c.getByRole('dialog', { name: 'Coșul tău' });
+  await d2.waitFor({ state: 'visible' });
+  assert(await d2.getByRole('checkbox', { name: /Cutie cadou/ }).count() === 0, 'gift box offered on a Coffret');
+  await c.context().close();
 });
 
 // Phase C3 (docs/design/phase-c3-discover-finder.md): Descoperă, Fragrance Finder, result
@@ -940,7 +1001,6 @@ await check('Ice image: the corrected description (Primitivo bottle, blotter str
 });
 
 const perfumersJson = JSON.parse(readFileSync(new URL('../data/perfumers.json', import.meta.url), 'utf8'));
-const catalogJson = JSON.parse(readFileSync(new URL('../data/catalog.json', import.meta.url), 'utf8'));
 const DESPRE_SOURCES = ['https://morphparfum.ro/despre-noi', 'https://en.morphparfum.com/maison/', 'https://en.morphparfum.com/nose-perfumer/'];
 // held out of /despre-noi (docs/design/phase-c4-1c-about-perfumers.md): disputed figures, the founder narrative, unsupported credits
 const DESPRE_NEVER = /Carbonn?ell?|Morel|25[–-]35|cea mai nouă creație|o dată pe an|siderurgic|lucrată manual|\b13 referințe|4 referințe/;

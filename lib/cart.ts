@@ -3,7 +3,8 @@ import { useSyncExternalStore } from 'react';
 
 // Mock cart for the concept: in memory, per page view. No checkout, no persistence.
 // Lines are merged by key; adding the same key again raises its quantity.
-export type CartItem = { key: string; name: string; format: string; price: number };
+// A line with `of` belongs to another line (the gift box of a bottle): it goes when that line goes, never outnumbers it.
+export type CartItem = { key: string; name: string; format: string; price: number; of?: string };
 export type CartLine = CartItem & { qty: number };
 type State = { items: CartLine[]; open: boolean };
 
@@ -23,9 +24,15 @@ export const cart = {
     set({ items: next, open: true });
   },
   setQty(key: string, qty: number) {
-    set({ ...state, items: qty > 0 ? state.items.map(x => (x.key === key ? { ...x, qty } : x)) : state.items.filter(x => x.key !== key) });
+    const own = state.items.find(x => x.key === key);
+    const cap = own?.of ? state.items.find(x => x.key === own.of)?.qty ?? 0 : Infinity;
+    const q = Math.min(qty, cap);
+    const items = state.items
+      .map(x => (x.key === key ? { ...x, qty: q } : x.of === key ? { ...x, qty: Math.min(x.qty, q) } : x))
+      .filter(x => x.qty > 0);
+    set({ ...state, items });
   },
-  remove(key: string) { set({ ...state, items: state.items.filter(x => x.key !== key) }); },
+  remove(key: string) { set({ ...state, items: state.items.filter(x => x.key !== key && x.of !== key) }); },
   open() { set({ ...state, open: true }); },
   close() { set({ ...state, open: false }); },
 };
