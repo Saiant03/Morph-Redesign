@@ -804,6 +804,75 @@ await check('Your Next Form: 12 real states, price and stock, contents never nam
   await r.context().close();
 });
 
+// ---- Phase C3.5.1: Layering motion, Nudo/Axum base notes, the shop's entrance ----
+const NUDO = 'morph-nudo-parfum-100ml', AXUM = 'morph-axum-parfum-100ml';
+const frames = t => t.evaluate(() => { const st = document.querySelector('[data-tier]').getBoundingClientRect();
+  return [...document.querySelectorAll('[class*="pairObj"]:not([data-leave]) [class*="pairFrame"]')].map(f => { const r = f.getBoundingClientRect(); return [r.left - st.left, r.top - st.top, r.width, r.height].map(Math.round).join(','); }).join(' '); });
+
+await check('layering motion: after replacing A and B the bottles stand exactly where a fresh page puts them; the leaving bottle is gone; no overflow', async () => {
+  const t = await page();
+  await t.goto(BASE + `/layering?a=${ZETA}&b=${VAPOR}`, { waitUntil: 'networkidle' });
+  for (const [slot, name] of [['A', 'Nudo'], ['B', 'Axum']]) {
+    await t.locator(`[data-slot="${slot}"]`).click();
+    await t.getByRole('group', { name: new RegExp(`Alege parfumul ${slot}`) }).getByRole('radio', { name, exact: true }).click();
+    assert(await t.locator('[data-leave]').count() === 1, `${slot}: no leaving bottle during the change`);
+    await t.waitForTimeout(1100);
+    await t.keyboard.press('Escape');
+  }
+  assert(await t.locator('[data-leave]').count() === 0, 'leaving bottle still on the shelf');
+  const moved = await frames(t);
+  assert(await t.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'horizontal overflow');
+  const f = await page();
+  await f.goto(BASE + `/layering?a=${NUDO}&b=${AXUM}`, { waitUntil: 'networkidle' });
+  const fresh = await frames(f);
+  assert(moved === fresh, `final geometry ${moved} ≠ ${fresh}`);
+  await t.context().close(); await f.context().close();
+});
+
+await check('layering reduced motion: a replaced bottle is final at once (no leaving copy, no rise, full opacity)', async () => {
+  const t = await page({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+  await t.goto(BASE + `/layering?a=${ZETA}&b=${VAPOR}`, { waitUntil: 'networkidle' });
+  await t.locator('[data-slot="A"]').click();
+  await t.getByRole('group', { name: /Alege parfumul A/ }).getByRole('radio', { name: 'Axum', exact: true }).click();
+  await t.waitForTimeout(50);
+  assert(await t.locator('[data-leave]').count() === 0, 'leaving copy under reduced motion');
+  const op = await t.locator('[class*="pairObj"][data-rise] [class*="pairFrame"]').evaluate(e => getComputedStyle(e).opacity);
+  assert(op === '1', `opacity ${op}`);
+  await t.keyboard.press('Escape');
+  await t.getByRole('button', { name: /Bază/ }).click();
+  await t.waitForTimeout(50);
+  const running = await t.evaluate(() => document.getAnimations().filter(a => (a.effect?.getTiming().duration ?? 0) > 1 && a.playState === 'running').length);
+  assert(running === 0, `${running} running animations`);
+  await t.context().close();
+});
+
+await check('Nudo / Axum: the base notes Morph publishes in the description are shown; no tier is empty', async () => {
+  const t = await page();
+  await t.goto(BASE + `/layering?a=${NUDO}&b=${AXUM}`, { waitUntil: 'networkidle' });
+  const base = await t.getByRole('list', { name: /Notele perechii/ }).getByRole('listitem').nth(2).innerText();
+  for (const n of ['Tămâie', 'Mosc alb', 'Vanilie', 'Ambră cenușie']) assert(base.includes(n), `${n} missing from Bază: ${base}`);
+  assert(!/nepublicate/.test(await t.getByRole('list', { name: /Notele perechii/ }).innerText()), 'unpublished marker with published notes');
+  // the attribute stays the source where it has values: Axum's opening is unchanged
+  assert((await t.getByRole('list', { name: /Notele perechii/ }).getByRole('listitem').nth(0).innerText()).includes('Chimion'), 'Axum opening');
+  await t.goto(BASE + `/${AXUM}`, { waitUntil: 'networkidle' });
+  assert(/Mosc alb/.test(await t.locator('main').innerText()), 'Axum PDP base notes');
+  await t.context().close();
+});
+
+await check('→ /magazin: in-site navigation lights the walnut room up from dark (shop-light), no overflow', async () => {
+  const t = await page();
+  await t.goto(BASE + '/layering', { waitUntil: 'networkidle' });
+  await t.evaluate(() => { document.documentElement.dataset.nav = ''; });
+  await t.evaluate(() => [...document.querySelectorAll('header a[href="/magazin"]')].find(a => a.getBoundingClientRect().width > 0).click());
+  await t.waitForURL(/\/magazin$/);
+  const names = await t.evaluate(() => document.getAnimations().map(a => a.animationName));
+  assert(names.includes('shop-light') && !names.includes('vt-light'), `animations ${names.join(' ')}`);
+  await t.waitForTimeout(1000);
+  assert((await t.locator('h1').innerText()) === 'Magazinul Morph', 'h1');
+  assert(await t.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'horizontal overflow');
+  await t.context().close();
+});
+
 await check('no console errors', async () => { assert(errors.length === 0, errors.slice(0, 3).join(' | ')); });
 
 await browser.close();

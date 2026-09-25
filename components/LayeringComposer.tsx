@@ -7,7 +7,7 @@ import {
 } from '@/lib/catalog';
 import { pairKey } from '@/lib/tryList';
 import { norm } from '@/lib/discover';
-import { PairStage } from './Stage';
+import { PairStage, type PairChange } from './Stage';
 import { AddToCart } from './AddToCart';
 import { TryToggle } from './TryToggle';
 import { TIERS } from './NotePyramid';
@@ -53,7 +53,9 @@ export function LayeringComposer({ first, second, headingId }: { first: string |
   const [pair, setPair] = useState<Pair>([first, second]);
   const [open, setOpen] = useState<Slot | null>(null);
   const [tier, setTier] = useState<Tier>('top');
-  const [rise, setRise] = useState<Slot | null>(null);
+  const [change, setChange] = useState<PairChange | null>(null);
+  const [leaving, setLeaving] = useState(false);
+  const leaveTimer = useRef(0);
   const [copied, setCopied] = useState(false);
   const slotRefs = [useRef<HTMLButtonElement>(null), useRef<HTMLButtonElement>(null)];
   const pickerRef = useRef<HTMLDivElement>(null);
@@ -79,16 +81,23 @@ export function LayeringComposer({ first, second, headingId }: { first: string |
     if (r && r.top > innerHeight - 160) pickerRef.current?.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   }, [open]);
 
+  // the pair is final at once; the bottle that stood in the slot is kept on the shelf only while it leaves (motion)
   function choose(slot: Slot, slug: string) {
     setPair(prev => (slot === 0 ? [slug, prev[1]] : [prev[0], slug]));
-    setRise(slot);
+    setChange(c => ({ slot, n: (c?.n ?? 0) + 1, from: [A, B] }));
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setLeaving(!still);
+    clearTimeout(leaveTimer.current);
+    if (!still) leaveTimer.current = window.setTimeout(() => setLeaving(false), 260);
   }
+  useEffect(() => () => clearTimeout(leaveTimer.current), []);
   function close(slot: Slot) {
     setOpen(null);
     slotRefs[slot].current?.focus();
   }
   function clear() {
     setPair([null, null]);
+    setChange(null);
     setOpen(null);
     setTier('top');
     slotRefs[0].current?.focus();
@@ -103,7 +112,7 @@ export function LayeringComposer({ first, second, headingId }: { first: string |
     <div className={s.composer} data-open={open !== null || undefined} data-empty={!A && !B || undefined}>
       <div className={s.room}>
         <div className={s.stageWrap}>
-          <PairStage pair={[A, B]} tier={tier} rise={rise} sizes="(max-width: 899px) 70vw, 32vw" className={s.stage} />
+          <PairStage pair={[A, B]} tier={tier} change={change} leaving={leaving} sizes="(max-width: 899px) 70vw, 32vw" className={s.stage} />
           {/* the tier on the glass (wide screens): the same notes as the strata list, which carries them for everyone */}
           <div className={s.onGlass} aria-hidden key={`${query}|${tier}`}>
             <span className={s.glassA}>{here.a.map(n => <span key={n}>{n}</span>)}</span>
@@ -174,9 +183,9 @@ export function LayeringComposer({ first, second, headingId }: { first: string |
                   <span className="num" aria-hidden>{i + 1}</span> {t.label}
                 </button>
                 <p className={s.voices} key={query}>
-                  <span className={s.a}>{A && <span className="sr-only">{A.shortName}: </span>}{v.a.map(n => <span key={n}>{n}</span>)}</span>
+                  <span className={s.a}>{A && <span className="sr-only">{A.shortName}: </span>}{v.a.map(n => <span key={n}>{n}</span>)}{A && !A.notes[t.key].length && <Unpublished />}</span>
                   <span className={s.seam}>{v.meet.length ? <><span className="sr-only">Amândouă: </span>{v.meet.map(n => <em key={n}>{n}</em>)}</> : null}</span>
-                  <span className={s.b}>{B && <span className="sr-only">{B.shortName}: </span>}{v.b.map(n => <span key={n}>{n}</span>)}</span>
+                  <span className={s.b}>{B && <span className="sr-only">{B.shortName}: </span>}{v.b.map(n => <span key={n}>{n}</span>)}{B && !B.notes[t.key].length && <Unpublished />}</span>
                 </p>
               </li>
             );
@@ -197,6 +206,9 @@ export function LayeringComposer({ first, second, headingId }: { first: string |
     </div>
   );
 }
+
+// a tier Morph publishes no notes for, in either the attribute or the description: said, never filled
+const Unpublished = () => <span className="muted t-small" title="Morph nu publică note pentru această etapă"><span aria-hidden>—</span><span className="sr-only">note nepublicate de Morph</span></span>;
 
 /** What the pair shares, as a sentence from Morph's data: notes first, then family and season. */
 function Together({ A, B }: { A: Perfume | null; B: Perfume | null }) {

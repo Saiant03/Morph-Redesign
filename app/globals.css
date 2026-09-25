@@ -181,8 +181,12 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 @media (prefers-reduced-motion: no-preference) {
   html[data-nav] .page-enter { animation: var(--vt-in) var(--ease-light) var(--vt-lead) backwards vt-light; }
   html:active-view-transition-type(room) .page-enter { animation: none; }
+  /* the shop (phase-c3-5-1-motion-polish.md): a dark walnut room at 40 % opacity shows the stone page through it
+     (a pale grey frame). Here the light comes up instead: same rise, same curve, from dark, never translucent */
+  html[data-nav] .page-enter:has(> [data-enter='shop']) { animation: 560ms var(--ease-light) var(--vt-lead) backwards shop-light; }
 }
 @keyframes vt-light { from { opacity: 0.4; transform: translateY(8px); filter: brightness(0.82); } }
+@keyframes shop-light { from { transform: translateY(8px); filter: brightness(0.35); } }
 ::view-transition-group(site-header) { z-index: 3; animation: none; }
 ::view-transition-old(site-header), ::view-transition-new(site-header) { animation: none; }
 ::view-transition-old(site-header) { display: none; }

@@ -61,10 +61,12 @@
   position: absolute; left: calc(50cqw + var(--x) * 1cqh); top: calc(var(--y) * 1cqh);
   width: calc(var(--pw) * 1cqh); height: calc(var(--ph) * 1cqh); translate: -50% -50%;
   background: radial-gradient(closest-side, var(--glow) 0%, var(--niche-mid) 34%, color-mix(in srgb, var(--niche-mid) 58%, transparent) 55%, color-mix(in srgb, var(--niche-mid) 20%, transparent) 76%, transparent 100%);
-  transition: --glow var(--d-story) var(--ease-inout), translate var(--d-slow) var(--ease-out), opacity var(--d-slow) var(--ease-out);
+  /* the tier moves the key light on the light's own curve; B's light follows A's by a beat, so it reads as one light
+     passing over the shelf, not two filters switching */
+  transition: --glow var(--d-story) var(--ease-inout), translate var(--d-story) var(--ease-light), opacity var(--d-story) var(--ease-light);
 }
 /* the second light adds to the first where they cross */
-.pool + .pool { mix-blend-mode: screen; }
+.pool + .pool { mix-blend-mode: screen; transition-delay: 0s, 70ms, 70ms; }
 .pool[data-off] { opacity: 0.12; }
 /* the time axis lowers the key light: opening high and full, the base lower and dimmer */
 .pair[data-tier='heart'] .pool:not([data-off]) { translate: -50% -46%; opacity: 0.93; }
@@ -78,10 +80,37 @@
 .pairRefl { left: 0; top: calc((2 * var(--foot) - 1) * 100%); height: 100%; width: 100%; translate: none; z-index: auto; }
 .behind .pairRefl { opacity: 0.55; }
 .pairGlint { left: 0; top: 0; height: 100%; translate: none; opacity: 0.85; }
-/* a bottle placed on the shelf rises into its light (the loader grammar); reduced motion: it is simply there */
+/* Changing a bottle (phase-c3-5-1-motion-polish.md), ~1 s in all, no layout property animated. Everything moves on
+   the children of .pairObj (the rule above: the host itself never forms a stacking context).
+   0–270 ms   the slot's light dips and lowers a little; the bottle standing there sinks out of it (leave, 220 ms);
+   150–870 ms the new bottle rises from under the glass (--rise of its own height: less for B, further back), its foot
+              held at the shelf line by the clip, so it comes up through the glass, never through the shelf's edge;
+              it is fully there by ~400 ms, then only decelerates into place (ease-out, no overshoot);
+   270–900 ms the light comes back up with it (it never arrives before the object); the glint comes last;
+              the other bottle, if the new pair's measures move it, glides to its new place with its light. */
+.pairObj { --rise: 5%; }
+.behind { --rise: 4%; }
 @media (prefers-reduced-motion: no-preference) {
-  .pairObj[data-rise] > .pairFrame { animation: pair-rise var(--d-slow) var(--ease-out) both; }
-  .pairObj[data-rise] > .pairRefl { animation: pair-fade var(--d-slow) var(--ease-out) both; }
+  .pool[data-dip='a'] { animation: dip-a var(--d-story) var(--ease-inout); }
+  .pool[data-dip='b'] { animation: dip-b var(--d-story) var(--ease-inout); }
+  .pool[data-glide='a'] { animation: glide-a var(--d-slow) var(--ease-inout); }
+  .pool[data-glide='b'] { animation: glide-b var(--d-slow) var(--ease-inout); }
+  .pairObj[data-leave] > * { animation: pair-leave 220ms var(--ease-inout) both; }
+  .pairObj[data-rise] > .pairFrame { animation: pair-rise 720ms var(--ease-out) 150ms both; }
+  .pairObj[data-rise] > .pairRefl { animation: pair-refl 720ms var(--ease-out) 150ms both; }
+  .pairObj[data-rise] > .pairGlint { animation: pair-glint 720ms var(--ease-out) 150ms both; }
+  .pairObj[data-glide='a'] > * { animation: glide-a var(--d-slow) var(--ease-inout); }
+  .pairObj[data-glide='b'] > * { animation: glide-b var(--d-slow) var(--ease-inout); }
 }
-@keyframes pair-rise { from { opacity: 0; translate: 0 3%; } }
-@keyframes pair-fade { from { opacity: 0; } }
+/* the dip: filter and transform, so the tier's translate and opacity keep their own transitions underneath */
+@keyframes dip-a { 30% { filter: brightness(0.4); transform: translateY(3%); } }
+@keyframes dip-b { 30% { filter: brightness(0.4); transform: translateY(3%); } }
+@keyframes glide-a { from { transform: translateX(calc(var(--dx) * 1cqh)); } }
+@keyframes glide-b { from { transform: translateX(calc(var(--dx) * 1cqh)); } }
+@keyframes pair-leave { to { opacity: 0; transform: translateY(1.5%); } }
+@keyframes pair-rise {
+  from { opacity: 0; transform: translateY(var(--rise)); clip-path: inset(0 0 calc((1 - var(--foot)) * 100% - 1.5% + var(--rise)) 0); }
+  35% { opacity: 1; }
+}
+@keyframes pair-refl { 0%, 30% { opacity: 0; } }
+@keyframes pair-glint { 0% { opacity: 0; transform: translateY(var(--rise)); } 60% { opacity: 0; } }

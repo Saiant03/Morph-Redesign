@@ -14,8 +14,9 @@ const WALL = ['morph-iconic-parfum-100ml', 'morph-indomable-parfum-100ml', 'morp
 export default function Page() {
   return (
     <>
-      {/* The room: an art wall with three lit niches, and the practical facts beside it */}
-      <section className={s.room} data-tone="wood" aria-labelledby="casa-titlu">
+      {/* The room: an art wall with three lit niches, and the practical facts beside it. data-enter: arriving here,
+          the walnut room is lit up from dark (globals.css, shop-light) */}
+      <section className={s.room} data-tone="wood" data-enter="shop" aria-labelledby="casa-titlu">
         <div className={`wrap ${s.roomGrid}`}>
           <div className={s.roomText}>
             <nav className="t-small muted" aria-label="Breadcrumb"><Link href="/">Morph</Link> / <span aria-current="page">Magazinul</span></nav>

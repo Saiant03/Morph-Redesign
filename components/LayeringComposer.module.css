@@ -16,17 +16,21 @@
 .stageWrap { position: relative; margin-left: calc(var(--m) * -1); }
 .stage { width: 100%; aspect-ratio: 3 / 2; }
 
-/* the active tier, standing on the glass beside its bottle (wide screens only; decorative copy of the strata) */
+/* the active tier, standing on the glass beside its bottle (wide screens only; decorative copy of the strata). It
+   arrives with the light: a beat after the pools start to move, A's side, then B's (the light's own 70 ms beat) */
 .onGlass { position: absolute; inset: 0; pointer-events: none; font-family: var(--serif); font-size: clamp(17px, 1.3vw, 21px); line-height: 1.25; }
 .onGlass > span { position: absolute; display: grid; gap: 4px; }
 .glassA { left: calc(var(--m) + 1%); top: 34%; max-width: 21%; }
 .glassB { right: 1%; top: 34%; max-width: 21%; justify-items: end; text-align: right; }
 .glassMeet { left: 50%; top: 2%; translate: -50% 0; justify-items: center; text-align: center; }
 .glassMeet em { font-size: 1.2em; }
-.glassA > *, .glassB > *, .glassMeet > * { animation: glass-in var(--d-slow) var(--ease-out) both; }
-.glassA > :nth-child(2), .glassB > :nth-child(2) { animation-delay: 80ms; }
-.glassA > :nth-child(3), .glassB > :nth-child(3) { animation-delay: 160ms; }
-.glassMeet > * { animation-delay: 240ms; }
+.glassA > *, .glassB > *, .glassMeet > * { animation: glass-in var(--d-slow) var(--ease-light) 120ms both; }
+.glassB > * { animation-delay: 190ms; }
+.glassA > :nth-child(2) { animation-delay: 200ms; }
+.glassB > :nth-child(2) { animation-delay: 270ms; }
+.glassA > :nth-child(3) { animation-delay: 280ms; }
+.glassB > :nth-child(3) { animation-delay: 350ms; }
+.glassMeet > * { animation-delay: 360ms; }
 @keyframes glass-in { from { opacity: 0; translate: 0 6px; } }
 
 /* the two slots, on the glass under their bottles: A left, B right */
@@ -51,12 +55,14 @@
 
 .strata { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--fg); }
 .stratum { display: grid; gap: 6px; padding: var(--s-3) 0 var(--s-4); border-bottom: 1px solid var(--border); transition: opacity var(--d-base) var(--ease-out); }
-.stop { position: relative; justify-self: center; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 14px; background: none; border: 0; color: var(--muted); font-size: 11.5px; letter-spacing: 0.09em; text-transform: uppercase; font-weight: 500; }
+.stop { position: relative; justify-self: center; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 14px; background: none; border: 0; color: var(--muted); font-size: 11.5px; letter-spacing: 0.09em; text-transform: uppercase; font-weight: 500; transition: color var(--d-fast) var(--ease-out); }
 .stop:hover { color: var(--fg); }
-/* the tier in the light: the same lit point as the chosen name in the picker */
+/* the tier in the light: the same lit point as the chosen name in the picker. The point and the tier's notes turn on
+   at once (fast), ahead of the light on the shelf, so the choice reads before the room has finished moving */
 .stop[aria-pressed='true'] { color: var(--fg); }
-.stop[aria-pressed='true']::before { content: ''; position: absolute; left: 2px; top: 50%; width: 6px; height: 6px; border-radius: 50%; background: var(--fg); translate: 0 -50%; }
-.voices { margin: 0; display: grid; grid-template-columns: 1fr minmax(48px, auto) 1fr; gap: var(--s-3); align-items: center; font-size: clamp(16px, 1.2vw, 19px); line-height: 1.3; }
+.stop::before { content: ''; position: absolute; left: 2px; top: 50%; width: 6px; height: 6px; border-radius: 50%; background: var(--fg); translate: 0 -50%; scale: 0; opacity: 0; transition: scale var(--d-base) var(--ease-out), opacity var(--d-fast) var(--ease-out); }
+.stop[aria-pressed='true']::before { scale: 1; opacity: 1; }
+.voices { margin: 0; display: grid; grid-template-columns: 1fr minmax(48px, auto) 1fr; gap: var(--s-3); align-items: center; font-size: clamp(16px, 1.2vw, 19px); line-height: 1.3; transition: color var(--d-base) var(--ease-out); }
 .voices > span { display: flex; flex-wrap: wrap; gap: 2px 12px; }
 .stratum:not([data-on='true']) .voices { color: var(--muted); }
 .a { justify-content: flex-end; text-align: right; animation: fromA var(--d-story) var(--ease-out) both; animation-delay: calc(var(--i) * 160ms); }

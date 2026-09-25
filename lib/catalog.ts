@@ -39,8 +39,17 @@ export type BodyKind = 'gel' | 'cream' | 'set-gel' | 'set-cream';
 export type BodyItem = Offer & { kind: BodyKind; scent: string | null };
 
 const fixNote = (n: string) => n.replace(/\bavola\b/g, 'Avola');
+// Seven perfumes (Axum, Nudo, Antigua Bay, Malaga, Umhh, Iconic: base; Kolonaki: heart) have an empty note attribute
+// in the Store API while Morph's own description lists that tier ("Note de bază: …"). Only an empty tier is filled
+// from it; a published attribute is never replaced (docs/design/phase-c3-5-1-motion-polish.md).
+const TIER_HEAD = { top: /^Note de v[âa]rf:/i, heart: /^Note de mijloc:/i, base: /^Note de baz[ăa]:/i };
+const fromText = (p: Perfume, t: keyof typeof TIER_HEAD) => {
+  const h = p.sections.find(x => TIER_HEAD[t].test(x.heading))?.heading ?? '';
+  return h.replace(TIER_HEAD[t], '').replace(/\.\s*$/, '').split(',').map(n => n.trim()).filter(Boolean).map(n => n.charAt(0).toUpperCase() + n.slice(1));
+};
+const tier = (p: Perfume, t: keyof typeof TIER_HEAD) => (p.notes[t].length ? p.notes[t] : fromText(p, t)).map(fixNote);
 // "Primavară" is spelled so in the Store API; shown with its diacritic.
-export const perfumes = (catalog.perfumes as Perfume[]).map(p => ({ ...p, season: p.season.map(x => (x === 'Primavară' ? 'Primăvară' : x)), notes: { top: p.notes.top.map(fixNote), heart: p.notes.heart.map(fixNote), base: p.notes.base.map(fixNote) } }));
+export const perfumes = (catalog.perfumes as Perfume[]).map(p => ({ ...p, season: p.season.map(x => (x === 'Primavară' ? 'Primăvară' : x)), notes: { top: tier(p, 'top'), heart: tier(p, 'heart'), base: tier(p, 'base') } }));
 export const travelSets = catalog.travel as Offer[];
 export const sampleSets = catalog.samples as Offer[];
 export const layeringSets = catalog.layering as Offer[];

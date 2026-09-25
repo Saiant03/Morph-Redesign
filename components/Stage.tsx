@@ -49,56 +49,88 @@ function standing(src: string, h: number) {
   return { b, box, ar, w, visible: w * (b.right - b.left), off: ((b.left + b.right) / 2 - 0.5) * w };
 }
 
-/**
- * Layering (docs/design/phase-c3-5-layering-ynf.md): two fragrances on one glass shelf, each in its own key light.
- * A stands in front, B a step behind (smaller, its foot a little higher on the glass) and the glass overlaps by a
- * fifth of the narrower bottle. The two pools of light overlap between them (screen): light adds, nothing is mixed.
- * Both bottles are set to the same measured object height, because Morph's packshots are framed at two scales.
- * An empty slot keeps its place on the shelf, unlit. `rise`: the slot just changed (its bottle rises into the light).
- */
-export function PairStage({ pair, tier = 'top', rise = null, className = '', sizes }: {
-  pair: [Perfume | null, Perfume | null]; tier?: 'top' | 'heart' | 'base'; rise?: 0 | 1 | null; className?: string; sizes: string;
-}) {
-  const [A, B] = pair;
+type Pair = [Perfume | null, Perfume | null];
+/** A slot's change on the pair stage: which slot, a counter (restarts the light's CSS animation), what stood there. */
+export type PairChange = { slot: 0 | 1; n: number; from: Pair };
+
+/** The pair's geometry in stage heights: each bottle's measured box, its centre on the shelf and its foot. */
+function pairLayout([A, B]: Pair) {
   // an empty slot takes the other bottle's measure, so choosing it later does not move the one already standing
   const other = (A ?? B)?.images[0] ?? '';
   const g = [standing(A?.images[0] ?? other, PAIR.h), standing(B?.images[0] ?? other, PAIR.h * PAIR.depth)];
   const gap = (g[0].visible + g[1].visible) / 2 - PAIR.overlap * Math.min(g[0].visible, g[1].visible);
   const shift = (g[1].visible - g[0].visible) / 4;
-  const centers = [-gap / 2 - shift, gap / 2 - shift];
-  const feet = [PAIR.shelf, PAIR.shelf - PAIR.lift];
+  return { g, centers: [-gap / 2 - shift, gap / 2 - shift], feet: [PAIR.shelf, PAIR.shelf - PAIR.lift] };
+}
+
+/**
+ * Layering (docs/design/phase-c3-5-layering-ynf.md): two fragrances on one glass shelf, each in its own key light.
+ * A stands in front, B a step behind (smaller, its foot a little higher on the glass) and the glass overlaps by a
+ * fifth of the narrower bottle. The two pools of light overlap between them (screen): light adds, nothing is mixed.
+ * Both bottles are set to the same measured object height, because Morph's packshots are framed at two scales.
+ * An empty slot keeps its place on the shelf, unlit.
+ * `change` (phase-c3-5-1-motion-polish.md): the slot's light dips, the bottle that stood there sinks out of it, the
+ * new one rises from under the glass into its place and the light comes back up with it; the other bottle glides to
+ * its new place. `leaving`: the bottle going out, rendered only while it leaves.
+ */
+export function PairStage({ pair, tier = 'top', change = null, leaving = false, className = '', sizes }: {
+  pair: Pair; tier?: 'top' | 'heart' | 'base'; change?: PairChange | null; leaving?: boolean; className?: string; sizes: string;
+}) {
+  const { g, centers, feet } = pairLayout(pair);
+  const prev = change ? pairLayout(change.from) : null;
+  const beat = change ? (change.n % 2 ? 'a' : 'b') : undefined;
   const r = (n: number) => n.toFixed(2);
+  const place = (k: 0 | 1, o: ReturnType<typeof standing>, x: number) => ({
+    '--x': r(x - o.off - o.w / 2), '--top': r(feet[k] - o.b.bottom * o.box), '--h': r(o.box), '--ar': o.ar,
+    '--foot': o.b.bottom, '--ol': o.b.left, '--ow': o.b.right - o.b.left,
+  });
+  const out = change && leaving ? change.from[change.slot] : null;
   return (
     <div className={`${s.pair} ${className}`} data-tier={tier} style={{ '--shelf': `${PAIR.shelf}%` } as React.CSSProperties}>
       <span className={s.shelf} aria-hidden />
       {([0, 1] as const).map(k => {
         const p = pair[k], o = g[k], h = k ? PAIR.h * PAIR.depth : PAIR.h;
+        // the changed slot's light dips and comes back; the other slot's light glides with its bottle
+        const dx = prev && change!.slot !== k ? prev.centers[k] - centers[k] : 0;
         return (
           <span key={`pool${k}`} className={s.pool} data-off={p ? undefined : ''} aria-hidden
-            style={{ ...(p ? scentVars(p) : {}), '--x': r(centers[k]), '--y': r(feet[k] - h * 0.52), '--pw': r(o.visible * 2.1), '--ph': r(h * 1.45) } as React.CSSProperties} />
+            data-dip={change?.slot === k ? beat : undefined} data-glide={Math.abs(dx) > 0.05 ? beat : undefined}
+            style={{ ...(p ? scentVars(p) : {}), '--dx': r(dx), '--x': r(centers[k]), '--y': r(feet[k] - h * 0.52), '--pw': r(o.visible * 2.1), '--ph': r(h * 1.45) } as React.CSSProperties} />
         );
       })}
-      {/* B first: A, in front, is painted over it */}
+      {/* B first: A, in front, is painted over it; the bottle leaving its slot is painted under the one arriving */}
       {([1, 0] as const).map(k => {
         const p = pair[k];
-        if (!p) return null;
-        const src = p.images[0], o = g[k], mask = lightMask(src);
-        const vars = {
-          '--x': r(centers[k] - o.off - o.w / 2), '--top': r(feet[k] - o.b.bottom * o.box), '--h': r(o.box), '--ar': o.ar,
-          '--foot': o.b.bottom, '--ol': o.b.left, '--ow': o.b.right - o.b.left,
-        } as React.CSSProperties;
-        return (
-          <span key={p.slug} className={`${s.pairObj} ${k ? s.behind : ''}`} style={vars} data-rise={rise === k ? '' : undefined} data-lit={mask ? '' : undefined}>
-            <span className={`${s.refl} ${s.pairRefl}`} aria-hidden><Image src={src} alt="" fill sizes={sizes} className={s.img} /></span>
-            <ViewTransition name={`obj-${p.slug}`} share="morph" default="none">
-              <span className={s.pairFrame}>
-                <span className={s.contact} aria-hidden />
-                <Image src={src} alt="" fill sizes={sizes} className={s.img} />
+        const going = out && change!.slot === k && out.slug !== p?.slug ? out : null;
+        const dx = prev && change!.slot !== k ? prev.centers[k] - centers[k] : 0;
+        return [
+          going && (() => {
+            const o = prev!.g[k], src = going.images[0];
+            return (
+              <span key={`out-${going.slug}`} className={`${s.pairObj} ${k ? s.behind : ''}`} style={place(k, o, prev!.centers[k]) as React.CSSProperties} data-leave="" aria-hidden>
+                <span className={`${s.refl} ${s.pairRefl}`}><Image src={src} alt="" fill sizes={sizes} className={s.img} /></span>
+                <span className={s.pairFrame}><span className={s.contact} /><Image src={src} alt="" fill sizes={sizes} className={s.img} /></span>
               </span>
-            </ViewTransition>
-            {mask && <ObjectLight mask={mask} className={`${s.glint} ${s.pairGlint}`} mode="hover" />}
-          </span>
-        );
+            );
+          })(),
+          p && (() => {
+            const src = p.images[0], o = g[k], mask = lightMask(src);
+            const vars = { ...place(k, o, centers[k]), '--dx': r(dx) } as React.CSSProperties;
+            return (
+              <span key={p.slug} className={`${s.pairObj} ${k ? s.behind : ''}`} style={vars} data-lit={mask ? '' : undefined}
+                data-rise={change?.slot === k && change.from[k]?.slug !== p.slug ? '' : undefined} data-glide={Math.abs(dx) > 0.05 ? beat : undefined}>
+                <span className={`${s.refl} ${s.pairRefl}`} aria-hidden><Image src={src} alt="" fill sizes={sizes} className={s.img} /></span>
+                <ViewTransition name={`obj-${p.slug}`} share="morph" default="none">
+                  <span className={s.pairFrame}>
+                    <span className={s.contact} aria-hidden />
+                    <Image src={src} alt="" fill sizes={sizes} className={s.img} />
+                  </span>
+                </ViewTransition>
+                {mask && <ObjectLight mask={mask} className={`${s.glint} ${s.pairGlint}`} mode="hover" />}
+              </span>
+            );
+          })(),
+        ];
       })}
     </div>
   );
