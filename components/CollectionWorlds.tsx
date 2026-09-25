@@ -15,6 +15,10 @@ const still = (c: CollectionId) => [...inCollection(c)].sort((a, b) => Number(b.
 const WIDE = '(min-width: 1200px)';
 const useWide = () => useSyncExternalStore(f => { const m = matchMedia(WIDE); m.addEventListener('change', f); return () => m.removeEventListener('change', f); }, () => matchMedia(WIDE).matches, () => true);
 const ROOM_SHARE = { 'enter-room': 'room-enter', default: 'room' };
+// React registers a named <ViewTransition> on every commit but releases the name only when it unmounts, so the name
+// must never move between mounted instances by a prop change. The owner is keyed by ownership instead: handing
+// `room-image` over (hydration, the 1200 px breakpoint, scrolling on phones) unmounts the old owner first.
+const owner = (yes: boolean) => (yes ? 'room-image' : undefined);
 
 /**
  * "Trei lumi" (SECTION → ENVIRONMENT): one sticky stage holding Morph's three collection campaigns; three text
@@ -37,7 +41,7 @@ export function CollectionWorlds() {
   return (
     <section className={s.worlds} aria-labelledby="lumi-titlu">
       <h2 id="lumi-titlu" className="sr-only">Trei colecții</h2>
-      <ViewTransition name={wide ? 'room-image' : undefined} share={ROOM_SHARE} default="none">
+      <ViewTransition key={owner(wide) ?? 'plain'} name={owner(wide)} share={ROOM_SHARE} default="none">
         <div className={s.stage} aria-hidden>
           {ALL_BY_COLLECTION.map(c => (
             <Image key={c} src={CAMPAIGN[c].src} alt="" fill sizes="100vw" className={s.env} style={{ objectPosition: CAMPAIGN[c].pos }} data-on={on === c} />
@@ -50,7 +54,7 @@ export function CollectionWorlds() {
         const prices = [...new Set(list.map(p => p.price))];
         return (
           <article key={c} ref={el => { panels.current[i] = el; }} data-world={c} className={s.panel} data-side={CAMPAIGN[c].side} data-align={CAMPAIGN[c].align} aria-labelledby={`lume-${c}`}>
-            <ViewTransition name={!wide && on === c ? 'room-image' : undefined} share={ROOM_SHARE} default="none">
+            <ViewTransition key={owner(!wide && on === c) ?? 'plain'} name={owner(!wide && on === c)} share={ROOM_SHARE} default="none">
               <div className={s.mobileImg}><CampaignPicture {...CAMPAIGN[c]} priority={false} /></div>
             </ViewTransition>
             <div className={s.card}>
