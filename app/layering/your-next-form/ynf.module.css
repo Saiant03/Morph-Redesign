@@ -1,11 +1,23 @@
 .page { min-height: 100%; }
-.how { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); padding: var(--s-5) 0 var(--s-8); border-top: 1px solid var(--border-strong); }
-.how > div { display: grid; gap: var(--s-2); align-content: start; max-width: 42ch; }
+/* known / unknown: Morph's sealed boxes (the state is the only thing written on them) beside the ledger */
+.known { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-6); padding-top: var(--s-5); border-top: 1px solid var(--border-strong); align-items: start; }
+.boxes { grid-column: 1 / span 7; position: relative; margin: 0 0 0 calc(var(--m) * -1); aspect-ratio: 1920 / 1000; overflow: hidden; }
+.boxes img { object-fit: cover; }
+.ledger { grid-column: 9 / -1; display: grid; gap: var(--s-5); align-content: start; }
+.ledger > div { display: grid; gap: var(--s-2); }
+.facts { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--fg); }
+.facts li { padding: 8px 0; border-bottom: 1px solid var(--border); }
+/* what the box keeps: the rule above is broken, the words stay readable */
+.unknown { border-top: 1px dashed var(--border-strong); }
+.unknown li { font-style: italic; font-family: var(--serif); font-size: 19px; }
+.quote { margin: 0; display: grid; gap: var(--s-2); padding-left: var(--s-3); border-left: 1px solid var(--metal); }
+.quote p { margin: 0; font-family: var(--serif); font-size: var(--t-3); line-height: 1.3; }
+.index { display: grid; gap: var(--s-6); }
 .next { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gap); row-gap: var(--s-6); padding-bottom: var(--section); }
 .next > h2 { grid-column: 1 / span 4; }
 .next > div { grid-column: span 4; display: grid; gap: var(--s-3); justify-items: start; align-content: start; padding-top: var(--s-4); border-top: 1px solid var(--border); }
 @media (max-width: 899px) {
-  .how, .next { grid-template-columns: 1fr; }
-  .how { gap: var(--s-5); padding-bottom: var(--s-7); }
-  .next > * { grid-column: 1 !important; }
+  .known, .next { grid-template-columns: 1fr; }
+  .known > *, .next > * { grid-column: 1 !important; }
+  .boxes { margin-inline: calc(var(--m) * -1); }
 }

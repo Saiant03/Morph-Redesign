@@ -48,3 +48,40 @@
     linear-gradient(104deg, transparent calc(var(--c) - 5%), rgb(255 255 255 / 0.16) calc(var(--c) - 2.5%), rgb(255 253 248 / 0.72) var(--c), rgb(255 255 255 / 0.14) calc(var(--c) + 1.5%), transparent calc(var(--c) + 3%)),
     linear-gradient(104deg, transparent calc(var(--c) + 6.5%), rgb(255 255 255 / 0.32) calc(var(--c) + 7.5%), transparent calc(var(--c) + 9%));
 }
+
+/* PairStage (Layering): one room, one shelf, two objects. Geometry comes in stage heights (cqh) from the measured
+   boxes; x is from the stage's centre line. No element here may form a stacking context around a bottle (no z-index,
+   transform or opacity on .pairObj), so each packshot multiplies into both pools of light, not only its own. */
+.pair {
+  position: relative; overflow: hidden; isolation: isolate; container-type: size;
+  background: var(--mat-grain) 0 0 / 160px, var(--bg);
+}
+.pair .shelf { mask-image: linear-gradient(to right, transparent 6%, #000 30%, #000 70%, transparent 94%), linear-gradient(to bottom, #000 40%, transparent); }
+.pool {
+  position: absolute; left: calc(50cqw + var(--x) * 1cqh); top: calc(var(--y) * 1cqh);
+  width: calc(var(--pw) * 1cqh); height: calc(var(--ph) * 1cqh); translate: -50% -50%;
+  background: radial-gradient(closest-side, var(--glow) 0%, var(--niche-mid) 34%, color-mix(in srgb, var(--niche-mid) 58%, transparent) 55%, color-mix(in srgb, var(--niche-mid) 20%, transparent) 76%, transparent 100%);
+  transition: --glow var(--d-story) var(--ease-inout), translate var(--d-slow) var(--ease-out), opacity var(--d-slow) var(--ease-out);
+}
+/* the second light adds to the first where they cross */
+.pool + .pool { mix-blend-mode: screen; }
+.pool[data-off] { opacity: 0.12; }
+/* the time axis lowers the key light: opening high and full, the base lower and dimmer */
+.pair[data-tier='heart'] .pool:not([data-off]) { translate: -50% -46%; opacity: 0.93; }
+.pair[data-tier='base'] .pool:not([data-off]) { translate: -50% -42%; opacity: 0.84; }
+.pairObj {
+  position: absolute; left: calc(50cqw + var(--x) * 1cqh); top: calc(var(--top) * 1cqh);
+  height: calc(var(--h) * 1cqh); aspect-ratio: var(--ar);
+}
+.pairObj[data-lit] { transition: --lx 500ms var(--ease-out), --ly 500ms var(--ease-out); }
+.pairFrame { position: absolute; inset: 0; mix-blend-mode: multiply; clip-path: inset(0 0 calc((1 - var(--foot)) * 100% - 1.5%) 0); }
+.pairRefl { left: 0; top: calc((2 * var(--foot) - 1) * 100%); height: 100%; width: 100%; translate: none; z-index: auto; }
+.behind .pairRefl { opacity: 0.55; }
+.pairGlint { left: 0; top: 0; height: 100%; translate: none; opacity: 0.85; }
+/* a bottle placed on the shelf rises into its light (the loader grammar); reduced motion: it is simply there */
+@media (prefers-reduced-motion: no-preference) {
+  .pairObj[data-rise] > .pairFrame { animation: pair-rise var(--d-slow) var(--ease-out) both; }
+  .pairObj[data-rise] > .pairRefl { animation: pair-fade var(--d-slow) var(--ease-out) both; }
+}
+@keyframes pair-rise { from { opacity: 0; translate: 0 3%; } }
+@keyframes pair-fade { from { opacity: 0; } }

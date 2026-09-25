@@ -1,10 +1,10 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { PageHead } from '@/components/PageHead';
 import { SectionNav } from '@/components/SectionNav';
 import { LayeringComposer } from '@/components/LayeringComposer';
-import { BlindPair } from '@/components/BlindPair';
 import { LAYERING_NAV } from '@/lib/nav';
-import { perfumes, travelFor, layeringSets, lei, BOUTIQUE } from '@/lib/catalog';
+import { perfumes, travelFor, layeringSets, lei } from '@/lib/catalog';
 import s from './layering.module.css';
 
 export const metadata = { title: 'Layering' };
@@ -12,10 +12,21 @@ export const metadata = { title: 'Layering' };
 const DEFAULT: [string, string] = ['morph-zeta-parfum-100ml', 'morph-vapor-parfum-100ml'];
 const valid = (v: unknown) => (typeof v === 'string' && perfumes.some(p => p.slug === v) ? v : null);
 
+/**
+ * The pair in the URL: no parameters show Morph's hero pair; an empty value is an empty slot (after "Golește
+ * raftul"); an unknown slug falls back to the default for that slot; B never repeats A.
+ */
+function readPair(sp: Record<string, string | string[] | undefined>): [string | null, string | null] {
+  if (sp.a === undefined && sp.b === undefined) return DEFAULT;
+  const slot = (v: string | string[] | undefined, d: string) => (v === '' ? null : valid(v) ?? d);
+  const a = slot(sp.a, DEFAULT[0]);
+  let b = slot(sp.b, DEFAULT[1]);
+  if (b && b === a) b = a === DEFAULT[1] ? DEFAULT[0] : DEFAULT[1];
+  return [a, b];
+}
+
 export default async function Page({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
-  const sp = await searchParams;
-  const a = valid(sp.a) ?? DEFAULT[0];
-  const b = valid(sp.b) && sp.b !== a ? (sp.b as string) : a === DEFAULT[1] ? DEFAULT[0] : DEFAULT[1];
+  const [a, b] = readPair(await searchParams);
   const travel = perfumes.filter(p => travelFor(p));
   const ynfIn = layeringSets.filter(x => x.inStock).length;
   return (
@@ -28,24 +39,19 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
         </PageHead>
 
         <section className={s.composer} aria-labelledby="compune">
-          <LayeringComposer key={`${a}|${b}`} detail first={a} second={b} heading="Compune" headingId="compune"
-            intro="Alege primul și al doilea strat. Notele se așază etapă cu etapă: deschiderea lângă deschidere, baza lângă bază. Ce au amândouă în aceeași etapă se întâlnește la mijloc. Linkul păstrează perechea." />
+          <LayeringComposer key={`${a}|${b}`} first={a} second={b} headingId="compune" />
         </section>
 
         <section className={`section ${s.ynf}`} aria-labelledby="ynf-titlu">
-          <BlindPair className={s.blind} />
+          <figure className={s.ynfImage}>
+            <Image src="/morph/campaign/ynf-box-in-hand.avif" alt="Cutia Your Next Form deschisă, cu două flacoane de 8 ml, ținută în mână" fill sizes="(max-width: 899px) 100vw, 50vw" />
+          </figure>
           <div className={s.ynfText}>
             <h2 id="ynf-titlu" className="t-1">Sau lasă compoziția în seama Morph</h2>
-            <p className="muted">Your Next Form: {layeringSets.length} seturi de layering în ediție limitată, fiecare cu două parfumuri de 8 ml. Nu știi care sunt până nu deschizi cutia; știi doar starea și acordul pe care îl descrie Morph. De aceea aici nișele rămân stinse.</p>
-            <p className="t-small">{ynfIn} din {layeringSets.length} în stoc, <span className="num">{lei(layeringSets[0].price)}</span> setul.</p>
-            <Link className="btn" href="/layering/your-next-form">Vezi cele {layeringSets.length} seturi</Link>
+            <p className="muted">Your Next Form: {layeringSets.length} perechi compuse de Morph, în ediție limitată, fiecare cu două parfumuri de 8 ml. Știi starea și acordul; parfumurile le afli abia când deschizi cutia.</p>
+            <p className="t-small"><span className="num">{lei(layeringSets[0].price)}</span> setul, {ynfIn} din {layeringSets.length} în stoc.</p>
+            <Link className="btn" href="/layering/your-next-form">Alege o stare</Link>
           </div>
-        </section>
-
-        <section className={`section ${s.try}`} aria-labelledby="pe-piele">
-          <h2 id="pe-piele" className="t-2">Pe piele, nu pe ecran</h2>
-          <p className="muted">Compunerea arată cum se așază notele publicate, nu cum miroase perechea. O verifici în travel acasă sau direct în {BOUTIQUE.short}, {BOUTIQUE.address}.</p>
-          <p className={s.tryLinks}><Link className="link" href="/descopera#incearca">Toate formatele de încercare</Link><Link className="link" href={BOUTIQUE.href}>Magazinul din București</Link></p>
         </section>
       </div>
     </div>

@@ -44,6 +44,8 @@ export const perfumes = (catalog.perfumes as Perfume[]).map(p => ({ ...p, season
 export const travelSets = catalog.travel as Offer[];
 export const sampleSets = catalog.samples as Offer[];
 export const layeringSets = catalog.layering as Offer[];
+/** A Your Next Form set's key in the URL (?stare=): its state, lower case. */
+export const stateKey = (o: Offer) => (o.state ?? o.slug).toLowerCase();
 export const snapshotAt = catalog.snapshotAt;
 export const bodyItems = catalog.body as BodyItem[];
 export const giftBox = (catalog.gift as (Offer & { range: number[] | null })[]).find(g => g.slug === 'gift-box') ?? null;

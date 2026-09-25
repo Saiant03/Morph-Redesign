@@ -2,6 +2,7 @@
 // Usage: node scripts/smoke.mjs [baseUrl]   — uses the globally installed Playwright and preinstalled Chromium.
 import { createRequire } from 'module';
 import { execSync } from 'child_process';
+import { readFileSync } from 'fs';
 const require = createRequire(import.meta.url);
 const { chromium, devices } = require(execSync('npm root -g').toString().trim() + '/playwright');
 
@@ -134,17 +135,6 @@ await check('finder: seven answers → Zeta, why, try, buy', async () => {
   assert(await pg.getByRole('button', { name: /travel 2×8 ml în coș/ }).count() >= 1, 'try');
 });
 
-await check('layering: URL pair, change slot updates URL, disclaimer', async () => {
-  await pg.goto(BASE + '/layering?a=morph-zeta-parfum-100ml&b=morph-kolonaki-parfum-100ml', { waitUntil: 'networkidle' });
-  assert(await pg.getByText('Aceasta este o vizualizare a celor două compoziții după notele publicate de Morph, nu o recomandare Morph.').count() === 1, 'disclaimer');
-  await pg.getByRole('button', { name: /Al doilea strat/ }).click();
-  await pg.getByRole('group', { name: 'Al doilea strat, Ice' }).getByRole('button', { name: 'Tonkatonic' }).click();
-  await pg.waitForTimeout(400);
-  assert(/b=morph-tonkatonic-100ml/.test(pg.url()), pg.url());
-  await pg.goto(BASE + '/layering?a=morph-garbage&b=morph-garbage', { waitUntil: 'networkidle' });
-  assert(await pg.locator('h1').count() === 1, 'invalid slugs broke the page');
-});
-
 await check('try list: finder result → shop selection', async () => {
   await pg.goto(BASE + '/descopera/finder/rezultat?q1=seductive&q2=sophisticated&q3=oriental&q4=events&q5=moderate&q6=autumn&q7=any', { waitUntil: 'networkidle' });
   await pg.getByRole('button', { name: /Adaugă Zeta pe lista/ }).click();
@@ -169,7 +159,7 @@ await check('reduced motion: hero and reveals fully visible', async () => {
 });
 
 await check('no horizontal overflow at 390 / 768 / 1024 / 1440 / 1920', async () => {
-  const routes = ['/', '/parfumuri', '/parfumuri/luxury', '/parfumuri/corp', '/morph-zeta-parfum-100ml', '/morph-zeta-gel-de-dus-200-ml', '/morph-crema-de-corp-tonkatonic', '/morph-set-vision', '/descopera', '/descopera/finder', '/descopera/finder?q1=elegant&q2=calm&pas=3', RESULT_ANY, '/layering', '/layering/your-next-form', '/magazin', '/cadouri'];
+  const routes = ['/', '/parfumuri', '/parfumuri/luxury', '/parfumuri/corp', '/morph-zeta-parfum-100ml', '/morph-zeta-gel-de-dus-200-ml', '/morph-crema-de-corp-tonkatonic', '/morph-set-vision', '/descopera', '/descopera/finder', '/descopera/finder?q1=elegant&q2=calm&pas=3', RESULT_ANY, '/layering', '/layering?a=&b=', '/layering?a=morph-animal-parfum-100ml&b=morph-miyazawa-parfum-100ml', '/layering/your-next-form', '/layering/your-next-form?stare=unforgettable', '/magazin', '/cadouri'];
   for (const w of [390, 768, 1024, 1440, 1920]) {
     const p = await page(w === 390 ? { ...devices['iPhone 13'] } : { viewport: { width: w, height: 900 } });
     for (const r of routes) {
@@ -636,6 +626,182 @@ await check('Finder under reduced motion and without JavaScript: fully usable', 
   await n.waitForURL(/rezultat\?.*q7=exclusive/);
   assert(await n.locator('h1').count() === 1 && !/Mai sunt/.test(await n.locator('h1').innerText()), 'no-JS result');
   await ctx.close();
+});
+
+// ---- Phase C3.5: Layering (composition studio) and Your Next Form (blind sets) ----
+const CAT = JSON.parse(readFileSync(new URL('../data/catalog.json', import.meta.url)));
+const P = slug => CAT.perfumes.find(p => p.slug === slug);
+const lei = n => `${n.toLocaleString('ro-RO')} lei`;
+const fold = t => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim();
+const ZETA = 'morph-zeta-parfum-100ml', VAPOR = 'morph-vapor-parfum-100ml', ANIMAL = 'morph-animal-parfum-100ml', MIYA = 'morph-miyazawa-parfum-100ml';
+const pairName = async t => (await t.locator('#compune').innerText()).replace(/\s+/g, ' ');
+const objects = t => t.locator('[class*="pairObj"]');
+
+await check('layering: empty slots, the default pair, a pair from the URL, invalid and duplicate fallback', async () => {
+  const t = await page();
+  await t.goto(BASE + '/layering?a=&b=', { waitUntil: 'networkidle' });
+  assert(await pairName(t) === 'Compune', 'empty heading: ' + await pairName(t));
+  assert(await objects(t).count() === 0, 'bottles on an empty shelf');
+  assert(await t.getByRole('button', { name: /Parfumul A, primul strat: Alege parfumul/ }).count() === 1, 'empty slot A');
+  assert(await t.getByRole('button', { name: /în travel/ }).count() === 0, 'buy offered without a pair');
+  for (const [q, a, b] of [['', 'Zeta', 'Vapor'], [`?a=${ANIMAL}&b=${MIYA}`, 'Animal', 'Miyazawa'], ['?a=morph-garbage&b=morph-garbage', 'Zeta', 'Vapor'], [`?a=${VAPOR}&b=${VAPOR}`, 'Vapor', 'Zeta'], [`?a=${ANIMAL}&b=${ANIMAL}`, 'Animal', 'Vapor']]) {
+    await t.goto(BASE + '/layering' + q, { waitUntil: 'networkidle' });
+    const n = await pairName(t);
+    assert(n.startsWith(a) && n.endsWith(b), `${q || '(none)'} → ${n}`);
+    assert(await objects(t).count() === 2, `${q}: ${await objects(t).count()} bottles`);
+  }
+  await t.context().close();
+});
+
+await check('layering: replace A and B on the name shelf (radios, keyboard, Escape), the URL keeps the pair through a reload', async () => {
+  const t = await page();
+  await t.goto(BASE + `/layering?a=${ZETA}&b=${VAPOR}`, { waitUntil: 'networkidle' });
+  const slotA = t.getByRole('button', { name: /Parfumul A/ }), slotB = t.getByRole('button', { name: /Parfumul B/ });
+  await slotA.click();
+  assert(await slotA.getAttribute('aria-expanded') === 'true', 'A not expanded');
+  const setA = t.getByRole('group', { name: 'Alege parfumul A, primul strat' });
+  await wait(setA, 'picker A');
+  assert(await t.evaluate(() => document.activeElement?.getAttribute('value')) === ZETA, 'focus not on the chosen radio');
+  assert(await setA.getByRole('radio', { name: /Vapor/ }).isDisabled(), 'B still selectable as A');
+  await setA.getByRole('radio', { name: 'Animal', exact: true }).click();
+  await t.waitForTimeout(300);
+  assert(new URL(t.url()).searchParams.get('a') === ANIMAL, t.url());
+  assert((await pairName(t)).startsWith('Animal'), 'stage/heading did not follow A');
+  await t.keyboard.press('Escape');
+  await t.waitForTimeout(100);
+  assert(await t.evaluate(() => document.activeElement?.getAttribute('aria-expanded')) === 'false', 'Escape did not return focus to slot A');
+  assert(await setA.count() === 0, 'picker still open');
+  await slotB.click();
+  const setB = t.getByRole('group', { name: 'Alege parfumul B, al doilea strat' });
+  await wait(setB, 'picker B');
+  const before = new URL(t.url()).searchParams.get('b');
+  await t.keyboard.press('ArrowDown');
+  await t.waitForTimeout(300);
+  assert(new URL(t.url()).searchParams.get('b') !== before, 'arrow key did not change B');
+  await setB.getByRole('radio', { name: 'Miyazawa', exact: true }).click();
+  await t.getByRole('button', { name: 'Gata' }).click();
+  await t.waitForTimeout(300);
+  assert(new URL(t.url()).searchParams.get('b') === MIYA, t.url());
+  await t.reload({ waitUntil: 'networkidle' });
+  assert(/^Animal.*Miyazawa$/.test(await pairName(t)), 'pair lost on reload: ' + await pairName(t));
+  await t.getByRole('button', { name: 'Golește raftul' }).click();
+  await t.waitForTimeout(300);
+  assert(new URL(t.url()).search === '?a=&b=' && await pairName(t) === 'Compune', 'reset: ' + t.url());
+  await t.context().close();
+});
+
+await check('layering: shared notes and tiers from Morph data, formats, prices, stock, try and buy, the disclaimer', async () => {
+  const t = await page();
+  await t.goto(BASE + `/layering?a=${ANIMAL}&b=${MIYA}`, { waitUntil: 'networkidle' });
+  const [A, B] = [P(ANIMAL), P(MIYA)];
+  const all = p => [...p.notes.top, ...p.notes.heart, ...p.notes.base];
+  const shared = all(A).filter(n => all(B).some(m => fold(m) === fold(n)));
+  const lead = await t.locator('[class*="together"]').first().innerText();
+  assert(shared.length > 0 && shared.every(n => fold(lead).includes(fold(n))), `shared ${shared} not in "${lead}"`);
+  const strata = t.getByRole('list', { name: /Notele perechii/ });
+  for (const n of all(A)) assert((await strata.innerText()).includes(n), `note ${n} missing from the strata`);
+  const base = t.getByRole('button', { name: /Bază/ });
+  await base.click();
+  assert(await base.getAttribute('aria-pressed') === 'true', 'tier button not pressed');
+  assert(await t.locator('[data-tier="base"]').count() === 1, 'stage light did not follow the tier');
+  const table = t.getByRole('table', { name: /Formate și prețuri/ });
+  for (const p of [A, B]) {
+    const row = await table.getByRole('row', { name: new RegExp(p.shortName) }).innerText();
+    assert(row.includes(lei(p.price)), `${p.slug} price: ${row}`);
+    const travel = CAT.travel.find(x => x.slug.includes(p.shortName.toLowerCase().replace(/\s+/g, '-')) && /2x8|set-travel/.test(x.slug));
+    assert(travel ? row.includes(lei(travel.price)) : /nu există/.test(row), `${p.slug} travel: ${row}`);
+    if (!p.inStock) assert(/epuizat/.test(row), `${p.slug} stock`);
+  }
+  assert(await t.getByText(/Nu e o recomandare Morph/).count() === 1, 'disclaimer');
+  assert(await t.getByRole('link', { name: 'Your Next Form' }).count() >= 1, 'YNF alternative');
+  // Zeta + Vapor: both have a travel set; the pair goes to the cart in one step
+  await t.goto(BASE + `/layering?a=${ZETA}&b=${VAPOR}`, { waitUntil: 'networkidle' });
+  await t.getByRole('button', { name: /Ambele în travel/ }).click();
+  const dialog = t.getByRole('dialog', { name: 'Coșul tău' });
+  await wait(dialog, 'cart');
+  assert(/Zeta/.test(await dialog.innerText()) && /Vapor/.test(await dialog.innerText()), 'travel pair not in cart');
+  await t.keyboard.press('Escape');
+  await t.context().close();
+});
+
+await check('layering phone: both bottles stay large on one shelf, slots ≥ 44 px, reduced motion still after a swap', async () => {
+  const t = await page({ ...devices['iPhone 13'], reducedMotion: 'reduce' });
+  await t.goto(BASE + `/layering?a=${ZETA}&b=${VAPOR}`, { waitUntil: 'networkidle' });
+  const boxes = await t.locator('[class*="pairFrame"]').evaluateAll(els => els.map(e => e.getBoundingClientRect()));
+  assert(boxes.length === 2 && boxes.every(b => b.height > 250), 'bottles too small: ' + boxes.map(b => Math.round(b.height)));
+  const overlap = Math.min(boxes[0].right, boxes[1].right) - Math.max(boxes[0].left, boxes[1].left);
+  assert(overlap > 0, 'the two objects do not overlap');
+  for (const b of await t.locator('[data-slot]').evaluateAll(els => els.map(e => e.getBoundingClientRect().height))) assert(b >= 44, `slot ${b}px`);
+  await t.getByRole('button', { name: /Parfumul B/ }).click();
+  await t.getByRole('group', { name: /Alege parfumul B/ }).getByRole('radio', { name: 'Nudo', exact: true }).click();
+  await t.waitForTimeout(60);
+  const slow = await t.evaluate(() => document.getAnimations().filter(a => (a.effect?.getTiming().duration ?? 0) > 1 && a.playState === 'running').length);
+  assert(slow === 0, `${slow} running animations`);
+  await t.context().close();
+});
+
+await check('Layering ↔ product: the bottle keeps its identity both ways (obj-<slug>)', async () => {
+  const t = await page();
+  await t.goto(BASE + `/layering?a=${ZETA}&b=${VAPOR}`, { waitUntil: 'networkidle' });
+  await hookVT(t);
+  const link = t.getByRole('table').getByRole('link', { name: 'Zeta' });
+  await link.scrollIntoViewIfNeeded();
+  await link.click();
+  await t.waitForURL(/morph-zeta-parfum-100ml/);
+  await t.waitForTimeout(900);
+  assert(/obj-morph-zeta-parfum-100ml/.test((await t.evaluate(() => window.__vt)).at(-1) ?? ''), 'layering → product');
+  // back into Layering from the product page while its stage is on screen
+  await t.evaluate(() => scrollTo(0, 0));
+  await hookVT(t);
+  await t.evaluate(() => [...document.querySelectorAll('a')].find(a => /^Compune cu/.test(a.textContent)).click());
+  await t.waitForURL(/layering\?a=morph-zeta/);
+  await t.waitForTimeout(900);
+  assert(/obj-morph-zeta-parfum-100ml/.test((await t.evaluate(() => window.__vt)).at(-1) ?? ''), 'product → layering');
+  await t.context().close();
+});
+
+await check('Your Next Form: 12 real states, price and stock, contents never named, add to cart, Morph links, keyboard, no JS', async () => {
+  const t = await page();
+  await t.goto(BASE + '/layering/your-next-form', { waitUntil: 'networkidle' });
+  const states = t.getByRole('list', { name: /stări Your Next Form/ }).getByRole('link');
+  assert(await states.count() === 12, `${await states.count()} states`);
+  assert(JSON.stringify(await states.allInnerTexts()) === JSON.stringify(CAT.layering.map(o => o.state + (o.inStock ? '' : ' · epuizat'))), 'state names differ from Morph');
+  const box = t.locator('#ynf-cutia');
+  const first = CAT.layering[0];
+  assert((await box.innerText()).includes(lei(first.price)) && (await box.innerText()).includes(first.inStock ? 'în stoc' : 'stoc epuizat'), 'price / stock');
+  assert(await box.getByRole('link', { name: /Pagina setului/ }).getAttribute('href') === first.url, 'Morph link');
+  // keyboard: Tab to the second state, Enter shows its box in place
+  await states.nth(0).focus();
+  await t.keyboard.press('Tab');
+  await t.keyboard.press('Enter');
+  await t.waitForTimeout(300);
+  const second = CAT.layering[1];
+  assert((await box.getByRole('heading').innerText()) === second.state, 'Enter did not open the next state');
+  assert(new URL(t.url()).searchParams.get('stare') === second.state.toLowerCase(), t.url());
+  assert(await states.nth(1).getAttribute('aria-current') === 'true', 'aria-current');
+  // the blind rule: no perfume name anywhere in the page (text, labels, alt text)
+  const names = CAT.perfumes.map(p => p.shortName);
+  const html = await t.locator('main').evaluate(m => m.innerText + ' ' + [...m.querySelectorAll('[aria-label],[alt],[title]')].map(e => e.getAttribute('aria-label') + e.getAttribute('alt') + e.getAttribute('title')).join(' '));
+  const leak = names.filter(n => new RegExp(`\\b${n}\\b`).test(html));
+  assert(leak.length === 0, 'perfume names on the page: ' + leak.join(', '));
+  await box.getByRole('button', { name: new RegExp(`Adaugă ${second.state}`) }).click();
+  const dialog = t.getByRole('dialog', { name: 'Coșul tău' });
+  await wait(dialog, 'cart');
+  assert((await dialog.innerText()).includes(`Your Next Form ${second.state}`), 'set not in cart');
+  await t.keyboard.press('Escape');
+  await t.context().close();
+  const ctx = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
+  const n = await ctx.newPage();
+  await n.goto(BASE + '/layering/your-next-form?stare=euphoric');
+  assert((await n.locator('#ynf-stare').innerText()) === 'Euphoric', 'no-JS state from the URL');
+  await ctx.close();
+  const r = await page({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
+  await r.goto(BASE + '/layering/your-next-form', { waitUntil: 'networkidle' });
+  await r.getByRole('link', { name: 'Fearless' }).click();
+  await r.waitForTimeout(60);
+  const slow = await r.evaluate(() => document.getAnimations().filter(a => (a.effect?.getTiming().duration ?? 0) > 1 && a.playState === 'running').length);
+  assert(slow === 0 && (await r.locator('#ynf-stare').innerText()) === 'Fearless', `reduced motion: ${slow} running`);
+  await r.context().close();
 });
 
 await check('no console errors', async () => { assert(errors.length === 0, errors.slice(0, 3).join(' | ')); });

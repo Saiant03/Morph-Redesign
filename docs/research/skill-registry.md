@@ -150,6 +150,10 @@ Same inspection procedure as above: shallow clone into the scratchpad, SKILL.md 
 | Understand Anything | https://github.com/Egonex-AI/Understand-Anything @ `6df3065` (2026-09-12), plugin 2.9.7 | MIT | Egonex-AI is the upstream: the README credits the original author Lum1104 and `github.com/Lum1104/Understand-Anything` resolves to the same HEAD (transferred repo, not a fork). It is a full Claude Code plugin, not a standalone skill: `/understand` needs a pnpm TypeScript workspace built on first run (`pnpm install && pnpm --filter @understand-anything/core build`, tree-sitter WASM), dispatches up to 5 subagents per batch, and ships hooks (PostToolUse on every Bash call; a SessionStart hook that tells the agent to rebuild a stale graph "without asking"). Vendoring means committing the external repo wholesale | Not installed. When the repo becomes hard to reason about, the owner installs it for one session with `/plugin marketplace add Egonex-AI/Understand-Anything`, keeps `autoUpdate` off, runs `/understand` once, and adds `.understand-anything/` to `.gitignore`. Reuse an existing `.understand-anything/` or `.ua/` graph instead of rebuilding. For normal tasks, read the relevant files directly |
 | awesome-design-md | https://github.com/VoltAgent/awesome-design-md @ `f696123` (2026-09-21) | MIT | A reference library of 74 DESIGN.md files describing other brands; copying it would import unrelated identities | For a specific visual problem, clone it into the scratchpad, read only the relevant references, extract the principle, adapt it to Morph. Nothing is copied into the repo without a named reason and attribution |
 
+## Named but not available (Phase C3.5, 2026-09-25)
+
+Reticle (runtime visual QA), Chisle (context reduction) and "UI Skills" were named in the C3.5 brief. None is in `.claude/skills/` and none has been through the inspection above, so none was installed. Runtime QA used scripted Node Playwright sessions (the `site-capture` setup); context was kept small by reading only the files and skill sections needed.
+
 ## Not provided
 
 Skill #11 was not provided, so no installation was attempted.
